@@ -1,4 +1,6 @@
 package Server;
+import models.*;
+import enums.*;
 import client.Envelop;
 
 /* This class represents our server side 
@@ -11,6 +13,12 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+
 
 public class Server {
 	
@@ -19,7 +27,7 @@ public class Server {
     private ObjectInputStream inStream = null;
     private ObjectOutputStream outputStream = null;
     private Envelop env;
-
+    public Connection conn;
     
     public Server() {
     }
@@ -44,10 +52,43 @@ public class Server {
             //System.out.println("Object received (address) = " + env.address);
             
             //TODO    /* ----- getting data from DB ------ */
+            mysqlConnection msql = new mysqlConnection();
+            
+            Patient temp = (Patient)env.getObj();
+            System.out.println(env.getType());
+            switch(env.getType()){
+            
+            case ADD_PATIENT:
+            	System.out.println("case ADD_PATIENT");
+            	msql.updateValue(temp);
+            	break;
+            
+            default:
+				break;
+            
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
             /* Sending data back to client */
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             outputStream.writeObject(env);
+           
             
            socket.close();
 

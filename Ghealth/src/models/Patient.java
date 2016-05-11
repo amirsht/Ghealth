@@ -8,18 +8,18 @@ public class Patient implements Serializable{
 	private String ptEmail;
 	private String ptPhone;
 	private String ptPrivateClinic;
-	private PersonalDoctor pd;
+	//private PersonalDoctor pd; //TODO uncomment
 	//TODO history missing
 	
 	
-	public Patient(int pID, String pName, String ptEmail, String ptPhone, String ptPrivateClinic, PersonalDoctor pd) {
+	public Patient(int pID, String pName, String ptEmail, String ptPhone, String ptPrivateClinic) {
 		super();
 		this.pID = pID;
 		this.pName = pName;
 		this.ptEmail = ptEmail;
 		this.ptPhone = ptPhone;
 		this.ptPrivateClinic = ptPrivateClinic;
-		this.pd = pd;
+		//this.pd = pd; //TODO Rebuild constractor
 	}
 	
 	
@@ -53,14 +53,14 @@ public class Patient implements Serializable{
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
-	public PersonalDoctor getPd() {
+	/*public PersonalDoctor getPd() {
 		return pd;
 	}
 	public void setPd(PersonalDoctor pd) {
 		this.pd = pd;
 	}
 	
-
+*/
 	
 
 }

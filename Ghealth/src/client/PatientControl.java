@@ -30,7 +30,7 @@ public class PatientControl {
         System.out.println("Test" +pt.getpName());
        
         En.setObj(pt);
-        En.setType(task.UPDATE_PATIENT);
+        En.setType(task.ADD_PATIENT);
         
        
         GetEn =  Controller.communicate(En);
@@ -46,8 +46,10 @@ public class PatientControl {
     
     public static void main(String[] args) {
     	
-    	Patient temp = new Patient(12345,"Moshe Pinto","pinto@gmail.com","p00000","Klalit", new PersonalDoctor("Ibrahim","Ibrahim@gmail.com"));
-        //PatientControl client = new PatientControl();
+    	//Patient temp = new Patient(12345,"Moshe Pinto","pinto@gmail.com","p00000","Klalit", new PersonalDoctor("Ibrahim","Ibrahim@gmail.com"));
+    	Patient temp = new Patient(12345,"\'"+"Moshe Pinto"+"\'","\'"+"pinto@gmail.com"+"\'","\'"+"p00000"+"\'","\'"+"Klalit"+"\'");
+    	
+    	//PatientControl client = new PatientControl();
         UpdatePatient(temp);
         
         
