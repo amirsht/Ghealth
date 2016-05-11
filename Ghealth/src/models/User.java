@@ -5,17 +5,17 @@ import enums.*;
 public class User  {
 
 	private String uID; //worker id 
-	private String Upassword;
+	private String uPassword;
 	private String uName; 
 	private Roles uRole; 
 	private String uEmail;
 	private Clinic uClinic;
 	
 	
-	public User(String uID, String upassword, String uName, Roles uRole, String uEmail, Clinic uClinic) {
+	public User(String uID, String uPassword, String uName, Roles uRole, String uEmail, Clinic uClinic) {
 		super();
 		this.uID = uID;
-		Upassword = upassword;
+		this.uPassword = uPassword;
 		this.uName = uName;
 		this.uRole = uRole;
 		this.uEmail = uEmail;
@@ -29,11 +29,11 @@ public class User  {
 		this.uID = uID;
 	}
 	
-	public String getUpassword() {
-		return Upassword;
+	public String getuPassword() {
+		return uPassword;
 	}
-	public void setUpassword(String upassword) {
-		Upassword = upassword;
+	public void setuPassword(String uPassword) {
+		uPassword = uPassword;
 	}
 	public String getuName() {
 		return uName;
