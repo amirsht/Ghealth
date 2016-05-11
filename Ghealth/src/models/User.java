@@ -2,29 +2,63 @@ package models;
 
 import models.Role.Roles;
 
-public class User extends Person  {
+public class User  {
 
+	private String WID; //worker id 
 	private String Upassword;
-	private int WID; //worker id 
+	private String pName; 
 	private Role uRole; 
 	
-	public User(int pID, String pName, int pPhone, String pHomeAddr, String Upassword, int WID, Roles uRole) {
-		super(pID, pName, pPhone, pHomeAddr);
+	
 		
-		this.Upassword = Upassword; 
-		this.WID = WID;
-		this.uRole = new Role(uRole);
-		
+	public User(String wID, String upassword, String pName, Role uRole) {
+		super();
+		setWID(wID);
+		Upassword = upassword;
+		this.setpName(pName);
+		this.uRole = uRole;
 	}
+	
 
 	
 	
-	public int getWID(){ return this.WID;}
 	
 	public boolean checkPassword(String inputPassword)
 	{
 		if(inputPassword.equals(this.Upassword)){ return true; }
 		else { return false; } 
+	}
+
+
+
+
+
+	public String getWID() {
+		return WID;
+	}
+
+
+
+
+
+	public void setWID(String wID) {
+		WID = wID;
+	}
+
+
+
+
+
+	public String getpName() {
+		return pName;
+	}
+
+
+
+
+
+	public void setpName(String pName) {
+		this.pName = pName;
 	}
 	
 	
