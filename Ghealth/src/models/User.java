@@ -4,64 +4,61 @@ import models.Role.Roles;
 
 public class User  {
 
-	private String WID; //worker id 
+	private String uID; //worker id 
 	private String Upassword;
-	private String pName; 
+	private String uName; 
 	private Role uRole; 
+	private String uEmail;
+	private Clinic uClinic;
 	
 	
-		
-	public User(String wID, String upassword, String pName, Role uRole) {
+	public User(String uID, String upassword, String uName, Role uRole, String uEmail, Clinic uClinic) {
 		super();
-		setWID(wID);
+		this.uID = uID;
 		Upassword = upassword;
-		this.setpName(pName);
+		this.uName = uName;
+		this.uRole = uRole;
+		this.uEmail = uEmail;
+		this.uClinic = uClinic;
+	}
+	
+	public String getuID() {
+		return uID;
+	}
+	public void setuID(String uID) {
+		this.uID = uID;
+	}
+	
+	public String getUpassword() {
+		return Upassword;
+	}
+	public void setUpassword(String upassword) {
+		Upassword = upassword;
+	}
+	public String getuName() {
+		return uName;
+	}
+	public void setuName(String uName) {
+		this.uName = uName;
+	}
+	public Role getuRole() {
+		return uRole;
+	}
+	public void setuRole(Role uRole) {
 		this.uRole = uRole;
 	}
-	
-
-	
-	
-	
-	public boolean checkPassword(String inputPassword)
-	{
-		if(inputPassword.equals(this.Upassword)){ return true; }
-		else { return false; } 
+	public String getuEmail() {
+		return uEmail;
 	}
-
-
-
-
-
-	public String getWID() {
-		return WID;
+	public void setuEmail(String uEmail) {
+		this.uEmail = uEmail;
 	}
-
-
-
-
-
-	public void setWID(String wID) {
-		WID = wID;
+	public Clinic getuClinic() {
+		return uClinic;
 	}
-
-
-
-
-
-	public String getpName() {
-		return pName;
+	public void setuClinic(Clinic uClinic) {
+		this.uClinic = uClinic;
 	}
-
-
-
-
-
-	public void setpName(String pName) {
-		this.pName = pName;
-	}
-	
-	
 	
 	
 }
