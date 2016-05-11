@@ -7,6 +7,10 @@ public class Envelop implements Serializable {
 	private Object obj;
 	private task type;
 	
+	public Envelop()
+	{
+		
+	}
 	
 	public Object getObj() {
 		return obj;

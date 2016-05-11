@@ -9,7 +9,7 @@ public class Patient implements Serializable{
 	private String ptPhone;
 	private String ptPrivateClinic;
 	private PersonalDoctor pd;
-	
+	//TODO history missing
 	
 	
 	public Patient(int pID, String pName, String ptEmail, String ptPhone, String ptPrivateClinic, PersonalDoctor pd) {
