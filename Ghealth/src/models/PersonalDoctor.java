@@ -1,6 +1,8 @@
 package models;
 
-public class PersonalDoctor {
+import java.io.Serializable;
+
+public class PersonalDoctor implements Serializable{
 
 	/* Table in DB, patient ID is the PK */
 	private String PersonalDoctorName;
