@@ -1,18 +1,18 @@
 package models;
+import enums.*;
 
-import models.Role.Roles;
 
 public class User  {
 
 	private String uID; //worker id 
 	private String Upassword;
 	private String uName; 
-	private Role uRole; 
+	private Roles uRole; 
 	private String uEmail;
 	private Clinic uClinic;
 	
 	
-	public User(String uID, String upassword, String uName, Role uRole, String uEmail, Clinic uClinic) {
+	public User(String uID, String upassword, String uName, Roles uRole, String uEmail, Clinic uClinic) {
 		super();
 		this.uID = uID;
 		Upassword = upassword;
@@ -41,10 +41,10 @@ public class User  {
 	public void setuName(String uName) {
 		this.uName = uName;
 	}
-	public Role getuRole() {
+	public Roles getuRole() {
 		return uRole;
 	}
-	public void setuRole(Role uRole) {
+	public void setuRole(Roles uRole) {
 		this.uRole = uRole;
 	}
 	public String getuEmail() {

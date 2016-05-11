@@ -3,15 +3,24 @@ package models;
 import java.sql.Time;
 import java.util.Date;
 
+
+
+//class for creating appt. by customer service 
+
 public class AppointmentSettings {
+	
+	public enum apptStatus{
+		
+		SCHEDUELD, CANCELED, ARRIVED, NOSHOW
+	}
 
 	private int appID;
 	private Date appDate;
 	private Time appTime;
 	private Date appcreatDate;
-	private String AppStatus;
+	private apptStatus AppStatus; //
 	
-	public AppointmentSettings(int appID, Date appDate, Time appTime, Date appcreatDate, String appStatus) 
+	public AppointmentSettings(int appID, Date appDate, Time appTime, Date appcreatDate, apptStatus appStatus) 
 	{
 		super();
 		this.appID = appID;
@@ -54,11 +63,11 @@ public class AppointmentSettings {
 	{
 		this.appcreatDate = appcreatDate;
 	}
-	public String getAppStatus() 
+	public apptStatus getAppStatus() 
 	{
 		return AppStatus;
 	}
-	public void setAppStatus(String appStatus) 
+	public void setAppStatus(apptStatus appStatus) 
 	{
 		AppStatus = appStatus;
 	}

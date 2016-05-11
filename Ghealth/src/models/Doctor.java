@@ -1,17 +1,20 @@
 package models;
 
-import models.Role.Roles;
+import enums.*;
 
 public class Doctor extends User {
 	
-	
 	private String dSpeciality; 
 	
-	public Doctor(int pID, String pName, int pPhone, String pHomeAddr, String Upassword, int WID, Roles uRole,String dSpeciality) {
-		super(pID, pName, pPhone, pHomeAddr, Upassword, WID, uRole);
-		this.dSpeciality = dSpeciality;
+
+	
+	public Doctor(String uID, String upassword, String uName, Roles uRole, String uEmail, Clinic uClinic, String dSpeciality) {
 		
+		super(uID, upassword, uName, uRole, uEmail, uClinic);
+		
+		this.dSpeciality = dSpeciality;
 	}
+
 
 	
 	public String getDotorSpeciality(){ return this.dSpeciality;}
