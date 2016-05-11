@@ -1,7 +1,7 @@
 package models;
 
-import java.awt.List;
-import java.util.Map;
+
+import java.util.*;
 
 public class Clinic {
 	
@@ -17,8 +17,16 @@ public class Clinic {
 		this.cID = cID;
 		this.cLocation = cLocation; 
 		
-		//TO DO : add list of doctors by
+		//TODO : add list of doctors by speciality. each speciality has doctors list for DB
 		
 	}
+	
+	
+	
+	private int getcID(){return this.cID;}
+	private String getcLocation(){return this.cLocation;}
+	
+	//TODO add get list of doctors. but a doctor can't reach to this function 
+	
 
 }
