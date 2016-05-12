@@ -21,7 +21,7 @@ public class PatientControl {
     public PatientControl() {
     }
     */
-    public static boolean UpdatePatient(Patient pt){
+    public static boolean CreateNewPatient(Patient pt){
     	
     	Envelop En = new Envelop();
         Envelop GetEn = new Envelop();
@@ -47,10 +47,11 @@ public class PatientControl {
     public static void main(String[] args) {
     	
     	//Patient temp = new Patient(12345,"Moshe Pinto","pinto@gmail.com","p00000","Klalit", new PersonalDoctor("Ibrahim","Ibrahim@gmail.com"));
-    	Patient temp = new Patient(12345,"\'"+"Moshe Pinto"+"\'","\'"+"pinto@gmail.com"+"\'","\'"+"p00000"+"\'","\'"+"Klalit"+"\'");
+    	Patient temp = new Patient("333333","Moshe Pinto","pinto@gmail.com","p00000","Klalit");
+    	//Patient temp = new Patient(22345,"\'"+"Moshe Pinto"+"\'","\'"+"pinto@gmail.com"+"\'","\'"+"p00000"+"\'","\'"+"Klalit"+"\'");
     	
     	//PatientControl client = new PatientControl();
-        UpdatePatient(temp);
+    	CreateNewPatient(temp);
         
         
     }

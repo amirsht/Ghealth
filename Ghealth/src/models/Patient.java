@@ -3,7 +3,7 @@ package models;
 import java.io.Serializable;
 
 public class Patient implements Serializable{
-	private int pID;
+	private String pID;
 	private String pName;
 	private String ptEmail;
 	private String ptPhone;
@@ -12,7 +12,12 @@ public class Patient implements Serializable{
 	//TODO history missing
 	
 	
-	public Patient(int pID, String pName, String ptEmail, String ptPhone, String ptPrivateClinic) {
+	public Patient()
+	{
+		super();
+	}
+	
+	public Patient(String pID, String pName, String ptEmail, String ptPhone, String ptPrivateClinic) {
 		super();
 		this.pID = pID;
 		this.pName = pName;
@@ -23,10 +28,10 @@ public class Patient implements Serializable{
 	}
 	
 	
-	public int getpID() {
+	public String getpID() {
 		return pID;
 	}
-	public void setpID(int pID) {
+	public void setpID(String pID) {
 		this.pID = pID;
 	}
 	public String getPtEmail() {
@@ -61,6 +66,11 @@ public class Patient implements Serializable{
 	}
 	
 */
-	
+
+	@Override
+	public String toString() {
+		return "Patient [ID=" + pID + ", Name=" + pName + ", Email=" + ptEmail + ", Phone=" + ptPhone
+				+ ", Private Clinic=" + ptPrivateClinic + "]";
+	}
 
 }

@@ -51,30 +51,32 @@ public class Server {
             System.out.println("Object received (address) = ");
             //System.out.println("Object received (address) = " + env.address);
             
-            //TODO    /* ----- getting data from DB ------ */
-            mysqlConnection msql = new mysqlConnection();
             
-            Patient temp = (Patient)env.getObj();
+            
+            
+            /* ----- getting data from DB ------ */
+            mysqlConnection msql = new mysqlConnection();
+            int status;
+            Patient pt = (Patient)env.getObj();
             System.out.println(env.getType());
             switch(env.getType()){
             
             case ADD_PATIENT:
             	System.out.println("case ADD_PATIENT");
-            	msql.updateValue(temp);
+            	status=msql.CreatePatient(pt.getpID(),pt.getpName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic());
+            	if(status == 10)
+            		System.out.println("The Patient '"+pt.getpName()+"' is already exist in GHEALTH!");
             	break;
             
+            case GET_PATIENT:
+            	System.out.println("case GET_PATIENT");
+            	msql.GetExistPatient("333333");
+            	break;
+            	
             default:
 				break;
             
             }
-            
-            
-            
-            
-            
-            
-            
-            
             
             
             
