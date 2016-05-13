@@ -4,14 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import enums.Status;
 import models.Envelop;
 import models.Patient;
 
 
 public class SCpatient {
 
-	private static final int EXIST = 1;
-	private static final int CREATED = 2;
 
 
 	public static Envelop GetExistPatient(String pID)
@@ -56,7 +55,7 @@ public class SCpatient {
 	}
 	
 	
-	public static int CreatePatient(String pID,String pName,String pEmail,String pPhone,String pPrivateClinic)
+	public static Status CreatePatient(String pID,String pName,String pEmail,String pPhone,String pPrivateClinic)
 	{
 		Statement stmt;
 		String querystr;
@@ -73,7 +72,7 @@ public class SCpatient {
 			if(en.getSingleObject() != null)
 			{
 				System.out.println("The Patient '"+pt+"' exist in DB");
-				return EXIST;
+				return Status.EXIST;
 			}
 			
 			stmt = mysqlConnection.conn.createStatement();
@@ -86,10 +85,10 @@ public class SCpatient {
           System.out.println("SQLException: " + ex.getMessage());
           System.out.println("SQLState: " + ex.getSQLState());
           System.out.println("VendorError: " + ex.getErrorCode());
-          return 0;
+          return Status.FAILED_EXCEPTION;
         }
 		
-		return CREATED;
+		return Status.CREATED;
 
 	}
 	

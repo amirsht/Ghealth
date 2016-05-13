@@ -49,7 +49,7 @@ public class PatientControl {
     	Patient temp = new Patient("333333");
     	
     	//PatientControl client = new PatientControl();
-    	CreateNewPatient(temp);	
+    	CreateNewPatient(temp);
     	GetExistPatient(temp);
         
         

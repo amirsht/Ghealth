@@ -27,6 +27,7 @@ public class Server {
     private ObjectOutputStream outputStream = null;
     private Envelop env;
     public Connection conn;
+    public Status status;
     
     public Server() {
     }
@@ -58,17 +59,19 @@ public class Server {
             
             /* ----- getting data from DB ------ */
             mysqlConnection msql = new mysqlConnection();
-            int status;
             Patient pt = (Patient)env.getSingleObject();
             System.out.println(env.getType());
+            
             switch(env.getType()){
             
             
             /*---     Patient Tasks:   ---*/
             case ADD_PATIENT:
             	System.out.println("case ADD_PATIENT");
+            	
             	status=SCpatient.CreatePatient(pt.getpID(),pt.getpName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic());
-            	if(status == 10)
+            	env.setStatus(status);
+            	if(status == Status.EXIST)
             		System.out.println("The Patient '"+pt.getpName()+"' is already exist in GHEALTH!");
             	break;
 

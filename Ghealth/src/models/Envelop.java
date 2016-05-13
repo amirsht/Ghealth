@@ -9,6 +9,7 @@ public class Envelop implements Serializable {
 
 	private List<Object> objList;
 	private task type;
+	private Status st;
 	
 	public Envelop() {
 		this.objList = new ArrayList<Object>();
@@ -38,6 +39,16 @@ public class Envelop implements Serializable {
 	public Object getSingleObject()
 	{
 		return this.objList.get(0);
+	}
+
+
+	public Status getStatus() {
+		return st;
+	}
+
+
+	public void setStatus(Status st) {
+		this.st = st;
 	}
 	
 }
