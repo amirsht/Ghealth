@@ -1,7 +1,6 @@
 package Server;
 import models.*;
 import enums.*;
-import client.Envelop;
 
 /* This class represents our server side 
  * of the system communication protocol.
@@ -33,7 +32,10 @@ public class Server {
     }
 
     public void communicate() {
+    	
+        System.out.println("Server-> Start - Before Socket Coonnection.");
         try {
+        	 serverSocket=null;
         	/* Server listening and connection */
             serverSocket = new ServerSocket(10007);
             System.out.println("Server: Waiting for connection...");
@@ -57,20 +59,22 @@ public class Server {
             /* ----- getting data from DB ------ */
             mysqlConnection msql = new mysqlConnection();
             int status;
-            Patient pt = (Patient)env.getObj();
+            Patient pt = (Patient)env.getSingleObject();
             System.out.println(env.getType());
             switch(env.getType()){
             
+            
+            /*---     Patient Tasks:   ---*/
             case ADD_PATIENT:
             	System.out.println("case ADD_PATIENT");
-            	status=msql.CreatePatient(pt.getpID(),pt.getpName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic());
+            	status=SCpatient.CreatePatient(pt.getpID(),pt.getpName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic());
             	if(status == 10)
             		System.out.println("The Patient '"+pt.getpName()+"' is already exist in GHEALTH!");
             	break;
-            
+
             case GET_PATIENT:
             	System.out.println("case GET_PATIENT");
-            	msql.GetExistPatient("333333");
+            	env=SCpatient.GetExistPatient(pt.getpID());
             	break;
             	
             default:
@@ -78,21 +82,18 @@ public class Server {
             
             }
             
-            
-            
-            
-            
-            
-            
-            
+                        
             
             
             /* Sending data back to client */
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             outputStream.writeObject(env);
-           
+
+       	 	//outputStream.flush();
+       	 	//outputStream.close();
             
            socket.close();
+           System.out.println("Server-> Finish - Socket close.");
 
         } catch (SocketException se) {
             System.exit(0);
@@ -102,9 +103,15 @@ public class Server {
             cn.printStackTrace();
        }
     }
-
+    
     public static void main(String[] args) {
-        Server server = new Server();
-        server.communicate();
+    	
+        Server server;
+        
+        while(true) 
+        {
+        	server = new Server();
+        	server.communicate();
+        }
     }
 }

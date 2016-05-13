@@ -13,45 +13,46 @@ import java.net.Socket;
 import java.net.SocketException;
 
 public class PatientControl {
-  
-    
-    
-    
-    /* Empty constructor 
-    public PatientControl() {
-    }
-    */
-    public static boolean CreateNewPatient(Patient pt){
+      
+	 
+    public static boolean PatientCon(Patient pt,task ts){
     	
     	Envelop En = new Envelop();
-        Envelop GetEn = new Envelop();
       
+        En.addobjList(pt);
+        En.setType(ts);
+        En =  Controller.communicate(En);
+        Patient pTemp = (Patient)(En.getSingleObject());
+        System.out.println(pTemp);
         
-        System.out.println("Test" +pt.getpName());
-       
-        En.setObj(pt);
-        En.setType(task.ADD_PATIENT);
-        
-       
-        GetEn =  Controller.communicate(En);
-        
-        Patient pTemp = (Patient)(GetEn.getObj());
-        System.out.println(pTemp.getPtEmail());
-        
-    	
         //TODO 
     	return false; 
     }
- 
+    
+    
+    public static boolean CreateNewPatient(Patient pt)
+    {
+    	PatientCon(pt,task.ADD_PATIENT);
+		return false;
+    }
+    
+    public static boolean GetExistPatient(Patient pt)
+    {
+    	PatientCon(pt,task.GET_PATIENT);
+		return false;
+    }
+    
     
     public static void main(String[] args) {
     	
-    	//Patient temp = new Patient(12345,"Moshe Pinto","pinto@gmail.com","p00000","Klalit", new PersonalDoctor("Ibrahim","Ibrahim@gmail.com"));
-    	Patient temp = new Patient("333333","Moshe Pinto","pinto@gmail.com","p00000","Klalit");
-    	//Patient temp = new Patient(22345,"\'"+"Moshe Pinto"+"\'","\'"+"pinto@gmail.com"+"\'","\'"+"p00000"+"\'","\'"+"Klalit"+"\'");
+    	//Patient temp = new Patient("333333");
+    	Patient temp = new Patient("333333");
     	
     	//PatientControl client = new PatientControl();
     	CreateNewPatient(temp);
+    	for (long i = 0; i<100000000 ; i++)
+    		;
+    	GetExistPatient(temp);
         
         
     }

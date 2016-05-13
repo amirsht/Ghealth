@@ -17,6 +17,12 @@ public class Patient implements Serializable{
 		super();
 	}
 	
+	public Patient(String pID)
+	{
+		super();
+		this.pID = pID;
+	}
+	
 	public Patient(String pID, String pName, String ptEmail, String ptPhone, String ptPrivateClinic) {
 		super();
 		this.pID = pID;

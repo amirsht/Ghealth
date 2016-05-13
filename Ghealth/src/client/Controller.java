@@ -7,6 +7,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 import enums.task;
+import models.Envelop;
 import models.Patient;
 import models.PersonalDoctor;
 
@@ -32,7 +33,7 @@ public class Controller {
 	            	/* Connection details + socket creation */
 	            	socket = new Socket(ip,port);
 	          
-	                System.out.println("Client: Socket created");
+	                System.out.println("Client->Controller: Socket created");
 	                
 	                /* Output stream creation and related object sending */
 	                outputStream = new ObjectOutputStream(socket.getOutputStream());
@@ -72,6 +73,7 @@ public class Controller {
 	                /* Flushing and closing stream */
 	                outputStream.flush();
 	                outputStream.close();
+	                socket.close();
 	                
 	            } catch (SocketException se) {
 	                se.printStackTrace();
