@@ -49,9 +49,7 @@ public class PatientControl {
     	Patient temp = new Patient("333333");
     	
     	//PatientControl client = new PatientControl();
-    	CreateNewPatient(temp);
-    	for (long i = 0; i<100000000 ; i++)
-    		;
+    	CreateNewPatient(temp);	
     	GetExistPatient(temp);
         
         

@@ -25,13 +25,13 @@ public class Controller {
 	   public static Envelop communicate(Envelop En) {
 	    	
 	    	String ip = "127.0.0.1";
-	    	int port =  10007;
+	    	
 
 	        while (!isConnected) { //loop not used, for future purposes
 	            try {
 	            	
 	            	/* Connection details + socket creation */
-	            	socket = new Socket(ip,port);
+	            	socket = new Socket(ip,10007);
 	          
 	                System.out.println("Client->Controller: Socket created");
 	                
@@ -73,7 +73,6 @@ public class Controller {
 	                /* Flushing and closing stream */
 	                outputStream.flush();
 	                outputStream.close();
-	                socket.close();
 	                
 	            } catch (SocketException se) {
 	                se.printStackTrace();

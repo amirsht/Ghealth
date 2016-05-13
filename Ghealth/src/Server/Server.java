@@ -35,9 +35,9 @@ public class Server {
     	
         System.out.println("Server-> Start - Before Socket Coonnection.");
         try {
-        	 serverSocket=null;
+        	int port=10007;
         	/* Server listening and connection */
-            serverSocket = new ServerSocket(10007);
+            serverSocket = new ServerSocket(port);
             System.out.println("Server: Waiting for connection...");
             socket = serverSocket.accept();
             System.out.println("Server: Connected");
@@ -89,9 +89,7 @@ public class Server {
             outputStream = new ObjectOutputStream(socket.getOutputStream());
             outputStream.writeObject(env);
 
-       	 	//outputStream.flush();
-       	 	//outputStream.close();
-            
+           serverSocket.close();
            socket.close();
            System.out.println("Server-> Finish - Socket close.");
 
