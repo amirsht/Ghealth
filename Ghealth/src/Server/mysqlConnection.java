@@ -1,3 +1,8 @@
+/**
+ * TODO This is the class description
+ */
+
+
 package Server;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -25,7 +30,7 @@ public class mysqlConnection {
         
         try 
         {
-            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/world","root","a4m3i2r1");
+            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ghealth","root","a4m3i2r1");
             //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.3.68/test","root","Root");
             System.out.println("SQL connection succeed");
 

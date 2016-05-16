@@ -1,3 +1,8 @@
+/**
+ * TODO This is the class description
+ */
+
+
 package models;
 
 import java.io.Serializable;
@@ -5,13 +10,25 @@ import java.io.Serializable;
 public class PersonalDoctor implements Serializable{
 
 	/* Table in DB, patient ID is the PK */
+	private int PersonalDoctorID;
 	private String PersonalDoctorName;
 	private String PersonalDoctorEmail;
+	/**
+	 * @param PersonalDoctorName
+	 * @param PersonalDoctorEmail
+	 */
 	
-	public PersonalDoctor(String personalDoctorName, String personalDoctorEmail) {
+	public PersonalDoctor(int idonly)
+	{
 		super();
-		PersonalDoctorName = personalDoctorName;
-		PersonalDoctorEmail = personalDoctorEmail;
+		this.PersonalDoctorID = idonly;
+	}
+	
+	public PersonalDoctor(int PersonalDoctorID,String PersonalDoctorName, String PersonalDoctorEmail) {
+		super();
+		this.setPersonalDoctorID(PersonalDoctorID);
+		this.PersonalDoctorName = PersonalDoctorName;
+		this.PersonalDoctorEmail = PersonalDoctorEmail;
 	}
 	
 	public String getPersonalDoctorName() {
@@ -25,6 +42,14 @@ public class PersonalDoctor implements Serializable{
 	}
 	public void setPersonalDoctorEmail(String personalDoctorEmail) {
 		PersonalDoctorEmail = personalDoctorEmail;
+	}
+
+	public int getPersonalDoctorID() {
+		return PersonalDoctorID;
+	}
+
+	public void setPersonalDoctorID(int personalDoctorID) {
+		PersonalDoctorID = personalDoctorID;
 	}
 	
 	

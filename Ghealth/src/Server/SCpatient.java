@@ -1,19 +1,22 @@
+/**
+ * TODO This is the class description
+ */
+
+
 package Server;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import enums.Status;
-import models.Envelop;
-import models.Patient;
+import models.*;
 
 
 public class SCpatient {
 
 
 
-	public static Envelop GetExistPatient(String pID)
+	public static Envelop GetExistPatient(String ptID)
 	{
 		ResultSet result = null;
 		Statement stmt;
@@ -21,26 +24,32 @@ public class SCpatient {
 		Patient pt = null;
 		Envelop en = new Envelop();
 		/* Return patient row if exist */
-		querystr="SELECT *,count(*) FROM patient WHERE pID = '"+pID+"';";
+		querystr="SELECT *,count(*) FROM patient WHERE ptID = '"+ptID+"';";
 		try 
 		{
 			stmt = mysqlConnection.conn.createStatement();
-			System.out.println(querystr+"\n(Check if patient: '"+pID+"' is exist in DB:)");
+			System.out.println(querystr+"\n(Check if patient: '"+ptID+"' is exist in DB:)");
 			result = stmt.executeQuery(querystr);
 			result.next();
-			if(result.getInt(6) == 1)
+			if(result.getInt(8) == 1)
 			{
+				/* Get & Create the patient from DB */
 				pt = new Patient();
-				pt.setpID(result.getString("pID"));
-				pt.setpName(result.getString("pName"));
+				pt.setpID(result.getString("ptID"));
+				pt.setpFirstName(result.getString("ptFirstName"));
+				pt.setpLastName(result.getString("ptLastName"));
 				pt.setPtEmail(result.getString("ptEmail"));
 				pt.setPtPhone(result.getString("ptPhone"));
 				pt.setPtPrivateClinic(result.getString("ptPrivateClinic"));
+				int ptdid = result.getInt("ptDoctorID");
+				pt.setptpersonalDoctorID(ptdid);
+				
+				
 				en.addobjList(pt);
 				//en.setObj(pt);
 			}
 			
-			System.out.println("ResultSet - pID - "+result.getString("pID") );
+			System.out.println("ResultSet - ptID - "+result.getString("ptID") );
 			mysqlConnection.conn.close();
 		}
 		catch (SQLException ex) 
@@ -55,20 +64,20 @@ public class SCpatient {
 	}
 	
 	
-	public static Status CreatePatient(String pID,String pName,String pEmail,String pPhone,String pPrivateClinic)
+	public static Status CreatePatient(String ptID,String pFName,String pLName,String pEmail,String pPhone,String pPrivateClinic,int personalDoctorID)
 	{
 		Statement stmt;
 		String querystr;
 		Patient pt = null;
 		Envelop en = new Envelop();
 		
-		querystr="INSERT INTO patient " + " VALUES ('"+pID+"','"+pName+"', '"+pEmail+"', '"+pPhone+"', '"+pPrivateClinic+"')";
+		querystr="INSERT INTO patient " + " VALUES ('"+ptID+"','"+pFName+"','"+pLName+"', '"+pEmail+"', '"+pPhone+"', '"+pPrivateClinic+"', '"+personalDoctorID+"')";
 		
 		try 
 		{
 			
-			en.addobjList(GetExistPatient(pID));
-			//en.setObj(GetExistPatient(pID)); //Check if patient exist in DB.
+			en.addobjList(GetExistPatient(ptID));
+			//en.setObj(GetExistPatient(ptID)); //Check if patient exist in DB.
 			if(en.getSingleObject() != null)
 			{
 				System.out.println("The Patient '"+pt+"' exist in DB");

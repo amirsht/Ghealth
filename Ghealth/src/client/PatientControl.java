@@ -46,10 +46,10 @@ public class PatientControl {
     public static void main(String[] args) {
     	
     	//Patient temp = new Patient("333333");
-    	Patient temp = new Patient("333333");
+    	//Patient newpt = new Patient("200113","Ori","Arel","temp@gmail.com","12345","Klalit",1);
+    	Patient temp = new Patient("200113");
     	
-    	//PatientControl client = new PatientControl();
-    	CreateNewPatient(temp);
+    	//CreateNewPatient(newpt);
     	GetExistPatient(temp);
         
         

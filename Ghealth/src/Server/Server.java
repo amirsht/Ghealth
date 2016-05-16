@@ -1,13 +1,13 @@
-package Server;
-import models.*;
-import enums.*;
-
-/* This class represents our server side 
+/** This class represents our server side 
  * of the system communication protocol.
  * there will be only one unique implementation of it
  * and it will contain: parser, big switch case, 
  * DB communication protocol and access, TBD...
  */
+
+package Server;
+import models.*;
+import enums.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -21,6 +21,12 @@ import java.sql.Statement;
 
 public class Server {
 	
+	/** 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
     private ServerSocket serverSocket = null;
     private Socket socket = null;
     private ObjectInputStream inStream = null;
@@ -69,10 +75,10 @@ public class Server {
             case ADD_PATIENT:
             	System.out.println("case ADD_PATIENT");
             	
-            	status=SCpatient.CreatePatient(pt.getpID(),pt.getpName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic());
+            	status=SCpatient.CreatePatient(pt.getpID(),pt.getpFirstName(),pt.getpLastName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic(),pt.getPd());
             	env.setStatus(status);
             	if(status == Status.EXIST)
-            		System.out.println("The Patient '"+pt.getpName()+"' is already exist in GHEALTH!");
+            		System.out.println("The Patient '"+pt.getpID()+"' is already exist in GHEALTH!");
             	break;
 
             case GET_PATIENT:
