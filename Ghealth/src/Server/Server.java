@@ -35,6 +35,12 @@ public class Server {
     public Connection conn;
     public Status status;
     
+    
+    public Patient pt = null;
+    public User us = null;
+    
+    
+    
     public Server() {
     }
 
@@ -65,16 +71,26 @@ public class Server {
             
             /* ----- getting data from DB ------ */
             mysqlConnection msql = new mysqlConnection();
-            Patient pt = (Patient)env.getSingleObject();
+            
             System.out.println(env.getType());
             
             switch(env.getType()){
             
             
+            /*---      User Tasks:    ---*/
+            case GET_USER:
+            	us = (User)env.getSingleObject();
+            	System.out.println("case GET_USER");
+            	env=SCuser.GetExistUser(us.getuID());
+            	break;
+            
+            	
+            	
             /*---     Patient Tasks:   ---*/
             case ADD_PATIENT:
+            	pt = (Patient)env.getSingleObject();
             	System.out.println("case ADD_PATIENT");
-            	
+    
             	status=SCpatient.CreatePatient(pt.getpID(),pt.getpFirstName(),pt.getpLastName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic(),pt.getPd());
             	env.setStatus(status);
             	if(status == Status.EXIST)
@@ -82,6 +98,7 @@ public class Server {
             	break;
 
             case GET_PATIENT:
+            	pt = (Patient)env.getSingleObject();
             	System.out.println("case GET_PATIENT");
             	env=SCpatient.GetExistPatient(pt.getpID());
             	break;

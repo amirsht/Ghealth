@@ -10,6 +10,7 @@ import enums.*;
 public class Doctor extends User {
 	
 	private String dSpeciality;
+	private int dcid;
 	/**
 	 * @param dSpeciality
 	 */
@@ -35,6 +36,14 @@ public class Doctor extends User {
 
 	public void setdSpeciality(String dSpeciality) {
 		this.dSpeciality = dSpeciality;
+	}
+
+	public int getDcid() {
+		return dcid;
+	}
+
+	public void setDcid(int dcid) {
+		this.dcid = dcid;
 	}
 	
 

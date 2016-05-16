@@ -15,31 +15,29 @@ import java.net.SocketException;
 public class PatientControl {
       
 	 
-    public static boolean PatientCon(Patient pt,task ts){
+    public static Patient PatientCon(Patient pt,task ts){
     	
     	Envelop En = new Envelop();
       
         En.addobjList(pt);
         En.setType(ts);
         En =  Controller.communicate(En);
-        Patient pTemp = (Patient)(En.getSingleObject());
-        System.out.println(pTemp);
+        pt = (Patient)(En.getSingleObject());
+        
         
         //TODO 
-    	return false; 
+    	return pt; 
     }
     
     
-    public static boolean CreateNewPatient(Patient pt)
+    public static Patient CreateNewPatient(Patient pt)
     {
-    	PatientCon(pt,task.ADD_PATIENT);
-		return false;
+    	return PatientCon(pt,task.ADD_PATIENT);
     }
     
-    public static boolean GetExistPatient(Patient pt)
+    public static Patient GetExistPatient(Patient pt)
     {
-    	PatientCon(pt,task.GET_PATIENT);
-		return false;
+    	return PatientCon(pt,task.GET_PATIENT);
     }
     
     
@@ -48,10 +46,12 @@ public class PatientControl {
     	//Patient temp = new Patient("333333");
     	//Patient newpt = new Patient("200113","Ori","Arel","temp@gmail.com","12345","Klalit",1);
     	Patient temp = new Patient("200113");
+    	User pinto = new User("5000");
+    	
     	
     	//CreateNewPatient(newpt);
-    	GetExistPatient(temp);
-        
+    	temp=GetExistPatient(temp);
+    	System.out.println(temp);
         
     }
 }

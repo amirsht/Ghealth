@@ -3,7 +3,8 @@ package enums;
 public enum task {
 
 	
-	ADD_PATIENT,UPDATE_PATIENT, GET_PATIENT
+	ADD_PATIENT,UPDATE_PATIENT, GET_PATIENT,
+	GET_USER
 	
 	
 }

@@ -28,6 +28,12 @@ public class User implements Serializable {
 		super();
 	}
 	
+	public User(String uID)
+	{
+		super();
+		this.uID = uID;
+	}
+	
 	/**
 	 * @param uID
 	 * @param uPassword
@@ -97,6 +103,13 @@ public class User implements Serializable {
 
 	public void setuLastName(String uLastName) {
 		this.uLastName = uLastName;
+	}
+
+	//TODO - only for us.
+	@Override
+	public String toString() {
+		return "User [uID=" + uID + ", uPassword=" + uPassword + ", uFirstName=" + uFirstName + ", uLastName="
+				+ uLastName + ", uRole=" + uRole + ", uEmail=" + uEmail + ", Clinic Name=" + uClinic.getcName() + "]";
 	}
 	
 	

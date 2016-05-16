@@ -18,6 +18,7 @@ public class SCpatient {
 
 	public static Envelop GetExistPatient(String ptID)
 	{
+		int rowCount=0;
 		ResultSet result = null;
 		Statement stmt;
 		String querystr;
@@ -30,8 +31,11 @@ public class SCpatient {
 			stmt = mysqlConnection.conn.createStatement();
 			System.out.println(querystr+"\n(Check if patient: '"+ptID+"' is exist in DB:)");
 			result = stmt.executeQuery(querystr);
-			result.next();
-			if(result.getInt(8) == 1)
+			result.last();
+			rowCount = result.getRow();
+			System.out.println("rowcount="+rowCount);
+			result.first();
+			if(rowCount == 1)
 			{
 				/* Get & Create the patient from DB */
 				pt = new Patient();
