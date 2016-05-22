@@ -23,7 +23,7 @@ import models.Patient;
 
 public class mysqlConnection {
 	
-	public Connection conn; //TODO - will be changed (maby) to private	
+	public static Connection conn; //TODO - will be changed (maby) to private	
 	public mysqlConnection temp;
 	private ServerGui ServerView;
 	private serverLogGui serverLogView;
