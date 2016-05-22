@@ -59,7 +59,12 @@ public class mysqlConnection {
             System.out.println("VendorError: " + ex.getErrorCode());
             }
    	}
-
+	/**
+	 * constructor
+	 * @param SerGui is the start gui that open first when we open 
+	 * the server - need to field port user name and password of workbench
+	 * @param servLog show when client connect or disconnect to server
+	 */
 
 	public mysqlConnection(ServerGui SerGui,serverLogGui servLog) 
 	{
@@ -93,7 +98,10 @@ public class mysqlConnection {
 		}
 	
 	}
-	
+	/**
+	 *  Inner class that handles when Button Login Pressed, implements ActiontListener
+	 *
+	 */
 	class LoginListener implements ActionListener {
 
 		@Override
@@ -133,7 +141,10 @@ public class mysqlConnection {
 	}
 	
 	
-	
+	/**
+	 * openConnectionDB is method that check if the open Connection to DB
+	 * @return boolean
+	 */
 	  public boolean openConnectionDB(){
 		  
 			
@@ -160,7 +171,11 @@ public class mysqlConnection {
 	          }
 		  
 	}
-	  
+		/**
+		 * set the new log of Employee that connect or disconnect to server
+		 * @param e1
+		 * @param Task
+		 */
 	  public void SetLog(String e1, String Task){
 			ZonedDateTime zonedDateTime = ZonedDateTime.now();
 	        if(Task.equals("login")){
