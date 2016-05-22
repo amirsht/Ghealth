@@ -72,6 +72,7 @@ public class mysqlConnection {
 		ServerView.setTextFieldPort(Defport);
 		ServerView.setTextFieldscheam(Scheam);
 		userLog = new ArrayList<String>();
+		
 		ServerView.addLoginActionListener(new LoginListener());
 		serverLogView.addDisconnectedBottonActionListener(new DisconnectedListener());
 
@@ -86,6 +87,7 @@ public class mysqlConnection {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
+			 System.out.println("Connection closed, program terminated");
 		System.exit(0);
 			
 		}
