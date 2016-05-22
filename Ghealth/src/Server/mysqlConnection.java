@@ -74,10 +74,7 @@ public class mysqlConnection {
 		userLog = new ArrayList<String>();
 		ServerView.addLoginActionListener(new LoginListener());
 		serverLogView.addDisconnectedBottonActionListener(new DisconnectedListener());
-		
-		System.out.println("mysqlConnection(ServerGui SerGui,serverLogGui servLog) constructor");
-	
-		
+
    	}
 	
 	  /**
@@ -107,7 +104,7 @@ public class mysqlConnection {
 			port = Integer.parseInt(Defport);
 			Scheam = ServerView.getTextScheam();
 			
-			System.out.println("GUI ACTION SERVER LOGIN");
+			System.out.println("GUI ACTION SERVER LOGIN TRY...");
 			
 			if(openConnectionDB()){
 				
