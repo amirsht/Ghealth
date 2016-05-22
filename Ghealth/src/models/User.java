@@ -12,6 +12,11 @@ import enums.*;
 
 public class User implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4147848156651925332L;
+	
 	private String uID; //worker id 
 	private String uPassword;
 	private String uFirstName;

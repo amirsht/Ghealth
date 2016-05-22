@@ -17,7 +17,7 @@ public class PatientControl {
 	 
     public static Patient PatientCon(Patient pt,task ts){
     	
-    	Envelop En = new Envelop();
+    	Envelope En = new Envelope();
       
         En.addobjList(pt);
         En.setType(ts);

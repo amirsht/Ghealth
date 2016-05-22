@@ -14,14 +14,14 @@ import enums.*;
 
 public class SCuser {
 
-	public static Envelop GetExistUser(String uID)
+	public static Envelope GetExistUser(String uID)
 	{
 		int rowCount=0;
 		ResultSet result = null;
 		Statement stmt;
 		String querystr;
 		User us = null;
-		Envelop en = new Envelop();
+		Envelope en = new Envelope();
 		Clinic cl = new Clinic();
 		/* Return patient row if exist */
 		querystr="SELECT *"

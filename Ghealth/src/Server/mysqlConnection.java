@@ -4,25 +4,42 @@
 
 
 package Server;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-import models.Envelop;
+import models.Envelope;
 import models.Patient;
 
 
 
 public class mysqlConnection {
 	
-	public static Connection conn; //TODO - will be changed (maby) to private
-
+	public Connection conn; //TODO - will be changed (maby) to private	
+	public mysqlConnection temp;
+	private ServerGui ServerView;
+	private serverLogGui serverLogView;
+	private  ArrayList<String> userLog;
+	private String userNameDB = "root";
+	private String passwordDB = "";
+	private String Defport = "5555";
+	private int port = 0;
+	private String Scheam = "jdbc:mysql://localhost/test";
+	public Server sv;
+	
 	public mysqlConnection() 
 	{
+		
+		System.out.println("mysqlConnection() constructor");
+		
 		try 
 		{
             Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -30,7 +47,8 @@ public class mysqlConnection {
         
         try 
         {
-            this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ghealth","root","a4m3i2r1");
+        	conn = DriverManager.getConnection(Scheam,userNameDB,passwordDB);
+            //this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ghealth","root","a4m3i2r1");
             //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.3.68/test","root","Root");
             System.out.println("SQL connection succeed");
 
@@ -41,60 +59,163 @@ public class mysqlConnection {
             System.out.println("VendorError: " + ex.getErrorCode());
             }
    	}
-	
-	
-	
-	
-	
-	
 
-	public String printPhysician()
+
+	public mysqlConnection(ServerGui SerGui,serverLogGui servLog) 
 	{
 		
-		Statement stmt;
-		String tableStr = "Physician Table:\n";
+		ServerView = SerGui;
+		serverLogView = servLog;
+		temp = this;
+		ServerView.setTextFieldPass(passwordDB);
+		ServerView.setTextFieldUser(userNameDB);
+		ServerView.setTextFieldPort(Defport);
+		ServerView.setTextFieldscheam(Scheam);
+		userLog = new ArrayList<String>();
+		ServerView.addLoginActionListener(new LoginListener());
+		serverLogView.addDisconnectedBottonActionListener(new DisconnectedListener());
 		
-		try 
-		{
-			stmt = this.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM Physician;");
-	 		while(rs.next())
-	 		{
-				 // Print out the values
-				 //System.out.println(rs.getString(1)+"\t\t" +rs.getString(2));
-				 // save the values in tableStr
-				 
-				 tableStr += rs.getString(1)+"     "+rs.getString(2)+"\n";
-			} 
-			rs.close();
+		System.out.println("mysqlConnection(ServerGui SerGui,serverLogGui servLog) constructor");
+	
+		
+   	}
+	
+	  /**
+	   * Inner class that handles when Button Logout Pressed, implements ActiontListener
+	   *
+	   */
+	class DisconnectedListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+		System.exit(0);
 			
-			return tableStr;
-			
-		} catch (SQLException e) {e.printStackTrace();return "Error getting DB";}
+		}
+	
 	}
 	
-	public boolean searchPhysician(String docname){
-		
-		Statement stmt;
-		
-		try 
-		{
-			stmt = this.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM Physician;");
-	 		while(rs.next())
-	 		{
-				 if (String.valueOf(rs.getString(1)).equals(String.valueOf(docname))) {
-					 rs.close();
-					 return true;
-				 }
-					 
-			} 
-			rs.close();
-			return false;
+	class LoginListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			userNameDB = ServerView.getTextUserName();
+			passwordDB = ServerView.getTextPassword();
+			Defport = ServerView.getTextPort();
+			port = Integer.parseInt(Defport);
+			Scheam = ServerView.getTextScheam();
+			
+			System.out.println("GUI ACTION SERVER LOGIN");
+			
+			if(openConnectionDB()){
+				
+				 sv = new Server(port);
+				 
+				   try 
+				    {
+					  sv.start();
+				      ServerView.dispose();
+				      serverLogView.setVisible(true);
+				      
+				    } 
+				    catch (Exception ex) 
+				    {
+				    	 ServerView.setWarningMessageVisibleTrue("ERROR - Could not listen for clients!");
+				    }
+				
+			}
 			
 			
-		} catch (SQLException e) {e.printStackTrace();return false;}		
+			
+		}
+	
+	}
+	
+	
+	
+	  public boolean openConnectionDB(){
+		  
+			
+			try 
+			{
+	          Class.forName("com.mysql.jdbc.Driver").newInstance();
+	      } catch (Exception ex) {/* handle the error*/
+	    	  System.out.println("Failed to open com.mysql.jdbc.Driver...");
+	      }
+	      
+	      try 
+	      {
+	           this.conn = DriverManager.getConnection(Scheam,userNameDB,passwordDB);
+	          //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.3.68/test","root","Root");
+	          System.out.println("SQL connection succeed");
+	          return true;
+	          
+	   	} catch (SQLException ex) 
+	   	    {/* handle any errors*/
+	          ServerView.setWarningMessageVisibleTrue("SQLException: " + ex.getMessage());
+	          ServerView.setWarningMessageVisibleTrue("SQLState: " + ex.getSQLState());
+	          ServerView.setWarningMessageVisibleTrue("VendorError: " + ex.getErrorCode());
+	          return false;
+	          }
+		  
+	}
+	  
+	  public void SetLog(String e1, String Task){
+			ZonedDateTime zonedDateTime = ZonedDateTime.now();
+	        if(Task.equals("login")){
+	        	userLog.add(e1);
+	        	serverLogView.getTextArea().setForeground(Color.green);
+	        	serverLogView.getTextArea().append(zonedDateTime.toLocalTime()+" : " +" User " + e1 + "- connected\n");	
+	        }
+	        if(Task.equals("loginTry")){
+	        	userLog.add(e1);
+	        	serverLogView.getTextArea().setForeground(Color.red);
+	        	serverLogView.getTextArea().append(zonedDateTime.toLocalTime()+" : " +" User " + e1 + "- Tried to log in\n");	
+	        }
 		
+	        
+	        if(Task.equals("Register")){
+	        	serverLogView.getTextArea().setForeground(Color.red);
+	        	serverLogView.getTextArea().append(zonedDateTime.toLocalTime()+" : " +e1 + "\n");	
+	        	userLog.remove(e1);
+	        
+	        }	
+	        
+	        
+	        if(Task.equals("logout")){
+	        	serverLogView.getTextArea().setForeground(Color.red);
+	        	serverLogView.getTextArea().append(zonedDateTime.toLocalTime()+" : " +" User " + e1 + "- Disconnected\n");	
+	        	userLog.remove(e1);
+	        
+	        }	
+			
+		}
+	
+	
+	/************************************************Getters and setters***************************************/
+	public ServerGui getServerView() {
+		return ServerView;
+	}
+
+	public void setServerView(ServerGui serverView) {
+		ServerView = serverView;
+	}
+
+	public serverLogGui getServerLogView() {
+		return serverLogView;
+	}
+
+	public void setServerLogView(serverLogGui serverLogView) {
+		this.serverLogView = serverLogView;
+	}
+	
+	 public void setPasswordDB(String password1) {
+			this.passwordDB = password1;
+		}
+	public void setUserNameDB(String userName) {
+		this.userNameDB = userName;
 	}
 	
 

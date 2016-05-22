@@ -16,14 +16,14 @@ public class SCpatient {
 
 
 
-	public static Envelop GetExistPatient(String ptID)
+	public static Envelope GetExistPatient(String ptID)
 	{
 		int rowCount=0;
 		ResultSet result = null;
 		Statement stmt;
 		String querystr;
 		Patient pt = null;
-		Envelop en = new Envelop();
+		Envelope en = new Envelope();
 		/* Return patient row if exist */
 		querystr="SELECT *,count(*) FROM patient WHERE ptID = '"+ptID+"';";
 		try 
@@ -73,7 +73,7 @@ public class SCpatient {
 		Statement stmt;
 		String querystr;
 		Patient pt = null;
-		Envelop en = new Envelop();
+		Envelope en = new Envelope();
 		
 		querystr="INSERT INTO patient " + " VALUES ('"+ptID+"','"+pFName+"','"+pLName+"', '"+pEmail+"', '"+pPhone+"', '"+pPrivateClinic+"', '"+personalDoctorID+"')";
 		

@@ -1,7 +1,7 @@
 package client;
 
 import enums.task;
-import models.Envelop;
+import models.Envelope;
 import models.Patient;
 import models.User;
 
@@ -9,7 +9,7 @@ public class UserControl {
 
 public static User UserCon(User us,task ts){
     	
-    	Envelop En = new Envelop();
+    	Envelope En = new Envelope();
       
         En.addobjList(us);
         En.setType(ts);

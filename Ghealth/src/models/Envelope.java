@@ -9,13 +9,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Envelop implements Serializable {
+public class Envelope implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7171959639692110621L;
 	private List<Object> objList;
 	private task type;
 	private Status st;
 	
-	public Envelop() {
+	public Envelope() {
 		this.objList = new ArrayList<Object>();
 	}
 

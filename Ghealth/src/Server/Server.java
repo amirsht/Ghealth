@@ -36,6 +36,8 @@ public class Server extends Thread
     public String filename;
     
     
+    
+    
     public Server(int port) 
     {
     	try 
@@ -69,7 +71,7 @@ public class Server extends Thread
     	
         //System.out.println("Server-> Start - Before Socket Coonnection.");
         try {
-        	Envelop env;
+        	Envelope env;
         	ObjectInputStream inputStream;
         	ObjectOutputStream outputStream;
         	
@@ -80,7 +82,7 @@ public class Server extends Thread
            // System.out.println("Object is = " + inStream);
             
             /* parsing and switching are needed here */
-            env  = (Envelop)inputStream.readObject();
+            env  = (Envelope)inputStream.readObject();
             
             System.out.println("Object received (address) = ");
             //System.out.println("Object received (address) = " + env.address);
@@ -209,13 +211,12 @@ public class Server extends Thread
 		dis.close();
 	}
     
-    
+  /*  
     public static void main(String[] args) {
     	
-        Server server;
-        
+        Server server;     
         server = new Server(10007);
         server.start();
      
-    }
+    }*/
 }

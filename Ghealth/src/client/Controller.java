@@ -11,7 +11,7 @@ import java.net.Socket;
 import java.net.SocketException;
 
 import enums.task;
-import models.Envelop;
+import models.Envelope;
 import models.Patient;
 import models.PersonalDoctor;
 
@@ -20,8 +20,8 @@ public class Controller {
 	    private static ObjectInputStream inputStream = null;
 	    private static ObjectOutputStream outputStream = null;
 	    private static boolean isConnected = false;
-	    private static Envelop En = null;
-	    private static Envelop GetEn = null;
+	    private static Envelope En = null;
+	    private static Envelope GetEn = null;
 	    
 	    
 	    public static void sendFile(String filename) throws IOException {
@@ -33,8 +33,11 @@ public class Controller {
 				dos.write(buffer);
 			}
 			
-			fis.close();
+			fis.close(); //Git Test
 			dos.close();	
+			
+			
+			
 		}
 		
 		
@@ -59,7 +62,7 @@ public class Controller {
 			dis.close();
 		} 
 	    
-	   public static Envelop communicate(Envelop En) {
+	   public static Envelope communicate(Envelope En) {
 	    	
 	    	String ip = "127.0.0.1";
 	    	
@@ -106,7 +109,7 @@ public class Controller {
 		                inputStream = new ObjectInputStream(socket.getInputStream());
 		                try {
 		                	
-		                	GetEn  = (Envelop) inputStream.readObject();
+		                	GetEn  = (Envelope) inputStream.readObject();
 						} catch (ClassNotFoundException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
