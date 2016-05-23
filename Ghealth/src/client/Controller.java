@@ -71,7 +71,7 @@ public class Controller {
 	            try {
 	            	
 	            	/* Connection details + socket creation */
-	            	socket = new Socket(ip,10007);
+	            	socket = new Socket(ip,5555);
 	          
 	                System.out.println("Client->Controller: Socket created");
 	                

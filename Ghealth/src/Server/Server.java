@@ -153,7 +153,7 @@ public class Server extends Thread
             System.out.println("Before sending object back");
             
             
-            
+            /* if the task is not to send FILE to client */
             if(env.getType() != task.GET_LAB_REF && env.getType() != task.UPDATE_LAB_REF)
             {
 	            /* Sending data back to client */
@@ -211,11 +211,11 @@ public class Server extends Thread
 		dis.close();
 	}
     
-  /*  
+  /*
     public static void main(String[] args) {
     	
         Server server;     
-        server = new Server(10007);
+        server = new Server(5555);
         server.start();
      
     }*/

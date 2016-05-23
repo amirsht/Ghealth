@@ -23,9 +23,9 @@ public class SCpatient {
 		Statement stmt;
 		String querystr;
 		Patient pt = null;
-		Envelope en = new Envelope();
+		Envelope en = null;
 		/* Return patient row if exist */
-		querystr="SELECT *,count(*) FROM patient WHERE ptID = '"+ptID+"';";
+		querystr="SELECT * FROM patient WHERE ptID = '"+ptID+"';";
 		try 
 		{
 			stmt = mysqlConnection.conn.createStatement();
@@ -33,10 +33,13 @@ public class SCpatient {
 			result = stmt.executeQuery(querystr);
 			result.last();
 			rowCount = result.getRow();
-			System.out.println("rowcount="+rowCount);
+			System.out.println("rowcount="+rowCount );
 			result.first();
-			if(rowCount == 1)
+			//TODO: fix the rowCount.
+			if(rowCount >= 1)
 			{
+				en = new Envelope();
+				System.out.println("Patient Exist in DB!");
 				/* Get & Create the patient from DB */
 				pt = new Patient();
 				pt.setpID(result.getString("ptID"));
@@ -45,13 +48,16 @@ public class SCpatient {
 				pt.setPtEmail(result.getString("ptEmail"));
 				pt.setPtPhone(result.getString("ptPhone"));
 				pt.setPtPrivateClinic(result.getString("ptPrivateClinic"));
-				int ptdid = result.getInt("ptDoctorID");
+				String ptdid = result.getString("ptDoctorID");
 				pt.setptpersonalDoctorID(ptdid);
 				
 				
 				en.addobjList(pt);
 				//en.setObj(pt);
 			}
+			
+			System.out.println("Patient Not Exist in DB");
+			mysqlConnection.conn.close();
 			
 			System.out.println("ResultSet - ptID - "+result.getString("ptID") );
 			mysqlConnection.conn.close();
@@ -68,7 +74,7 @@ public class SCpatient {
 	}
 	
 	
-	public static Status CreatePatient(String ptID,String pFName,String pLName,String pEmail,String pPhone,String pPrivateClinic,int personalDoctorID)
+	public static Status CreatePatient(String ptID,String pFName,String pLName,String pEmail,String pPhone,String pPrivateClinic,String personalDoctorID)
 	{
 		Statement stmt;
 		String querystr;
@@ -76,17 +82,18 @@ public class SCpatient {
 		Envelope en = new Envelope();
 		
 		querystr="INSERT INTO patient " + " VALUES ('"+ptID+"','"+pFName+"','"+pLName+"', '"+pEmail+"', '"+pPhone+"', '"+pPrivateClinic+"', '"+personalDoctorID+"')";
+		//System.out.println(querystr);
 		
 		try 
 		{
 			
-			en.addobjList(GetExistPatient(ptID));
+			//en.addobjList(GetExistPatient(ptID));
 			//en.setObj(GetExistPatient(ptID)); //Check if patient exist in DB.
-			if(en.getSingleObject() != null)
+			/*if(en.getSingleObject() != null)
 			{
 				System.out.println("The Patient '"+pt+"' exist in DB");
 				return Status.EXIST;
-			}
+			}*/
 			
 			stmt = mysqlConnection.conn.createStatement();
 			System.out.println("Create new patient in DB: " + querystr);

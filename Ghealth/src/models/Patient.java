@@ -14,7 +14,7 @@ public class Patient implements Serializable{
 	private String ptEmail;
 	private String ptPhone;
 	private String ptPrivateClinic;
-	private int ptpersonalDoctorID; 
+	private String ptpersonalDoctorID; 
 	//TODO Medical History History Missing
 	
 	
@@ -45,7 +45,7 @@ public class Patient implements Serializable{
 
 
 	public Patient(String ptID, String ptFirstName, String ptLastName, String ptEmail, String ptPhone,
-			String ptPrivateClinic, int ptpersonalDoctorID) {
+			String ptPrivateClinic, String ptpersonalDoctorID) {
 		super();
 		this.ptID = ptID;
 		this.ptFirstName = ptFirstName;
@@ -129,13 +129,13 @@ public class Patient implements Serializable{
 
 
 
-	public int getPd() {
+	public String getPd() {
 		return this.ptpersonalDoctorID;
 	}
 
 
 
-	public void setptpersonalDoctorID(int pd) {
+	public void setptpersonalDoctorID(String pd) {
 		this.ptpersonalDoctorID = pd;
 	}
 

@@ -28,11 +28,11 @@ public class mysqlConnection {
 	private ServerGui ServerView;
 	private serverLogGui serverLogView;
 	private  ArrayList<String> userLog;
-	private String userNameDB = "root";
-	private String passwordDB = "";
-	private String Defport = "5555";
-	private int port = 0;
-	private String Scheam = "jdbc:mysql://localhost/test";
+	private static String userNameDB = "root";
+	private static String passwordDB = "a4m3i2r1";
+	private static String Defport = "5555";
+	private static int port = 0;
+	private String Scheam = "jdbc:mysql://localhost/ghealth";
 	public Server sv;
 	
 	public mysqlConnection() 
@@ -47,7 +47,7 @@ public class mysqlConnection {
         
         try 
         {
-        	conn = DriverManager.getConnection(Scheam,userNameDB,passwordDB);
+        	this.conn = DriverManager.getConnection(Scheam,userNameDB,passwordDB);
             //this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ghealth","root","a4m3i2r1");
             //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.3.68/test","root","Root");
             System.out.println("SQL connection succeed");

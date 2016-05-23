@@ -1,8 +1,7 @@
 package client;
 
-import models.GhealthClientModel;
-import controllers.GhealthClientController;
-import view.GhealthClientGUI;
+import GUI.*;
+//import models.User;
 
 /**
  * The Main Class That starts Ghealth Application.
@@ -10,13 +9,12 @@ import view.GhealthClientGUI;
  */
 public class GhealthApp {
 
-	public static GhealthClient clien;
-
 	public static void main(String[] args) {
 		
-		GhealthClientGUI clientView = new GhealthClientGUI();
-		GhealthClientModel clientModel = new GhealthClientModel();
-        GhealthClientController clientController = new GhealthClientController(clientView,clientModel);
+		
+		LoginGUI login1 = new LoginGUI();
+		UserControl userctrl = new UserControl(login1);
+		
 
 	}
 
