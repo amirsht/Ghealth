@@ -112,7 +112,7 @@ public class SendEmailTest {
  * Authenticator class
  * Made for Gmail ass-wipe Security system 
  *
- * @author Ronin
+ * @author Pinto.com
  */
 class GMailAuthenticator extends Authenticator {
     String user;
