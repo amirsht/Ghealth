@@ -63,7 +63,7 @@ public class DoctorGUI extends JFrame {
 		label.setBounds(0, 0, 0, 0);
 		contentPane.add(label);
 		
-		JLabel lblLogo = new JLabel("Welcome Admin");
+		JLabel lblLogo = new JLabel("Welcome Doctor");
 		lblLogo.setIcon(new ImageIcon(DoctorGUI.class.getResource("/images/logo2.png")));
 		lblLogo.setBounds(0, 0, 794, 79);
 		contentPane.add(lblLogo);
