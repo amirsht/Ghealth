@@ -44,6 +44,7 @@ public class CostumerServiceGUI extends JFrame {
 	private JTextField pClinic;
 	private JTextField PationID;
 	private JTextField doctorID;
+	
 
 
 	/**
