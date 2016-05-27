@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+import java.awt.Label;
 
 
 public class CostumerServiceGUI extends JFrame {
@@ -70,82 +71,75 @@ public class CostumerServiceGUI extends JFrame {
 		contentPane.add(lblLogo);
 		
 		btnAddPatient = new JButton("ADD PATIENT");
-		btnAddPatient.setBounds(319, 444, 109, 23);
+		btnAddPatient.setBounds(220, 444, 109, 23);
 		contentPane.add(btnAddPatient);
 		
 		fName = new JTextField();
-		fName.setBounds(438, 161, 86, 20);
+		fName.setBounds(372, 163, 86, 20);
 		contentPane.add(fName);
 		fName.setColumns(10);
 		
 		lName = new JTextField();
-		lName.setBounds(438, 203, 86, 20);
+		lName.setBounds(372, 205, 86, 20);
 		contentPane.add(lName);
 		lName.setColumns(10);
 		
 		eMail = new JTextField();
-		eMail.setBounds(438, 244, 86, 20);
+		eMail.setBounds(372, 242, 86, 20);
 		contentPane.add(eMail);
 		eMail.setColumns(10);
 		
 		phone = new JTextField();
-		phone.setBounds(438, 285, 86, 20);
+		phone.setBounds(372, 285, 86, 20);
 		contentPane.add(phone);
 		phone.setColumns(10);
 		
 		pClinic = new JTextField();
-		pClinic.setBounds(438, 324, 86, 20);
+		pClinic.setBounds(372, 326, 86, 20);
 		contentPane.add(pClinic);
 		pClinic.setColumns(10);
 		
 		PationID = new JTextField();
-		PationID.setBounds(438, 123, 86, 20);
+		PationID.setBounds(372, 123, 86, 20);
 		contentPane.add(PationID);
 		PationID.setColumns(10);
 		
 		doctorID = new JTextField();
-		doctorID.setBounds(438, 368, 86, 20);
+		doctorID.setBounds(372, 368, 86, 20);
 		contentPane.add(doctorID);
 		doctorID.setColumns(10);
 		
-		JTextPane txtpnPationId = new JTextPane();
-		txtpnPationId.setText("Pation ID");
-		txtpnPationId.setBounds(340, 123, 71, 20);
-		contentPane.add(txtpnPationId);
-		
-		JTextPane txtpnFirstName = new JTextPane();
-		txtpnFirstName.setText("First Name");
-		txtpnFirstName.setBounds(340, 161, 71, 20);
-		contentPane.add(txtpnFirstName);
-		
-		JTextPane txtpnLastName = new JTextPane();
-		txtpnLastName.setText("Last Name");
-		txtpnLastName.setBounds(340, 203, 71, 20);
-		contentPane.add(txtpnLastName);
-		
-		JTextPane txtpnEmail = new JTextPane();
-		txtpnEmail.setText("Email");
-		txtpnEmail.setBounds(340, 244, 71, 20);
-		contentPane.add(txtpnEmail);
-		
-		JTextPane txtpnPhone = new JTextPane();
-		txtpnPhone.setText("Phone");
-		txtpnPhone.setBounds(340, 285, 71, 20);
-		contentPane.add(txtpnPhone);
-		
-		JTextPane txtpnPrivateClinic = new JTextPane();
-		txtpnPrivateClinic.setText("Private Clinic");
-		txtpnPrivateClinic.setBounds(340, 324, 71, 20);
-		contentPane.add(txtpnPrivateClinic);
-		
-		JTextPane txtpnPatientDoctorId = new JTextPane();
-		txtpnPatientDoctorId.setText("Doctor ID");
-		txtpnPatientDoctorId.setBounds(340, 368, 71, 20);
-		contentPane.add(txtpnPatientDoctorId);
-		
 		btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(508, 444, 89, 23);
+		btnCancel.setBounds(392, 444, 109, 23);
 		contentPane.add(btnCancel);
+		
+		Label label_1 = new Label("Pation ID");
+		label_1.setBounds(252, 123, 62, 22);
+		contentPane.add(label_1);
+		
+		Label label_2 = new Label("First Name");
+		label_2.setBounds(252, 161, 62, 22);
+		contentPane.add(label_2);
+		
+		Label label_3 = new Label("Last Name");
+		label_3.setBounds(252, 203, 62, 22);
+		contentPane.add(label_3);
+		
+		Label label_4 = new Label("Email");
+		label_4.setBounds(252, 242, 62, 22);
+		contentPane.add(label_4);
+		
+		Label label_5 = new Label("Phone");
+		label_5.setBounds(252, 283, 62, 22);
+		contentPane.add(label_5);
+		
+		Label label_6 = new Label("Private Clinic");
+		label_6.setBounds(252, 324, 77, 22);
+		contentPane.add(label_6);
+		
+		Label label_7 = new Label("Doctor ID");
+		label_7.setBounds(252, 366, 62, 22);
+		contentPane.add(label_7);
 		
 		
 		setLocationRelativeTo(null);
@@ -212,8 +206,4 @@ public class CostumerServiceGUI extends JFrame {
 	public String getDoctorID() {
 		return doctorID.getText();
 	}
-	
-	// Getters
-
-
 }
