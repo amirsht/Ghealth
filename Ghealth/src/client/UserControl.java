@@ -103,7 +103,7 @@ public static User UserCon(User us,task ts){
         		   	   switch(us.getuRole())
         		   	   {
 	        		   	   case CUSTOMER_SERVICE:
-	        		   		   CostumerServiceGUI cs = new CostumerServiceGUI();
+	        		   		   CS_GUI_findPatient cs = new CS_GUI_findPatient();
 	        		   		   PatientControl pt = new PatientControl(cs);
 	        		   		//TODO: open the next window (menu).
 	        		   		   break;

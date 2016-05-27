@@ -26,6 +26,9 @@ public class SCpatient {
 		Envelope en = null;
 		/* Return patient row if exist */
 		querystr="SELECT * FROM patient WHERE ptID = '"+ptID+"';";
+		en = new Envelope();
+		pt = new Patient();
+		
 		try 
 		{
 			stmt = mysqlConnection.conn.createStatement();
@@ -38,10 +41,10 @@ public class SCpatient {
 			//TODO: fix the rowCount.
 			if(rowCount >= 1)
 			{
-				en = new Envelope();
+				
 				System.out.println("Patient Exist in DB!");
 				/* Get & Create the patient from DB */
-				pt = new Patient();
+				
 				pt.setpID(result.getString("ptID"));
 				pt.setpFirstName(result.getString("ptFirstName"));
 				pt.setpLastName(result.getString("ptLastName"));
@@ -54,13 +57,14 @@ public class SCpatient {
 				
 				en.addobjList(pt);
 				//en.setObj(pt);
+				System.out.println("ResultSet - ptID - "+result.getString("ptID") );
+				mysqlConnection.conn.close();
 			}
-			
-			System.out.println("Patient Not Exist in DB");
-			mysqlConnection.conn.close();
-			
-			System.out.println("ResultSet - ptID - "+result.getString("ptID") );
-			mysqlConnection.conn.close();
+			else {
+				en.addobjList(pt);
+				System.out.println("Patient Not Exist in DB");
+				mysqlConnection.conn.close();
+			}
 		}
 		catch (SQLException ex) 
    	    {/* handle any errors*/
