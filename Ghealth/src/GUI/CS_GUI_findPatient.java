@@ -41,8 +41,6 @@ public class CS_GUI_findPatient extends JFrame {
 	private JLabel lblwarningMessage = null;
 	private JTextField InsertPatientId;
 	
-
-
 	/**
 	 * Create the frame.
 	 */

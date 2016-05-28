@@ -39,7 +39,7 @@ public class CS_GUI_Appoint extends JFrame {
 	private JLabel lblwarningMessage = null;
 	
 
-
+ 
 	/**
 	 * Create the frame.
 	 */
