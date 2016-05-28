@@ -95,6 +95,8 @@ public static User UserCon(User us,task ts){
         		   
         		   User us = GetExistUser(UserLogin);
         		   
+        		   if(us.getuID() != null){
+        		   
         		   if(UserLogin.getuPassword().equals(us.getuPassword()))
         		   {
         			   System.out.println("Password Match!");
@@ -131,6 +133,8 @@ public static User UserCon(User us,task ts){
         			   System.out.println("Pass not match");
         			   JOptionPane.showMessageDialog(null,"Pass not match!!!!","Error", JOptionPane.INFORMATION_MESSAGE);
         		   }
+        		   }else JOptionPane.showMessageDialog(null,"No such User!!!!","Error", JOptionPane.INFORMATION_MESSAGE); 
+        			   
         		   System.out.println("pass: " + us.getuPassword() + " " + us.getuRole());
         		   
         		   

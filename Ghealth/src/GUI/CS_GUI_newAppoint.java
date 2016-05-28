@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import enums.DoctorSpeciallity;
+
 import javax.swing.JTextField;
 
 import java.awt.Window.Type;
@@ -23,9 +26,11 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Label;
+import javax.swing.JComboBox;
 
+import enums.*;
 
-public class CS_GUI_Appoint extends JFrame {
+public class CS_GUI_newAppoint extends JFrame {
 
 	
 	/**
@@ -37,13 +42,14 @@ public class CS_GUI_Appoint extends JFrame {
 	private JButton btnCancelAppoint;
 	private JButton btnCrtAppoint;
 	private JLabel lblwarningMessage = null;
+	public JComboBox<?> docBox;
 	
 
 
 	/**
 	 * Create the frame.
 	 */
-	public CS_GUI_Appoint() {
+	public CS_GUI_newAppoint() {
 		setResizable(false);
 		setTitle("G-Health");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DoctorGUI.class.getResource("/images/logo2.PNG")));
@@ -61,7 +67,7 @@ public class CS_GUI_Appoint extends JFrame {
 		
 		JLabel lblLogo = new JLabel("Welcome CS");
 		lblLogo.setIcon(new ImageIcon(DoctorGUI.class.getResource("/images/logo2.png")));
-		lblLogo.setBounds(0, 0, 794, 79);
+		lblLogo.setBounds(0, 0, 794, 109);
 		contentPane.add(lblLogo);
 		
 		btnCrtAppoint = new JButton("CREATE APPOINTMENT");
@@ -69,7 +75,7 @@ public class CS_GUI_Appoint extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCrtAppoint.setBounds(142, 399, 172, 68);
+		btnCrtAppoint.setBounds(142, 470, 172, 68);
 		contentPane.add(btnCrtAppoint);
 		
 		btnCancelAppoint = new JButton("CANCEL APPOINTMENT");
@@ -77,37 +83,20 @@ public class CS_GUI_Appoint extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCancelAppoint.setBounds(392, 399, 172, 68);
+		btnCancelAppoint.setBounds(369, 470, 172, 68);
 		contentPane.add(btnCancelAppoint);
 		
-		Label label_1 = new Label("Patient ID");
-		label_1.setBounds(142, 106, 62, 22);
-		contentPane.add(label_1);
+		docBox = new JComboBox<Object>(DoctorSpeciallity.values());
+		docBox.setBounds(263, 141, 106, 20);
+		contentPane.add(docBox);
 		
-		Label label_2 = new Label("First Name");
-		label_2.setBounds(252, 106, 62, 22);
-		contentPane.add(label_2);
+		JLabel lblChooseDoctorType = new JLabel("Choose Doctor Type");
+		lblChooseDoctorType.setBounds(123, 144, 114, 14);
+		contentPane.add(lblChooseDoctorType);
 		
-		Label label_3 = new Label("Last Name");
-		label_3.setBounds(364, 106, 62, 22);
-		contentPane.add(label_3);
-		
-		Label label_4 = new Label("Email");
-		label_4.setBounds(485, 106, 62, 22);
-		contentPane.add(label_4);
-		
-		Label label_5 = new Label("Phone");
-		label_5.setBounds(142, 179, 62, 22);
-		contentPane.add(label_5);
-		
-		Label label_6 = new Label("Private Clinic");
-		label_6.setBounds(252, 179, 77, 22);
-		contentPane.add(label_6);
-		
-		Label label_7 = new Label("Doctor ID");
-		label_7.setBounds(364, 179, 62, 22);
-		contentPane.add(label_7);
-	
+		JLabel lblPatientName = new JLabel("Patient name:");
+		lblPatientName.setBounds(123, 120, 106, 14);
+		contentPane.add(lblPatientName);	
 		
 		setLocationRelativeTo(null);
 		
@@ -135,61 +124,39 @@ public class CS_GUI_Appoint extends JFrame {
 	}
 	
 	
-	public void createAppointActionListener(ActionListener e)
+	public void createNewAppointActionListener(ActionListener e)
 	{
 		btnCrtAppoint.addActionListener(e);
 	}
 	
-	public void cancelAppointActionListener(ActionListener e)
+	public void cancelNewAppointActionListener(ActionListener e)
 	{
 		btnCancelAppoint.addActionListener(e);
 	}
+	
+	public void SelectDocTypeActionListener(ActionListener e){
+		
+		docBox.addActionListener(e);
+		
+	}
+	
 
 	public void setfName(String ffName) {
 
 		
-		JLabel fName = new JLabel(ffName);
-		fName.setBounds(252, 137, 46, 14);
-		contentPane.add(fName);	
+		JLabel displayData = new JLabel(ffName);
+		displayData.setBounds(247, 120, 122, 14);
+		contentPane.add(displayData);	
 
 	}
 
-	public void setlName(String llName) {
-		JLabel lName = new JLabel(llName);
-		lName.setBounds(364, 137, 46, 14);
-		contentPane.add(lName);
-	}
-
-	public void seteMail(String Mail) {
-		JLabel eMail = new JLabel(Mail);
-		eMail.setBounds(482, 137, 82, 14);
-		contentPane.add(eMail);
-	}
-
-	public void setPhone(String pphone) {
-		JLabel phone = new JLabel(pphone);
-		phone.setBounds(142, 207, 46, 14);
-		contentPane.add(phone);
+	public void setPtID(String ptIDstr) {
 		
+		JLabel ptID = new JLabel(ptIDstr);
+		ptID.setBounds(372, 120, 100, 14);
+		contentPane.add(ptID);
 	}
 
-	public void setpClinic(String Clinic) {
-		JLabel pClinic = new JLabel(Clinic);
-		pClinic.setBounds(252, 210, 46, 14);
-		contentPane.add(pClinic);
-	}
 
-	public void setPationID(String ppationID) {
-		JLabel PationID = new JLabel(ppationID);
-		PationID.setBounds(142, 137, 100, 14);
-		contentPane.add(PationID);
-	}
-
-	public void setDoctorID(String ddoctorID) {
-		JLabel doctorID = new JLabel(ddoctorID);
-		doctorID.setBounds(364, 210, 46, 14);
-		contentPane.add(doctorID);
-	}
-	
 }
 

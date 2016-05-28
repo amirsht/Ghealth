@@ -57,11 +57,18 @@ public class SCuser {
 				us.setuRole(Roles.valueOf(temp124));
 				
 				en.addobjList(us);
+				
+				System.out.println("ResultSet - uID - "+result.getString("uID") );
+				mysqlConnection.conn.close();
 				//en.setObj(pt);
+			}else{
+				us = new User(null,null,null,null,null,null,null);
+				en.addobjList(us);
+				
+				System.out.println("ResultSet - uID - NO SUCH USER ");
+				mysqlConnection.conn.close();
 			}
 			
-			System.out.println("ResultSet - uID - "+result.getString("uID") );
-			mysqlConnection.conn.close();
 		}
 		catch (SQLException ex) 
    	    {/* handle any errors*/

@@ -8,16 +8,15 @@ package models;
 import java.sql.Time;
 import java.util.Date;
 
+import enums.apptStatus;
+
 
 
 //class for creating appt. by customer service 
 
 public class AppointmentSettings {
 	
-	public enum apptStatus{
-		
-		SCHEDUELD, CANCELED, ARRIVED, NOSHOW
-	}
+	
 
 	private int appID;
 	private Date appDate;

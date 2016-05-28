@@ -9,6 +9,11 @@ import java.io.Serializable;
 
 public class PersonalDoctor implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4471079822624266319L;
+	
 	/* Table in DB, patient ID is the PK */
 	private int PersonalDoctorID;
 	private String PersonalDoctorName;

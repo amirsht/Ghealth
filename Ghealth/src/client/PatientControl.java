@@ -27,9 +27,21 @@ public class PatientControl {
 	private CS_GUI_addPatient csGUI;
 	private CS_GUI_findPatient csGUI_findPatient;
 	private CS_GUI_Appoint csGUI_Appoint;
+	private CS_GUI_newAppoint csGUI_CreateNewAppoint;
 	
 	private Patient pt;
 	
+	public PatientControl(CS_GUI_newAppoint cs,Patient pt)
+	{
+		
+		
+		csGUI_CreateNewAppoint = cs;
+		csGUI_CreateNewAppoint.setfName(pt.getpFirstName());
+		csGUI_CreateNewAppoint.setPtID(pt.getpID());
+		
+		csGUI_CreateNewAppoint.SelectDocTypeActionListener(new SelectDoctorTypeListener());
+		csGUI_CreateNewAppoint.cancelNewAppointActionListener(new CancelListener());	
+	}
 	/**
 	 * 
 	 * constractor for the Adding patient screen GUI
@@ -66,6 +78,8 @@ public class PatientControl {
 	 */
 	public PatientControl(CS_GUI_Appoint cs,Patient pt)
 	{
+		this.pt = pt;
+		
 		csGUI_Appoint = cs;
 		csGUI_Appoint.setfName(pt.getpFirstName());
 		csGUI_Appoint.setlName(pt.getpLastName());
@@ -74,7 +88,7 @@ public class PatientControl {
 		csGUI_Appoint.setpClinic(pt.getPtPrivateClinic());
 		csGUI_Appoint.setPationID(pt.getpID());
 		csGUI_Appoint.setDoctorID(pt.getPd());
-		csGUI_Appoint.createAppointActionListener(new createAppointListener());
+		csGUI_Appoint.createAppointActionListener(new createNewAppointListener());
 		csGUI_Appoint.cancelAppointActionListener(new CancelAppintListener());	
 	}
 	
@@ -148,9 +162,11 @@ public class PatientControl {
 		public void actionPerformed(ActionEvent e) 
 		{
 			
-			System.out.println("trying to find a patient " + csGUI_findPatient.getfName());
-			csGUI_findPatient.getfName();
-			Patient findpt = new Patient(csGUI_findPatient.getfName(),"","","","","","");
+			System.out.println("trying to find a patient " + csGUI_findPatient.getPtID());
+			
+			csGUI_findPatient.getPtID();
+			
+			Patient findpt = new Patient(csGUI_findPatient.getPtID(),"","","","","","");
 			
 			findpt=GetExistPatient(findpt);
 			
@@ -181,7 +197,7 @@ public class PatientControl {
 		
 	}
 	
-	class createAppointListener  implements ActionListener 
+	class createNewAppointListener  implements ActionListener 
 	{
 
 		@Override
@@ -189,6 +205,10 @@ public class PatientControl {
 		{
 			
 			System.out.println("trying to create appoint ");
+			
+			CS_GUI_newAppoint newApp_gui = new CS_GUI_newAppoint();
+			
+			PatientControl newApp_ctrl = new PatientControl(newApp_gui,pt);
 			
 			
 		}
@@ -220,6 +240,20 @@ public class PatientControl {
 			
 			CS_GUI_addPatient addpt = new CS_GUI_addPatient();
 			PatientControl addpt_CL = new PatientControl(addpt);
+			
+			
+		}
+		
+	}
+	
+	class SelectDoctorTypeListener  implements ActionListener 
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+		
+			System.out.println("Trying to GET Select Doctor type: " + csGUI_CreateNewAppoint.docBox.getSelectedItem().toString());
 			
 			
 		}

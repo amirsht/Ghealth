@@ -9,7 +9,11 @@ import enums.*;
 
 public class Doctor extends User {
 	
-	private String dSpeciality;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3874467060459550851L;
+	private DoctorSpeciallity dSpeciality;
 	private int dcid;
 	/**
 	 * @param dSpeciality
@@ -17,7 +21,7 @@ public class Doctor extends User {
 	
 	// Constractor With dSpeciality
 	public Doctor(String uID, String uPassword, String uFirstName, String uLastName, Roles uRole, String uEmail,
-			Clinic uClinic,String dSpeciality) 
+			Clinic uClinic,DoctorSpeciallity dSpeciality) 
 	{
 		super(uID, uPassword, uFirstName, uLastName, uRole, uEmail, uClinic);
 		this.setdSpeciality(dSpeciality);
@@ -30,11 +34,11 @@ public class Doctor extends User {
 		super(uID, uPassword, uFirstName, uLastName, uRole, uEmail, uClinic);
 	}
 
-	public String getdSpeciality() {
+	public DoctorSpeciallity getdSpeciality() {
 		return dSpeciality;
 	}
 
-	public void setdSpeciality(String dSpeciality) {
+	public void setdSpeciality(DoctorSpeciallity dSpeciality) {
 		this.dSpeciality = dSpeciality;
 	}
 

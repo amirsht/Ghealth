@@ -136,7 +136,7 @@ public class CS_GUI_findPatient extends JFrame {
 	}
 
 	
-	public String getfName() {
+	public String getPtID() {
 		return InsertPatientId.getText();
 	}
 	
