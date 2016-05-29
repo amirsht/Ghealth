@@ -76,13 +76,11 @@ public class LoginGUI extends JFrame {
 		contentPane.add(lblPassword);
 		
 		userField = new JTextField();
-		userField.setHorizontalAlignment(SwingConstants.CENTER);
 		userField.setBounds(290, 300, 139, 22);
 		contentPane.add(userField);
 		userField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
 				//JTextField();
 		passwordField.setColumns(10);
 		passwordField.setBounds(290, 330, 139, 22);

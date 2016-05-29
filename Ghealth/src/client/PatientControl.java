@@ -122,14 +122,16 @@ public class PatientControl {
 		public void actionPerformed(ActionEvent e) 
 		{
 			System.out.println("trying to find a patient " + csGUI_findPatient.getPtID());
-			csGUI_findPatient.getPtID();
 			
+		if(csGUI_findPatient.getPtID().equals("") || csGUI_findPatient.getPtID().equals("Insert ID here...")) 		//If fields are empty , show error message
+       	 {
+       		 JOptionPane.showMessageDialog(null,"Please insert Patient ID!","Error", JOptionPane.INFORMATION_MESSAGE);    
+       		 return;	//return to the find patient window
+       	 }//if
+		
 			// This is new verison of client controller func call:
 			Patient findpt = new Patient(csGUI_findPatient.getPtID());
 			Envelope en = Controller.Control(findpt,task.GET_PATIENT);
-			
-			
-			//PatientCon(findpt,task.GET_PATIENT);  This is old verison of client controller func call
 			
 			
 			/* if Pation exist */
@@ -142,7 +144,6 @@ public class PatientControl {
 				AppointmentControl pt_appoint = new AppointmentControl(appoint,findpt);
 			}
 			else{
-
 				int response = JOptionPane.showConfirmDialog(null, "The Patient '"+findpt.getpID()+"' Patient NOT Exists! "
 						+ "\nWould you like to create new pation?","Confirm",
 				        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);

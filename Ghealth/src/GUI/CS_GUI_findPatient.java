@@ -149,7 +149,6 @@ public class CS_GUI_findPatient extends JFrame {
 	public String getPtID() {
 		return InsertPatientId.getText();
 	}
-	
 
 	public class CancelListener implements ActionListener 
     {
