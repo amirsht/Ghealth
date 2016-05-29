@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import client.Controller;
+import client.LoginControl;
 import enums.DoctorSpeciallity;
 import enums.task;
 import models.Envelope;
@@ -74,8 +75,14 @@ public class CS_GUI_addPatient extends JFrame {
 		JLabel label = new JLabel("New label");
 		label.setBounds(0, 0, 0, 0);
 		contentPane.add(label);
+
+		JLabel lblLogo;
+		if(LoginControl.getUser_full_name() == null)
+			lblLogo = new JLabel("Welcome CS!");
+		else lblLogo = new JLabel("Hi "+LoginControl.getUser_full_name()+"!");
 		
-		JLabel lblLogo = new JLabel("Welcome CS");
+		
+		
 		lblLogo.setIcon(new ImageIcon(DoctorGUI.class.getResource("/images/logo2.png")));
 		lblLogo.setBounds(0, 0, 794, 79);
 		contentPane.add(lblLogo);
@@ -211,6 +218,9 @@ public class CS_GUI_addPatient extends JFrame {
 	}
 
 
+	public void setPationID(String id){
+		PationID.setText(id);
+	}
 	public String getPationID() {
 		return PationID.getText();
 	}

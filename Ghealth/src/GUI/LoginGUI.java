@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
 
@@ -16,11 +17,15 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
 
 public class LoginGUI extends JFrame {
@@ -32,7 +37,8 @@ public class LoginGUI extends JFrame {
 	
 	private JPanel contentPane;
 	private JTextField userField;
-	private JTextField passwordField;
+	private JPasswordField passwordField;
+	//private JTextField passwordField;
 	private JButton btnCancel;
 	private JButton btnLogin;
 	private JLabel lblwarningMessage = null;
@@ -70,11 +76,14 @@ public class LoginGUI extends JFrame {
 		contentPane.add(lblPassword);
 		
 		userField = new JTextField();
+		userField.setHorizontalAlignment(SwingConstants.CENTER);
 		userField.setBounds(290, 300, 139, 22);
 		contentPane.add(userField);
 		userField.setColumns(10);
 		
-		passwordField = new JTextField();
+		passwordField = new JPasswordField();
+		passwordField.setHorizontalAlignment(SwingConstants.CENTER);
+				//JTextField();
 		passwordField.setColumns(10);
 		passwordField.setBounds(290, 330, 139, 22);
 		contentPane.add(passwordField);

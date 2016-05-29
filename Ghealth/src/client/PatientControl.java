@@ -36,10 +36,11 @@ public class PatientControl {
 	 * constractor for the Adding patient screen GUI
 	 * @param 
 	 */
-	public PatientControl(CS_GUI_addPatient cs)
+	public PatientControl(CS_GUI_addPatient cs,String pID)
 	{
 		csGUI_addPatient = cs;
 		csGUI_addPatient.addPatientActionListener(new AddPatientListener());
+		csGUI_addPatient.setPationID(pID);
 		//csGUI_addPatient.addCancelActionListener(this.dispose());	
 		//csGUI_addPatient.addCancelActionListener(new CancelListener());	
 	}
@@ -141,11 +142,23 @@ public class PatientControl {
 				AppointmentControl pt_appoint = new AppointmentControl(appoint,findpt);
 			}
 			else{
-				csGUI_findPatient.dispose();
-				CS_GUI_findPatient csGUI_addOpt = new CS_GUI_findPatient();
-				csGUI_addOpt.addPatientOpt();
-				PatientControl addPtOpt_CL = new PatientControl(csGUI_addOpt);
-				JOptionPane.showMessageDialog(null,"Patient NOT Exists!","Error", JOptionPane.INFORMATION_MESSAGE);
+
+				int response = JOptionPane.showConfirmDialog(null, "The Patient '"+findpt.getpID()+"' Patient NOT Exists! "
+						+ "\nWould you like to create new pation?","Confirm",
+				        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				    if (response == JOptionPane.NO_OPTION)   {
+				      System.out.println("No button clicked");
+				    } 
+				    else if (response == JOptionPane.YES_OPTION) {
+				      System.out.println("Yes button clicked");
+						csGUI_findPatient.dispose();
+						System.out.println("Create new patient form fill");
+						PatientControl addpt_CL = new PatientControl(new CS_GUI_addPatient(),findpt.getpID());
+				    } 
+				    else if (response == JOptionPane.CLOSED_OPTION) {
+				      System.out.println("JOptionPane closed");
+				    }
+			
 			}
 			
 		}
@@ -153,17 +166,6 @@ public class PatientControl {
 	}
 	
 	
-	class createNewPtActionListener  implements ActionListener 
-	{
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			System.out.println("create new patient form fill");
-			
-			CS_GUI_addPatient addpt = new CS_GUI_addPatient();
-			PatientControl addpt_CL = new PatientControl(addpt);
-		}	
-	}//createNewPtActionListener
 	
 	
 	

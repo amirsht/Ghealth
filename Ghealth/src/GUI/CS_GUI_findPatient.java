@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import client.LoginControl;
+
 import javax.swing.JTextField;
 
 import java.awt.Window.Type;
@@ -16,6 +19,8 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 
@@ -37,7 +42,7 @@ public class CS_GUI_findPatient extends JFrame {
 	private JPanel contentPane;
 	private JButton btnCancel;
 	private JButton findPatient;
-	private JButton btnCrtPt;
+	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
 	private JTextField InsertPatientId;
 	
@@ -59,8 +64,10 @@ public class CS_GUI_findPatient extends JFrame {
 		JLabel label = new JLabel("New label");
 		label.setBounds(0, 0, 0, 0);
 		contentPane.add(label);
-		
-		JLabel lblLogo = new JLabel("Welcome CS");
+		JLabel lblLogo;
+		if(LoginControl.getUser_full_name() == null)
+			lblLogo = new JLabel("Welcome CS!");
+		else lblLogo = new JLabel("Hi "+LoginControl.getUser_full_name()+"!");
 		lblLogo.setIcon(new ImageIcon(DoctorGUI.class.getResource("/images/logo2.png")));
 		lblLogo.setBounds(0, 0, 794, 79);
 		contentPane.add(lblLogo);
@@ -83,8 +90,16 @@ public class CS_GUI_findPatient extends JFrame {
 		btnCancel.addActionListener(new CancelListener());
 		
 		InsertPatientId = new JTextField();
-		InsertPatientId.setText("insert patient id here");
+		InsertPatientId.setText("Insert ID here...");
 		InsertPatientId.setBounds(270, 126, 137, 20);
+		
+		/* MouseListener for clear JTextField when mouse clicks */
+		InsertPatientId.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+            	InsertPatientId.setText("");
+            }
+        });
 		contentPane.add(InsertPatientId);
 		InsertPatientId.setColumns(10);
 		
@@ -129,26 +144,12 @@ public class CS_GUI_findPatient extends JFrame {
 		btnCancel.addActionListener(e);
 	}
 	
-	public void createNewPtActionListener(ActionListener e)
-	{
-		btnCrtPt.addActionListener(e);
-	}
 
 	
 	public String getPtID() {
 		return InsertPatientId.getText();
 	}
 	
-	public void addPatientOpt() {
-		btnCrtPt = new JButton("CREATE NEW PATIENT?");
-		btnCrtPt.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnCrtPt.setBounds(142, 399, 172, 68);
-		contentPane.add(btnCrtPt);
-		
-	}
 
 	public class CancelListener implements ActionListener 
     {
@@ -158,5 +159,4 @@ public class CS_GUI_findPatient extends JFrame {
     		dispose();
     	}	
     }//CancelListener
-
 }
