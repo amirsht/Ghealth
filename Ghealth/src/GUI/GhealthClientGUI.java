@@ -1,4 +1,5 @@
 package GUI;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
@@ -40,6 +41,13 @@ public class GhealthClientGUI extends JFrame{
 		ButtonCancel = new JButton("Cancel");
 		ButtonCancel.setBounds(122, 180, 89, 23);
 		getContentPane().add(ButtonCancel);
+		ButtonCancel.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				dispose();
+			}
+		});
 		
 		this.setTitle("GHealth Connection to Server");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

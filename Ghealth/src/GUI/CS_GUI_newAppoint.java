@@ -79,12 +79,15 @@ public class CS_GUI_newAppoint extends JFrame {
 		contentPane.add(btnCrtAppoint);
 		
 		btnCancelAppoint = new JButton("CANCEL APPOINTMENT");
-		btnCancelAppoint.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCancelAppoint.setBounds(369, 470, 172, 68);
 		contentPane.add(btnCancelAppoint);
+		btnCancelAppoint.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				dispose();
+			}
+		});
 		
 		docBox = new JComboBox<Object>(DoctorSpeciallity.values());
 		docBox.setBounds(263, 141, 106, 20);

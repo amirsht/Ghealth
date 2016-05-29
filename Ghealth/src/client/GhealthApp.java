@@ -13,7 +13,7 @@ public class GhealthApp {
 		
 		
 		LoginGUI login1 = new LoginGUI();
-		UserControl userctrl = new UserControl(login1);
+		LoginControl userctrl = new LoginControl(login1);
 		
 
 	}

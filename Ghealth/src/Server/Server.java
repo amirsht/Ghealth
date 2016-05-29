@@ -98,6 +98,7 @@ public class Server extends Thread
             switch(env.getType()){
             
             
+            
             /*---      User Tasks:    ---*/
             case GET_USER:
             	us = (User)env.getSingleObject();
@@ -124,7 +125,9 @@ public class Server extends Thread
             	env=SCpatient.GetExistPatient(pt.getpID());
             	break;
             	
-            	
+            case GET_PRIVATE_CLINIC_LIST:
+            	env.setStringArray(SCpatient.GetClinicList());
+            	break;
             	
             /*---     Lab-Ref Tasks:   ---*/
             case GET_LAB_REF:

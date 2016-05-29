@@ -16,8 +16,10 @@ public class Envelope implements Serializable {
 	 */
 	private static final long serialVersionUID = -7171959639692110621L;
 	private List<Object> objList;
+	private String StrArray [];
 	private task type;
 	private Status st;
+	private DoctorSpeciallity sp;
 	
 	public Envelope() {
 		this.objList = new ArrayList<Object>();
@@ -57,6 +59,26 @@ public class Envelope implements Serializable {
 
 	public void setStatus(Status st) {
 		this.st = st;
+	}
+
+
+	public DoctorSpeciallity getSpeciality() {
+		return sp;
+	}
+
+
+	public void setSpeciality(DoctorSpeciallity sp) {
+		this.sp = sp;
+	}
+
+
+	public String[] getStringArray() {
+		return StrArray;
+	}
+
+
+	public void setStringArray(String strArray[]) {
+		StrArray = strArray;
 	}
 	
 }

@@ -3,8 +3,8 @@ package client;
 import models.*;
 import enums.*;
 import GUI.*;
-import client.UserControl.CancelListener;
-import client.UserControl.LoginListener;
+import client.LoginControl.CancelListener;
+import client.LoginControl.LoginListener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +24,7 @@ import javax.swing.JOptionPane;
 public class DoctorController {
 
 	public DoctorController(){
+		
 		
 		
 	}

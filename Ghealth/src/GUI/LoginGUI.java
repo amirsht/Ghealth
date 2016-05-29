@@ -88,6 +88,14 @@ public class LoginGUI extends JFrame {
 		btnCancel.setIcon(new ImageIcon(LoginGUI.class.getResource("/images/cancel.PNG")));
 		btnCancel.setBounds(350, 370, 97, 25);
 		contentPane.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				dispose();
+			}
+		});
+		
 		
 		setLocationRelativeTo(null);
 		

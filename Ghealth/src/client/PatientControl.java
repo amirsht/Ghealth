@@ -2,9 +2,10 @@ package client;
 import models.*;
 import enums.*;
 import GUI.*;
-import client.UserControl.CancelListener;
-import client.UserControl.LoginListener;
+import client.LoginControl.CancelListener;
+import client.LoginControl.LoginListener;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 /* This class represents our client side 
@@ -18,30 +19,18 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
 public class PatientControl {
       
-	 
-	private CS_GUI_addPatient csGUI;
+	private CS_GUI_addPatient csGUI_addPatient;
 	private CS_GUI_findPatient csGUI_findPatient;
-	private CS_GUI_Appoint csGUI_Appoint;
-	private CS_GUI_newAppoint csGUI_CreateNewAppoint;
 	
-	private Patient pt;
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
+
 	
-	public PatientControl(CS_GUI_newAppoint cs,Patient pt)
-	{
-		
-		
-		csGUI_CreateNewAppoint = cs;
-		csGUI_CreateNewAppoint.setfName(pt.getpFirstName());
-		csGUI_CreateNewAppoint.setPtID(pt.getpID());
-		
-		csGUI_CreateNewAppoint.SelectDocTypeActionListener(new SelectDoctorTypeListener());
-		csGUI_CreateNewAppoint.cancelNewAppointActionListener(new CancelListener());	
-	}
 	/**
 	 * 
 	 * constractor for the Adding patient screen GUI
@@ -49,10 +38,10 @@ public class PatientControl {
 	 */
 	public PatientControl(CS_GUI_addPatient cs)
 	{
-		csGUI = cs;
-		pt = new Patient();
-		csGUI.addPatientActionListener(new AddPatientListener());
-		csGUI.addCancelActionListener(new CancelListener());	
+		csGUI_addPatient = cs;
+		csGUI_addPatient.addPatientActionListener(new AddPatientListener());
+		//csGUI_addPatient.addCancelActionListener(this.dispose());	
+		//csGUI_addPatient.addCancelActionListener(new CancelListener());	
 	}
 	
 	/**
@@ -62,74 +51,40 @@ public class PatientControl {
 	public PatientControl(CS_GUI_findPatient cs)
 	{
 		csGUI_findPatient = cs;
-		pt = new Patient();
 		csGUI_findPatient.findPatientActionListener(new findPatientListener());
-		csGUI_findPatient.addCancelActionListener(new CancelListener());
-		csGUI_findPatient.createNewPtActionListener(new createNewPtActionListener());
+		//csGUI_findPatient.addCancelActionListener(new CancelListener());
+		//csGUI_findPatient.createNewPtActionListener(new createNewPtActionListener());
 	}
 	
 	
-	/**
-	 * 
-	 * constractor for the find patient screen GUI
-	 * @param
-	 * @param
-	 * 
-	 */
-	public PatientControl(CS_GUI_Appoint cs,Patient pt)
-	{
-		this.pt = pt;
-		
-		csGUI_Appoint = cs;
-		csGUI_Appoint.setfName(pt.getpFirstName());
-		csGUI_Appoint.setlName(pt.getpLastName());
-		csGUI_Appoint.seteMail(pt.getPtEmail());
-		csGUI_Appoint.setPhone(pt.getPtPhone());
-		csGUI_Appoint.setpClinic(pt.getPtPrivateClinic());
-		csGUI_Appoint.setPationID(pt.getpID());
-		csGUI_Appoint.setDoctorID(pt.getPd());
-		csGUI_Appoint.createAppointActionListener(new createNewAppointListener());
-		csGUI_Appoint.cancelAppointActionListener(new CancelAppintListener());	
-	}
+
 	
+	
+	
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
+	/*
     public static Patient PatientCon(Patient pt,task ts){
     	
     	Envelope En = new Envelope();
       
+    	//Build the envelope that will be send to server 
         En.addobjList(pt);
         En.setType(ts);
+        /* communicate will send to the server 
+         * and get from the server
+         *  the envelope 
         En =  Controller.communicate(En);
+        if (En.getStatus() == Status.NOT_EXIST)
+        	return null;
         pt = (Patient)(En.getSingleObject());
-        
-        
-        //TODO 
     	return pt; 
-    }
+    	
+    } /*  END Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
     
     
-    public static Patient CreateNewPatient(Patient pt)
-    {
-    	return PatientCon(pt,task.ADD_PATIENT);
-    }
-    
-    public static Patient GetExistPatient(Patient pt)
-    {
-    	return PatientCon(pt,task.GET_PATIENT);
-    }
-    
-    
-    
-    
-    class CancelListener implements ActionListener 
-    {
-    	@Override
-    	public void actionPerformed(ActionEvent e)
-    	{
-    		csGUI.dispose();	//Closes the login window
-    	}	
-    }//action
 
-
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   ActionListener Functions ~~~~~~~~~~~~~~~~~~~~~~~~  */
+  
 
 	class AddPatientListener  implements ActionListener 
 	{
@@ -139,17 +94,21 @@ public class PatientControl {
 		{
 			
 			System.out.println("Add Patient Lis");
-			//Patient newpt = new Patient("200113","Ori","Arel","temp@gmail.com","12345","Klalit",1);
-			Patient newpt = new Patient(csGUI.getPationID(),
-										csGUI.getfName(),
-										csGUI.getlName(),
-										csGUI.geteMail(),
-										csGUI.getPhone(),
-										csGUI.getpClinic(),
-										csGUI.getDoctorID()	);
-			CreateNewPatient(newpt);
+			System.out.println(csGUI_addPatient.getClinicBox().getSelectedItem());
+		
+			Patient newpt = new Patient(csGUI_addPatient.getPationID(),
+										csGUI_addPatient.getfName(),
+										csGUI_addPatient.getlName(),
+										csGUI_addPatient.geteMail(),
+										csGUI_addPatient.getPhone(),
+										(String)csGUI_addPatient.getClinicBox().getSelectedItem(),
+										csGUI_addPatient.getDoctorID()	);
 			
-			csGUI.dispose();
+			Controller.Control(newpt,task.ADD_PATIENT); //New Controller Call
+			//PatientCon(newpt,task.ADD_PATIENT); --> OLD Controller call.
+			JOptionPane.showMessageDialog(null,"The Patient: "+newpt.getpFirstName()+" "+newpt.getpLastName()
+												+" Was successfully added!","Error", JOptionPane.INFORMATION_MESSAGE);
+			csGUI_addPatient.dispose();
 			
 		}
 		
@@ -161,106 +120,52 @@ public class PatientControl {
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			
 			System.out.println("trying to find a patient " + csGUI_findPatient.getPtID());
-			
 			csGUI_findPatient.getPtID();
 			
-			Patient findpt = new Patient(csGUI_findPatient.getPtID(),"","","","","","");
+			// This is new verison of client controller func call:
+			Patient findpt = new Patient(csGUI_findPatient.getPtID());
+			Envelope en = Controller.Control(findpt,task.GET_PATIENT);
 			
-			findpt=GetExistPatient(findpt);
 			
-			if (findpt.getpID()!= null){
+			//PatientCon(findpt,task.GET_PATIENT);  This is old verison of client controller func call
+			
+			
+			/* if Pation exist */
+			if (en.getStatus() == Status.EXIST)
+			{
+				findpt = (Patient)en.getSingleObject();
 				JOptionPane.showMessageDialog(null,"Patient Exists! \n" + findpt,"INFO", JOptionPane.INFORMATION_MESSAGE);
-				
 				csGUI_findPatient.dispose();
-				
 				CS_GUI_Appoint appoint = new CS_GUI_Appoint();
-				
-				PatientControl pt_appoint = new PatientControl(appoint,findpt);
-				
+				AppointmentControl pt_appoint = new AppointmentControl(appoint,findpt);
 			}
 			else{
 				csGUI_findPatient.dispose();
-				
 				CS_GUI_findPatient csGUI_addOpt = new CS_GUI_findPatient();
 				csGUI_addOpt.addPatientOpt();
-				
 				PatientControl addPtOpt_CL = new PatientControl(csGUI_addOpt);
-				
 				JOptionPane.showMessageDialog(null,"Patient NOT Exists!","Error", JOptionPane.INFORMATION_MESSAGE);
-				
-				
 			}
 			
 		}
 		
 	}
 	
-	class createNewAppointListener  implements ActionListener 
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			
-			System.out.println("trying to create appoint ");
-			
-			CS_GUI_newAppoint newApp_gui = new CS_GUI_newAppoint();
-			
-			PatientControl newApp_ctrl = new PatientControl(newApp_gui,pt);
-			
-			
-		}
-		
-	}
-	
-	class CancelAppintListener  implements ActionListener 
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			
-			System.out.println("trying to cancel appoint ");
-			
-			
-		}
-		
-	}
 	
 	class createNewPtActionListener  implements ActionListener 
 	{
-
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			
 			System.out.println("create new patient form fill");
 			
 			CS_GUI_addPatient addpt = new CS_GUI_addPatient();
 			PatientControl addpt_CL = new PatientControl(addpt);
-			
-			
-		}
-		
-	}
+		}	
+	}//createNewPtActionListener
 	
-	class SelectDoctorTypeListener  implements ActionListener 
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-		
-			System.out.println("Trying to GET Select Doctor type: " + csGUI_CreateNewAppoint.docBox.getSelectedItem().toString());
-			
-			
-		}
-		
-	}
 	
-    
-
+	
 } //PationControl
 

@@ -6,6 +6,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import client.Controller;
+import enums.DoctorSpeciallity;
+import enums.task;
+import models.Envelope;
+
 import javax.swing.JTextField;
 
 import java.awt.Window.Type;
@@ -16,6 +22,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 
@@ -23,6 +30,8 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Label;
+import javax.swing.JSpinner;
+import javax.swing.JComboBox;
 
 
 public class CS_GUI_addPatient extends JFrame {
@@ -41,9 +50,9 @@ public class CS_GUI_addPatient extends JFrame {
 	private JTextField lName;
 	private JTextField eMail;
 	private JTextField phone;
-	private JTextField pClinic;
 	private JTextField PationID;
 	private JTextField doctorID;
+	private JComboBox ClinicBox;
 	
 
 
@@ -95,10 +104,6 @@ public class CS_GUI_addPatient extends JFrame {
 		contentPane.add(phone);
 		phone.setColumns(10);
 		
-		pClinic = new JTextField();
-		pClinic.setBounds(372, 326, 86, 20);
-		contentPane.add(pClinic);
-		pClinic.setColumns(10);
 		
 		PationID = new JTextField();
 		PationID.setBounds(372, 123, 86, 20);
@@ -113,6 +118,7 @@ public class CS_GUI_addPatient extends JFrame {
 		btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(392, 444, 109, 23);
 		contentPane.add(btnCancel);
+		btnCancel.addActionListener(new CancelListener());
 		
 		Label label_1 = new Label("Pation ID");
 		label_1.setBounds(252, 123, 62, 22);
@@ -141,6 +147,14 @@ public class CS_GUI_addPatient extends JFrame {
 		Label label_7 = new Label("Doctor ID");
 		label_7.setBounds(252, 366, 62, 22);
 		contentPane.add(label_7);
+		
+		Envelope en = Controller.Control(null, task.GET_PRIVATE_CLINIC_LIST);
+		String [] ClinicList = en.getStringArray();
+		System.out.println(ClinicList);
+		//GET_PRIVATE_CLINIC_LIST
+		ClinicBox = new JComboBox<Object>(ClinicList);
+		ClinicBox.setBounds(372, 324, 115, 20);
+		contentPane.add(ClinicBox);
 		
 		
 		setLocationRelativeTo(null);
@@ -196,9 +210,6 @@ public class CS_GUI_addPatient extends JFrame {
 		return phone.getText();
 	}
 
-	public String getpClinic() {
-		return pClinic.getText();
-	}
 
 	public String getPationID() {
 		return PationID.getText();
@@ -207,4 +218,19 @@ public class CS_GUI_addPatient extends JFrame {
 	public String getDoctorID() {
 		return doctorID.getText();
 	}
+	
+	public JComboBox getClinicBox()
+	{
+		return ClinicBox;
+	}
+		
+	
+	public class CancelListener implements ActionListener 
+    {
+    	@Override
+    	public void actionPerformed(ActionEvent e)
+    	{
+    		dispose();
+    	}	
+    }//CancelListener
 }

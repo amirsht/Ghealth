@@ -14,6 +14,7 @@ import enums.task;
 import models.Envelope;
 import models.Patient;
 import models.PersonalDoctor;
+import models.User;
 
 public class Controller {
 	 	private static Socket socket = null;
@@ -24,44 +25,15 @@ public class Controller {
 	    private static Envelope GetEn = null;
 	    
 	    
-	    public static void sendFile(String filename) throws IOException {
-			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
-			FileInputStream fis = new FileInputStream(filename);
-			byte[] buffer = new byte[4096];
-			
-			while (fis.read(buffer) > 0) {
-				dos.write(buffer);
-			}
-			
-			fis.close(); //Git Test
-			dos.close();	
-			
-			
-			
-		}
-		
-		
-		/* method copied from Server */
-		private static void saveFile() throws IOException {
-			DataInputStream dis = new DataInputStream(socket.getInputStream());
-			FileOutputStream fos = new FileOutputStream("src//client//files//temp_file.jpg");
-			byte[] buffer = new byte[4096];
-			
-			int filesize = 15123; // Send file size in separate msg
-			int read = 0;
-			int totalRead = 0;
-			int remaining = filesize;
-			while((read = dis.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
-				totalRead += read;
-				remaining -= read;
-				System.out.println("read " + totalRead + " bytes.");
-				fos.write(buffer, 0, read);
-			}
-			
-			fos.close();
-			dis.close();
-		} 
-	    
+	    public static Envelope Control(Object obj,task ts)
+	    {
+	    	Envelope En = new Envelope();
+	        En.addobjList(obj);
+	        En.setType(ts);
+	        En = communicate(En);
+	    	return En;
+	    }
+
 	   public static Envelope communicate(Envelope En) {
 	    	
 	    	String ip = "127.0.0.1";
@@ -138,6 +110,42 @@ public class Controller {
 	    }//end function
 
 	    
+	    public static void sendFile(String filename) throws IOException {
+			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
+			FileInputStream fis = new FileInputStream(filename);
+			byte[] buffer = new byte[4096];
+			
+			while (fis.read(buffer) > 0) {
+				dos.write(buffer);
+			}
+			
+			fis.close(); //Git Test
+			dos.close();	
+			
+			
+			
+		}
+		
+		/* method copied from Server */
+		private static void saveFile() throws IOException {
+			DataInputStream dis = new DataInputStream(socket.getInputStream());
+			FileOutputStream fos = new FileOutputStream("src//client//files//temp_file.jpg");
+			byte[] buffer = new byte[4096];
+			
+			int filesize = 15123; // Send file size in separate msg
+			int read = 0;
+			int totalRead = 0;
+			int remaining = filesize;
+			while((read = dis.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
+				totalRead += read;
+				remaining -= read;
+				System.out.println("read " + totalRead + " bytes.");
+				fos.write(buffer, 0, read);
+			}
+			
+			fos.close();
+			dis.close();
+		} 
 	    
 	    
 }

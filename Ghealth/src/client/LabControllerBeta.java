@@ -14,7 +14,6 @@ public static void LabController(task ts){
         En =  Controller.communicate(En);
         
         
-        
     }
     
     

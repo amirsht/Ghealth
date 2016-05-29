@@ -4,5 +4,7 @@ public enum DoctorSpeciallity {
 
 	Eyes,
 	Cardio,
-	Family
+	Orthopedist, 
+	Neurologist,
+	Gynecologist
 }

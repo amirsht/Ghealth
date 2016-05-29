@@ -79,6 +79,7 @@ public class CS_GUI_Appoint extends JFrame {
 		});
 		btnCancelAppoint.setBounds(392, 399, 172, 68);
 		contentPane.add(btnCancelAppoint);
+		btnCancelAppoint.addActionListener(new CancelListener());
 		
 		Label label_1 = new Label("Patient ID");
 		label_1.setBounds(142, 106, 62, 22);
@@ -191,5 +192,14 @@ public class CS_GUI_Appoint extends JFrame {
 		contentPane.add(doctorID);
 	}
 	
+	
+	public class CancelListener implements ActionListener 
+    {
+    	@Override
+    	public void actionPerformed(ActionEvent e)
+    	{
+    		dispose();
+    	}	
+    }//CancelListener
 }
 

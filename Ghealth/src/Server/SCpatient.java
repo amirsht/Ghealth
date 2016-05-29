@@ -8,6 +8,9 @@ package Server;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
 import enums.Status;
 import models.*;
 
@@ -22,12 +25,11 @@ public class SCpatient {
 		ResultSet result = null;
 		Statement stmt;
 		String querystr;
-		Patient pt = null;
-		Envelope en = null;
+		Patient pt = new Patient();
+		Envelope en = new Envelope();
+		
 		/* Return patient row if exist */
 		querystr="SELECT * FROM patient WHERE ptID = '"+ptID+"';";
-		en = new Envelope();
-		pt = new Patient();
 		
 		try 
 		{
@@ -38,10 +40,17 @@ public class SCpatient {
 			rowCount = result.getRow();
 			System.out.println("rowcount="+rowCount );
 			result.first();
-			//TODO: fix the rowCount.
-			if(rowCount >= 1)
+			
+			if(rowCount == 0)
 			{
-				
+				en.setStatus(Status.NOT_EXIST);
+				//en.addobjList(pt);
+				System.out.println("Patient Not Exist in DB");
+				mysqlConnection.conn.close();
+			}
+			else
+			{
+				en.setStatus(Status.EXIST);
 				System.out.println("Patient Exist in DB!");
 				/* Get & Create the patient from DB */
 				
@@ -58,11 +67,6 @@ public class SCpatient {
 				en.addobjList(pt);
 				//en.setObj(pt);
 				System.out.println("ResultSet - ptID - "+result.getString("ptID") );
-				mysqlConnection.conn.close();
-			}
-			else {
-				en.addobjList(pt);
-				System.out.println("Patient Not Exist in DB");
 				mysqlConnection.conn.close();
 			}
 		}
@@ -113,6 +117,45 @@ public class SCpatient {
         }
 		
 		return Status.CREATED;
+
+	}
+	
+	public static String[] GetClinicList()
+	{
+		Statement stmt;
+		String querystr;
+		Patient pt = null;
+		ResultSet result = null;
+		String [] contactListNames = null;
+		
+		querystr="SELECT PrivateClinicName "
+				+ "FROM privateclniic";
+		//System.out.println(querystr);
+		
+		try 
+		{
+			
+			List rowValues = new ArrayList();
+			stmt = mysqlConnection.conn.createStatement();
+			System.out.println("Create new patient in DB: " + querystr);
+			result = stmt.executeQuery(querystr);
+			while (result.next())
+            {
+				rowValues.add(result.getString(1));
+            }   
+			contactListNames = (String[]) rowValues.toArray(new String[rowValues.size()]);
+			
+			mysqlConnection.conn.close();
+		}
+		catch (SQLException ex) 
+   	    {/* handle any errors*/
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+         
+        }
+		return contactListNames;
+		
 
 	}
 	

@@ -1,5 +1,8 @@
 package enums;
 
 public enum Status {
-	EXIST,CREATED,FAILED_EXCEPTION
+	EXIST,
+	CREATED,
+	NOT_EXIST,
+	FAILED_EXCEPTION
 }

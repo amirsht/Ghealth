@@ -80,6 +80,7 @@ public class CS_GUI_findPatient extends JFrame {
 		});
 		btnCancel.setBounds(352, 157, 140, 23);
 		contentPane.add(btnCancel);
+		btnCancel.addActionListener(new CancelListener());
 		
 		InsertPatientId = new JTextField();
 		InsertPatientId.setText("insert patient id here");
@@ -149,5 +150,13 @@ public class CS_GUI_findPatient extends JFrame {
 		
 	}
 
+	public class CancelListener implements ActionListener 
+    {
+    	@Override
+    	public void actionPerformed(ActionEvent e)
+    	{
+    		dispose();
+    	}	
+    }//CancelListener
 
 }
