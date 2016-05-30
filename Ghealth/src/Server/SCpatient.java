@@ -107,30 +107,31 @@ public class SCpatient {
 	}
 	
 	
-	public static String[] GetClinicList()
+	public static Envelope GetClinicList()
 	{
+		Envelope en = new Envelope();
 		Statement stmt;
 		String querystr;
 		Patient pt = null;
 		ResultSet result = null;
 		String [] contactListNames = null;
 		
-		querystr="SELECT PrivateClinicName "
+		querystr="SELECT * "
 				+ "FROM privateclniic";
 		//System.out.println(querystr);
 		
 		try 
 		{
-			
-			List rowValues = new ArrayList();
 			stmt = mysqlConnection.conn.createStatement();
 			System.out.println("Create new patient in DB: " + querystr);
 			result = stmt.executeQuery(querystr);
 			while (result.next())
             {
-				rowValues.add(result.getString(1));
+				//pc.add(new PrivateClinic(result.getString(1),result.getString(2)));
+				en.addobjList(new PrivateClinic(result.getString(1),result.getString(2)));
+				System.out.println(result.getString(1)+" "+result.getString(2));
             }   
-			contactListNames = (String[]) rowValues.toArray(new String[rowValues.size()]);
+			//contactListNames = (String[]) rowValues.toArray(new String[rowValues.size()]);
 			mysqlConnection.conn.close();
 		}
 		catch (SQLException ex) 
@@ -140,7 +141,7 @@ public class SCpatient {
           System.out.println("VendorError: " + ex.getErrorCode());
          
         }
-		return contactListNames;
+		return en;
 		
 
 	}
