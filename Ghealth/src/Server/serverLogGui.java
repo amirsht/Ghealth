@@ -48,6 +48,13 @@ public class serverLogGui extends AbstractGuiServer{
 	/**
 	 * Initialize report log
 	 */
+	
+	
+	public void setLog(String str){
+		this.textArea.append(str + "\n");
+	}
+	
+	
 	public void initReport(){
 		textArea = new JTextArea("Server log",23,38);
 		textArea.setFont(myFont = new Font("Serif",Font.BOLD,15));

@@ -38,6 +38,7 @@ public class Server extends Thread
     
     
     
+    
     public Server(int port) 
     {
     	try 
@@ -110,10 +111,13 @@ public class Server extends Thread
             	
             /*---     Patient Tasks:   ---*/
             case ADD_PATIENT:
-            	System.out.println("case ADD_PATIENT");
             	pt = (Patient)env.getSingleObject();
-            	status=SCpatient.CreatePatient(pt);
+            	System.out.println("case ADD_PATIENT");
+    
+            	status=SCpatient.CreatePatient(pt.getpID(),pt.getpFirstName(),pt.getpLastName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic(),pt.getPd());
             	env.setStatus(status);
+            	if(status == Status.EXIST)
+            		System.out.println("The Patient '"+pt.getpID()+"' is already exist in GHEALTH!");
             	break;
 
             case GET_PATIENT:
