@@ -81,28 +81,14 @@ public class SCpatient {
 		return en;
 	}
 	
-	
-	public static Status CreatePatient(String ptID,String pFName,String pLName,String pEmail,String pPhone,String pPrivateClinic,String personalDoctorID)
+	public static Status CreatePatient(Patient pt)
 	{
 		Statement stmt;
 		String querystr;
-		Patient pt = null;
-		Envelope en = new Envelope();
-		
-		querystr="INSERT INTO patient " + " VALUES ('"+ptID+"','"+pFName+"','"+pLName+"', '"+pEmail+"', '"+pPhone+"', '"+pPrivateClinic+"', '"+personalDoctorID+"')";
-		//System.out.println(querystr);
+		querystr="INSERT INTO patient " + " VALUES ('"+pt.getpID()+"','"+pt.getpFirstName()+"','"+pt.getpLastName()+"', '"+pt.getPtEmail()+"', '"+pt.getPtPhone()+"', '"+pt.getPtPrivateClinic()+"', '"+pt.getPd()+"')";
 		
 		try 
 		{
-			
-			//en.addobjList(GetExistPatient(ptID));
-			//en.setObj(GetExistPatient(ptID)); //Check if patient exist in DB.
-			/*if(en.getSingleObject() != null)
-			{
-				System.out.println("The Patient '"+pt+"' exist in DB");
-				return Status.EXIST;
-			}*/
-			
 			stmt = mysqlConnection.conn.createStatement();
 			System.out.println("Create new patient in DB: " + querystr);
 			stmt.executeUpdate(querystr);
@@ -119,6 +105,7 @@ public class SCpatient {
 		return Status.CREATED;
 
 	}
+	
 	
 	public static String[] GetClinicList()
 	{
@@ -144,7 +131,6 @@ public class SCpatient {
 				rowValues.add(result.getString(1));
             }   
 			contactListNames = (String[]) rowValues.toArray(new String[rowValues.size()]);
-			
 			mysqlConnection.conn.close();
 		}
 		catch (SQLException ex) 

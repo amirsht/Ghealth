@@ -30,9 +30,7 @@ public class PatientControl {
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
-	
 	/**
-	 * 
 	 * constractor for the Adding patient screen GUI
 	 * @param 
 	 */
@@ -42,7 +40,7 @@ public class PatientControl {
 		csGUI_addPatient.addPatientActionListener(new AddPatientListener());
 		csGUI_addPatient.setPationID(pID);
 		//csGUI_addPatient.addCancelActionListener(this.dispose());	
-		//csGUI_addPatient.addCancelActionListener(new CancelListener());	
+		//csGUI_addPatient.addCancelActionListener(new CancelListener());
 	}
 	
 	/**
@@ -82,8 +80,6 @@ public class PatientControl {
     	
     } /*  END Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
     
-    
-
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   ActionListener Functions ~~~~~~~~~~~~~~~~~~~~~~~~  */
   
 
@@ -96,11 +92,27 @@ public class PatientControl {
 			
 			System.out.println("Add Patient Lis");
 			System.out.println(csGUI_addPatient.getClinicBox().getSelectedItem());
-		
+			if(csGUI_addPatient.getPationID().equals("") ||
+				csGUI_addPatient.getfName().equals("") ||
+				csGUI_addPatient.getlName().equals("") ||
+				csGUI_addPatient.geteMail().equals(""))
+			{
+				JOptionPane.showMessageDialog(null,"There is Empty Fields!","Error", JOptionPane.INFORMATION_MESSAGE);    
+	       		System.out.println("Empty Fields!");
+				return;	//return to the find patient window
+				
+			}
+			else if(csGUI_addPatient.getPhone().length() < 7)
+			{
+				JOptionPane.showMessageDialog(null,"Please enter real phone number ( Numbers > 7)","Error", JOptionPane.INFORMATION_MESSAGE);    
+	       		System.out.println("Please enter real phone number ( Numbers > 7)");
+				return;	//return to the find patient window
+			}
+			
 			Patient newpt = new Patient(csGUI_addPatient.getPationID(),
 										csGUI_addPatient.getfName(),
 										csGUI_addPatient.getlName(),
-										csGUI_addPatient.geteMail(),
+										csGUI_addPatient.geteMail()+"@"+csGUI_addPatient.geteMailBox().getSelectedItem(),
 										csGUI_addPatient.getPhone(),
 										(String)csGUI_addPatient.getClinicBox().getSelectedItem(),
 										csGUI_addPatient.getDoctorID()	);
@@ -109,7 +121,10 @@ public class PatientControl {
 			//PatientCon(newpt,task.ADD_PATIENT); --> OLD Controller call.
 			JOptionPane.showMessageDialog(null,"The Patient: "+newpt.getpFirstName()+" "+newpt.getpLastName()
 												+" Was successfully added!","Error", JOptionPane.INFORMATION_MESSAGE);
+			
 			csGUI_addPatient.dispose();
+			CS_GUI_Appoint appoint = new CS_GUI_Appoint();
+			AppointmentControl pt_appoint = new AppointmentControl(appoint,newpt);
 			
 		}
 		
@@ -134,11 +149,12 @@ public class PatientControl {
 			Envelope en = Controller.Control(findpt,task.GET_PATIENT);
 			
 			
-			/* if Pation exist */
+			/* if Patient exist */
 			if (en.getStatus() == Status.EXIST)
 			{
 				findpt = (Patient)en.getSingleObject();
-				JOptionPane.showMessageDialog(null,"Patient Exists! \n" + findpt,"INFO", JOptionPane.INFORMATION_MESSAGE);
+				//JOptionPane.showMessageDialog(null,"Patient Exists! \n" + findpt,"INFO", JOptionPane.INFORMATION_MESSAGE);
+				System.out.println("Patient Exist!\n"+findpt);
 				csGUI_findPatient.dispose();
 				CS_GUI_Appoint appoint = new CS_GUI_Appoint();
 				AppointmentControl pt_appoint = new AppointmentControl(appoint,findpt);
@@ -165,9 +181,6 @@ public class PatientControl {
 		}
 		
 	}
-	
-	
-	
 	
 	
 } //PationControl

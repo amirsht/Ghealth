@@ -110,13 +110,10 @@ public class Server extends Thread
             	
             /*---     Patient Tasks:   ---*/
             case ADD_PATIENT:
-            	pt = (Patient)env.getSingleObject();
             	System.out.println("case ADD_PATIENT");
-    
-            	status=SCpatient.CreatePatient(pt.getpID(),pt.getpFirstName(),pt.getpLastName(),pt.getPtEmail(),pt.getPtPhone(),pt.getPtPrivateClinic(),pt.getPd());
+            	pt = (Patient)env.getSingleObject();
+            	status=SCpatient.CreatePatient(pt);
             	env.setStatus(status);
-            	if(status == Status.EXIST)
-            		System.out.println("The Patient '"+pt.getpID()+"' is already exist in GHEALTH!");
             	break;
 
             case GET_PATIENT:

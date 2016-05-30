@@ -54,6 +54,7 @@ public class CS_GUI_addPatient extends JFrame {
 	private JTextField PationID;
 	private JTextField doctorID;
 	private JComboBox ClinicBox;
+	private JComboBox eMailcomboBox;
 	
 
 
@@ -127,9 +128,9 @@ public class CS_GUI_addPatient extends JFrame {
 		contentPane.add(btnCancel);
 		btnCancel.addActionListener(new CancelListener());
 		
-		Label label_1 = new Label("Pation ID");
-		label_1.setBounds(252, 123, 62, 22);
-		contentPane.add(label_1);
+		Label at = new Label("@");
+		at.setBounds(464, 240, 15, 22);
+		contentPane.add(at);
 		
 		Label label_2 = new Label("First Name");
 		label_2.setBounds(252, 161, 62, 22);
@@ -162,6 +163,15 @@ public class CS_GUI_addPatient extends JFrame {
 		ClinicBox = new JComboBox<Object>(ClinicList);
 		ClinicBox.setBounds(372, 324, 115, 20);
 		contentPane.add(ClinicBox);
+		
+		String [] eMailList = {"gmail.com","hotmail.com","braude.ac.il","yahoo.com","walla.co.il","iol.com"};
+		eMailcomboBox = new JComboBox<Object>(eMailList);
+		eMailcomboBox.setBounds(485, 242, 115, 20);
+		contentPane.add(eMailcomboBox);
+		
+		Label label_8 = new Label("Pation ID");
+		label_8.setBounds(267, 123, 62, 22);
+		contentPane.add(label_8);
 		
 		
 		setLocationRelativeTo(null);
@@ -232,6 +242,11 @@ public class CS_GUI_addPatient extends JFrame {
 	public JComboBox getClinicBox()
 	{
 		return ClinicBox;
+	}
+	
+	public JComboBox geteMailBox()
+	{
+		return eMailcomboBox;
 	}
 		
 	

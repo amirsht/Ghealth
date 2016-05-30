@@ -85,7 +85,7 @@ public class CS_GUI_Appoint extends JFrame {
 		contentPane.add(btnCancelAppoint);
 		
 		pationDetails = new JPanel();
-		pationDetails.setBounds(567, 172, 172, 232);
+		pationDetails.setBounds(497, 170, 273, 232);
 		contentPane.add(pationDetails);
 		pationDetails.setLayout(null);
 		
@@ -110,7 +110,7 @@ public class CS_GUI_Appoint extends JFrame {
 		pationDetails.add(label_5);
 		
 		Label label_6 = new Label("Private Clinic");
-		label_6.setBounds(5, 155, 62, 22);
+		label_6.setBounds(5, 155, 82, 22);
 		pationDetails.add(label_6);
 		
 		Label label_7 = new Label("Doctor ID");
@@ -174,40 +174,39 @@ public class CS_GUI_Appoint extends JFrame {
 	
 	public void setPationID(String ppationID) {
 		JLabel PationID = new JLabel(ppationID);
-		PationID.setBounds(88,5, 62, 22);
+		PationID.setBounds(95,5,300, 22);
 		pationDetails.add(PationID);
 	}
 
 	public void setfName(String ffName) {
-
 		JLabel fName = new JLabel(ffName);
-		fName.setBounds(95, 35, 62, 22);
+		fName.setBounds(95, 35, 300, 22);
 		pationDetails.add(fName);	
 
 	}
 
 	public void setlName(String llName) {
 		JLabel lName = new JLabel(llName);
-		lName.setBounds(95, 65, 62, 22);
+		lName.setBounds(95, 65, 300, 22);
 		pationDetails.add(lName);
 	}
 
 	public void seteMail(String Mail) {
 		JLabel eMail = new JLabel(Mail);
-		eMail.setBounds(95, 95, 62, 22);
+		eMail.setBounds(95, 95, 300, 22);
 		pationDetails.add(eMail);
 	}
 
 	public void setPhone(String pphone) {
 		JLabel phone = new JLabel(pphone);
-		phone.setBounds(95, 125, 62, 22);
+		phone.setBounds(95, 125, 300, 22);
 		pationDetails.add(phone);
 		
 	}
 
 	public void setpClinic(String Clinic) {
 		JLabel pClinic = new JLabel(Clinic);
-		pClinic.setBounds(95, 155, 62, 22);
+		pClinic.setBounds(95, 155, 90, 22);
 		pationDetails.add(pClinic);
 	}
 
@@ -215,7 +214,7 @@ public class CS_GUI_Appoint extends JFrame {
 
 	public void setDoctorID(String ddoctorID) {
 		JLabel doctorID = new JLabel(ddoctorID);
-		doctorID.setBounds(95, 185, 62, 22);
+		doctorID.setBounds(95, 185, 90, 22);
 		pationDetails.add(doctorID);
 		JLabel lblPatientDetails = new JLabel("Patient Details:");
 		lblPatientDetails.setBounds(581, 116, 107, 20);
