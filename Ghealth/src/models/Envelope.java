@@ -15,8 +15,8 @@ public class Envelope implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -7171959639692110621L;
+	//private ArrayList<Object> objList;
 	private List<Object> objList;
-	private String StrArray [];
 	private task type;
 	private Status st;
 	private DoctorSpeciallity sp;
@@ -72,13 +72,5 @@ public class Envelope implements Serializable {
 	}
 
 
-	public String[] getStringArray() {
-		return StrArray;
-	}
-
-
-	public void setStringArray(String strArray[]) {
-		StrArray = strArray;
-	}
 	
 }
