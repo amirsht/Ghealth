@@ -11,7 +11,7 @@ import client.Controller;
 import client.LoginControl;
 import enums.DoctorSpeciallity;
 import enums.task;
-import models.Envelope;
+import models.*;
 
 import javax.swing.JTextField;
 
@@ -23,6 +23,7 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -157,10 +158,18 @@ public class CS_GUI_addPatient extends JFrame {
 		contentPane.add(label_7);
 		
 		Envelope en = Controller.Control(null, task.GET_PRIVATE_CLINIC_LIST);
-		String [] ClinicList = en.getStringArray();
-		System.out.println(ClinicList);
-		//GET_PRIVATE_CLINIC_LIST
-		ClinicBox = new JComboBox<Object>(ClinicList);
+		String [] str = new String[en.getobjList().size()];
+		
+		System.out.println(en.getobjList().size());
+		int i=0;
+		for(Object obj : en.getobjList())
+		{
+			PrivateClinic pc;
+			pc = (PrivateClinic)obj;
+			str[i++] = (pc.getPrivateClinicName());
+		}
+		
+		ClinicBox = new JComboBox<Object>(str);
 		ClinicBox.setBounds(372, 324, 115, 20);
 		contentPane.add(ClinicBox);
 		

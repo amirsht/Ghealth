@@ -10,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
 
+import enums.DoctorSpeciallity;
 import enums.task;
 import models.Envelope;
 import models.Patient;
@@ -28,7 +29,9 @@ public class Controller {
 	    public static Envelope Control(Object obj,task ts)
 	    {
 	    	Envelope En = new Envelope();
-	        En.addobjList(obj);
+	    	if(obj instanceof DoctorSpeciallity)
+	    		En.setSpeciality((DoctorSpeciallity)obj);
+	    	else En.addobjList(obj);
 	        En.setType(ts);
 	        En = communicate(En);
 	    	return En;

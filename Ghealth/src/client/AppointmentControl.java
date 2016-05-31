@@ -7,7 +7,11 @@ import GUI.CS_GUI_Appoint;
 import GUI.CS_GUI_findPatient;
 import GUI.CS_GUI_newAppoint;
 import GUI.LoginGUI;
+import enums.DoctorSpeciallity;
+import enums.task;
+import models.Envelope;
 import models.Patient;
+import models.User;
 
 public class AppointmentControl {
 
@@ -80,7 +84,7 @@ public class AppointmentControl {
 		{
 		
 			System.out.println("Trying to GET Select Doctor type: " + csGUI_CreateNewAppoint.docBox.getSelectedItem().toString());
-			
+
 		}
 		
 	}

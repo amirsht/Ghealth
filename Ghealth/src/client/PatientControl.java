@@ -56,10 +56,6 @@ public class PatientControl {
 	}
 	
 	
-
-	
-	
-	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
 	/*
     public static Patient PatientCon(Patient pt,task ts){
