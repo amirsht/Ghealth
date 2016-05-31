@@ -114,7 +114,14 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User [uID=" + uID + ", uPassword=" + uPassword + ", uFirstName=" + uFirstName + ", uLastName="
-				+ uLastName + ", uRole=" + uRole + ", uEmail=" + uEmail + ", Clinic Name=" + uClinic.getcName() + "]";
+				+ uLastName + ", uRole=" + uRole + ", uEmail=" + uEmail + ", Clinic Name=" + uClinic.getcName() + " Location=" + uClinic.getcLocation() +"]";
+		
+	}
+	
+	
+	public String toStringClinicList() {
+		return "Clinic: "+uClinic.getcName() + " " + (uClinic.getcLocation())
+				+ " | Doctor: " + uFirstName + " " + uLastName;
 	}
 	
 	

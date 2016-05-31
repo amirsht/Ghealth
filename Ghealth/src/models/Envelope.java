@@ -19,7 +19,7 @@ public class Envelope implements Serializable {
 	private List<Object> objList;
 	private task type;
 	private Status st;
-	private DoctorSpeciallity sp;
+	//private DoctorSpeciallity sp;
 	
 	public Envelope() {
 		this.objList = new ArrayList<Object>();
@@ -41,6 +41,7 @@ public class Envelope implements Serializable {
 		this.objList = obj;
 	}
 	
+	
 	public void addobjList(Object obj)
 	{
 		this.objList.add(obj);
@@ -61,7 +62,7 @@ public class Envelope implements Serializable {
 		this.st = st;
 	}
 
-
+/*
 	public DoctorSpeciallity getSpeciality() {
 		return sp;
 	}
@@ -69,7 +70,7 @@ public class Envelope implements Serializable {
 
 	public void setSpeciality(DoctorSpeciallity sp) {
 		this.sp = sp;
-	}
+	}*/
 
 
 	

@@ -29,6 +29,7 @@ public class StartServer {
 		    @Override
 		    public void println(String x) {
 		        //super.println(System.currentTimeMillis() + ": " + x);
+		    	super.println(x);
 		    	servLog.setLog(x);
 		    }
 		};

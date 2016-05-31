@@ -9,6 +9,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketException;
+import java.util.ArrayList;
+import java.util.List;
 
 import enums.DoctorSpeciallity;
 import enums.task;
@@ -29,8 +31,13 @@ public class Controller {
 	    public static Envelope Control(Object obj,task ts)
 	    {
 	    	Envelope En = new Envelope();
-	    	if(obj instanceof DoctorSpeciallity)
-	    		En.setSpeciality((DoctorSpeciallity)obj);
+	    	
+	    	if(obj instanceof List<?>)
+	    	{
+	    		/* This case is for sending list and not object. */
+	    		List<Object> objList = (List<Object>) obj;
+	    		En.setobjList(objList);
+	    	}
 	    	else En.addobjList(obj);
 	        En.setType(ts);
 	        En = communicate(En);

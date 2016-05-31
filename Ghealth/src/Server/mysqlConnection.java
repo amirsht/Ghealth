@@ -29,7 +29,7 @@ public class mysqlConnection {
 	private serverLogGui serverLogView;
 	private  ArrayList<String> userLog;
 	private static String userNameDB = "root";
-	private static String passwordDB = "1234";
+	private static String passwordDB = "a4m3i2r1";
 	private static String Defport = "5555";
 	private static int port = 0;
 	private String Scheam = "jdbc:mysql://localhost/ghealth";

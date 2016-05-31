@@ -43,7 +43,10 @@ public class CS_GUI_newAppoint extends JFrame {
 	private JButton btnCancelAppoint;
 	private JButton btnCrtAppoint;
 	private JLabel lblwarningMessage = null;
-	public JComboBox<?> docBox;
+	private JComboBox<?> docBox;
+	private JComboBox<?> DoctorBox;
+	private JComboBox<?> DoctorHoursBox;
+	private JLabel lblDoctorHours;
 	
 
 
@@ -107,6 +110,24 @@ public class CS_GUI_newAppoint extends JFrame {
 		lblPatientName.setBounds(123, 120, 106, 14);
 		contentPane.add(lblPatientName);	
 		
+		DoctorBox = new JComboBox<Object>();
+		DoctorBox.setBounds(263, 181, 453, 20);
+		DoctorBox.setVisible(false);
+		contentPane.add(DoctorBox);
+		
+		JLabel lblChooseClinic = new JLabel("Choose Clinic & Doctor");
+		lblChooseClinic.setBounds(123, 184, 114, 14);
+		contentPane.add(lblChooseClinic);
+		
+		DoctorHoursBox = new JComboBox<Object>();
+		DoctorHoursBox.setBounds(263, 212, 207, 20);
+		DoctorHoursBox.setVisible(false);
+		contentPane.add(DoctorHoursBox);
+		
+		lblDoctorHours = new JLabel("Doctor Hours");
+		lblDoctorHours.setBounds(123, 218, 114, 14);
+		contentPane.add(lblDoctorHours);
+		
 		setLocationRelativeTo(null);
 		
 		setVisible(true);
@@ -149,6 +170,16 @@ public class CS_GUI_newAppoint extends JFrame {
 		
 	}
 	
+	public void DoctorBoxActionListener(ActionListener e){
+		
+		DoctorBox.addActionListener(e);
+	}
+	
+public void DoctorHoursBoxActionListener(ActionListener e){
+		
+		DoctorHoursBox.addActionListener(e);
+	}
+	
 
 	public void setfName(String ffName) {
 
@@ -166,6 +197,19 @@ public class CS_GUI_newAppoint extends JFrame {
 		contentPane.add(ptID);
 	}
 
+	public JComboBox<?> getDocBox() {
+		return docBox;
+	}
 
+	public JComboBox<?> getDoctorBox() {
+		return DoctorBox;
+	}
+	
+	public JComboBox<?> getDoctorHoursBox() {
+		return DoctorHoursBox;
+	}
+	
+	
+	
 }
 

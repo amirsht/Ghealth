@@ -17,64 +17,104 @@ import enums.apptStatus;
 public class AppointmentSettings {
 	
 	
-
-	private int appID;
-	private Date appDate;
-	private Time appTime;
-	private Date appcreatDate;
-	private apptStatus AppStatus; //
+	private int apsID;
+	private String apsPtID;
+	private String apsDate;
+	private String apsTime;
+	private String CreateDate;
+	private String CreateTime;
+	private apptStatus apsStatus;
+	private String apsDocID;
 	
-	public AppointmentSettings(int appID, Date appDate, Time appTime, Date appcreatDate, apptStatus appStatus) 
+	
+	
+	public AppointmentSettings()
 	{
 		super();
-		this.appID = appID;
-		this.appDate = appDate;
-		this.appTime = appTime;
-		this.appcreatDate = appcreatDate;
-		this.AppStatus = appStatus;
 	}
 	
+	
+	public AppointmentSettings(String apsPtID, String apsDate, String apsTime, String createTimeDate, String createTime,
+			apptStatus apsStatus, String apsDocID) {
+		super();
+		this.apsPtID = apsPtID;
+		this.apsDate = apsDate;
+		this.apsTime = apsTime;
+		CreateDate = createTimeDate;
+		CreateTime = createTime;
+		this.apsStatus = apsStatus;
+		this.apsDocID = apsDocID;
+	}
+	
+	public AppointmentSettings(int apsID, String apsPtID, String apsDate, String apsTime, String createTimeDate,
+			String createTime, apptStatus apsStatus, String apsDocID) {
+		super();
+		this.apsID = apsID;
+		this.apsPtID = apsPtID;
+		this.apsDate = apsDate;
+		this.apsTime = apsTime;
+		CreateDate = createTimeDate;
+		CreateTime = createTime;
+		this.apsStatus = apsStatus;
+		this.apsDocID = apsDocID;
+	}
+	public void setApsID(int apsID) {
+		this.apsID = apsID;
+	}
+	public void setApsPtID(String apsPtID) {
+		this.apsPtID = apsPtID;
+	}
+	public void setApsDate(String apsDate) {
+		this.apsDate = apsDate;
+	}
+	public void setApsTime(String apsTime) {
+		this.apsTime = apsTime;
+	}
+	public void setCreateDate(String createDate) {
+		CreateDate = createDate;
+	}
+	public void setCreateTime(String createTime) {
+		CreateTime = createTime;
+	}
+	public void setApsStatus(apptStatus apsStatus) {
+		this.apsStatus = apsStatus;
+	}
+	public void setApsDocID(String apsDocID) {
+		this.apsDocID = apsDocID;
+	}
 
-	public int getAppID() 
-	{
-		return appID;
-	}	
-	public void setAppID(int appID) 
-	{
-		this.appID = appID;
+	public int getApsID() {
+		return apsID;
 	}
-	public Date getAppDate() 
-	{
-		return appDate;
+
+	public String getApsPtID() {
+		return apsPtID;
 	}
-	public void setAppDate(Date appDate) 
-	{
-		this.appDate = appDate;
+
+	public String getApsDate() {
+		return apsDate;
 	}
-	public Time getAppTime() 
-	{
-		return appTime;
+
+	public String getApsTime() {
+		return apsTime;
 	}
-	public void setAppTime(Time appTime) 
-	{
-		this.appTime = appTime;
+
+	public String getCreateDate() {
+		return CreateDate;
 	}
-	public Date getAppcreatDate() 
-	{
-		return appcreatDate;
+
+	public String getCreateTime() {
+		return CreateTime;
 	}
-	public void setAppcreatDate(Date appcreatDate) 
-	{
-		this.appcreatDate = appcreatDate;
+
+	public apptStatus getApsStatus() {
+		return apsStatus;
 	}
-	public apptStatus getAppStatus() 
-	{
-		return AppStatus;
+
+	public String getApsDocID() {
+		return apsDocID;
 	}
-	public void setAppStatus(apptStatus appStatus) 
-	{
-		AppStatus = appStatus;
-	}
+	
 	
 	
 	

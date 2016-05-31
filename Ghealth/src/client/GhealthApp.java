@@ -1,7 +1,18 @@
 package client;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import GUI.*;
+import enums.DoctorSpeciallity;
 //import models.User;
+import enums.task;
+import models.Envelope;
+import models.User;
 
 /**
  * The Main Class That starts Ghealth Application.
@@ -9,7 +20,36 @@ import GUI.*;
  */
 public class GhealthApp {
 
+	
+	
 	public static void main(String[] args) {
+		
+		
+		/* GET_DOCTORS_IN_CLINIC_BY_TYPE */
+		/*
+		List<Object> objList = new ArrayList<Object>();
+		objList.add("4444");
+		objList.add(DoctorSpeciallity.Orthopedist);
+		Envelope en = Controller.Control(objList,task.GET_DOCTORS_IN_CLINIC_BY_TYPE);
+		for (Object obj : en.getobjList())
+		{
+			System.out.println((User)obj);
+		}
+		
+		/* GET_AVAILIBLE_DOCTOR_HOURS */
+		/*
+		List<Object> objList_2 = new ArrayList<Object>();
+		objList_2.add("2016-07-15");
+		objList_2.add("5002");
+		en = Controller.Control(objList_2,task.GET_AVAILIBLE_DOCTOR_HOURS);
+		for (Object obj : en.getobjList())
+		{
+			System.out.println("Hour - ");
+			System.out.println(obj.toString());
+		}
+	    
+		
+		*/
 		
 		
 		LoginGUI login1 = new LoginGUI();
@@ -17,5 +57,6 @@ public class GhealthApp {
 		
 
 	}
+
 
 }

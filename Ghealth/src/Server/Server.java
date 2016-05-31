@@ -8,6 +8,8 @@ import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
+import java.util.List;
 
 
 
@@ -63,6 +65,7 @@ public class Server extends Thread
         //System.out.println("Server-> Start - Before Socket Coonnection.");
         try {
         	Envelope env;
+        	List<Object> objList;
         	ObjectInputStream inputStream;
         	ObjectOutputStream outputStream;
         	
@@ -85,11 +88,11 @@ public class Server extends Thread
             mysqlConnection msql = new mysqlConnection();
             
             System.out.println(env.getType());
-            
-switch(env.getType()){
-            
+     
             
             
+            switch(env.getType()){
+         
             /*---      User Tasks:    ---*/
             case GET_USER:
             	us = (User)env.getSingleObject();
@@ -118,11 +121,29 @@ switch(env.getType()){
             	break;
             	
             	
-            /*---   Appointment Tasks: ---*/      
+            /*---   Appointment Tasks: ---*/  
+            case CREATE_NEW_APPOINTMENT:
+            	System.out.println("CREATE_NEW_APPOINTMENT");
+            	AppointmentSettings as = (AppointmentSettings) env.getSingleObject();
+            	status=SCappointment.CreateAppointment(as);
+            	env.setStatus(status);
+            	break;
+            	
             case GET_DOCTORS_IN_CLINIC_BY_TYPE:
-            	System.out.println(env.getSpeciality().toString());
-            	env = SCappointment.GetClinicDoctorList(env.getSpeciality().toString());
-            	System.out.println("Get Clinic List");
+            	
+            	objList = env.getobjList();
+            	System.out.println(objList.get(0).toString() + objList.get(1).toString());
+            	env = SCappointment.GetClinicDoctorList(objList.get(0).toString(),objList.get(1).toString());
+            	System.out.println("GET_DOCTORS_IN_CLINIC_BY_TYPE");
+            	break;
+            	
+            case GET_AVAILIBLE_DOCTOR_HOURS:
+            	objList = env.getobjList();
+            	System.out.println(objList.get(0).toString() + objList.get(1).toString());
+            	System.out.println("GET_AVAILIBLE_DOCTOR_HOURS");
+            	env = SCappointment.GetAvailibleDoctorHours(objList.get(0).toString(),objList.get(1).toString());
+            	break;
+            	
             /*---     Lab-Ref Tasks:   ---*/
             case GET_LAB_REF:
             /* Sending file to client */
@@ -154,8 +175,11 @@ switch(env.getType()){
             if(env.getType() != task.GET_LAB_REF && env.getType() != task.UPDATE_LAB_REF)
             {
 	            /* Sending data back to client */
+            	System.out.println("before new output stream");
 	            outputStream = new ObjectOutputStream(cs.getOutputStream());
+	            System.out.println("before write env to out stream");
 	            outputStream.writeObject(env);
+	            
             }
            //serverSocket.close();
            //cs.close();
