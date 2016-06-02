@@ -5,16 +5,17 @@
 
 package models;
 
+import java.io.Serializable;
 import java.sql.Time;
 import java.util.Date;
 
-import enums.apptStatus;
+import enums.Status;
 
 
 
 //class for creating appt. by customer service 
 
-public class AppointmentSettings {
+public class AppointmentSettings  implements Serializable {
 	
 	
 	private int apsID;
@@ -23,7 +24,7 @@ public class AppointmentSettings {
 	private String apsTime;
 	private String CreateDate;
 	private String CreateTime;
-	private apptStatus apsStatus;
+	private Status apsStatus;
 	private String apsDocID;
 	
 	
@@ -35,7 +36,7 @@ public class AppointmentSettings {
 	
 	
 	public AppointmentSettings(String apsPtID, String apsDate, String apsTime, String createTimeDate, String createTime,
-			apptStatus apsStatus, String apsDocID) {
+			Status apsStatus, String apsDocID) {
 		super();
 		this.apsPtID = apsPtID;
 		this.apsDate = apsDate;
@@ -47,7 +48,7 @@ public class AppointmentSettings {
 	}
 	
 	public AppointmentSettings(int apsID, String apsPtID, String apsDate, String apsTime, String createTimeDate,
-			String createTime, apptStatus apsStatus, String apsDocID) {
+			String createTime, Status apsStatus, String apsDocID) {
 		super();
 		this.apsID = apsID;
 		this.apsPtID = apsPtID;
@@ -76,7 +77,7 @@ public class AppointmentSettings {
 	public void setCreateTime(String createTime) {
 		CreateTime = createTime;
 	}
-	public void setApsStatus(apptStatus apsStatus) {
+	public void setApsStatus(Status apsStatus) {
 		this.apsStatus = apsStatus;
 	}
 	public void setApsDocID(String apsDocID) {
@@ -107,7 +108,7 @@ public class AppointmentSettings {
 		return CreateTime;
 	}
 
-	public apptStatus getApsStatus() {
+	public Status getApsStatus() {
 		return apsStatus;
 	}
 

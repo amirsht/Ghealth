@@ -25,7 +25,7 @@ public class SCappointment {
 	{
 		ResultSet result = null;
 		Statement stmt; 
-		String querystr_a,querystr_b;
+		String querystr_a,querystr_b,querystr_c;
 		User us = null;
 		Envelope en = new Envelope();
 		
@@ -33,41 +33,59 @@ public class SCappointment {
 		System.out.println(sp);
 		
 		
+		
 		querystr_a="CREATE OR REPLACE VIEW AMIR AS"
 				+ " SELECT * "
 				+ " FROM appointmentsettings a "
-				+ " WHERE a.apsPtID='"+pt+"';";
+				+ " WHERE a.apsPtID='"+pt+"' AND a.apsStatus='ARRIVED';";
 		
+		querystr_b="SELECT COUNT(*) AS COUNT"
+				+ " FROM appointmentsettings a,doctor d"
+				+ " WHERE a.apsStatus='SCHEDUELD' AND d.dSpeciality='"+sp+"' AND d.dID=a.apsDocID;";
 		
-		querystr_b="SELECT uID,uFirstName,uLastName,cLocation,cName "
+		querystr_c="SELECT DISTINCT uID,uFirstName,uLastName,cLocation,cName "
 				+ " FROM user,clinic,doctor LEFT JOIN AMIR on AMIR.apsDocID = doctor.dID "
 				+ " WHERE dSpeciality='"+sp+"' AND uID = dID AND cID = ucID"
 				+ " ORDER BY apsDate DESC; ";
 		
 		
+		
 		System.out.println(querystr_a);
 		System.out.println(querystr_b);
+		System.out.println(querystr_c);
 		try 
 		{
 			stmt = mysqlConnection.conn.createStatement();
 			stmt.executeUpdate(querystr_a);
 			System.out.println("after first query");
 			result = stmt.executeQuery(querystr_b);
-			System.out.println("after sec query");
-			while (result.next())
-            {
-				/* Get & Create the exist user from DB */
-				us = new User();
-				Clinic cl = new Clinic();
-				us.setuID(result.getString("uID"));
-				us.setuFirstName(result.getString("uFirstName"));
-				us.setuLastName(result.getString("uLastName"));
-				cl.setcLocation(result.getString("cLocation"));
-				cl.setcName(result.getString("cName"));
-				us.setuClinic(cl);
-				System.out.println(us);
-				en.addobjList(us);
+			System.out.println("after second query");
+			result.next();
+			if(result.getInt("COUNT") > 0)
+			{
+				System.out.println("There is SCHEDUELD appointment to "+sp+" Cant ceate more appointment to same doctor type!");
+				en.setStatus(Status.SCHEDUELD);
+			}
+			else {
+				result = stmt.executeQuery(querystr_c);
+				System.out.println("after third query");
+				while (result.next())
+	            {
+					/* Get & Create the exist user from DB */
+					us = new User();
+					Clinic cl = new Clinic();
+					us.setuID(result.getString("uID"));
+					us.setuFirstName(result.getString("uFirstName"));
+					us.setuLastName(result.getString("uLastName"));
+					cl.setcLocation(result.getString("cLocation"));
+					cl.setcName(result.getString("cName"));
+					us.setuClinic(cl);
+					System.out.println(us);
+					en.addobjList(us);
+					
+				}
 				
+				en.setStatus(Status.ARRIVED);
 			}
 			en.setType(task.GET_DOCTORS_IN_CLINIC_BY_TYPE);
 			//System.out.println("ResultSet - uID - "+result.getString("uID") );
@@ -150,7 +168,8 @@ public class SCappointment {
 		Statement stmt;
 		String querystr;
 		
-		querystr="INSERT INTO appointmentsettings " + " VALUES ('null','"+as.getApsPtID()+"','"+as.getApsDate()+"','"+as.getApsTime()+"', '"
+		querystr="INSERT INTO appointmentsettings " + " (apsPtID,apsDate,apsTime,apsCreateDate,apsCreateTime,apsStatus,apsDocID) "
+				+ "VALUES ('"+as.getApsPtID()+"','"+as.getApsDate()+"','"+as.getApsTime()+"', '"
 		+as.getCreateDate()+"', '"+as.getCreateTime()+"', '"+as.getApsStatus().toString()+"', '"+as.getApsDocID()+"')";
 		
 		try 

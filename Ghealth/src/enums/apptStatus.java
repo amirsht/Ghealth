@@ -2,5 +2,5 @@ package enums;
 
 public enum apptStatus{
 	
-	SCHEDUELD, CANCELED, ARRIVED, NOSHOW
+	//SCHEDUELD, CANCELED, ARRIVED, NOSHOW
 }

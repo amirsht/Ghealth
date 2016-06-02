@@ -4,5 +4,9 @@ public enum Status {
 	EXIST,
 	CREATED,
 	NOT_EXIST,
-	FAILED_EXCEPTION
+	FAILED_EXCEPTION,
+	
+	
+	/* Appointment Status: */
+	SCHEDUELD, CANCELED, ARRIVED, NOSHOW
 }

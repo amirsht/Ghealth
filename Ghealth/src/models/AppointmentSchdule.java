@@ -5,7 +5,9 @@
 
 package models;
 
-public class AppointmentSchdule {
+import java.io.Serializable;
+
+public class AppointmentSchdule  implements Serializable{
 
 	
 	

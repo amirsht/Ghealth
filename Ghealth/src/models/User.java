@@ -120,8 +120,8 @@ public class User implements Serializable {
 	
 	
 	public String toStringClinicList() {
-		return "Clinic: "+uClinic.getcName() + " " + (uClinic.getcLocation())
-				+ " | Doctor: " + uFirstName + " " + uLastName;
+		return "Clinic: '"+uClinic.getcName() + "' " + (uClinic.getcLocation())
+				+ "  |  Doctor: " + uFirstName + " " + uLastName;
 	}
 	
 	
