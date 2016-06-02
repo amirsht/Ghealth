@@ -62,6 +62,8 @@ public class Envelope implements Serializable {
 		this.st = st;
 	}
 
+
+
 /*
 	public DoctorSpeciallity getSpeciality() {
 		return sp;

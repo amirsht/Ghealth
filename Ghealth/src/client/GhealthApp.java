@@ -8,11 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import GUI.*;
-import enums.DoctorSpeciallity;
-//import models.User;
-import enums.task;
-import models.Envelope;
-import models.User;
+import enums.*;
+import models.*;
 
 /**
  * The Main Class That starts Ghealth Application.
@@ -24,6 +21,14 @@ public class GhealthApp {
 	
 	public static void main(String[] args) {
 		
+		
+		/*
+		List<Object> objList = new ArrayList<Object>();
+		Envelope en = Controller.Control(new Patient("4444"),task.GET_OPEN_APPOINTMENTS);
+		for (Object obj : en.getobjList())
+		{
+			System.out.println((AppointmentSettings)obj);
+		}
 		
 		/* GET_DOCTORS_IN_CLINIC_BY_TYPE */
 		/*

@@ -26,7 +26,7 @@ public class AppointmentSettings  implements Serializable {
 	private String CreateTime;
 	private Status apsStatus;
 	private String apsDocID;
-	
+	private Doctor doctor;
 	
 	
 	public AppointmentSettings()
@@ -59,6 +59,8 @@ public class AppointmentSettings  implements Serializable {
 		this.apsStatus = apsStatus;
 		this.apsDocID = apsDocID;
 	}
+	
+	
 	public void setApsID(int apsID) {
 		this.apsID = apsID;
 	}
@@ -115,8 +117,31 @@ public class AppointmentSettings  implements Serializable {
 	public String getApsDocID() {
 		return apsDocID;
 	}
+
+
+
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
 	
 	
-	
+	@Override
+	public String toString() {
+		
+		return "AppointmentSettings [apsPtID=" + apsPtID + ", apsDate=" + apsDate + ", apsTime=" + apsTime
+				+ ", CreateDate=" + CreateDate + ", CreateTime=" + CreateTime + ", apsStatus=" + apsStatus
+				+ ", apsDocID=" + apsDocID + "]";
+	}
+
+
+	public String toStringCancelAppoint() {
+		return "("+doctor.getdSpeciality()+") Date=" + apsDate + ", Doctor "+
+				doctor.getuLastName()+",Clinic="+doctor.getuClinic().getcName()+" ("+doctor.getuClinic().getcLocation()+")";
+	}
 	
 }

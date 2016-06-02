@@ -123,15 +123,13 @@ public class SCpatient {
 		try 
 		{
 			stmt = mysqlConnection.conn.createStatement();
-			System.out.println("Create new patient in DB: " + querystr);
+			System.out.println("Get Clinic List " + querystr);
 			result = stmt.executeQuery(querystr);
 			while (result.next())
             {
-				//pc.add(new PrivateClinic(result.getString(1),result.getString(2)));
 				en.addobjList(new PrivateClinic(result.getString(1),result.getString(2)));
 				System.out.println(result.getString(1)+" "+result.getString(2));
             }   
-			//contactListNames = (String[]) rowValues.toArray(new String[rowValues.size()]);
 			mysqlConnection.conn.close();
 		}
 		catch (SQLException ex) 

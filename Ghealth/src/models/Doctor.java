@@ -5,16 +5,19 @@
 
 package models;
 
+import java.io.Serializable;
+
+import javax.management.relation.Role;
+
 import enums.*;
 
-public class Doctor extends User {
+public class Doctor extends User implements Serializable{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 3874467060459550851L;
 	private DoctorSpeciallity dSpeciality;
-	private int dcid;
 	/**
 	 * @param dSpeciality
 	 */
@@ -33,6 +36,13 @@ public class Doctor extends User {
 	{
 		super(uID, uPassword, uFirstName, uLastName, uRole, uEmail, uClinic);
 	}
+	
+	//Constractor without password & roll
+	public Doctor(String uID,String uFirstName,String uLastName,Clinic uClinic,DoctorSpeciallity dSpeciality) 
+	{
+		super(uID,"****",uFirstName,uLastName,Roles.DOCTOR,"",uClinic);
+		this.setdSpeciality(dSpeciality);
+	}
 
 	public DoctorSpeciallity getdSpeciality() {
 		return dSpeciality;
@@ -42,13 +52,6 @@ public class Doctor extends User {
 		this.dSpeciality = dSpeciality;
 	}
 
-	public int getDcid() {
-		return dcid;
-	}
-
-	public void setDcid(int dcid) {
-		this.dcid = dcid;
-	}
 	
 
 }

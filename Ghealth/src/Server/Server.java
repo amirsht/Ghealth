@@ -144,6 +144,13 @@ public class Server extends Thread
             	env = SCappointment.GetAvailibleDoctorHours(objList.get(0).toString(),objList.get(1).toString());
             	break;
             	
+            	
+            case GET_OPEN_APPOINTMENTS:
+            	System.out.println("GET_OPEN_APPOINTMENTS");
+            	pt = (Patient)env.getSingleObject();
+            	env = SCappointment.GetSCHEDUELDAppointments(pt.getpID());
+            	break;
+            	
             /*---     Lab-Ref Tasks:   ---*/
             case GET_LAB_REF:
             /* Sending file to client */

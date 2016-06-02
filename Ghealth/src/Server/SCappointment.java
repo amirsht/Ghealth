@@ -15,7 +15,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import enums.Status;
 import models.*;
 import enums.*;
 
@@ -88,7 +87,6 @@ public class SCappointment {
 				en.setStatus(Status.ARRIVED);
 			}
 			en.setType(task.GET_DOCTORS_IN_CLINIC_BY_TYPE);
-			//System.out.println("ResultSet - uID - "+result.getString("uID") );
 			mysqlConnection.conn.close();
 		}
 		catch (SQLException ex) 
@@ -147,7 +145,6 @@ public class SCappointment {
 			en.setobjList(timeList);
 			en.setType(task.GET_AVAILIBLE_DOCTOR_HOURS);
 			
-			//System.out.println("ResultSet - uID - "+result.getString("uID") );
 			mysqlConnection.conn.close();
 		}
 		catch (SQLException ex) 
@@ -188,6 +185,58 @@ public class SCappointment {
         }
 		
 		return Status.CREATED;
+
+	}
+	
+	
+	public static Envelope GetSCHEDUELDAppointments(String ptID)
+	{
+		Statement stmt;
+		String querystr;
+		ResultSet result;
+		Envelope en = new Envelope();
+		AppointmentSettings as;
+		Doctor doctor;
+		
+		querystr="SELECT  apsID,apsPtID,apsDate,apsTime,apsCreateDate,apsCreateTime,apsStatus,apsDocID,uFirstName,uLastName,cID,cName,cLocation,dSpeciality "
+				+ "FROM appointmentsettings,user,clinic,doctor "
+				+ "WHERE apsPtID='"+ptID+"' AND apsStatus='SCHEDUELD' AND uID=apsDocID AND cID=ucID AND dID=uID";
+		
+		try 
+		{
+			stmt = mysqlConnection.conn.createStatement();
+			System.out.println("Create new appointment in DB: " + querystr);
+			result = stmt.executeQuery(querystr);
+			en.setStatus(Status.NOT_EXIST);
+			while (result.next())
+            {
+				Status st =  Status.valueOf(result.getString(7));
+				as = new AppointmentSettings(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
+						result.getString(5),result.getString(6),st,result.getString("apsDocID"));
+				
+				
+				Clinic clinic = new Clinic(result.getInt("cID"),result.getString("cName"),result.getString("cLocation"));
+				DoctorSpeciallity ds = DoctorSpeciallity.valueOf(result.getString("dSpeciality"));
+				doctor = new Doctor(result.getString("apsDocID"),result.getString("uFirstName"),result.getString("uLastName"),clinic,ds);
+				as.setDoctor(doctor);
+				en.addobjList(as);
+				System.out.println(as);
+				en.setStatus(Status.EXIST);
+            }   
+			
+			en.setType(task.GET_OPEN_APPOINTMENTS);
+			mysqlConnection.conn.close();
+		}
+		catch (SQLException ex) 
+   	    {/* handle any errors*/
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+          en.setStatus(Status.FAILED_EXCEPTION);
+          return en;
+        }
+		
+		return en;
 
 	}
 

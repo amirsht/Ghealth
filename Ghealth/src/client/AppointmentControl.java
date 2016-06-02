@@ -15,23 +15,16 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-import GUI.CS_GUI_Appoint;
-import GUI.CS_GUI_findPatient;
-import GUI.CS_GUI_newAppoint;
-import GUI.LoginGUI;
-import enums.DoctorSpeciallity;
-import enums.Status;
-import enums.task;
-import models.AppointmentSettings;
-import models.Envelope;
-import models.Patient;
-import models.User;
+import GUI.*;
+import enums.*;
+import models.*;
 
 public class AppointmentControl {
 
 
 	private CS_GUI_Appoint csGUI_Appoint;
 	private CS_GUI_newAppoint csGUI_CreateNewAppoint;
+	private CS_GUI_cancelAppoint csGUI_cancelAppoint;
 	private Patient pt;
 	private AppointmentSettings as;
 	private List<Object> objList_str;
@@ -69,10 +62,32 @@ public class AppointmentControl {
 		csGUI_Appoint.createAppointActionListener(new createNewAppointListener());
 		csGUI_Appoint.SearchPatientActionListener(new SearchPatientListener());
 		csGUI_Appoint.LogOutActionListener(new LogOutListener());
-		csGUI_Appoint.cancelAppointActionListener(new CancelAppintListener());	
+		csGUI_Appoint.cancelAppointActionListener(new CancelAppointListener());	
 	}
 	
+	
+	
 
+	public List<String> GET_OPEN_APPOINTMENTS(String ptID)
+	{
+		
+		Envelope en = Controller.Control(new Patient(ptID),task.GET_OPEN_APPOINTMENTS);
+		List<String> strList = new ArrayList<String>();
+		
+		if(en.getStatus() == Status.NOT_EXIST)
+		{
+			System.out.println("There is no open appointments to cancel!");
+			return null;
+		}
+		for (Object obj : en.getobjList())
+		{
+			strList.add(((AppointmentSettings)obj).toStringCancelAppoint());
+			System.out.println((AppointmentSettings)obj);
+		}
+				
+		return strList;
+	}
+	
 	public List<String> GET_DOCTOR_CLINIC(String ptID,DoctorSpeciallity ds)
 	{
 		/* GET_DOCTORS_IN_CLINIC_BY_TYPE */
@@ -262,14 +277,27 @@ public class AppointmentControl {
 	
 	
 	
-	class CancelAppintListener  implements ActionListener 
+	class CancelAppointListener  implements ActionListener 
 	{
 
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
 			System.out.println("trying to cancel appoint ");
+
+			List<String> objList = GET_OPEN_APPOINTMENTS(pt.getpID());
+			if(objList == null)
+			{
+				System.out.println("There is no open appointment to cancel for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				JOptionPane.showMessageDialog(null,"There is no open appointment to cancel for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No Open Appointment", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
 			
+			CS_GUI_cancelAppoint cs = new CS_GUI_cancelAppoint();
+			cs.getcomboBox().setModel(new DefaultComboBoxModel(objList.toArray()));
+			cs.SetPatient(pt);
+			
+		
 		}
 		
 	}//CancelAppintListener
@@ -357,4 +385,6 @@ public class AppointmentControl {
     		//csGUI_Appoint.dispose();	//Closes the login window
     	}	
     }//action
+
+
 }
