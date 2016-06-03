@@ -8,6 +8,7 @@ import java.net.SocketException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class Server extends Thread
     public Patient pt = null;
     public User us = null;
     public String filename;
+    public static List<String> sessionList = new ArrayList<String>();
     
     
     
@@ -42,6 +44,7 @@ public class Server extends Thread
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+    	
     }
     
     
@@ -96,10 +99,16 @@ public class Server extends Thread
             /*---      User Tasks:    ---*/
             case GET_USER:
             	us = (User)env.getSingleObject();
-            	System.out.println("case GET_USER");
-            	env=SCuser.GetExistUser(us.getuID());
-            	break;
-            
+            	if(searchUserSession(us.getuID())==true){
+            		((User)env.getSingleObject()).setuID("0");
+            		break;
+            	}
+            	else{
+            		sessionList.add(us.getuID());
+	            	System.out.println("case GET_USER");
+	            	env=SCuser.GetExistUser(us.getuID());
+	            	break;
+            	}
             	
             	
             /*---     Patient Tasks:   ---*/
@@ -166,6 +175,12 @@ public class Server extends Thread
             	filename="src//Server//files//newfile.jpg";
             	saveFile(filename,cs);
             	break;
+            	
+            case LOG_OUT:
+                /* client is logging out */
+            	us = (User)env.getSingleObject();
+            	removeSession(us.getuID());
+                	break;
             
             	
             default:
@@ -204,6 +219,21 @@ public class Server extends Thread
         
     }
     
+    
+    public void removeSession(String getuID) {
+    	System.out.println("before remove");
+		sessionList.remove(getuID);
+	}
+
+
+
+	public boolean searchUserSession(String uid){
+    	for(String str: sessionList) {
+    	    if(str.trim().equals(uid))
+    	       return true;
+    	}
+    	return false;
+    }
     
     public void sendFile(String filename,Socket s) throws IOException {
 		DataOutputStream dos = new DataOutputStream(s.getOutputStream());

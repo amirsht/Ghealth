@@ -22,6 +22,7 @@ public class LoginControl {
 	private LoginGUI loginG;
 	private User UserLogin;
 	private static String user_full_name;
+	private static String uId = null;
 	//private User user;
 	//private User U;
 	
@@ -62,7 +63,10 @@ public static User UserCon(User us,task ts){
 		return user_full_name;
 	}
 
-
+    public static String getUserId() {
+    	System.out.println("after get user id");
+		return uId;
+	}
 
 	public static void setUser_full_name(String user_full_name) {
 		LoginControl.user_full_name = user_full_name;
@@ -102,9 +106,9 @@ public static User UserCon(User us,task ts){
         		   
         		   Envelope en = Controller.Control(UserLogin,task.GET_USER);
         		   User us = (User)en.getSingleObject();
-        		   
+        		   uId = us.getuID();
         		 
-        		   if(us.getuID() != null)
+        		   if(us.getuID() != null && !us.getuID().equals("0"))
         		   {
         			   setUser_full_name(us.getuFirstName()+" "+us.getuLastName());
 	        		   if(UserLogin.getuPassword().equals(us.getuPassword()))
@@ -150,7 +154,10 @@ public static User UserCon(User us,task ts){
 	        			   JOptionPane.showMessageDialog(null,"Pass not match!!!!","Error", JOptionPane.INFORMATION_MESSAGE);
 	        		   }
         		   }
-        		   else JOptionPane.showMessageDialog(null,"No such User!!!!","Error", JOptionPane.INFORMATION_MESSAGE); 
+        		   else if (us.getuID().equals("0"))
+        			   JOptionPane.showMessageDialog(null,"User is in another session!","Error", JOptionPane.INFORMATION_MESSAGE);
+        		   else
+        			   JOptionPane.showMessageDialog(null,"No such User!!!!","Error", JOptionPane.INFORMATION_MESSAGE); 
         			   	
         		   System.out.println("pass: " + us.getuPassword() + " " + us.getuRole());
         		   

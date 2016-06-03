@@ -10,6 +10,8 @@ public class StartServer {
 
 	public static serverLogGui servLog = new serverLogGui();
     public static PrintStream ps = null;
+    public static Server sv = null;
+    public static int port = 5555;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -17,8 +19,8 @@ public class StartServer {
 	    servLog.dispose();
 	    ServerGui serv = new ServerGui();
 	    mysqlConnection servCon = new mysqlConnection(serv,servLog);
-   		//ps = StartServer.activateSYSOHook();
-		//System.setOut(ps);
+	    sv = new Server(port);
+	    sv.start();
 	    ps = activateSYSOHook();
 	    System.setOut(ps);
 		

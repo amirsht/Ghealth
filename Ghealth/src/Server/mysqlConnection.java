@@ -118,11 +118,11 @@ public class mysqlConnection {
 			
 			if(openConnectionDB()){
 				
-				 sv = new Server(port);
+				 //sv = new Server(port);
 				 
 				   try 
 				    {
-					  sv.start();
+					  //sv.start();
 				      ServerView.dispose();
 				      serverLogView.setVisible(true);
 				      
