@@ -169,6 +169,14 @@ public class Server extends Thread
             	env.setStatus(SCappointment.CancelAppointment(as.getApsID()));
             	break;
             	
+            	
+            	/*--- Doctor flow Tasks  ----*/
+            case GET_CURRENT_APPOINTMENT_ID:
+            	System.out.println("GET_CURRENT_APPOINTMENT_ID");
+            	String[] patiend_doc =(String[])env.getSingleObject();
+            	env = SCdocAppointment.GetCurrentAppointment(patiend_doc[0], patiend_doc[1]);
+            	
+            	break;
             /*---     Lab-Ref Tasks:   ---*/
             case GET_LAB_REF:
             /* Sending file to client */
