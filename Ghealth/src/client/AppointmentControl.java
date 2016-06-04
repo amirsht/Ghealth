@@ -73,6 +73,7 @@ public class AppointmentControl {
 		
 		Envelope en = Controller.Control(new Patient(ptID),task.GET_OPEN_APPOINTMENTS);
 		List<String> strList = new ArrayList<String>();
+		objList_str = en.getobjList();
 		
 		if(en.getStatus() == Status.NOT_EXIST)
 		{
@@ -293,11 +294,34 @@ public class AppointmentControl {
 				return;
 			}
 			
-			CS_GUI_cancelAppoint cs = new CS_GUI_cancelAppoint();
-			cs.getcomboBox().setModel(new DefaultComboBoxModel(objList.toArray()));
-			cs.SetPatient(pt);
-			
+			csGUI_cancelAppoint = new CS_GUI_cancelAppoint();
+			csGUI_cancelAppoint.getcomboBox().setModel(new DefaultComboBoxModel(objList.toArray()));
+			csGUI_cancelAppoint.SetPatient(pt);
+			csGUI_cancelAppoint.getbtnCancelAppointment().addActionListener(new cancelAppointmentFromDB());
 		
+		}
+		
+	}//CancelAppintListener
+	
+	
+	class cancelAppointmentFromDB  implements ActionListener 
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			System.out.println("trying to cancel appoint ");
+			//csGUI_cancelAppoint.getcomboBox().getSelectedItem();
+			int selectedIndex = csGUI_cancelAppoint.getcomboBox().getSelectedIndex();
+			as = (AppointmentSettings) objList_str.get(selectedIndex);
+			Envelope en = Controller.Control(as,task.CANCEL_APPOINTMENT_FROM_DB);
+			if(en.getStatus() == Status.CANCELED)
+			{
+				System.out.println("Appointment is canceled!!\n");
+				JOptionPane.showMessageDialog(null,"Appointment is canceled!\n"
+						+ as,"Appointment Canceled!", JOptionPane.INFORMATION_MESSAGE);
+				csGUI_cancelAppoint.dispose();
+			}
 		}
 		
 	}//CancelAppintListener

@@ -94,7 +94,7 @@ public class Automation extends Thread{
 			}
 			/* -------------end of parsing--------------- */ 
 
-			timer.schedule(new PeriodicNotification(), 5 * 1000); // Suppose to be every hour but now its every 15 seconds for us to notice in testing
+			timer.schedule(new PeriodicNotification(), 5 * 10000000); // Suppose to be every hour but now its every 15 seconds for us to notice in testing
 		}
 		
 		private void sendMail(Notification nt) {

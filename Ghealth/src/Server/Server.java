@@ -26,6 +26,7 @@ public class Server extends Thread
     public Status status;
     public Patient pt = null;
     public User us = null;
+    public AppointmentSettings as = null;
     public String filename;
     public static List<String> sessionList = new ArrayList<String>();
     
@@ -134,7 +135,7 @@ public class Server extends Thread
             /*---   Appointment Tasks: ---*/  
             case CREATE_NEW_APPOINTMENT:
             	System.out.println("CREATE_NEW_APPOINTMENT");
-            	AppointmentSettings as = (AppointmentSettings) env.getSingleObject();
+            	as = (AppointmentSettings) env.getSingleObject();
             	status=SCappointment.CreateAppointment(as);
             	env.setStatus(status);
             	break;
@@ -159,6 +160,13 @@ public class Server extends Thread
             	System.out.println("GET_OPEN_APPOINTMENTS");
             	pt = (Patient)env.getSingleObject();
             	env = SCappointment.GetSCHEDUELDAppointments(pt.getpID());
+            	break;
+            	
+            	
+            case CANCEL_APPOINTMENT_FROM_DB:
+            	System.out.println("CANCEL_APPOINTMENT_FROM_DB");
+            	as = (AppointmentSettings) env.getSingleObject();
+            	env.setStatus(SCappointment.CancelAppointment(as.getApsID()));
             	break;
             	
             /*---     Lab-Ref Tasks:   ---*/

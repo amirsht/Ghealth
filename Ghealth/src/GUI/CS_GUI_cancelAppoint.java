@@ -31,7 +31,7 @@ public class CS_GUI_cancelAppoint extends JFrame{
 	private JPanel contentPane;
 	private JPanel patientDetails;
 	private JComboBox comboBox;
-	
+	private JButton btnCancelAppointment;
 	
 	public CS_GUI_cancelAppoint() {
 		setResizable(false);
@@ -58,9 +58,9 @@ public class CS_GUI_cancelAppoint extends JFrame{
 		lblPleaseSelectAppointment.setBounds(87, 112, 359, 24);
 		contentPane.add(lblPleaseSelectAppointment);
 		
-		JButton btnCancelAppointment = new JButton("Cancel Appointment");
+		btnCancelAppointment = new JButton("Cancel Appointment");
 		btnCancelAppointment.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnCancelAppointment.setBounds(87, 227, 274, 65);
+		btnCancelAppointment.setBounds(87, 210, 274, 65);
 		contentPane.add(btnCancelAppointment);
 		JLabel lblLogo;
 		if(LoginControl.getUser_full_name() == null)
@@ -154,6 +154,11 @@ public void SetPatient(Patient pt) {
 		
 	}
 
+
+	public JButton getbtnCancelAppointment()
+	{
+		return btnCancelAppointment;
+	}
 
 	public JComboBox getcomboBox()
 	{

@@ -243,4 +243,34 @@ public class SCappointment {
 	
 	
 	
+	public static Status CancelAppointment(int apsID)
+	{
+		Statement stmt;
+		String querystr;
+		int result;
+		
+		querystr="UPDATE appointmentsettings "
+				+ "SET apsStatus='CANCELED' "
+				+ "WHERE apsID='"+apsID+"'";
+		
+		try 
+		{
+			stmt = mysqlConnection.conn.createStatement();
+			System.out.println("Cancel appointment in DB: " + querystr);
+			result = stmt.executeUpdate(querystr);
+		
+			mysqlConnection.conn.close();
+		}
+		catch (SQLException ex) 
+   	    {/* handle any errors*/
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+          return Status.FAILED_EXCEPTION;
+        }
+		
+		return Status.CANCELED;
+
+	}
+	
 }
