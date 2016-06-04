@@ -61,7 +61,7 @@ public class AppointmentControl {
 		csGUI_Appoint.SetPatient(pt);
 		csGUI_Appoint.createAppointActionListener(new createNewAppointListener());
 		csGUI_Appoint.SearchPatientActionListener(new SearchPatientListener());
-		csGUI_Appoint.LogOutActionListener(new LogOutListener());
+		//csGUI_Appoint.LogOutActionListener(new LogOutListener());
 		csGUI_Appoint.cancelAppointActionListener(new CancelAppointListener());	
 	}
 	
@@ -326,6 +326,7 @@ public class AppointmentControl {
 		
 	}//CancelAppintListener
 	
+	/*
 	class LogOutListener  implements ActionListener 
 	{
 
@@ -333,13 +334,14 @@ public class AppointmentControl {
 		public void actionPerformed(ActionEvent e) 
 		{
 			
-			
+			Controller.Control(new User(LoginControl.getUserId()),task.LOG_OUT);
 			csGUI_Appoint.dispose();
 			LoginControl userctrl = new LoginControl(new LoginGUI());
 
 		}
 		
 	}//LogOutListener
+	*/
 	
 	class SearchPatientListener  implements ActionListener 
 	{

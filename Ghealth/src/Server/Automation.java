@@ -50,9 +50,19 @@ public class Automation extends Thread{
 	public class PeriodicNotification extends TimerTask{
 		public void run(){
 			/* TODO Checks for changed status appointment notifications */
+
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+			Calendar tommorow = Calendar.getInstance();
+			tommorow.add(Calendar.DATE, 1);
+			String tommorow_b = formatter.format(tommorow.getTime());
+			
+			
 			querystr = "SELECT  apsID,apsPtID,apsDate,apsTime,apsCreateDate,apsCreateTime,apsStatus,apsDocID,uFirstName,uLastName,cID,cName,cLocation,dSpeciality,ptEmail "
 					+ "FROM appointmentsettings,user,clinic,doctor,patient "
-					+ "WHERE apsPtID=patient.ptID AND apsStatus='SCHEDUELD' AND uID=apsDocID AND cID=ucID AND dID=uID";//SELECT mother fucker appointments";
+					+ "WHERE apsPtID=patient.ptID AND apsStatus='SCHEDUELD' AND uID=apsDocID AND cID=ucID AND dID=uID AND apsDate='"+tommorow_b+"'";//SELECT mother fucker appointments";
+			
+			System.out.println(querystr);
 
 			getSql(querystr);
 			
@@ -71,8 +81,6 @@ public class Automation extends Thread{
 					as.setDoctor(doctor);
 					/* prep notification obj */
 					Notification nt = new Notification();
-					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-					SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
 					Date dt = formatter.parse(as.getApsDate());
 					nt.date = dt;
 					//nt.date=as.getApsDate();
@@ -94,7 +102,7 @@ public class Automation extends Thread{
 			}
 			/* -------------end of parsing--------------- */ 
 
-			timer.schedule(new PeriodicNotification(), 5 * 10000000); // Suppose to be every hour but now its every 15 seconds for us to notice in testing
+			timer.schedule(new PeriodicNotification(), 5 * 1000); // Suppose to be every hour but now its every 15 seconds for us to notice in testing
 		}
 		
 		private void sendMail(Notification nt) {

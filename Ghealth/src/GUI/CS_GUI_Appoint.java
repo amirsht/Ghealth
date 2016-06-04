@@ -7,8 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.Controller;
 import client.LoginControl;
+import enums.task;
 import models.Patient;
+import models.User;
 
 import javax.swing.JTextField;
 
@@ -93,6 +96,7 @@ public class CS_GUI_Appoint extends JFrame {
 		
 		LogOut = new JButton("Log Out");
 		LogOut.setBounds(138, 400, 245, 68);
+		LogOut.addActionListener(new LogOutListener());
 		contentPane.add(LogOut);
 		
 		setLocationRelativeTo(null);
@@ -219,6 +223,22 @@ public void SetPatient(Patient pt) {
 		
 	}
 	
+
+
+	class LogOutListener  implements ActionListener 
+	{
+	
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			
+			Controller.Control(new User(LoginControl.getUserId()),task.LOG_OUT);
+			dispose();
+			LoginControl userctrl = new LoginControl(new LoginGUI());
+	
+		}
+		
+	}//LogOutListener
 	
 }
 
