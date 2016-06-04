@@ -2,12 +2,6 @@ package client;
 import models.*;
 import enums.*;
 import GUI.*;
-import client.AppointmentControl.CancelAppointListener;
-import client.AppointmentControl.LogOutListener;
-import client.AppointmentControl.SearchPatientListener;
-import client.AppointmentControl.createNewAppointListener;
-import client.LoginControl.CancelListener;
-import client.LoginControl.LoginListener;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
