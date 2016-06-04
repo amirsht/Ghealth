@@ -53,6 +53,7 @@ public class Server extends Thread
     {
     	while(true)
 	    	try {
+	    		System.out.println("where am i");
 				Socket clientSocket = serverSocket.accept();
 				System.out.println("Server: Connected");
 				communicate(clientSocket);
@@ -268,6 +269,7 @@ public class Server extends Thread
 		fos.close();
 		dis.close();
 	}
+    
     
   /*
     public static void main(String[] args) {

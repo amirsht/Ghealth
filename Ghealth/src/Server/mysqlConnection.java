@@ -23,7 +23,7 @@ import models.Patient;
 
 public class mysqlConnection {
 	
-	public static Connection conn; //TODO - will be changed (maby) to private	
+	public static Connection conn,autoConn; //TODO - will be changed (maby) to private	
 	public mysqlConnection temp;
 	private ServerGui ServerView;
 	private serverLogGui serverLogView;
@@ -34,6 +34,7 @@ public class mysqlConnection {
 	private static int port = 0;
 	private String Scheam = "jdbc:mysql://localhost/ghealth";
 	public Server sv;
+	public Automation auto = null;
 	
 	public mysqlConnection() 
 	{
@@ -51,7 +52,8 @@ public class mysqlConnection {
             //this.conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ghealth","root","a4m3i2r1");
             //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.3.68/test","root","Root");
             System.out.println("SQL connection succeed");
-
+           
+    		
      	} catch (SQLException ex) 
      	    {/* handle any errors*/
             System.out.println("SQLException: " + ex.getMessage());
@@ -160,6 +162,15 @@ public class mysqlConnection {
 	           this.conn = DriverManager.getConnection(Scheam,userNameDB,passwordDB);
 	          //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.3.68/test","root","Root");
 	          System.out.println("SQL connection succeed");
+	          this.autoConn = DriverManager.getConnection(Scheam,userNameDB,passwordDB);
+	          System.out.println("SQL connection for Auto succeed");
+	          
+	            /** Automated machine Start**/
+	        	auto = new Automation();
+	    		auto.start();
+	    		System.out.println("Automated machine has launched... *\\0/*");
+	    		/**                 **/
+	    		
 	          return true;
 	          
 	   	} catch (SQLException ex) 

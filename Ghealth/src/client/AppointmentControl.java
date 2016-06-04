@@ -358,7 +358,7 @@ public class AppointmentControl {
 				JOptionPane.showMessageDialog(null,"The date '"+choosenDate+"' has passed, please select a proper date.","Choose another date!", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
-			as.setApsDate(choosenDate);
+			as.setApsDate(date);
 			System.out.println("Selected Date is: "+as.getApsDate());
 			
 			List<String> objList = GET_DOCTOR_HOURS(pt.getpID(),choosenDate);
