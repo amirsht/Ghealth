@@ -5,6 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,30 +61,34 @@ public class Automation extends Thread{
 				while (result.next())
 				{
 					Status st =  Status.valueOf(result.getString(7));
-					as = new AppointmentSettings(result.getInt(1),result.getString(2),result.getDate(3),result.getString(4),
+					as = new AppointmentSettings(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
 							result.getString(5),result.getString(6),st,result.getString("apsDocID"));
 					Patient pt= new Patient();
-					pt.setPtEmail(result.getString(15));
+					pt.setPtEmail(result.getString("ptEmail"));
 					Clinic clinic = new Clinic(result.getInt("cID"),result.getString("cName"),result.getString("cLocation"));
 					DoctorSpeciallity ds = DoctorSpeciallity.valueOf(result.getString("dSpeciality"));
 					doctor = new Doctor(result.getString("apsDocID"),result.getString("uFirstName"),result.getString("uLastName"),clinic,ds);
 					as.setDoctor(doctor);
 					/* prep notification obj */
 					Notification nt = new Notification();
-					nt.date=as.getApsDate();
+					SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+					SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+					Date dt = formatter.parse(as.getApsDate());
+					nt.date = dt;
+					//nt.date=as.getApsDate();
 					nt.docName="Dr. " + doctor.getuLastName() + " " + doctor.getuFirstName();
 					nt.location=clinic.getcLocation();
 					nt.mail=pt.getPtEmail();
 					System.out.println(nt.date + " "+ nt.docName+" "+nt.mail+ " "+nt.location+ " ");
 					/* checking if this is todays notification */
 					Date today = c.getTime();
-					cal.setTime(as.getApsDate());
+					cal.setTime(dt);
 					int diffrence = cal.get(Calendar.DAY_OF_MONTH)-c.get(Calendar.DAY_OF_MONTH);
 					System.out.println("diff: "+diffrence);
 					if(diffrence <= 1 && diffrence >=0)
 						sendMail(nt);
 				}
-			} catch (SQLException e) {
+			} catch (SQLException | ParseException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}

@@ -20,7 +20,7 @@ public class AppointmentSettings  implements Serializable {
 	
 	private int apsID;
 	private String apsPtID;
-	private Date apsDate;
+	private String apsDate;
 	private String apsTime;
 	private String CreateDate;
 	private String CreateTime;
@@ -35,7 +35,7 @@ public class AppointmentSettings  implements Serializable {
 	}
 	
 	
-	public AppointmentSettings(String apsPtID, Date apsDate, String apsTime, String createTimeDate, String createTime,
+	public AppointmentSettings(String apsPtID, String apsDate, String apsTime, String createTimeDate, String createTime,
 			Status apsStatus, String apsDocID) {
 		super();
 		this.apsPtID = apsPtID;
@@ -47,7 +47,7 @@ public class AppointmentSettings  implements Serializable {
 		this.apsDocID = apsDocID;
 	}
 	
-	public AppointmentSettings(int apsID, String apsPtID, Date apsDate, String apsTime, String createTimeDate,
+	public AppointmentSettings(int apsID, String apsPtID, String apsDate, String apsTime, String createTimeDate,
 			String createTime, Status apsStatus, String apsDocID) {
 		super();
 		this.apsID = apsID;
@@ -67,7 +67,7 @@ public class AppointmentSettings  implements Serializable {
 	public void setApsPtID(String apsPtID) {
 		this.apsPtID = apsPtID;
 	}
-	public void setApsDate(Date apsDate) {
+	public void setApsDate(String apsDate) {
 		this.apsDate = apsDate;
 	}
 	public void setApsTime(String apsTime) {
@@ -94,7 +94,7 @@ public class AppointmentSettings  implements Serializable {
 		return apsPtID;
 	}
 
-	public Date getApsDate() {
+	public String getApsDate() {
 		return apsDate;
 	}
 

@@ -308,8 +308,8 @@ public class AppointmentControl {
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			Controller.Control(new User(LoginControl.getUserId()),task.LOG_OUT);
-			System.out.println("after control");
+			
+			
 			csGUI_Appoint.dispose();
 			LoginControl userctrl = new LoginControl(new LoginGUI());
 
@@ -358,7 +358,7 @@ public class AppointmentControl {
 				JOptionPane.showMessageDialog(null,"The date '"+choosenDate+"' has passed, please select a proper date.","Choose another date!", JOptionPane.INFORMATION_MESSAGE);
 				return;
 			}
-			as.setApsDate(date);
+			as.setApsDate(choosenDate);
 			System.out.println("Selected Date is: "+as.getApsDate());
 			
 			List<String> objList = GET_DOCTOR_HOURS(pt.getpID(),choosenDate);

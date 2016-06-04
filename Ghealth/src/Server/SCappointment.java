@@ -211,7 +211,7 @@ public class SCappointment {
 			while (result.next())
             {
 				Status st =  Status.valueOf(result.getString(7));
-				as = new AppointmentSettings(result.getInt(1),result.getString(2),result.getDate(3),result.getString(4),
+				as = new AppointmentSettings(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
 						result.getString(5),result.getString(6),st,result.getString("apsDocID"));
 				
 				
