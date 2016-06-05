@@ -106,9 +106,10 @@ public class Server extends Thread
             		break;
             	}
             	else{
-            		sessionList.add(us.getuID());
+            		env=SCuser.GetExistUser(us.getuID());
+            		if(((User)(env.getSingleObject())).getuPassword().equals(us.getuPassword()))
+            			sessionList.add(us.getuID());
 	            	System.out.println("case GET_USER");
-	            	env=SCuser.GetExistUser(us.getuID());
 	            	break;
             	}
             	
