@@ -104,6 +104,8 @@ public class Automation extends Thread{
 					Notification nt = new Notification();
 					Date dt = formatter.parse(as.getApsDate());
 					nt.date = dt;
+					nt.sdate = as.getApsDate();
+					nt.time = as.getApsTime();
 					nt.docName="Dr. " + doctor.getuLastName() + " " + doctor.getuFirstName();
 					nt.location=clinic.getcLocation();
 					nt.mail=pt.getPtEmail();
@@ -143,7 +145,9 @@ public class Automation extends Thread{
 			*/
 			//-------------------------------------------------------------------------------------
 		}
-		
+		/** 
+		 * Sending mail function 
+		**/
 		private void sendMail(Notification nt) {
 			// TODO Auto-generated method stub
 			try {

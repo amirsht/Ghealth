@@ -93,7 +93,7 @@ public class Email {
 		/**
 		 * Message itself
 		 */
-generateMailMessage.setSubject("You have medical appointment scheduled for tomorrow");	
+		generateMailMessage.setSubject("You have medical appointment scheduled for tomorrow");	
 		
 		String strVar="";
 		strVar += "<html>";
@@ -102,13 +102,15 @@ generateMailMessage.setSubject("You have medical appointment scheduled for tomor
 		strVar += "<body>";
 		strVar += "<h2><span style=\"font-size:20px;\">Dear Patient,<//span><//h2>";
 		strVar += "";
-		strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">You have an appointment with <strong><span style=\"background-color:#AFEEEE;\">" + nt.docName + "<//span><//strong>&nbsp;tomorrow (<strong>"+nt.location+"<//strong>) at <strong>"+nt.date+"<//strong>. <//em><//p>";
+		strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">You have an appointment with <strong><span style=\"background-color:#AFEEEE;\">" + nt.docName + "<//span><//strong>&nbsp;tomorrow (<strong>"+nt.sdate+"<//strong>) at <strong>"+nt.time+" "+nt.location+"<//strong>. <//em><//p>";
 		strVar += "";
 		strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">Please feel free to&nbsp;call us at &lt;04-9901911&gt; &nbsp;if you have any questions.<//em><//p>";
 		strVar += "";
 		strVar += "<p>&nbsp;<//p>";
 		strVar += "";
 		strVar += "<p><span style=\"font-size: 20px;\">Braude Hospital<span style=\"font-size:12px;\">&nbsp;- Always there fo you!<//span><//span><//p>";
+		strVar += "<p><span style=\"font-size: 20px;\"><span style=\"font-size:12px;\"><img alt=\"\" src=\"http://www.maloclinic.co.il/wp-content/uploads/2012/07/malo-clinc-team1.jpg\" style=\"width: 940px; height: 320px;\" //><//span><//span><//p>";
+		strVar += "";
 		strVar += "<//body>";
 		strVar += "<//html>";
 		strVar += "";
