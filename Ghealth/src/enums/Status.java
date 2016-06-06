@@ -5,6 +5,7 @@ public enum Status {
 	CREATED,
 	NOT_EXIST,
 	FAILED_EXCEPTION,
+	IN_SESSION,
 	
 	
 	/* Appointment Status: */

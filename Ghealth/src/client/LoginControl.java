@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
-
+import enums.Status;
 import enums.task;
 import models.Envelope;
 import models.Patient;
@@ -106,9 +106,12 @@ public static User UserCon(User us,task ts){
         		   
         		   Envelope en = Controller.Control(UserLogin,task.GET_USER);
         		   User us = (User)en.getSingleObject();
+        		   
         		   uId = us.getuID();
-        		 
-        		   if(us.getuID() != null && !us.getuID().equals("0"))
+        		   System.out.println(en.getStatus().toString());
+        		   
+        		   //if(us.getuID() != null && !us.getuID().equals("0"))
+        		   if(en.getStatus()!=Status.IN_SESSION)
         		   {
         			   setUser_full_name(us.getuFirstName()+" "+us.getuLastName());
 	        		   if(UserLogin.getuPassword().equals(us.getuPassword()))
@@ -155,7 +158,7 @@ public static User UserCon(User us,task ts){
 	        			   JOptionPane.showMessageDialog(null,"Pass not match!!!!","Error", JOptionPane.INFORMATION_MESSAGE);
 	        		   }
         		   }
-        		   else if (us.getuID().equals("0"))
+        		   else if (en.getStatus()==Status.IN_SESSION)
         			   JOptionPane.showMessageDialog(null,"User is in another session!","Error", JOptionPane.INFORMATION_MESSAGE);
         		   else
         			   JOptionPane.showMessageDialog(null,"No such User!!!!","Error", JOptionPane.INFORMATION_MESSAGE); 

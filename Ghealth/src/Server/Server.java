@@ -101,14 +101,19 @@ public class Server extends Thread
             /*---      User Tasks:    ---*/
             case GET_USER:
             	us = (User)env.getSingleObject();
+            	
             	if(searchUserSession(us.getuID())==true){
-            		((User)env.getSingleObject()).setuID("0");
+            		
+            		env.setStatus(Status.IN_SESSION);
+            		
+            		System.out.println("USER IN SESSION");
             		break;
             	}
             	else{
             		env=SCuser.GetExistUser(us.getuID());
-            		if(((User)(env.getSingleObject())).getuPassword().equals(us.getuPassword()))
+            		if(env.getStatus() == Status.EXIST && ((User)(env.getSingleObject())).getuPassword().equals(us.getuPassword()))
             			sessionList.add(us.getuID());
+            		else{System.out.println("******************************");}
 	            	System.out.println("case GET_USER");
 	            	break;
             	}
@@ -197,6 +202,7 @@ public class Server extends Thread
             case LOG_OUT:
                 /* client is logging out */
             	us = (User)env.getSingleObject();
+            	
             	removeSession(us.getuID());
                 	break;
             

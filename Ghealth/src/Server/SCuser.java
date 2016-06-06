@@ -58,10 +58,14 @@ public class SCuser {
 				
 				en.addobjList(us);
 				
+				en.setStatus(Status.EXIST);
+				
 				System.out.println("ResultSet - uID - "+result.getString("uID") );
 				mysqlConnection.conn.close();
 				//en.setObj(pt);
 			}else{
+				
+				en.setStatus(Status.NOT_EXIST);
 				us = new User(null,null,null,null,null,null,null);
 				en.addobjList(us);
 				
