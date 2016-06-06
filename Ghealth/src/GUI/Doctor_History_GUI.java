@@ -29,31 +29,37 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Label;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.UIManager;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.BevelBorder;
+import javax.swing.JComboBox;
 
 
-public class Doctor_rec_GUI extends LoggingOut {
-
+public class Doctor_History_GUI extends LoggingOut {
 
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5798215983453009657L;
+	private static final long serialVersionUID = 4721311421959450478L;
 	
 	private JPanel contentPane;
-	private JTextPane textRecPane;
 	private JButton btnCancel;
-	private JButton saveRec;
 	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
 	private JPanel patientDetails;
+	private JComboBox<?> AppointmentBox;
+	private JComboBox<?> LabResBox;
+	
 	JButton SearchPatient;
 	JButton LogOut;
 	
 	/**
 	 * Create the frame.
 	 */
-	public Doctor_rec_GUI() {
+	public Doctor_History_GUI() {
 		setResizable(false);
 		setTitle("G-Health");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DoctorGUI.class.getResource("/images/logo2.PNG")));
@@ -76,27 +82,33 @@ public class Doctor_rec_GUI extends LoggingOut {
 		lblLogo.setBounds(0, 0, 794, 79);
 		contentPane.add(lblLogo);
 		
-		saveRec = new JButton("SAVE RECORD");
-		saveRec.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		saveRec.setBounds(93, 467, 140, 23);
-		contentPane.add(saveRec);
-		
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCancel.setBounds(386, 467, 140, 23);
+		btnCancel.setBounds(630, 523, 140, 23);
 		contentPane.add(btnCancel);
-		btnCancel.addActionListener(new CancelListener());
 		
-		textRecPane = new JTextPane();
-		textRecPane.setText("Ask the patient what's up?...");
-		textRecPane.setBounds(202, 143, 273, 228);
-		contentPane.add(textRecPane);
+		AppointmentBox = new JComboBox();
+		AppointmentBox.setBounds(10, 139, 370, 20);
+		contentPane.add(AppointmentBox);
+		
+		JLabel AppointmentLabel = new JLabel("Appointment History");
+		AppointmentLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		AppointmentLabel.setBounds(10, 114, 140, 14);
+		contentPane.add(AppointmentLabel);
+		
+		JLabel lblLabResultHistory = new JLabel("Lab Result History");
+		lblLabResultHistory.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblLabResultHistory.setBounds(10, 184, 140, 14);
+		contentPane.add(lblLabResultHistory);
+		
+		LabResBox = new JComboBox();
+		LabResBox.setBounds(10, 209, 370, 20);
+		contentPane.add(LabResBox);
+		
+		btnCancel.addActionListener(new CancelListener());
 		
 		
 		setLocationRelativeTo(null);
@@ -122,12 +134,6 @@ public class Doctor_rec_GUI extends LoggingOut {
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
-	}
-	
-	
-	public void RecordPatientActionListener(ActionListener e)
-	{
-		saveRec.addActionListener(e);
 	}
 	
 	public void addCancelActionListener(ActionListener e)
@@ -212,14 +218,14 @@ public void SetPatient(Patient pt) {
 		
 	}
 
-	
-	//public String getPtID() {
-	//	return InsertPatientId.getText();
-	//}
-
-public String getRecordField() {
-	return textRecPane.getText();
-}
+	public JComboBox getAppointmentBox()
+	{
+		return AppointmentBox;
+	}
+	public JComboBox getLabResultBox()
+	{
+		return LabResBox;
+	}
 
 	public class CancelListener implements ActionListener 
     {

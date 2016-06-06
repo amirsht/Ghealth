@@ -32,7 +32,8 @@ public class DoctorController {
 	private DoctorGUI docGUI;
 	private Doctor_Pt_GUI docPtGUI;
 	private Patient pt;
-	private Doctor_rec_GUI doc_rec;
+	private Doctor_rec_GUI doc_recGUI;
+	private Doctor_History_GUI doc_hist_GUI;
 	private String DoctorID;
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
@@ -57,10 +58,17 @@ public class DoctorController {
 		this.DoctorID = docID;
 		docPtGUI = doc_pt;
 		docPtGUI.SetPatient(pt);
-		docPtGUI.RecordAppointActionListener(new RecAppointListener());
-		//docPtGUI.SearchPatientActionListener(new SearchPatientListener());
-		//docPtGUI.LogOutActionListener(new LogOutListener());
-		//docPtGUI.cancelAppointActionListener(new CancelAppointListener());	
+		docPtGUI.RecordAppointActionListener(new RecAppointListener());	
+		docPtGUI.ViewHistoryActionListener(new ViewHistoryListener());
+	}
+	
+	public DoctorController(Doctor_rec_GUI docRec,Patient pt,String docID)
+	{
+		this.pt = pt;
+		this.DoctorID = docID;
+		doc_recGUI = docRec;
+		doc_recGUI.SetPatient(pt);
+		doc_recGUI.RecordPatientActionListener(new RecPatientListener());	
 	}
 	
 	public int GET_CURRENT_APPOINTMENT(String ptID, String docID)
@@ -75,32 +83,20 @@ public class DoctorController {
 		}else{
 		
 		int apptID = (int)en.getSingleObject();
-			
 		
-		System.out.println("the appointement ID back from SERVER:" + apptID );
+		return apptID;
+		}
+	}
+	
+	public void SET_APPOINTMENT_RECORD(String AppID, String AppSummery)
+	{
+		String [] AppID_AppSummery = {AppID,AppSummery};
+		Envelope en = Controller.Control( AppID_AppSummery, task.SET_APPOINTMENT_RECORD);
 		
-		return apptID;}
 	}
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
-	/*
-    public static Patient PatientCon(Patient pt,task ts){
-    	
-    	Envelope En = new Envelope();
-      
-    	//Build the envelope that will be send to server 
-        En.addobjList(pt);
-        En.setType(ts);
-        /* communicate will send to the server 
-         * and get from the server
-         *  the envelope 
-        En =  Controller.communicate(En);
-        if (En.getStatus() == Status.NOT_EXIST)
-        	return null;
-        pt = (Patient)(En.getSingleObject());
-    	return pt; 
-    	
-    } /*  END Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
+	
     
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   ActionListener Functions ~~~~~~~~~~~~~~~~~~~~~~~~  */
   
@@ -151,11 +147,40 @@ public class DoctorController {
 				
 				Doctor_rec_GUI docRec = new Doctor_rec_GUI();
 				docRec.SetPatient(pt);
+				DoctorController doc_rec_cntrl = new DoctorController(docRec,pt,DoctorID);
+				
 				
 			}
 			else{
 			JOptionPane.showMessageDialog(null, "The Patient '"+pt.getpFirstName() +"'HAS NO APPOINTMENT!" + "\n","Confirm",JOptionPane.OK_OPTION);
 			System.out.println("NO APPOINTMENT");}
+		}
+		
+	}
+	
+	
+	class RecPatientListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+						
+			int appID = GET_CURRENT_APPOINTMENT(pt.getpID(),DoctorID);		
+			String strAppID = appID + "";
+			
+			SET_APPOINTMENT_RECORD(strAppID,doc_recGUI.getRecordField());
+			doc_recGUI.dispose();
+		}
+		
+	}
+	
+	class ViewHistoryListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Tring to VIEW PATIENT HISTORY");
+			Doctor_History_GUI doc_histGUI = new Doctor_History_GUI();
+			doc_histGUI.SetPatient(pt);
+						
 		}
 		
 	}

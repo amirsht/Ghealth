@@ -39,7 +39,7 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	private static final long serialVersionUID = 1645191120165568000L;
 	
 	private JPanel contentPane;
-	private JButton btnCancelAppoint;
+	private JButton btnViewHistory;
 	private JButton btnRecAppoint;
 	private JLabel lblwarningMessage = null;
 	private JPanel patientDetails;
@@ -82,9 +82,13 @@ public class Doctor_Pt_GUI extends LoggingOut {
 		btnRecAppoint.setBounds(138, 220, 245, 68);
 		contentPane.add(btnRecAppoint);
 		
-		btnCancelAppoint = new JButton("CANCEL APPOINTMENT");
-		btnCancelAppoint.setBounds(138, 310, 245, 68);
-		contentPane.add(btnCancelAppoint);
+		btnViewHistory = new JButton("Medical History");
+		btnViewHistory.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnViewHistory.setBounds(138, 310, 245, 68);
+		contentPane.add(btnViewHistory);
 		
 
 		
@@ -138,9 +142,9 @@ public class Doctor_Pt_GUI extends LoggingOut {
 		SearchPatient.addActionListener(e);
 	}
 	
-	public void cancelAppointActionListener(ActionListener e)
+	public void ViewHistoryActionListener(ActionListener e)
 	{
-		btnCancelAppoint.addActionListener(e);
+		btnViewHistory.addActionListener(e);
 	}
 	
 	
