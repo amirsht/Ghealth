@@ -30,7 +30,7 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
-public class DoctorGUI extends JFrame {
+public class DoctorGUI extends LoggingOut {
 
 	
 	/**

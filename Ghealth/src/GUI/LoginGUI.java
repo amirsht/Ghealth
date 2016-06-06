@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import java.awt.Window.Type;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 
 import java.awt.Font;
@@ -20,15 +21,19 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 
 
-public class LoginGUI extends JFrame {
+public class LoginGUI extends LoggingOut {
 
 	/**
 	 * 
@@ -53,12 +58,15 @@ public class LoginGUI extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginGUI.class.getResource("/images/logo2.png")));
 		setTitle("Ghealth Login");
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 200, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		//JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+
+		
 		
 		JLabel label = new JLabel("");
 		label.setBounds(10, 30, 1200, 200);

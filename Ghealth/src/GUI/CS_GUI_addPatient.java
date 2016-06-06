@@ -23,6 +23,8 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,12 +33,14 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
+
 import java.awt.Label;
 import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 
 
-public class CS_GUI_addPatient extends JFrame {
+public class CS_GUI_addPatient extends LoggingOut {
 
 	
 	/**
@@ -73,7 +77,16 @@ public class CS_GUI_addPatient extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		contentPane.setLayout(null);
-		
+		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+		/*--------------------------------------------------------------------------
+		frame.addWindowListener(new WindowAdapter()
+		{
+		    public void windowClosing(WindowEvent e)
+		    {
+		    	System.out.println("------------window closed-------------");
+		    }
+		});
+		*/ //-------------------------------------------------------------------------
 		JLabel label = new JLabel("New label");
 		label.setBounds(0, 0, 0, 0);
 		contentPane.add(label);

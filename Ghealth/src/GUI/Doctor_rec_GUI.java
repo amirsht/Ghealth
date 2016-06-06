@@ -31,7 +31,7 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
-public class Doctor_rec_GUI extends JFrame {
+public class Doctor_rec_GUI extends LoggingOut {
 
 
 	

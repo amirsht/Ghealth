@@ -32,7 +32,7 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
-public class CS_GUI_Appoint extends JFrame {
+public class CS_GUI_Appoint extends LoggingOut {
 
 	
 	/**
@@ -239,6 +239,6 @@ public void SetPatient(Patient pt) {
 		}
 		
 	}//LogOutListener
-	
+
 }
 

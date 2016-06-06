@@ -30,7 +30,7 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
-public class CS_GUI_findPatient extends JFrame {
+public class CS_GUI_findPatient extends LoggingOut {
 
 
 	

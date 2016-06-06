@@ -44,7 +44,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
-public class MainWindowGUI extends JFrame {
+public class MainWindowGUI extends LoggingOut {
 
 	/**
 	 * 

@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-public class GhealthClientGUI extends JFrame{
+public class GhealthClientGUI extends LoggingOut{
 
 	private static final long serialVersionUID = -2806545028733372660L;
 	

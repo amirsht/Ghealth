@@ -23,7 +23,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import java.awt.Font;
 
-public class CS_GUI_cancelAppoint extends JFrame{
+public class CS_GUI_cancelAppoint extends LoggingOut{
 	/**
 	 * 
 	 */

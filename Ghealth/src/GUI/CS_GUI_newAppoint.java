@@ -41,7 +41,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTree;
 import java.awt.Panel;
 
-public class CS_GUI_newAppoint extends JFrame {
+public class CS_GUI_newAppoint extends LoggingOut {
 
 	
 	/**

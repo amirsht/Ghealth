@@ -21,6 +21,7 @@ public class GhealthApp {
 	
 	public static void main(String[] args) {
 		
+		LoggingOut lo = new LoggingOut();
 		LoginGUI login1 = new LoginGUI();
 		LoginControl userctrl = new LoginControl(login1);
 		
