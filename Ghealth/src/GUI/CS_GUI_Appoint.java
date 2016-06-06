@@ -225,20 +225,7 @@ public void SetPatient(Patient pt) {
 	
 
 
-	class LogOutListener  implements ActionListener 
-	{
-	
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			
-			Controller.Control(new User(LoginControl.getUserId()),task.LOG_OUT);
-			dispose();
-			LoginControl userctrl = new LoginControl(new LoginGUI());
-	
-		}
-		
-	}//LogOutListener
+
 
 }
 

@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import GUI.LoggingOut.LogOutListener;
 import client.LoginControl;
 import models.Patient;
 
@@ -93,6 +94,7 @@ public class Doctor_Pt_GUI extends LoggingOut {
 		
 		LogOut = new JButton("Log Out");
 		LogOut.setBounds(138, 400, 245, 68);
+		LogOut.addActionListener(new LogOutListener());
 		contentPane.add(LogOut);
 		
 		setLocationRelativeTo(null);

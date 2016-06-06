@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import GUI.LoggingOut.LogOutListener;
 import client.LoginControl;
 
 import javax.swing.JTextField;
@@ -38,12 +39,12 @@ public class DoctorGUI extends LoggingOut {
 	 */
 	private static final long serialVersionUID = -3233126342207430542L;
 	
-	private JPanel contentPane1;
-	private JButton btnCancel1;
-	private JButton findPatient1;
+	private JPanel contentPane;
+	private JButton btnCancel;
+	private JButton findPatient;
 	//private JButton btnCrtPt;
-	private JLabel lblwarningMessage1 = null;
-	private JTextField InsertPatientId1;
+	private JLabel lblwarningMessage = null;
+	private JTextField InsertPatientId;
 	
 	/**
 	 * Create the frame.
@@ -54,62 +55,68 @@ public class DoctorGUI extends LoggingOut {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DoctorGUI.class.getResource("/images/logo2.PNG")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
-		contentPane1 = new JPanel();
-		contentPane1.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane1);
-		contentPane1.setLayout(null);
-		contentPane1.setLayout(null);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		contentPane.setLayout(null);
 		
 		JLabel label = new JLabel("New label");
 		label.setBounds(0, 0, 0, 0);
-		contentPane1.add(label);
+		contentPane.add(label);
 		JLabel lblLogo;
 		if(LoginControl.getUser_full_name() == null)
 			lblLogo = new JLabel("Welcome DOCTOR!");
 		else lblLogo = new JLabel("Hi "+LoginControl.getUser_full_name()+"!");
 		lblLogo.setIcon(new ImageIcon(DoctorGUI.class.getResource("/images/logo2.png")));
 		lblLogo.setBounds(0, 0, 794, 79);
-		contentPane1.add(lblLogo);
+		contentPane.add(lblLogo);
 		
-		findPatient1 = new JButton("Search Patient");
+		findPatient = new JButton("Search Patient");
 		
-		findPatient1.addActionListener(new ActionListener() {
+		findPatient.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
 		
-		findPatient1.setBounds(202, 157, 140, 23);
-		contentPane1.add(findPatient1);
+		findPatient.setBounds(202, 157, 140, 23);
+		contentPane.add(findPatient);
 		
-		btnCancel1 = new JButton("Cancel");
+		btnCancel = new JButton("Cancel");
 		
-		btnCancel1.addActionListener(new ActionListener() {
+		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCancel1.setBounds(352, 157, 140, 23);
-		contentPane1.add(btnCancel1);
-		btnCancel1.addActionListener(new CancelListener());
+		btnCancel.setBounds(352, 157, 140, 23);
+		contentPane.add(btnCancel);
+		btnCancel.addActionListener(new CancelListener());
 		
-		InsertPatientId1 = new JTextField();
-		InsertPatientId1.setText("Insert ID here...");
-		InsertPatientId1.setBounds(270, 126, 137, 20);
+		InsertPatientId = new JTextField();
+		InsertPatientId.setText("Insert ID here...");
+		InsertPatientId.setBounds(270, 126, 137, 20);
 		
 		/* MouseListener for clear JTextField when mouse clicks */
-		InsertPatientId1.addMouseListener(new MouseAdapter(){
+		InsertPatientId.addMouseListener(new MouseAdapter(){
             @Override
             public void mouseClicked(MouseEvent e){
-            	InsertPatientId1.setText("");
+            	InsertPatientId.setText("");
             }
         });
 		
-		contentPane1.add(InsertPatientId1);
-		InsertPatientId1.setColumns(10);
+		contentPane.add(InsertPatientId);
+		InsertPatientId.setColumns(10);
 		
 		Label label_1 = new Label("Patient ID");
 		label_1.setBounds(202, 126, 62, 22);
-		contentPane1.add(label_1);
+		contentPane.add(label_1);
 		
+		
+		
+		JButton LogOut = new JButton("Log Out");
+		LogOut.setBounds(138, 400, 245, 68);
+		LogOut.addActionListener(new LogOutListener());
+		contentPane.add(LogOut);
 		
 		setLocationRelativeTo(null);
 		
@@ -120,39 +127,39 @@ public class DoctorGUI extends LoggingOut {
 	}
 	
 	public void setWarningMessageVisibleTrue() {
-		lblwarningMessage1.setVisible(true);	
+		lblwarningMessage.setVisible(true);	
 	}
 	
 	public void setWarningMessageVisibleTrue(String st) {
-		lblwarningMessage1.setText(st);
-		lblwarningMessage1.setForeground(Color.RED);
-		lblwarningMessage1.setBounds(10, 165, 245, 30);
-		lblwarningMessage1.setVisible(true);	
+		lblwarningMessage.setText(st);
+		lblwarningMessage.setForeground(Color.RED);
+		lblwarningMessage.setBounds(10, 165, 245, 30);
+		lblwarningMessage.setVisible(true);	
 		
 	}
 	
 	
 	
 	public void undisplayWarningMessage() {
-		lblwarningMessage1.setVisible(false);
+		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
 	public void findPatientActionListener(ActionListener e)
 	{
-		findPatient1.addActionListener(e);
+		findPatient.addActionListener(e);
 	}
 	
 	public void addCancelActionListener(ActionListener e)
 	{
-		btnCancel1.addActionListener(e);
+		btnCancel.addActionListener(e);
 	}
 	
 
 	
 	public String getPtID() {
-		return InsertPatientId1.getText();
+		return InsertPatientId.getText();
 	}
 
 	public class CancelListener implements ActionListener 

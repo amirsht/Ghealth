@@ -1,13 +1,13 @@
 package GUI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
-import GUI.CS_GUI_Appoint.LogOutListener;
 import client.Controller;
 import client.LoginControl;
 import enums.task;
@@ -15,6 +15,11 @@ import models.User;
 
 public class LoggingOut extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 270872694035967708L;
+
 	public LoggingOut(){
 		addWindowListener(exitListener);
 	}
@@ -35,6 +40,21 @@ public class LoggingOut extends JFrame{
 	        }
 	    }
 	};
+	
+	class LogOutListener  implements ActionListener 
+	{
+	
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			
+			Controller.Control(new User(LoginControl.getUserId()),task.LOG_OUT);
+			dispose();
+			LoginControl userctrl = new LoginControl(new LoginGUI());
+	
+		}
+		
+	}//LogOutListener
 	
 //logout
 }

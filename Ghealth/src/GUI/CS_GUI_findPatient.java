@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import GUI.LoggingOut.LogOutListener;
 import client.LoginControl;
 
 import javax.swing.JTextField;
@@ -107,6 +108,11 @@ public class CS_GUI_findPatient extends LoggingOut {
 		label_1.setBounds(202, 126, 62, 22);
 		contentPane.add(label_1);
 		
+		
+		JButton LogOut = new JButton("Log Out");
+		LogOut.setBounds(138, 400, 245, 68);
+		LogOut.addActionListener(new LogOutListener());
+		contentPane.add(LogOut);
 		
 		setLocationRelativeTo(null);
 		
