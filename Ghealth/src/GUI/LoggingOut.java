@@ -32,7 +32,8 @@ public class LoggingOut extends JFrame{
 	             null, "Are You Sure you want to close and log out?", 
 	             "Exit Confirmation", JOptionPane.YES_NO_OPTION, 
 	             JOptionPane.QUESTION_MESSAGE, null, null, null);
-	        if (confirm == 0) {
+	        if (confirm == 0) 
+	        {
 	        	Controller.Control(new User(LoginControl.getUserId()),task.LOG_OUT);
 				dispose();
 				LoginControl userctrl = new LoginControl(new LoginGUI());

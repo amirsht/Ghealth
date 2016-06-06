@@ -29,7 +29,7 @@ public class Server extends Thread
     public AppointmentSettings as = null;
     public String filename;
     public static List<String> sessionList = new ArrayList<String>();
-    
+    public LabSettings ls = null;
     
     
     
@@ -211,6 +211,16 @@ public class Server extends Thread
             	/* TODO: Save & generate path to SQL table */
             	filename="src//Server//files//newfile.jpg";
             	saveFile(filename,cs);
+            	break;
+				
+			case GET_SCHEDUELD_LAB:
+            	pt = (Patient)env.getSingleObject();
+            	env = SClab.Get_SCHEDUELD_labs(pt.getpID());
+            	break;
+            	
+            case UPDATE_LAB_RECORD:
+            	ls = (LabSettings)env.getSingleObject();
+            	SClab.UpdateLabRecord(ls.getLabID(),ls.getLabDoctorReq());
             	break;
             	
             case LOG_OUT:

@@ -1,8 +1,9 @@
 package client;
+
 import models.*;
 import enums.*;
 import GUI.*;
-import client.AppointmentControl.cancelAppointmentFromDB;
+//import client.AppointmentControl.cancelAppointmentFromDB;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -38,7 +39,7 @@ public class DoctorController {
 	private String DoctorID;
 	
 	private AppointmentSettings as;
-	private List<Object> objList_str;
+	private List<Object> objList_stra;
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
@@ -75,6 +76,7 @@ public class DoctorController {
 		doc_recGUI.RecordPatientActionListener(new RecPatientListener());	
 	}
 	
+	/*
 	public DoctorController(Doctor_History_GUI history,Patient pt,String docID)
 	{
 		this.pt = pt;
@@ -84,6 +86,7 @@ public class DoctorController {
 		doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());	
 		doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
 	}
+	*/
 	
 	public int GET_CURRENT_APPOINTMENT(String ptID, String docID)
 	{
@@ -114,8 +117,7 @@ public class DoctorController {
 		
 		Envelope en = Controller.Control(new Patient(ptID),task.GET_ARRIVED_APPOINTMENTS);
 		List<String> strList = new ArrayList<String>();
-		//objList_str = en.getobjList();
-		objList_str = new ArrayList<Object>();
+		objList_stra = en.getobjList();
 		
 		if(en.getStatus() == Status.NOT_EXIST)
 		{
@@ -125,7 +127,6 @@ public class DoctorController {
 		for (Object obj : en.getobjList())
 		{
 			strList.add(((AppointmentSettings)obj).toStringCancelAppoint());
-			objList_str.add(((AppointmentSettings)obj).getApsDocID());
 			System.out.println((AppointmentSettings)obj);
 		}
 				
@@ -222,10 +223,12 @@ public class DoctorController {
 				System.out.println("There is no open appointment to cancel for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
 				JOptionPane.showMessageDialog(null,"There are no recorded appointments to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
 			}
-			Doctor_History_GUI doc_histGUI = new Doctor_History_GUI();
-			doc_histGUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
-			doc_histGUI.SetPatient(pt);
-			DoctorController doc_histControl = new DoctorController(doc_histGUI,pt,DoctorID);
+			doc_hist_GUI = new Doctor_History_GUI();
+			doc_hist_GUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
+			doc_hist_GUI.SetPatient(pt);
+			doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());	
+			doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
+			//DoctorController doc_histControl = new DoctorController(doc_histGUI,pt,DoctorID);
 						
 		}
 		
@@ -238,11 +241,10 @@ public class DoctorController {
 			System.out.println("Tring to VIEW Appointment History!!");
 
 			int selectedIndex = doc_hist_GUI.getAppointmentHistoryBox().getSelectedIndex();
-
-			//System.out.println("" + (objList_str.get(selectedIndex)).toString());
-			//AppointmentSettings aaa = (AppointmentSettings)objList_str.get(selectedIndex);
-
-						//Envelope en = Controller.Control(as,task.CANCEL_APPOINTMENT_FROM_DB);
+			System.out.println("" + selectedIndex);
+			AppointmentSettings aaa = (AppointmentSettings)objList_stra.get(selectedIndex);
+			System.out.println(aaa);
+			//Envelope en = Controller.Control(as,task.CANCEL_APPOINTMENT_FROM_DB);
 			System.out.println("Tring to VIEW Appointment Summery INDEX:" + selectedIndex);			
 		}
 		
