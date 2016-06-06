@@ -18,6 +18,11 @@ import enums.Status;
 public class AppointmentSettings  implements Serializable {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7716496157001890423L;
+	
 	private int apsID;
 	private String apsPtID;
 	private String apsDate;
@@ -27,6 +32,7 @@ public class AppointmentSettings  implements Serializable {
 	private Status apsStatus;
 	private String apsDocID;
 	private Doctor doctor;
+	
 	
 	
 	public AppointmentSettings()

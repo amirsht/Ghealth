@@ -2,6 +2,7 @@ package client;
 import models.*;
 import enums.*;
 import GUI.*;
+import client.AppointmentControl.cancelAppointmentFromDB;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,9 @@ public class DoctorController {
 	private Doctor_rec_GUI doc_recGUI;
 	private Doctor_History_GUI doc_hist_GUI;
 	private String DoctorID;
+	
+	private AppointmentSettings as;
+	private List<Object> objList_str;
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
@@ -71,6 +75,16 @@ public class DoctorController {
 		doc_recGUI.RecordPatientActionListener(new RecPatientListener());	
 	}
 	
+	public DoctorController(Doctor_History_GUI history,Patient pt,String docID)
+	{
+		this.pt = pt;
+		this.DoctorID = docID;
+		doc_hist_GUI = history;
+		doc_hist_GUI.SetPatient(pt);
+		doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());	
+		doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
+	}
+	
 	public int GET_CURRENT_APPOINTMENT(String ptID, String docID)
 	{
 		String [] patientID_doctorID = {ptID,docID};
@@ -93,6 +107,29 @@ public class DoctorController {
 		String [] AppID_AppSummery = {AppID,AppSummery};
 		Envelope en = Controller.Control( AppID_AppSummery, task.SET_APPOINTMENT_RECORD);
 		
+	}
+	
+	public List<String> GET_ARRIVED_APPOINTMENTS(String ptID)
+	{
+		
+		Envelope en = Controller.Control(new Patient(ptID),task.GET_ARRIVED_APPOINTMENTS);
+		List<String> strList = new ArrayList<String>();
+		//objList_str = en.getobjList();
+		objList_str = new ArrayList<Object>();
+		
+		if(en.getStatus() == Status.NOT_EXIST)
+		{
+			System.out.println("There is no open appointments to cancel!");
+			return null;
+		}
+		for (Object obj : en.getobjList())
+		{
+			strList.add(((AppointmentSettings)obj).toStringCancelAppoint());
+			objList_str.add(((AppointmentSettings)obj).getApsDocID());
+			System.out.println((AppointmentSettings)obj);
+		}
+				
+		return strList;
 	}
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
@@ -178,8 +215,44 @@ public class DoctorController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Tring to VIEW PATIENT HISTORY");
+			
+			List<String> objList = GET_ARRIVED_APPOINTMENTS(pt.getpID());
+			if(objList == null)
+			{
+				System.out.println("There is no open appointment to cancel for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				JOptionPane.showMessageDialog(null,"There are no recorded appointments to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
+			}
 			Doctor_History_GUI doc_histGUI = new Doctor_History_GUI();
+			doc_histGUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
 			doc_histGUI.SetPatient(pt);
+			DoctorController doc_histControl = new DoctorController(doc_histGUI,pt,DoctorID);
+						
+		}
+		
+	}
+	
+	class AppointmentHistoryBoxListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Tring to VIEW Appointment History!!");
+
+			int selectedIndex = doc_hist_GUI.getAppointmentHistoryBox().getSelectedIndex();
+
+			//System.out.println("" + (objList_str.get(selectedIndex)).toString());
+			//AppointmentSettings aaa = (AppointmentSettings)objList_str.get(selectedIndex);
+
+						//Envelope en = Controller.Control(as,task.CANCEL_APPOINTMENT_FROM_DB);
+			System.out.println("Tring to VIEW Appointment Summery INDEX:" + selectedIndex);			
+		}
+		
+	}
+	
+	class LabResultBoxListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Tring to VIEW LAB RESULT!!");
 						
 		}
 		

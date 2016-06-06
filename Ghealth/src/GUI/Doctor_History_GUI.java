@@ -35,6 +35,7 @@ import javax.swing.UIManager;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JComboBox;
+import javax.swing.JEditorPane;
 
 
 public class Doctor_History_GUI extends LoggingOut {
@@ -55,6 +56,7 @@ public class Doctor_History_GUI extends LoggingOut {
 	
 	JButton SearchPatient;
 	JButton LogOut;
+	private JEditorPane editorPane;
 	
 	/**
 	 * Create the frame.
@@ -90,8 +92,8 @@ public class Doctor_History_GUI extends LoggingOut {
 		btnCancel.setBounds(630, 523, 140, 23);
 		contentPane.add(btnCancel);
 		
-		AppointmentBox = new JComboBox();
-		AppointmentBox.setBounds(10, 139, 370, 20);
+		AppointmentBox = new JComboBox<Object>();
+		AppointmentBox.setBounds(10, 139, 465, 20);
 		contentPane.add(AppointmentBox);
 		
 		JLabel AppointmentLabel = new JLabel("Appointment History");
@@ -104,9 +106,13 @@ public class Doctor_History_GUI extends LoggingOut {
 		lblLabResultHistory.setBounds(10, 184, 140, 14);
 		contentPane.add(lblLabResultHistory);
 		
-		LabResBox = new JComboBox();
-		LabResBox.setBounds(10, 209, 370, 20);
+		LabResBox = new JComboBox<Object>();
+		LabResBox.setBounds(10, 209, 465, 20);
 		contentPane.add(LabResBox);
+		
+		editorPane = new JEditorPane();
+		editorPane.setBounds(10, 274, 465, 272);
+		contentPane.add(editorPane);
 		
 		btnCancel.addActionListener(new CancelListener());
 		
@@ -218,13 +224,26 @@ public void SetPatient(Patient pt) {
 		
 	}
 
-	public JComboBox getAppointmentBox()
-	{
+	public void SetSummery(String summery) {
+		editorPane.setText(summery);
+	}
+
+	public JComboBox<?> getAppointmentHistoryBox() {
 		return AppointmentBox;
 	}
-	public JComboBox getLabResultBox()
-	{
+	
+	public JComboBox<?> getLabResultBox() {
 		return LabResBox;
+	}
+	
+	public void AppointmentHistoryBoxActionListener(ActionListener e){
+		
+		AppointmentBox.addActionListener(e);
+	}
+	
+	public void LabResultBoxActionListener(ActionListener e){
+		
+		LabResBox.addActionListener(e);
 	}
 
 	public class CancelListener implements ActionListener 
