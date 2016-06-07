@@ -218,11 +218,12 @@ public class Server extends Thread
             	break;
             
             	
-            case UPDATE_LAB_REF:
+            case UPLOAD_FILE_TO_LAB_RECORD:
             /* Geting file from client */
-            	/* TODO: Save & generate path to SQL table */
-            	filename="src//Server//files//newfile.jpg";
+            	ls = (LabSettings)env.getSingleObject();
+            	filename="src//Server//files//"+Integer.toString(ls.getLabID())+"."+ls.getFileExt();
             	saveFile(filename,cs);
+            	SClab.UpdateLabFilePath(filename,ls.getLabID());
             	break;
 				
 			case GET_SCHEDUELD_LAB:
@@ -232,7 +233,7 @@ public class Server extends Thread
             	
             case UPDATE_LAB_RECORD:
             	ls = (LabSettings)env.getSingleObject();
-            	SClab.UpdateLabRecord(ls.getLabID(),ls.getLabDoctorReq());
+            	SClab.UpdateLabRecord(ls.getLabID(),ls.getLabWorkerSummery());
             	break;
             	
             case LOG_OUT:
@@ -254,7 +255,7 @@ public class Server extends Thread
             
             
             /* if the task is not to send FILE to client */
-            if(env.getType() != task.GET_LAB_REF && env.getType() != task.UPDATE_LAB_REF)
+            if(env.getType() != task.UPLOAD_FILE_TO_LAB_RECORD && env.getType() != task.GET_LAB_REF)
             {
 	            /* Sending data back to client */
             	System.out.println("before new output stream");
@@ -312,7 +313,7 @@ public class Server extends Thread
      */
     public void sendFile(String filename,Socket s) throws IOException {
 		DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-		FileInputStream fis = new FileInputStream("src//Server//files//bbb.jpg");
+		FileInputStream fis = new FileInputStream("src//Server//files//newfiletest.jpg");
 		byte[] buffer = new byte[4096];
 		
 		while (fis.read(buffer) > 0) {
@@ -333,9 +334,9 @@ public class Server extends Thread
     private void saveFile(String filename,Socket clientSock) throws IOException {
 		DataInputStream dis = new DataInputStream(clientSock.getInputStream());
 		FileOutputStream fos = new FileOutputStream(filename);
-		byte[] buffer = new byte[4096];
+		byte[] buffer = new byte[16*1024]; // 16 kb
 		
-		int filesize = 15123; // Send file size in separate msg
+		int filesize = 2097152; // 2mb files - Send file size in separate msg
 		int read = 0;
 		int totalRead = 0;
 		int remaining = filesize;

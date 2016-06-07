@@ -7,6 +7,10 @@ import client.DoctorController.findPatientListener;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.awt.image.ImageFilter;
+import java.io.File;
+import java.io.FileFilter;
 /* This class represents our client side 
  * of the system communication protocol.
  * the client will be personal for every component in the program
@@ -21,11 +25,16 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 
 public class LabController {
@@ -34,6 +43,9 @@ public class LabController {
 	private Patient pt;
 	private String LabWorkerID;
 	private List<Object> objList_str;
+	private LabSettings lb;
+	private Lab_Rec_GUI rec;
+	private boolean UploadFile=false;
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
@@ -54,24 +66,6 @@ public class LabController {
 	}
 	
 	
-	public int GET_CURRENT_LABS(String ptID, String docID)
-	{
-		String [] patientID_doctorID = {ptID,docID};
-		Envelope en = Controller.Control( patientID_doctorID, task.GET_CURRENT_APPOINTMENT_ID);
-		
-		if(en.getStatus() == Status.NOT_EXIST)
-		{
-			System.out.println("There is no open appointments to RECORD!");
-			return 0;
-		}else{
-		
-		int apptID = (int)en.getSingleObject();
-			
-		
-		System.out.println("the appointement ID back from SERVER:" + apptID );
-		
-		return apptID;}
-	}
 
 
 	class findPatientListener  implements ActionListener 
@@ -107,6 +101,8 @@ public class LabController {
 				}
 				else 
 				{
+					labGUI.getLabHistoryComboBox().setVisible(true);
+					labGUI.getbtnChooseLab().setVisible(true);
 					labGUI.getLabHistoryComboBox().setModel(new DefaultComboBoxModel(objList.toArray()));
 				}
 				
@@ -119,17 +115,132 @@ public class LabController {
 	}
 
 		
+	class BrowseFileListener  implements ActionListener 
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			if(UploadFile == true)
+			{
+				JOptionPane.showMessageDialog(null,
+                        "You already upload file, can't load more files! ",
+                         "Upload more files.",
+                         JOptionPane.OK_OPTION);
+				return;
+			}
+			//rec.getFileChooser().showOpenDialog(this)
+			JFileChooser fc = new JFileChooser();
+			int val = fc.showOpenDialog(rec);
+			String extension;
+			try 
+			{
+				File unfiltered_picture = fc.getSelectedFile();
+				extension=unfiltered_picture.getPath();
+		        int index=extension.indexOf(".");
+		        //get the extension of the file
+		        extension=extension.substring(index+1, extension.length());
+			       if(val==JFileChooser.APPROVE_OPTION) 
+			       {
+			           
+			           //if the file is not jpg, png, or jpeg, reject it and send a message to the user.
+			           if(!extension.matches("[jJ][pP][gG]") && !extension.matches("[pP][nN][gG]") && !extension.matches("[jJ][pP][eE][gG]")) 
+			           {
+			              JOptionPane.showMessageDialog(null,
+			                                            "cannot load file. File must be of type png, jpeg, or jpg. \n Your file is of type " + extension,
+			                                             "Error: improper file",
+			                                             JOptionPane.OK_OPTION);
+			              return;
+			            //if the file is of the proper type, display it to the user on the img JLabel.
+			           }
+			       }
+				    System.out.println("Going to upload: "+unfiltered_picture);
+					int response = JOptionPane.showConfirmDialog(null,unfiltered_picture+" This is the file you choose\n"
+							+ "Upload this file to lab record?","Confirm",
+				        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				    if (response == JOptionPane.NO_OPTION)   
+				    {
+				    	
+				    	System.out.println("No option!");
+						return;	//return
+				      	
+				    } 
+				    else if (response == JOptionPane.YES_OPTION) 
+				    {
+				    	lb.setFilePath(unfiltered_picture.toString());
+				    	lb.setFileExt(extension);
+				    	Controller.Control(lb,task.UPLOAD_FILE_TO_LAB_RECORD);
+				    	UploadFile=true;
+				    } 
+				    else if (response == JOptionPane.CLOSED_OPTION) {
+				      System.out.println("JOptionPane closed");
+				    }
+			} catch(Exception f)
+			{ System.out.println(f); }
+		}
+	}
+	
 		class ChooseLabListener  implements ActionListener 
 		{
 
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				//labGUI.dispose();
-				LabSettings lb = (LabSettings)objList_str.get(labGUI.getLabHistoryComboBox().getSelectedIndex());
+
+				labGUI.getLabHistoryComboBox().setVisible(false);
+				labGUI.getbtnChooseLab().setVisible(false);
+				lb = (LabSettings)objList_str.get(labGUI.getLabHistoryComboBox().getSelectedIndex());
 				lb.toStringOpenLabs();
-				Lab_Rec_GUI rec = new Lab_Rec_GUI(lb);
+				rec = new Lab_Rec_GUI(lb);
+				rec.RecordLabActionListener(new RecordLab());
+				rec.getBrowseButton().addActionListener(new BrowseFileListener());
+				rec.SetPatient(pt);
 				
+				
+				
+				
+			}
+			
+		}
+		
+		
+		class jpgFilter  implements FileFilter 
+		{
+
+			@Override
+			public boolean accept(File f) {
+	            return f.getName().endsWith(".jpg");
+			}
+			
+
+			
+		}
+		
+		class RecordLab  implements ActionListener 
+		{
+
+			@Override
+			public void actionPerformed(ActionEvent e) 
+			{
+
+				if(rec.getRecordField().equals("Add your lab record here..."))
+				{
+					System.out.println("Pleae fill the lab record!");
+					JOptionPane.showMessageDialog(null,"Pleae fill the lab record!"
+					,"Can't find open lab reference", JOptionPane.INFORMATION_MESSAGE);
+					return;
+				}
+				
+				else
+				{
+					lb.setLabWorkerSummery(rec.getRecordField());
+					Controller.Control(lb,task.UPDATE_LAB_RECORD);
+					JOptionPane.showMessageDialog(null,"Lab record was updated!"
+							,"Done.", JOptionPane.INFORMATION_MESSAGE);
+
+					
+					rec.dispose();
+				}
 			}
 			
 		}

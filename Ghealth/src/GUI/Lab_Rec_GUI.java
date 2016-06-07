@@ -7,7 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import client.Controller;
 import client.LoginControl;
+import enums.task;
 import models.LabSettings;
 import models.Patient;
 
@@ -23,8 +25,11 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -52,7 +57,9 @@ public class Lab_Rec_GUI extends LoggingOut {
 	private JButton SearchPatient;
 	private JButton LogOut;
 	private LabSettings lb;
-	
+	private JButton btnUploadFile;
+	private JButton Browse;
+	private JFileChooser fc;
 	/**
 	 * Create the frame.
 	 */
@@ -63,7 +70,7 @@ public class Lab_Rec_GUI extends LoggingOut {
 		setResizable(false);
 		setTitle("G-Health");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DoctorGUI.class.getResource("/images/logo2.PNG")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -76,18 +83,14 @@ public class Lab_Rec_GUI extends LoggingOut {
 		contentPane.add(label);
 		JLabel lblLogo;
 		if(LoginControl.getUser_full_name() == null)
-			lblLogo = new JLabel("Welcome DOCTOR!");
+			lblLogo = new JLabel("Welcome Lab-Worker!");
 		else lblLogo = new JLabel("Hi "+LoginControl.getUser_full_name()+"!");
 		lblLogo.setIcon(new ImageIcon(DoctorGUI.class.getResource("/images/logo2.png")));
 		lblLogo.setBounds(0, 0, 794, 79);
 		contentPane.add(lblLogo);
 		
 		saveRec = new JButton("SAVE RECORD");
-		saveRec.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
-		saveRec.setBounds(102, 467, 140, 23);
+		saveRec.setBounds(202, 503, 140, 23);
 		contentPane.add(saveRec);
 		
 		btnCancel = new JButton("Cancel");
@@ -95,24 +98,31 @@ public class Lab_Rec_GUI extends LoggingOut {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCancel.setBounds(386, 467, 140, 23);
+		btnCancel.setBounds(374, 503, 140, 23);
 		contentPane.add(btnCancel);
 		btnCancel.addActionListener(new CancelListener());
 		
 		textRecPane = new JTextPane();
-		textRecPane.setText("Ask the patient what's up?...");
-		textRecPane.setBounds(202, 143, 273, 228);
+		textRecPane.setText("Add your lab record here...");
+		textRecPane.setBounds(202, 203, 273, 228);
 		contentPane.add(textRecPane);
 		
 		JLabel lblDoctor = new JLabel("Doctor Requirements:");
-		lblDoctor.setBounds(528, 143, 178, 14);
+		lblDoctor.setBounds(202, 102, 178, 14);
 		contentPane.add(lblDoctor);
 		
 		JLabel DoctorReq = new JLabel(lb.getLabDoctorReq());
 		DoctorReq.setVerticalAlignment(SwingConstants.TOP);
-		DoctorReq.setBounds(528, 168, 229, 203);
+		DoctorReq.setBounds(202, 127, 288, 50);
 		contentPane.add(DoctorReq);
 		
+		
+		
+		
+		
+		Browse = new JButton("Upload File");
+		Browse.setBounds(202, 455, 140, 23);
+		contentPane.add(Browse);
 		
 		setLocationRelativeTo(null);
 		
@@ -140,7 +150,7 @@ public class Lab_Rec_GUI extends LoggingOut {
 	}
 	
 	
-	public void RecordPatientActionListener(ActionListener e)
+	public void RecordLabActionListener(ActionListener e)
 	{
 		saveRec.addActionListener(e);
 	}
@@ -151,7 +161,6 @@ public class Lab_Rec_GUI extends LoggingOut {
 	}
 	
 public void SetPatient(Patient pt) {
-		
 		
 		JLabel lblPatientDetails = new JLabel("Patient Details:");
 		lblPatientDetails.setBounds(541, 135, 107, 20);
@@ -228,13 +237,24 @@ public void SetPatient(Patient pt) {
 	}
 
 	
-	//public String getPtID() {
-	//	return InsertPatientId.getText();
-	//}
+	public JButton getUploadFileButton()
+	{
+		return btnUploadFile;
+	}
 
-public String getRecordField() {
-	return textRecPane.getText();
-}
+	public String getRecordField() {
+		return textRecPane.getText();
+	}
+	
+	public JButton getBrowseButton()
+	{
+		return Browse;
+	}
+	
+	public JFileChooser getFileChooser()
+	{
+		return fc;
+	}
 
 	public class CancelListener implements ActionListener 
     {
@@ -244,4 +264,7 @@ public String getRecordField() {
     		dispose();
     	}	
     }//CancelListener
+	
+	
+	
 }

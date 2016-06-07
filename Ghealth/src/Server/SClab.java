@@ -92,14 +92,14 @@ public class SClab {
 		String querystr;
 		int result;
 		
-		querystr="UPDATE appointmentsettings "
-				+ "SET labWorkerSummery='"+record+"' "
-				+ "WHERE labID='"+record+"'";
+		querystr="UPDATE labsettings "
+				+ "SET labStatus='ARRIVED',labWorkerSummery='"+record+"' "
+				+ "WHERE labID='"+labID+"'";
 		
 		try 
 		{
 			stmt = mysqlConnection.conn.createStatement();
-			System.out.println("Cancel appointment in DB: " + querystr);
+			System.out.println("Update lab in DB: " + querystr);
 			result = stmt.executeUpdate(querystr);
 		
 			mysqlConnection.conn.close();
@@ -113,6 +113,36 @@ public class SClab {
         }
 		
 
+	}
+
+
+
+
+	public static void UpdateLabFilePath(String filename,int labID) {
+		Statement stmt;
+		String querystr;
+		int result;
+		
+		querystr="UPDATE labsettings "
+				+ "SET labPhotoPath='"+filename+"' "
+				+ "WHERE labID='"+labID+"'";
+		
+		try 
+		{
+			stmt = mysqlConnection.conn.createStatement();
+			System.out.println("Update lab in DB: " + querystr);
+			result = stmt.executeUpdate(querystr);
+		
+			mysqlConnection.conn.close();
+		}
+		catch (SQLException ex) 
+   	    {/* handle any errors*/
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+          //return Status.FAILED_EXCEPTION;
+        }
+		
 	}
 	
 }

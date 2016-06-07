@@ -57,7 +57,7 @@ public class LabGUI extends LoggingOut {
 		setResizable(false);
 		setTitle("G-Health");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LabGUI.class.getResource("/images/logo2.PNG")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -124,12 +124,13 @@ public class LabGUI extends LoggingOut {
 		
 		
 		Lab_History = new JComboBox<Object>();
-		Lab_History.setBounds(194, 243, 328, 20);
-		Lab_History.setVisible(true);
+		Lab_History.setBounds(197, 214, 328, 20);
+		Lab_History.setVisible(false);
 		contentPane.add(Lab_History);
 		
 		btnChooseLab = new JButton("Choose Lab");
-		btnChooseLab.setBounds(270, 279, 178, 23);
+		btnChooseLab.setBounds(270, 258, 178, 23);
+		btnChooseLab.setVisible(false);
 		contentPane.add(btnChooseLab);
 		
 		

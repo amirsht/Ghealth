@@ -15,6 +15,7 @@ import java.util.List;
 import enums.DoctorSpeciallity;
 import enums.task;
 import models.Envelope;
+import models.LabSettings;
 import models.Patient;
 import models.PersonalDoctor;
 import models.User;
@@ -99,8 +100,9 @@ public class Controller {
 	                /* Choose if get file or object */
 	                if(En.getType() == task.GET_LAB_REF)
 	                	saveFile();
-	                else if(En.getType() == task.UPDATE_LAB_REF)
-	                	sendFile("src//client//files//afasdf.jpg");
+	                else if(En.getType() == task.UPLOAD_FILE_TO_LAB_RECORD)
+	                	sendFile(((LabSettings)En.getSingleObject()).getFilePath());
+	                	//sendFile("src//client//files//afasdf.jpg");
 	                else
 	                {
 		                inputStream = new ObjectInputStream(socket.getInputStream());
@@ -140,14 +142,29 @@ public class Controller {
 	     * @param filename
 	     * @throws IOException
 	     */
-	    public static void sendFile(String filename) throws IOException {
+	    public static void sendFile(String filename) throws IOException 
+	    {
 			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 			FileInputStream fis = new FileInputStream(filename);
-			byte[] buffer = new byte[4096];
-			
+			byte[] buffer = new byte[16*1024]; //16 kb buffer
+
+			int filesize = 2097152; // Send file up to 2 mb size in separate msg
+			int read = 0;
+			int totalRead = 0;
+			int remaining = filesize;
+			while((read = fis.read(buffer, 0, Math.min(buffer.length, remaining))) > 0) {
+				totalRead += read;
+				remaining -= read;
+				System.out.println("read " + totalRead + " bytes.");
+				dos.write(buffer, 0, read);
+			}
+	        
+	        /*
 			while (fis.read(buffer) > 0) {
 				dos.write(buffer);
 			}
+			*/
+			
 			
 			fis.close(); //Git Test
 			dos.close();	
@@ -164,9 +181,9 @@ public class Controller {
 		private static void saveFile() throws IOException {
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			FileOutputStream fos = new FileOutputStream("src//client//files//temp_file.jpg");
-			byte[] buffer = new byte[4096];
+			byte[] buffer = new byte[16*1024]; // 16 kb buffer
 			
-			int filesize = 15123; // Send file size in separate msg
+			int filesize = 2097152; // Send file up to 2mb size in separate msg
 			int read = 0;
 			int totalRead = 0;
 			int remaining = filesize;

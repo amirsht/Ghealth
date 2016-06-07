@@ -215,9 +215,7 @@ public void SetPatient(Patient pt) {
 		JLabel doctorID = new JLabel(pt.getPd());
 		doctorID.setBounds(95, 185, 90, 22);
 		patientDetails.add(doctorID);
-		
-		
-		
+				
 		patientDetails.setVisible(true);
 		
 	}

@@ -17,6 +17,8 @@ public class LabSettings implements Serializable{
 	private String labWorkerSummery;
 	private String labPhotoPath;
 	private User labWorker;
+	private String filePath;
+	private String fileExt;
 	
 	
 	public LabSettings(int labID,String labPtID, String createDate, String createTime, Status labStatus, String labDocID,
@@ -68,6 +70,30 @@ public class LabSettings implements Serializable{
 
 	public void setLabDoctorReq(String labDoctorReq) {
 		this.labDoctorReq = labDoctorReq;
+	}
+
+	public String getLabWorkerSummery() {
+		return labWorkerSummery;
+	}
+
+	public void setLabWorkerSummery(String labWorkerSummery) {
+		this.labWorkerSummery = labWorkerSummery;
+	}
+
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getFileExt() {
+		return fileExt;
+	}
+
+	public void setFileExt(String fileExt) {
+		this.fileExt = fileExt;
 	}
 	
 }

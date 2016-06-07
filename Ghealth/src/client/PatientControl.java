@@ -39,8 +39,6 @@ public class PatientControl {
 		csGUI_addPatient = cs;
 		csGUI_addPatient.addPatientActionListener(new AddPatientListener());
 		csGUI_addPatient.setPationID(pID);
-		//csGUI_addPatient.addCancelActionListener(this.dispose());	
-		//csGUI_addPatient.addCancelActionListener(new CancelListener());
 	}
 	
 	/**
@@ -51,32 +49,9 @@ public class PatientControl {
 	{
 		csGUI_findPatient = cs;
 		csGUI_findPatient.findPatientActionListener(new findPatientListener());
-		//csGUI_findPatient.addCancelActionListener(new CancelListener());
-		//csGUI_findPatient.createNewPtActionListener(new createNewPtActionListener());
 	}
 	
 	
-	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
-	/*
-    public static Patient PatientCon(Patient pt,task ts){
-    	
-    	Envelope En = new Envelope();
-      
-    	//Build the envelope that will be send to server 
-        En.addobjList(pt);
-        En.setType(ts);
-        /* communicate will send to the server 
-         * and get from the server
-         *  the envelope 
-        En =  Controller.communicate(En);
-        if (En.getStatus() == Status.NOT_EXIST)
-        	return null;
-        pt = (Patient)(En.getSingleObject());
-    	return pt; 
-    	
-    } /*  END Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
-    
-	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   ActionListener Functions ~~~~~~~~~~~~~~~~~~~~~~~~  */
   
 
 	class AddPatientListener  implements ActionListener 
@@ -113,8 +88,7 @@ public class PatientControl {
 										(String)csGUI_addPatient.getClinicBox().getSelectedItem(),
 										csGUI_addPatient.getDoctorID()	);
 			
-			Controller.Control(newpt,task.ADD_PATIENT); //New Controller Call
-			//PatientCon(newpt,task.ADD_PATIENT); --> OLD Controller call.
+			Controller.Control(newpt,task.ADD_PATIENT); 
 			JOptionPane.showMessageDialog(null,"The Patient: "+newpt.getpFirstName()+" "+newpt.getpLastName()
 												+" Was successfully added!","Error", JOptionPane.INFORMATION_MESSAGE);
 			
@@ -149,7 +123,6 @@ public class PatientControl {
 			if (en.getStatus() == Status.EXIST)
 			{
 				findpt = (Patient)en.getSingleObject();
-				//JOptionPane.showMessageDialog(null,"Patient Exists! \n" + findpt,"INFO", JOptionPane.INFORMATION_MESSAGE);
 				System.out.println("Patient Exist!\n"+findpt);
 				csGUI_findPatient.dispose();
 				CS_GUI_Appoint appoint = new CS_GUI_Appoint();
