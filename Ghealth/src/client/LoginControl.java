@@ -128,7 +128,8 @@ public static User UserCon(User us,task ts){
 		        		   		//TODO: open the next window (menu).
 		        		   		   break;
 		        		   	   case LAB_WORKER:
-		        		   		System.out.println("This user is LAB_WORKER");
+			        		   		System.out.println("This user is LAB_WORKER");
+			        		   		LabController lb = new LabController(new LabGUI(),us.getuID());
 		        		   		//TODO: open the next window (menu).
 		        		   		   break;
 		        		   	   case CLINIC_MANAGER:

@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import GUI.LoggingOut.LogOutListener;
 import client.LoginControl;
+import models.LabSettings;
 import models.Patient;
 
 import javax.swing.JTextField;
@@ -21,6 +21,8 @@ import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 
@@ -28,32 +30,40 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import java.awt.Label;
+import javax.swing.SwingConstants;
 
 
-public class Doctor_Pt_GUI extends LoggingOut {
+public class Lab_Rec_GUI extends LoggingOut {
+
 
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1645191120165568000L;
+	private static final long serialVersionUID = -5798215983453009657L;
 	
 	private JPanel contentPane;
-	private JButton btnViewHistory;
-	private JButton btnRecAppoint;
+	private JTextPane textRecPane;
+	private JButton btnCancel;
+	private JButton saveRec;
+	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
 	private JPanel patientDetails;
-	JButton SearchPatient;
-	JButton LogOut;
-
- 
+	private JButton SearchPatient;
+	private JButton LogOut;
+	private LabSettings lb;
+	
 	/**
 	 * Create the frame.
 	 */
-	public Doctor_Pt_GUI() {
+	public Lab_Rec_GUI(LabSettings lb) 
+	{
+
+		this.lb = lb;
 		setResizable(false);
 		setTitle("G-Health");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(DoctorGUI.class.getResource("/images/logo2.PNG")));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -68,37 +78,41 @@ public class Doctor_Pt_GUI extends LoggingOut {
 		if(LoginControl.getUser_full_name() == null)
 			lblLogo = new JLabel("Welcome DOCTOR!");
 		else lblLogo = new JLabel("Hi "+LoginControl.getUser_full_name()+"!");
-		
 		lblLogo.setIcon(new ImageIcon(DoctorGUI.class.getResource("/images/logo2.png")));
 		lblLogo.setBounds(0, 0, 794, 79);
 		contentPane.add(lblLogo);
 		
-		btnRecAppoint = new JButton("RECORD APPOINTMENT");
-		btnRecAppoint.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnRecAppoint.setBounds(138, 220, 245, 68);
-		contentPane.add(btnRecAppoint);
-		
-		btnViewHistory = new JButton("Medical History");
-		btnViewHistory.addActionListener(new ActionListener() {
+		saveRec = new JButton("SAVE RECORD");
+		saveRec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnViewHistory.setBounds(138, 310, 245, 68);
-		contentPane.add(btnViewHistory);
+		saveRec.setBounds(102, 467, 140, 23);
+		contentPane.add(saveRec);
 		
-
+		btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCancel.setBounds(386, 467, 140, 23);
+		contentPane.add(btnCancel);
+		btnCancel.addActionListener(new CancelListener());
 		
-		SearchPatient = new JButton("SEARCH ANOTHER PATIENT");
-		SearchPatient.setBounds(138, 130, 245, 68);
-		contentPane.add(SearchPatient);
+		textRecPane = new JTextPane();
+		textRecPane.setText("Ask the patient what's up?...");
+		textRecPane.setBounds(202, 143, 273, 228);
+		contentPane.add(textRecPane);
 		
-		LogOut = new JButton("Log Out");
-		LogOut.setBounds(138, 400, 245, 68);
-		LogOut.addActionListener(new LogOutListener());
-		contentPane.add(LogOut);
+		JLabel lblDoctor = new JLabel("Doctor Requirements:");
+		lblDoctor.setBounds(528, 143, 178, 14);
+		contentPane.add(lblDoctor);
+		
+		JLabel DoctorReq = new JLabel(lb.getLabDoctorReq());
+		DoctorReq.setVerticalAlignment(SwingConstants.TOP);
+		DoctorReq.setBounds(528, 168, 229, 203);
+		contentPane.add(DoctorReq);
+		
 		
 		setLocationRelativeTo(null);
 		
@@ -126,26 +140,15 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	}
 	
 	
-	public void RecordAppointActionListener(ActionListener e)
+	public void RecordPatientActionListener(ActionListener e)
 	{
-		btnRecAppoint.addActionListener(e);
+		saveRec.addActionListener(e);
 	}
 	
-	public void LogOutActionListener(ActionListener e)
+	public void addCancelActionListener(ActionListener e)
 	{
-		LogOut.addActionListener(e);
+		btnCancel.addActionListener(e);
 	}
-	
-	public void SearchPatientActionListener(ActionListener e)
-	{
-		SearchPatient.addActionListener(e);
-	}
-	
-	public void ViewHistoryActionListener(ActionListener e)
-	{
-		btnViewHistory.addActionListener(e);
-	}
-	
 	
 public void SetPatient(Patient pt) {
 		
@@ -223,7 +226,22 @@ public void SetPatient(Patient pt) {
 		patientDetails.setVisible(true);
 		
 	}
+
 	
-	
+	//public String getPtID() {
+	//	return InsertPatientId.getText();
+	//}
+
+public String getRecordField() {
+	return textRecPane.getText();
 }
 
+	public class CancelListener implements ActionListener 
+    {
+    	@Override
+    	public void actionPerformed(ActionEvent e)
+    	{
+    		dispose();
+    	}	
+    }//CancelListener
+}

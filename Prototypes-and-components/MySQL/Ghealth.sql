@@ -139,26 +139,39 @@ INSERT INTO `doctor` VALUES ('5000','Orthopedist'),('5001','Orthopedist'),('5002
 UNLOCK TABLES;
 
 --
--- Table structure for table `labref`
+-- Table structure for table `labsettings`
 --
 
-DROP TABLE IF EXISTS `labref`;
+DROP TABLE IF EXISTS `labsettings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `labref` (
-  `LabRefID` int(11) NOT NULL,
-  `LabFilePath` varchar(100) DEFAULT NULL,
-  PRIMARY KEY (`LabRefID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `labsettings` (
+  `labID` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `labPtID` varchar(45) DEFAULT NULL,
+  `labCreateDate` date DEFAULT NULL,
+  `labCreateTime` time DEFAULT NULL,
+  `labStatus` varchar(45) DEFAULT NULL,
+  `labDocID` varchar(45) DEFAULT NULL,
+  `labworkerID` varchar(45) DEFAULT NULL,
+  `labDocReq` varchar(150) DEFAULT NULL,
+  `labWorkerSummery` varchar(150) DEFAULT NULL,
+  `labPhotoPath` varchar(150) DEFAULT NULL,
+  PRIMARY KEY (`labID`),
+  KEY `labPtID_idx` (`labPtID`),
+  KEY `labDocID` (`labDocID`),
+  CONSTRAINT `labDocID` FOREIGN KEY (`labDocID`) REFERENCES `user` (`uID`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `labPtID` FOREIGN KEY (`labPtID`) REFERENCES `patient` (`ptID`) ON DELETE NO ACTION ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `labref`
+-- Dumping data for table `labsettings`
 --
 
-LOCK TABLES `labref` WRITE;
-/*!40000 ALTER TABLE `labref` DISABLE KEYS */;
-/*!40000 ALTER TABLE `labref` ENABLE KEYS */;
+LOCK TABLES `labsettings` WRITE;
+/*!40000 ALTER TABLE `labsettings` DISABLE KEYS */;
+INSERT INTO `labsettings` VALUES (1,'4444','2016-06-15','14:01:43','SCHEDUELD','5004','6000','Please kill this patient!','',NULL);
+/*!40000 ALTER TABLE `labsettings` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -267,7 +280,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('4000','1234','Amir','Sht','amir@gm.com',1,'CUSTOMER_SERVICE'),('5000','1234','Moshe','Pinto','Pinto@gmail.com',1,'DOCTOR'),('5001','1234','Eran','Tamir','Eran.Tamir@walla.co.il',2,'DOCTOR'),('5002','1234','Yossi','Leitner','Yossi.Leitner@walla.co.il',3,'DOCTOR'),('5003','1234','Hossam','Ra\'d','Hossam.Rara@walla.com',4,'DOCTOR'),('5004','1234','Viktor','Klein','ViktorVikKlein@yahoo.com',5,'DOCTOR'),('5005','1234','Slava','Babayev','SlavSlavaBBB@gmail.com',6,'DOCTOR'),('5006','1234','Vitaliy','Gitman','Vital@iol.com',7,'DOCTOR'),('5007','1234','Alexei','Yad-Shalom','Alexei@yahoo.coom',1,'DOCTOR'),('5008','1234','Vladimir','Ruhman','Vladimirruhruh@yahoo.com',2,'DOCTOR'),('5009','1234','Guy','Reznik','guyrez@walla.com',3,'DOCTOR'),('5010','1234','Guri','Alfi','AlfiGurgur@gmail.com',4,'DOCTOR'),('5011','1234','Ovadia','Cohen','ovad@gmail.com',5,'DOCTOR'),('5012','1234','Ilya','Vered','ilyaver@gmail.com',6,'DOCTOR'),('5013','1234','Shasha','Stoyko','Stoykoshasha@gmail.com',7,'DOCTOR'),('5014','1234','Sveta','Aronov','SvetaRonova@gmail.com',5,'DOCTOR'),('5015','1234','Irena','Glushko','Irenaglushko@gmail.com',2,'DOCTOR');
+INSERT INTO `user` VALUES ('4000','1234','Amir','Sht','amir@gm.com',1,'CUSTOMER_SERVICE'),('5000','1234','Moshe','Pinto','Pinto@gmail.com',1,'DOCTOR'),('5001','1234','Eran','Tamir','Eran.Tamir@walla.co.il',2,'DOCTOR'),('5002','1234','Yossi','Leitner','Yossi.Leitner@walla.co.il',3,'DOCTOR'),('5003','1234','Hossam','Ra\'d','Hossam.Rara@walla.com',4,'DOCTOR'),('5004','1234','Viktor','Klein','ViktorVikKlein@yahoo.com',5,'DOCTOR'),('5005','1234','Slava','Babayev','SlavSlavaBBB@gmail.com',6,'DOCTOR'),('5006','1234','Vitaliy','Gitman','Vital@iol.com',7,'DOCTOR'),('5007','1234','Alexei','Yad-Shalom','Alexei@yahoo.coom',1,'DOCTOR'),('5008','1234','Vladimir','Ruhman','Vladimirruhruh@yahoo.com',2,'DOCTOR'),('5009','1234','Guy','Reznik','guyrez@walla.com',3,'DOCTOR'),('5010','1234','Guri','Alfi','AlfiGurgur@gmail.com',4,'DOCTOR'),('5011','1234','Ovadia','Cohen','ovad@gmail.com',5,'DOCTOR'),('5012','1234','Ilya','Vered','ilyaver@gmail.com',6,'DOCTOR'),('5013','1234','Shasha','Stoyko','Stoykoshasha@gmail.com',7,'DOCTOR'),('5014','1234','Sveta','Aronov','SvetaRonova@gmail.com',5,'DOCTOR'),('5015','1234','Irena','Glushko','Irenaglushko@gmail.com',2,'DOCTOR'),('6000','1234','Lauren','Smith','SmithMail@gmail.com',6,'LAB_WORKER'),('6001','1234','Isabelle','Olaru','OlaruMail@gmail.com',5,'LAB_WORKER'),('6002','1234','Florina','Tilea','Tilea.Not@gmail.com',4,'LAB_WORKER');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -298,4 +311,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-06 15:01:57
+-- Dump completed on 2016-06-06 17:18:19

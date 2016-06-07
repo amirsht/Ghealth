@@ -41,11 +41,14 @@ public class Doctor_rec_GUI extends LoggingOut {
 	private static final long serialVersionUID = -5798215983453009657L;
 	
 	private JPanel contentPane;
+	private JTextPane textRecPane;
 	private JButton btnCancel;
-	private JButton findPatient;
+	private JButton saveRec;
 	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
 	private JPanel patientDetails;
+	JButton SearchPatient;
+	JButton LogOut;
 	
 	/**
 	 * Create the frame.
@@ -66,19 +69,19 @@ public class Doctor_rec_GUI extends LoggingOut {
 		contentPane.add(label);
 		JLabel lblLogo;
 		if(LoginControl.getUser_full_name() == null)
-			lblLogo = new JLabel("Welcome CS!");
+			lblLogo = new JLabel("Welcome DOCTOR!");
 		else lblLogo = new JLabel("Hi "+LoginControl.getUser_full_name()+"!");
 		lblLogo.setIcon(new ImageIcon(DoctorGUI.class.getResource("/images/logo2.png")));
 		lblLogo.setBounds(0, 0, 794, 79);
 		contentPane.add(lblLogo);
 		
-		findPatient = new JButton("SAVE RECORD");
-		findPatient.addActionListener(new ActionListener() {
+		saveRec = new JButton("SAVE RECORD");
+		saveRec.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		findPatient.setBounds(93, 467, 140, 23);
-		contentPane.add(findPatient);
+		saveRec.setBounds(93, 467, 140, 23);
+		contentPane.add(saveRec);
 		
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
@@ -89,7 +92,8 @@ public class Doctor_rec_GUI extends LoggingOut {
 		contentPane.add(btnCancel);
 		btnCancel.addActionListener(new CancelListener());
 		
-		JTextPane textRecPane = new JTextPane();
+		textRecPane = new JTextPane();
+		textRecPane.setText("Ask the patient what's up?...");
 		textRecPane.setBounds(202, 143, 273, 228);
 		contentPane.add(textRecPane);
 		
@@ -120,9 +124,9 @@ public class Doctor_rec_GUI extends LoggingOut {
 	}
 	
 	
-	public void findPatientActionListener(ActionListener e)
+	public void RecordPatientActionListener(ActionListener e)
 	{
-		findPatient.addActionListener(e);
+		saveRec.addActionListener(e);
 	}
 	
 	public void addCancelActionListener(ActionListener e)
@@ -211,6 +215,10 @@ public void SetPatient(Patient pt) {
 	//public String getPtID() {
 	//	return InsertPatientId.getText();
 	//}
+
+public String getRecordField() {
+	return textRecPane.getText();
+}
 
 	public class CancelListener implements ActionListener 
     {

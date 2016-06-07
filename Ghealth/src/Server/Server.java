@@ -29,7 +29,7 @@ public class Server extends Thread
     public AppointmentSettings as = null;
     public String filename;
     public static List<String> sessionList = new ArrayList<String>();
-    
+    public LabSettings ls = null;
     
     
     
@@ -183,6 +183,20 @@ public class Server extends Thread
             	env = SCdocAppointment.GetCurrentAppointment(patiend_doc[0], patiend_doc[1]);
             	
             	break;
+            	
+            case SET_APPOINTMENT_RECORD:
+            	System.out.println("SET_APPOINTMENT_RECORD");
+            	String[] appID_appRec =(String[])env.getSingleObject();
+            	SCdocAppointment.RecordAppointment(appID_appRec[0], appID_appRec[1]);
+            	
+            	break;
+            	
+            case GET_ARRIVED_APPOINTMENTS:
+            	System.out.println("GET_ARRIVED_APPOINTMENTS");
+            	pt = (Patient)env.getSingleObject();
+            	env = SCdocAppointment.GetRecordedAppointments(pt.getpID());
+            	
+            	break;
             /*---     Lab-Ref Tasks:   ---*/
             case GET_LAB_REF:
             /* Sending file to client */
@@ -197,6 +211,16 @@ public class Server extends Thread
             	/* TODO: Save & generate path to SQL table */
             	filename="src//Server//files//newfile.jpg";
             	saveFile(filename,cs);
+            	break;
+				
+			case GET_SCHEDUELD_LAB:
+            	pt = (Patient)env.getSingleObject();
+            	env = SClab.Get_SCHEDUELD_labs(pt.getpID());
+            	break;
+            	
+            case UPDATE_LAB_RECORD:
+            	ls = (LabSettings)env.getSingleObject();
+            	SClab.UpdateLabRecord(ls.getLabID(),ls.getLabDoctorReq());
             	break;
             	
             case LOG_OUT:

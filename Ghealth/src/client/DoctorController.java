@@ -1,7 +1,9 @@
 package client;
+
 import models.*;
 import enums.*;
 import GUI.*;
+//import client.AppointmentControl.cancelAppointmentFromDB;
 
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -32,8 +34,12 @@ public class DoctorController {
 	private DoctorGUI docGUI;
 	private Doctor_Pt_GUI docPtGUI;
 	private Patient pt;
-	private Doctor_rec_GUI doc_rec;
+	private Doctor_rec_GUI doc_recGUI;
+	private Doctor_History_GUI doc_hist_GUI;
 	private String DoctorID;
+	
+	private AppointmentSettings as;
+	private List<Object> objList_stra;
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
@@ -57,11 +63,30 @@ public class DoctorController {
 		this.DoctorID = docID;
 		docPtGUI = doc_pt;
 		docPtGUI.SetPatient(pt);
-		docPtGUI.RecordAppointActionListener(new RecAppointListener());
-		//docPtGUI.SearchPatientActionListener(new SearchPatientListener());
-		//docPtGUI.LogOutActionListener(new LogOutListener());
-		//docPtGUI.cancelAppointActionListener(new CancelAppointListener());	
+		docPtGUI.RecordAppointActionListener(new RecAppointListener());	
+		docPtGUI.ViewHistoryActionListener(new ViewHistoryListener());
 	}
+	
+	public DoctorController(Doctor_rec_GUI docRec,Patient pt,String docID)
+	{
+		this.pt = pt;
+		this.DoctorID = docID;
+		doc_recGUI = docRec;
+		doc_recGUI.SetPatient(pt);
+		doc_recGUI.RecordPatientActionListener(new RecPatientListener());	
+	}
+	
+	/*
+	public DoctorController(Doctor_History_GUI history,Patient pt,String docID)
+	{
+		this.pt = pt;
+		this.DoctorID = docID;
+		doc_hist_GUI = history;
+		doc_hist_GUI.SetPatient(pt);
+		doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());	
+		doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
+	}
+	*/
 	
 	public int GET_CURRENT_APPOINTMENT(String ptID, String docID)
 	{
@@ -75,32 +100,41 @@ public class DoctorController {
 		}else{
 		
 		int apptID = (int)en.getSingleObject();
-			
 		
-		System.out.println("the appointement ID back from SERVER:" + apptID );
+		return apptID;
+		}
+	}
+	
+	public void SET_APPOINTMENT_RECORD(String AppID, String AppSummery)
+	{
+		String [] AppID_AppSummery = {AppID,AppSummery};
+		Envelope en = Controller.Control( AppID_AppSummery, task.SET_APPOINTMENT_RECORD);
 		
-		return apptID;}
+	}
+	
+	public List<String> GET_ARRIVED_APPOINTMENTS(String ptID)
+	{
+		
+		Envelope en = Controller.Control(new Patient(ptID),task.GET_ARRIVED_APPOINTMENTS);
+		List<String> strList = new ArrayList<String>();
+		objList_stra = en.getobjList();
+		
+		if(en.getStatus() == Status.NOT_EXIST)
+		{
+			System.out.println("There is no open appointments to cancel!");
+			return null;
+		}
+		for (Object obj : en.getobjList())
+		{
+			strList.add(((AppointmentSettings)obj).toStringCancelAppoint());
+			System.out.println((AppointmentSettings)obj);
+		}
+				
+		return strList;
 	}
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
-	/*
-    public static Patient PatientCon(Patient pt,task ts){
-    	
-    	Envelope En = new Envelope();
-      
-    	//Build the envelope that will be send to server 
-        En.addobjList(pt);
-        En.setType(ts);
-        /* communicate will send to the server 
-         * and get from the server
-         *  the envelope 
-        En =  Controller.communicate(En);
-        if (En.getStatus() == Status.NOT_EXIST)
-        	return null;
-        pt = (Patient)(En.getSingleObject());
-    	return pt; 
-    	
-    } /*  END Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
+	
     
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   ActionListener Functions ~~~~~~~~~~~~~~~~~~~~~~~~  */
   
@@ -151,11 +185,77 @@ public class DoctorController {
 				
 				Doctor_rec_GUI docRec = new Doctor_rec_GUI();
 				docRec.SetPatient(pt);
+				DoctorController doc_rec_cntrl = new DoctorController(docRec,pt,DoctorID);
+				
 				
 			}
 			else{
 			JOptionPane.showMessageDialog(null, "The Patient '"+pt.getpFirstName() +"'HAS NO APPOINTMENT!" + "\n","Confirm",JOptionPane.OK_OPTION);
 			System.out.println("NO APPOINTMENT");}
+		}
+		
+	}
+	
+	
+	class RecPatientListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+						
+			int appID = GET_CURRENT_APPOINTMENT(pt.getpID(),DoctorID);		
+			String strAppID = appID + "";
+			
+			SET_APPOINTMENT_RECORD(strAppID,doc_recGUI.getRecordField());
+			doc_recGUI.dispose();
+		}
+		
+	}
+	
+	class ViewHistoryListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Tring to VIEW PATIENT HISTORY");
+			
+			List<String> objList = GET_ARRIVED_APPOINTMENTS(pt.getpID());
+			if(objList == null)
+			{
+				System.out.println("There is no open appointment to cancel for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				JOptionPane.showMessageDialog(null,"There are no recorded appointments to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
+			}
+			doc_hist_GUI = new Doctor_History_GUI();
+			doc_hist_GUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
+			doc_hist_GUI.SetPatient(pt);
+			doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());	
+			doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
+			//DoctorController doc_histControl = new DoctorController(doc_histGUI,pt,DoctorID);
+						
+		}
+		
+	}
+	
+	class AppointmentHistoryBoxListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Tring to VIEW Appointment History!!");
+
+			int selectedIndex = doc_hist_GUI.getAppointmentHistoryBox().getSelectedIndex();
+			System.out.println("" + selectedIndex);
+			AppointmentSettings aaa = (AppointmentSettings)objList_stra.get(selectedIndex);
+			System.out.println(aaa);
+			//Envelope en = Controller.Control(as,task.CANCEL_APPOINTMENT_FROM_DB);
+			System.out.println("Tring to VIEW Appointment Summery INDEX:" + selectedIndex);			
+		}
+		
+	}
+	
+	class LabResultBoxListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Tring to VIEW LAB RESULT!!");
+						
 		}
 		
 	}
