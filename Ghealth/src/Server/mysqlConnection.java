@@ -21,6 +21,9 @@ import models.Patient;
 
 
 
+/**
+ * MySQL Connection Class
+ */
 public class mysqlConnection {
 	
 	public static Connection conn,autoConn; //TODO - will be changed (maby) to private	
@@ -36,9 +39,11 @@ public class mysqlConnection {
 	public Server sv;
 	public Automation auto = null;
 	
+	/**
+	 * Default constructor
+	 */
 	public mysqlConnection() 
 	{
-		
 		System.out.println("mysqlConnection() constructor");
 		
 		try 

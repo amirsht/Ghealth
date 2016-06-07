@@ -13,7 +13,7 @@ import models.*;
 
 /**
  * The Main Class That starts Ghealth Application.
- *
+ * Initializes login screen
  */
 public class GhealthApp {
 
@@ -25,9 +25,7 @@ public class GhealthApp {
 		LoginGUI login1 = new LoginGUI();
 		LoginControl userctrl = new LoginControl(login1);
 		
-
 	}
-
 
 }
 

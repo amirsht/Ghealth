@@ -23,6 +23,9 @@ import models.Clinic;
 import models.Doctor;
 import models.Patient;
 
+/**
+ *	Controls the automated tasks
+ */
 public class Automation extends Thread{
 	private Timer timer = new Timer();
 	//public static Email mail= new Email();
@@ -52,6 +55,9 @@ public class Automation extends Thread{
 	}
 	
 	//-------------------------------------------------------------------------------------
+	/**
+	 * Execute automatic periodical reports
+	 */
 	public class PeriodicReport extends TimerTask{
 		public void run(){
 			
@@ -62,6 +68,10 @@ public class Automation extends Thread{
 	}
 	
 	//-------------------------------------------------------------------------------------
+	
+	/**
+	 * Execute automatic periodical notifications
+	 */
 	public class PeriodicNotification extends TimerTask{
 		public void run(){
 			/* TODO Checks for changed status appointment notifications */
@@ -147,7 +157,8 @@ public class Automation extends Thread{
 		}
 		/** 
 		 * Sending mail function 
-		**/
+		 * @param nt
+		 */
 		private void sendMail(Notification nt) {
 			// TODO Auto-generated method stub
 			try {
@@ -160,6 +171,11 @@ public class Automation extends Thread{
 		}
 		
 		//-------------------------------------------------------------------------------------
+		
+		/**
+		 * Getting SQL query results back from DB
+		 * @param query
+		 */
 		public void getSql(String query){
 		//	Statement stmt;
 			try {
@@ -173,6 +189,12 @@ public class Automation extends Thread{
 		}
 		
 		//-------------------------------------------------------------------------------------
+		
+		/**
+		 * Searching if user in session
+		 * @param mail
+		 * @return
+		 */
 		public boolean searchUserSession(String mail){
 	    	for(Notification notf: notLst) {
 	    	    if(notf.mail.equals(mail))

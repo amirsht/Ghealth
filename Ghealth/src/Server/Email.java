@@ -13,6 +13,9 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
  
 
+/**
+ * Sends the notification mail to the patient
+ */
 public class Email {
  
 	static Properties mailServerProperties;

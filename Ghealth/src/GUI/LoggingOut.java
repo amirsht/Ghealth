@@ -16,18 +16,21 @@ import models.User;
 public class LoggingOut extends JFrame{
 	
 	/**
-	 * 
+	 * A father class which all GUI classes inherit from.
+	 * Controls the window X button and logging out function
 	 */
 	private static final long serialVersionUID = 270872694035967708L;
-	private LoginGUI lg;
 
+	/**
+	 * Setting X button to do nothing and adds the listener
+	 */
 	public LoggingOut(){
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(exitListener);
 	}
 	
 	WindowListener exitListener = new WindowAdapter() {
-
+		
 	    @Override
 	    public void windowClosing(WindowEvent e) {
 	        int confirm = JOptionPane.showOptionDialog(
@@ -44,6 +47,9 @@ public class LoggingOut extends JFrame{
 	    }
 	};
 	
+	/**
+	 * Logging out listener
+	 */
 	class LogOutListener  implements ActionListener 
 	{
 	

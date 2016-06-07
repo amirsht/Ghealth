@@ -19,6 +19,10 @@ import models.Patient;
 import models.PersonalDoctor;
 import models.User;
 
+/**
+ * Taking care of all connection and transportation in client side
+ * including file management
+ */
 public class Controller {
 	 	private static Socket socket = null;
 	    private static ObjectInputStream inputStream = null;
@@ -28,6 +32,12 @@ public class Controller {
 	    private static Envelope GetEn = null;
 	    
 	    
+	    /**
+	     * Encapsulate in Envelope struct type
+	     * @param obj
+	     * @param ts
+	     * @return
+	     */
 	    public static Envelope Control(Object obj,task ts)
 	    {
 	    	Envelope En = new Envelope();
@@ -44,7 +54,12 @@ public class Controller {
 	    	return En;
 	    }
 
-	   public static Envelope communicate(Envelope En) {
+	   /**
+	    * Sending the envelope
+	    * @param En
+	    * @return
+	    */
+	public static Envelope communicate(Envelope En) {
 	    	
 	    	String ip = "127.0.0.1";
 	    	
@@ -120,6 +135,11 @@ public class Controller {
 	    }//end function
 
 	    
+	    /**
+	     * Sending the file
+	     * @param filename
+	     * @throws IOException
+	     */
 	    public static void sendFile(String filename) throws IOException {
 			DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
 			FileInputStream fis = new FileInputStream(filename);
@@ -136,7 +156,11 @@ public class Controller {
 			
 		}
 		
-		/* method copied from Server */
+		
+		/**
+		 * Saving file in client storage
+		 * @throws IOException
+		 */
 		private static void saveFile() throws IOException {
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
 			FileOutputStream fos = new FileOutputStream("src//client//files//temp_file.jpg");

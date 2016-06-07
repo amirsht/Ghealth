@@ -3,8 +3,7 @@ package Server;
 import java.io.PrintStream;
 
 /**
- * main class that start the server
- *
+ * main class that start the server, SQL connection, server log and print hook
  */
 public class StartServer {
 
@@ -26,6 +25,10 @@ public class StartServer {
 		
 	}
 	
+	/**
+	 * Taking control of the System.out.println output and redirect it to our server log screen
+	 * @return
+	 */
 	public static PrintStream activateSYSOHook(){
 		PrintStream myStream = new PrintStream(System.out) {
 		    @Override

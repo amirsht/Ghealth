@@ -15,12 +15,13 @@ import java.util.List;
 
 
 
+/**
+ * Main server class.
+ * includes mainly the server socket connections and the tasks switch case
+ */
 public class Server extends Thread
 {
-	/** 
-	 * 
-	 * 
-	 */
+
     private ServerSocket serverSocket = null;
     public Connection conn;
     public Status status;
@@ -34,12 +35,16 @@ public class Server extends Thread
     
     
     
+    /**
+     * Starting server socket with given port
+     * @param port
+     */
     public Server(int port) 
     {
     	try 
     	{
 			serverSocket = new ServerSocket(port);
-			System.out.println("Server: Waiting for connection...");
+			System.out.println("Starting Server class");
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -49,12 +54,14 @@ public class Server extends Thread
     }
     
     
-    
+    /**
+     * Waiting for connections
+     */
     public void run()
     {
     	while(true)
 	    	try {
-	    		System.out.println("where am i");
+	    		System.out.println("Server: Waiting for connection...");
 				Socket clientSocket = serverSocket.accept();
 				System.out.println("Server: Connected");
 				communicate(clientSocket);
@@ -65,6 +72,11 @@ public class Server extends Thread
         
     }
 
+    
+    /**
+     * Taking care of network transportations and tasks switch case
+     * @param cs
+     */
     public void communicate(Socket cs) {
     	
         //System.out.println("Server-> Start - Before Socket Coonnection.");
@@ -268,6 +280,10 @@ public class Server extends Thread
     }
     
     
+    /**
+     * Removing user session from the active sessions list
+     * @param getuID
+     */
     public void removeSession(String getuID) {
     	System.out.println("before remove");
 		sessionList.remove(getuID);
@@ -275,6 +291,11 @@ public class Server extends Thread
 
 
 
+	/**
+	 * Searching user session in active sessions list
+	 * @param uid
+	 * @return
+	 */
 	public boolean searchUserSession(String uid){
     	for(String str: sessionList) {
     	    if(str.trim().equals(uid))
@@ -283,6 +304,12 @@ public class Server extends Thread
     	return false;
     }
     
+    /**
+     * Sending file
+     * @param filename
+     * @param s
+     * @throws IOException
+     */
     public void sendFile(String filename,Socket s) throws IOException {
 		DataOutputStream dos = new DataOutputStream(s.getOutputStream());
 		FileInputStream fis = new FileInputStream("src//Server//files//bbb.jpg");
@@ -297,6 +324,12 @@ public class Server extends Thread
 	}
     
     
+    /**
+     * Saving file in server storage
+     * @param filename
+     * @param clientSock
+     * @throws IOException
+     */
     private void saveFile(String filename,Socket clientSock) throws IOException {
 		DataInputStream dis = new DataInputStream(clientSock.getInputStream());
 		FileOutputStream fos = new FileOutputStream(filename);
