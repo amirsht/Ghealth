@@ -19,8 +19,10 @@ public class LoggingOut extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 270872694035967708L;
+	private LoginGUI lg;
 
 	public LoggingOut(){
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(exitListener);
 	}
 	

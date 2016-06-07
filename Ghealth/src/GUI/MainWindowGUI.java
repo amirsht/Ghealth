@@ -80,7 +80,6 @@ public class MainWindowGUI extends LoggingOut {
 		setResizable(false);
 		setTitle("G-Health");
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MainWindowGUI.class.getResource("/images/logo2.png")));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

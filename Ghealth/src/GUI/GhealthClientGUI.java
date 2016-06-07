@@ -50,7 +50,6 @@ public class GhealthClientGUI extends LoggingOut{
 		});
 		
 		this.setTitle("GHealth Connection to Server");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setBounds(500, 200, 300, 250);
 		this.setVisible(true);
 		this.setResizable(false);
