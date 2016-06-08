@@ -41,7 +41,6 @@ public class CS_GUI_findPatient extends LoggingOut {
 	private static final long serialVersionUID = -5798215983453009657L;
 	
 	private JPanel contentPane;
-	private JButton btnCancel;
 	private JButton findPatient;
 	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
@@ -77,17 +76,8 @@ public class CS_GUI_findPatient extends LoggingOut {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		findPatient.setBounds(202, 157, 140, 23);
+		findPatient.setBounds(243, 157, 140, 23);
 		contentPane.add(findPatient);
-		
-		btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnCancel.setBounds(352, 157, 140, 23);
-		contentPane.add(btnCancel);
-		btnCancel.addActionListener(new CancelListener());
 		
 		InsertPatientId = new JTextField();
 		InsertPatientId.setText("Insert ID here...");
@@ -144,10 +134,6 @@ public class CS_GUI_findPatient extends LoggingOut {
 		findPatient.addActionListener(e);
 	}
 	
-	public void addCancelActionListener(ActionListener e)
-	{
-		btnCancel.addActionListener(e);
-	}
 	
 
 	

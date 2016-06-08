@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.Label;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -32,6 +34,7 @@ public class CS_GUI_cancelAppoint extends LoggingOut{
 	private JPanel patientDetails;
 	private JComboBox comboBox;
 	private JButton btnCancelAppointment;
+	private JButton btnCancelAppoint;
 	
 	public CS_GUI_cancelAppoint() {
 		setResizable(false);
@@ -49,7 +52,7 @@ public class CS_GUI_cancelAppoint extends LoggingOut{
 		contentPane.add(label);
 		
 		comboBox = new JComboBox();
-		comboBox.setBounds(87, 147, 422, 24);
+		comboBox.setBounds(58, 147, 443, 24);
 		contentPane.add(comboBox);
 		
 		JLabel lblPleaseSelectAppointment = new JLabel("Please select appointment to cancel");
@@ -57,16 +60,25 @@ public class CS_GUI_cancelAppoint extends LoggingOut{
 		lblPleaseSelectAppointment.setBounds(87, 112, 359, 24);
 		contentPane.add(lblPleaseSelectAppointment);
 		
-		btnCancelAppointment = new JButton("Cancel Appointment");
-		btnCancelAppointment.setFont(new Font("Tahoma", Font.PLAIN, 25));
-		btnCancelAppointment.setBounds(87, 210, 274, 65);
+		btnCancelAppointment = new JButton("Cancel Selected Appointment");
+		btnCancelAppointment.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		btnCancelAppointment.setBounds(87, 224, 391, 65);
 		contentPane.add(btnCancelAppointment);
 		JLabel lblLogo;
 		if(LoginControl.getUser_full_name() == null)
 			lblLogo = new JLabel("Welcome CS!");
 		else lblLogo = new JLabel("Hi "+LoginControl.getUser_full_name()+"!");
 		
-		
+		btnCancelAppoint = new JButton("CLOSE WINDOW");
+		btnCancelAppoint.setBounds(202, 470, 172, 68);
+		contentPane.add(btnCancelAppoint);
+		btnCancelAppoint.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				dispose();
+			}
+		});
 
 		setLocationRelativeTo(null);
 		

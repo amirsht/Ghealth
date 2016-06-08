@@ -75,6 +75,7 @@ public class DoctorController {
 		docPtGUI.RecordAppointActionListener(new RecAppointListener());	
 		docPtGUI.ViewHistoryActionListener(new ViewHistoryListener());
 		docPtGUI.CreateLabActionListener(new CreateLabListener());
+		docPtGUI.SearchPatientActionListener(new SearchAnotherPatientListener());
 	}
 	
 	public DoctorController(Doctor_rec_GUI docRec,Patient pt,String docID)
@@ -350,6 +351,19 @@ public class DoctorController {
 			System.out.println("Create Lab in DB!!");
 			JOptionPane.showMessageDialog(null,"Lab Request open success","Lab request complete", JOptionPane.INFORMATION_MESSAGE);
 			docLabGUI.dispose();
+		
+		}
+	
+	}
+	
+	
+	class SearchAnotherPatientListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			docPtGUI.dispose();
+			DoctorGUI doc_gui = new DoctorGUI();	        		   		   
+	   		DoctorController docCon = new DoctorController(doc_gui,LoginControl.getUserId());
 		
 		}
 	
