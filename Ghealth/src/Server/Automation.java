@@ -45,6 +45,8 @@ public class Automation extends Thread{
 			 * here we can enter a starting date to schedule mailing at a certain hour
 			 * if there isn't a future date it will start immediately and repeat with the given value
 			 */
+			//Date startDate = dateFormatter.parse("2016-06-04 19:14:30");
+			//timer.schedule(new PeriodicNotification(),startDate, 60 * 1000);  //Every 24 hours at 8AM
 			Date startDate = dateFormatter.parse("2016-06-04 19:14:30");
 			timer.schedule(new PeriodicNotification(),startDate, 24 * 60 * 60 * 1000);  //Every 24 hours at 8AM
 		} catch (ParseException e) {
@@ -85,7 +87,7 @@ public class Automation extends Thread{
 
 			//-------------------------------------------------------------------------------------
 			
-			querystr = "SELECT  apsID,apsPtID,apsDate,apsTime,apsCreateDate,apsCreateTime,apsStatus,apsDocID,uFirstName,uLastName,cID,cName,cLocation,dSpeciality,ptEmail "
+			querystr = "SELECT  apsID,apsPtID,apsDate,apsTime,apsCreateDate,apsCreateTime,apsStatus,apsDocID,uFirstName,uLastName,cID,cName,cLocation,dSpeciality,ptEmail,ptFirstName,ptLastName "
 					+ "FROM appointmentsettings,user,clinic,doctor,patient "
 					+ "WHERE apsPtID=patient.ptID AND apsStatus='SCHEDUELD' AND uID=apsDocID AND cID=ucID AND dID=uID AND apsDate='"+tommorow_b+"'";//SELECT mother fucker appointments";
 			
@@ -114,6 +116,7 @@ public class Automation extends Thread{
 					Notification nt = new Notification();
 					Date dt = formatter.parse(as.getApsDate());
 					nt.date = dt;
+					nt.ptName = result.getString("ptFirstName") +" "+ result.getString("ptLastName");
 					nt.sdate = as.getApsDate();
 					nt.time = as.getApsTime();
 					nt.docName="Dr. " + doctor.getuLastName() + " " + doctor.getuFirstName();

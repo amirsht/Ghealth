@@ -13,4 +13,5 @@ public class Notification {
 	public String mail = null;
 	public String location = null;
 	public String docName = null;	
+	public String ptName = null;
 }

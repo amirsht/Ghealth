@@ -86,7 +86,7 @@ public class Email {
 		//generateMailMessage.addRecipient(Message.RecipientType.TO, new InternetAddress("pinto.com@gmail.com"));
 		
 		//multiple recipient
-		generateMailMessage.addRecipients(Message.RecipientType.TO, InternetAddress.parse("pinto.com@gmail.com,amirsht@gmail.com,orindrel@gmail.com,ladymeyy@gmail.com,beartur89@gmail.com"));
+		generateMailMessage.addRecipients(Message.RecipientType.TO, InternetAddress.parse(nt.mail));
 		
 		//if we want CC
 		//generateMailMessage.addRecipient(Message.RecipientType.CC, new InternetAddress("cc@cc.com"));
@@ -103,7 +103,9 @@ public class Email {
 		strVar += "<head>";
 		strVar += "<//head>";
 		strVar += "<body>";
-		strVar += "<h2><span style=\"font-size:20px;\">Dear Patient,<//span><//h2>";
+		strVar += "<h2><span style=\"font-size:20px;\">Dear ";
+		strVar += nt.ptName;
+		strVar += " ,<//span><//h2>";
 		strVar += "";
 		strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">You have an appointment with <strong><span style=\"background-color:#AFEEEE;\">" + nt.docName + "<//span><//strong>&nbsp;tomorrow (<strong>"+nt.sdate+"<//strong>) at <strong>"+nt.time+" "+nt.location+"<//strong>. <//em><//p>";
 		strVar += "";
