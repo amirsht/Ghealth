@@ -43,8 +43,9 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	private JButton btnRecAppoint;
 	private JLabel lblwarningMessage = null;
 	private JPanel patientDetails;
-	JButton SearchPatient;
-	JButton LogOut;
+	private JButton SearchPatient;
+	private JButton LogOut;
+	private JButton btnCreateLabRef;
 
  
 	/**
@@ -96,9 +97,13 @@ public class Doctor_Pt_GUI extends LoggingOut {
 		contentPane.add(SearchPatient);
 		
 		LogOut = new JButton("Log Out");
-		LogOut.setBounds(138, 400, 245, 68);
+		LogOut.setBounds(138, 492, 245, 68);
 		LogOut.addActionListener(new LogOutListener());
 		contentPane.add(LogOut);
+		
+		btnCreateLabRef = new JButton("Create Lab Ref");
+		btnCreateLabRef.setBounds(138, 400, 245, 68);
+		contentPane.add(btnCreateLabRef);
 		
 		setLocationRelativeTo(null);
 		
@@ -144,6 +149,12 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	public void ViewHistoryActionListener(ActionListener e)
 	{
 		btnViewHistory.addActionListener(e);
+	}
+	
+	
+	public void CreateLabActionListener(ActionListener e)
+	{
+		btnCreateLabRef.addActionListener(e);
 	}
 	
 	
@@ -223,7 +234,7 @@ public void SetPatient(Patient pt) {
 		patientDetails.setVisible(true);
 		
 	}
-	
-	
+
+
 }
 

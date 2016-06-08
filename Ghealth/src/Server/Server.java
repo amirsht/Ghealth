@@ -189,6 +189,13 @@ public class Server extends Thread
             	
             	
             	/*--- Doctor flow Tasks  ----*/
+            	
+            case CREATE_LAB_REF:
+            	ls = (LabSettings)env.getSingleObject();
+            	status=SClab.CreaetLabRef(ls);
+            	env.setStatus(status);
+
+            	break;
             case GET_CURRENT_APPOINTMENT_ID:
             	System.out.println("GET_CURRENT_APPOINTMENT_ID");
             	String[] patiend_doc =(String[])env.getSingleObject();
@@ -207,14 +214,13 @@ public class Server extends Thread
             	System.out.println("GET_ARRIVED_APPOINTMENTS");
             	pt = (Patient)env.getSingleObject();
             	env = SCdocAppointment.GetRecordedAppointments(pt.getpID());
-            	
             	break;
             /*---     Lab-Ref Tasks:   ---*/
-            case GET_LAB_REF:
+            case SEND_FILE_TO_CLIENT:
             /* Sending file to client */
             	/* TODO: SQL query returns filename as string */
-            	filename="src//Server//files//bbb.jpg";
-            	sendFile(filename,cs);
+            	ls = (LabSettings)env.getSingleObject();
+            	sendFile(ls.getFilePath(),cs);
             	break;
             
             	
@@ -226,6 +232,10 @@ public class Server extends Thread
             	SClab.UpdateLabFilePath(filename,ls.getLabID());
             	break;
 				
+            case GET_ARRIVED_LABS:
+            	pt = (Patient)env.getSingleObject();
+            	env = SClab.Get_ARRIVED_labs(pt.getpID());
+            	break;
 			case GET_SCHEDUELD_LAB:
             	pt = (Patient)env.getSingleObject();
             	env = SClab.Get_SCHEDUELD_labs(pt.getpID());
@@ -233,7 +243,7 @@ public class Server extends Thread
             	
             case UPDATE_LAB_RECORD:
             	ls = (LabSettings)env.getSingleObject();
-            	SClab.UpdateLabRecord(ls.getLabID(),ls.getLabWorkerSummery());
+            	SClab.UpdateLabRecord(ls.getLabID(),ls.getLabWorkerSummery(),ls.getLabWorkerID());
             	break;
             	
             case LOG_OUT:
@@ -255,7 +265,7 @@ public class Server extends Thread
             
             
             /* if the task is not to send FILE to client */
-            if(env.getType() != task.UPLOAD_FILE_TO_LAB_RECORD && env.getType() != task.GET_LAB_REF)
+            if(env.getType() != task.UPLOAD_FILE_TO_LAB_RECORD && env.getType() != task.SEND_FILE_TO_CLIENT)
             {
 	            /* Sending data back to client */
             	System.out.println("before new output stream");
@@ -313,7 +323,14 @@ public class Server extends Thread
      */
     public void sendFile(String filename,Socket s) throws IOException {
 		DataOutputStream dos = new DataOutputStream(s.getOutputStream());
-		FileInputStream fis = new FileInputStream("src//Server//files//newfiletest.jpg");
+		
+		String extension;
+		extension=filename;
+	    int index=extension.indexOf(".");
+	    //get the extension of the file
+	    extension=extension.substring(index+1, extension.length());
+		
+		FileInputStream fis = new FileInputStream(filename);
 		byte[] buffer = new byte[4096];
 		
 		while (fis.read(buffer) > 0) {

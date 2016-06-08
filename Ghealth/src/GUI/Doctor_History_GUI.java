@@ -15,13 +15,20 @@ import javax.swing.JTextField;
 import java.awt.Window.Type;
 
 import javax.swing.JLabel;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 import javax.swing.JButton;
 
@@ -36,6 +43,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
+import java.awt.Panel;
+import java.awt.RenderingHints;
 
 
 public class Doctor_History_GUI extends LoggingOut {
@@ -54,10 +63,11 @@ public class Doctor_History_GUI extends LoggingOut {
 	private JComboBox<?> AppointmentBox;
 	private JComboBox<?> LabResBox;
 	
-	JButton SearchPatient;
-	JButton LogOut;
+	private JButton SearchPatient;
+	private JButton LogOut;
 	private JEditorPane editorPane;
-	
+	private JPanel imagePan;
+	private JLabel imglabel;
 	/**
 	 * Create the frame.
 	 */
@@ -111,9 +121,22 @@ public class Doctor_History_GUI extends LoggingOut {
 		contentPane.add(LabResBox);
 		
 		editorPane = new JEditorPane();
-		editorPane.setBounds(10, 274, 465, 272);
+		editorPane.setBounds(10, 274, 164, 286);
+		editorPane.setContentType("text/html");
+		editorPane.setEditable(false);
+		//editorPane.setLineWrap(true); //Makes the text wrap to the next line
+		//editorPane.setWrapStyleWord(true); //Makes the text wrap full words, not just letters
 		contentPane.add(editorPane);
 		
+		imagePan = new JPanel();
+		imagePan.setLocation(175, 271);
+		imagePan.setSize(300, 300);
+		imagePan.setVisible(true);
+    	contentPane.add(imagePan);
+    	imglabel = new JLabel();
+        imagePan.add(imglabel);
+    	
+    	
 		btnCancel.addActionListener(new CancelListener());
 		
 		
@@ -219,7 +242,6 @@ public void SetPatient(Patient pt) {
 		patientDetails.add(doctorID);
 		
 		
-		
 		patientDetails.setVisible(true);
 		
 	}
@@ -245,7 +267,49 @@ public void SetPatient(Patient pt) {
 		
 		LabResBox.addActionListener(e);
 	}
+	
+	public  JEditorPane geteditorPane()
+	{
+			return editorPane;
+	}
 
+	public JPanel getimagePan()
+	{
+		return imagePan;
+	}
+	
+	public void setAddToImagePan(String Path)
+	{
+		Image image = null;
+        try {
+        	//File sourceimage = new File("src\\images\\aaa.jpg");
+        	File sourceimage = new File(Path);
+        	image = ImageIO.read(sourceimage);
+        	image = getScaledImage(image,300,300);
+        } catch (IOException e) {
+        	e.printStackTrace();
+        }
+        
+        
+        
+        //imglabel = new JLabel(new ImageIcon(image));
+        imglabel.setIcon(new ImageIcon(image));
+        //imagePan.add(imglabel);
+              
+	}
+	
+	
+	private static Image getScaledImage(Image srcImg, int w, int h){
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        return resizedImg;
+    }
+	
 	public class CancelListener implements ActionListener 
     {
     	@Override

@@ -6,8 +6,11 @@ import GUI.*;
 //import client.AppointmentControl.cancelAppointmentFromDB;
 
 import java.awt.Container;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 /* This class represents our client side 
  * of the system communication protocol.
  * the client will be personal for every component in the program
@@ -23,8 +26,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -33,6 +39,7 @@ public class DoctorController {
       
 	private DoctorGUI docGUI;
 	private Doctor_Pt_GUI docPtGUI;
+	private Doctor_Create_Lab_GUI docLabGUI;
 	private Patient pt;
 	private Doctor_rec_GUI doc_recGUI;
 	private Doctor_History_GUI doc_hist_GUI;
@@ -40,6 +47,8 @@ public class DoctorController {
 	
 	private AppointmentSettings as;
 	private List<Object> objList_stra;
+	private List<Object> objList_strb;
+
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
@@ -65,6 +74,7 @@ public class DoctorController {
 		docPtGUI.SetPatient(pt);
 		docPtGUI.RecordAppointActionListener(new RecAppointListener());	
 		docPtGUI.ViewHistoryActionListener(new ViewHistoryListener());
+		docPtGUI.CreateLabActionListener(new CreateLabListener());
 	}
 	
 	public DoctorController(Doctor_rec_GUI docRec,Patient pt,String docID)
@@ -75,18 +85,6 @@ public class DoctorController {
 		doc_recGUI.SetPatient(pt);
 		doc_recGUI.RecordPatientActionListener(new RecPatientListener());	
 	}
-	
-	/*
-	public DoctorController(Doctor_History_GUI history,Patient pt,String docID)
-	{
-		this.pt = pt;
-		this.DoctorID = docID;
-		doc_hist_GUI = history;
-		doc_hist_GUI.SetPatient(pt);
-		doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());	
-		doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
-	}
-	*/
 	
 	public int GET_CURRENT_APPOINTMENT(String ptID, String docID)
 	{
@@ -128,6 +126,27 @@ public class DoctorController {
 		{
 			strList.add(((AppointmentSettings)obj).toStringCancelAppoint());
 			System.out.println((AppointmentSettings)obj);
+		}
+				
+		return strList;
+	}
+	
+	public List<String> GET_ARRIVED_LABS(String ptID)
+	{
+		
+		Envelope en = Controller.Control(new Patient(ptID),task.GET_ARRIVED_LABS);
+		List<String> strList = new ArrayList<String>();
+		objList_strb = en.getobjList();
+		
+		if(en.getStatus() == Status.NOT_EXIST)
+		{
+			System.out.println("There is no open labs!");
+			return null;
+		}
+		for (Object obj : en.getobjList())
+		{
+			strList.add(((LabSettings)obj).tostringShowLabs());
+			System.out.println((LabSettings)obj);
 		}
 				
 		return strList;
@@ -190,7 +209,7 @@ public class DoctorController {
 				
 			}
 			else{
-			JOptionPane.showMessageDialog(null, "The Patient '"+pt.getpFirstName() +"'HAS NO APPOINTMENT!" + "\n","Confirm",JOptionPane.OK_OPTION);
+			JOptionPane.showMessageDialog(null, "The Patient '"+pt.getpFirstName() +"'HAS NO APPOINTMENT FOR YOU!" + "\n","Confirm",JOptionPane.OK_OPTION);
 			System.out.println("NO APPOINTMENT");}
 		}
 		
@@ -205,6 +224,13 @@ public class DoctorController {
 			int appID = GET_CURRENT_APPOINTMENT(pt.getpID(),DoctorID);		
 			String strAppID = appID + "";
 			
+			if(doc_recGUI.getRecordField().equals("Please fill appointment record here..."))
+			{
+				//TODO - pop up message
+				System.out.println("Pleae fill appointment!!!");
+				return;
+			}
+
 			SET_APPOINTMENT_RECORD(strAppID,doc_recGUI.getRecordField());
 			doc_recGUI.dispose();
 		}
@@ -220,13 +246,23 @@ public class DoctorController {
 			List<String> objList = GET_ARRIVED_APPOINTMENTS(pt.getpID());
 			if(objList == null)
 			{
-				System.out.println("There is no open appointment to cancel for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				System.out.println("There is no open appointment for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
 				JOptionPane.showMessageDialog(null,"There are no recorded appointments to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
 			}
+			
+			
+			List<String> labList = GET_ARRIVED_LABS(pt.getpID());
+			if(labList == null)
+			{
+				System.out.println("There is no open labs "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				JOptionPane.showMessageDialog(null,"There are no recorded appointments to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
 			doc_hist_GUI = new Doctor_History_GUI();
 			doc_hist_GUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
 			doc_hist_GUI.SetPatient(pt);
-			doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());	
+			doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());
+			doc_hist_GUI.getLabResultBox().setModel(new DefaultComboBoxModel(labList.toArray()));
 			doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
 			//DoctorController doc_histControl = new DoctorController(doc_histGUI,pt,DoctorID);
 						
@@ -245,7 +281,9 @@ public class DoctorController {
 			AppointmentSettings aaa = (AppointmentSettings)objList_stra.get(selectedIndex);
 			System.out.println(aaa);
 			//Envelope en = Controller.Control(as,task.CANCEL_APPOINTMENT_FROM_DB);
-			System.out.println("Tring to VIEW Appointment Summery INDEX:" + selectedIndex);			
+			System.out.println("Tring to VIEW Appointment Summery INDEX:" + selectedIndex);	
+			doc_hist_GUI.SetSummery(aaa.getApsSummery());
+
 		}
 		
 	}
@@ -254,12 +292,67 @@ public class DoctorController {
 	{
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			doc_hist_GUI.getimagePan().setVisible(false);
+			int selectedIndex = doc_hist_GUI.getLabResultBox().getSelectedIndex();
+			LabSettings ls = (LabSettings)objList_strb.get(selectedIndex);
+			
+			doc_hist_GUI.SetSummery(ls.getLabWorkerSummery());
+			
+			Controller.Control(ls,task.SEND_FILE_TO_CLIENT);
+			
+			System.out.println(ls.getFilePath());
+			if(!ls.getFilePath().equals("NO FILE"))
+			{
+				//Controller.Control(ls,task.SEND_FILE_TO_CLIENT);
+				System.out.println(ls.getFileExt());
+				doc_hist_GUI.setAddToImagePan("src\\images\\lab_file."+ls.getFileExt());
+				doc_hist_GUI.getimagePan().setVisible(true);
+			}
+			else doc_hist_GUI.getimagePan().setVisible(false);
 			System.out.println("Tring to VIEW LAB RESULT!!");
-						
+			
+			
 		}
 		
 	}
 	
 	
+	class CreateLabListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Trying to create Lab");
+			docLabGUI = new Doctor_Create_Lab_GUI();
+			docLabGUI.SetPatient(pt);
+			docLabGUI.CreateNewLabRefActionListener(new CreateLabinDBListener());
+		}
+	}
+	
+	
+	
+	class CreateLabinDBListener  implements ActionListener 
+	{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+			if(docLabGUI.getRecordField().equals("Please fill your requirements for the lab worker.") || docLabGUI.getRecordField().equals("") )
+			{
+				JOptionPane.showMessageDialog(null,"Please fill your requirements!","Can't create lab ref!", JOptionPane.INFORMATION_MESSAGE);
+				return;	//return to the find patient window
+			}
+			
+			LabSettings ls = new LabSettings();
+			ls.setLabPtID(pt.getpID());
+			ls.setLabDocID(LoginControl.getUserId());
+			ls.setLabDoctorReq(docLabGUI.getRecordField());
+			Controller.Control(ls,task.CREATE_LAB_REF);
+			System.out.println("Create Lab in DB!!");
+			JOptionPane.showMessageDialog(null,"Lab Request open success","Lab request complete", JOptionPane.INFORMATION_MESSAGE);
+			docLabGUI.dispose();
+		
+		}
+	
+	}
 } //PationControl
 

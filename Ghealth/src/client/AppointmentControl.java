@@ -61,7 +61,6 @@ public class AppointmentControl {
 		csGUI_Appoint.SetPatient(pt);
 		csGUI_Appoint.createAppointActionListener(new createNewAppointListener());
 		csGUI_Appoint.SearchPatientActionListener(new SearchPatientListener());
-		//csGUI_Appoint.LogOutActionListener(new LogOutListener());
 		csGUI_Appoint.cancelAppointActionListener(new CancelAppointListener());	
 	}
 	

@@ -14,11 +14,7 @@ import java.util.List;
 
 import enums.DoctorSpeciallity;
 import enums.task;
-import models.Envelope;
-import models.LabSettings;
-import models.Patient;
-import models.PersonalDoctor;
-import models.User;
+import models.*;
 
 /**
  * Taking care of all connection and transportation in client side
@@ -98,8 +94,11 @@ public class Controller {
 	            try {
 	            	
 	                /* Choose if get file or object */
-	                if(En.getType() == task.GET_LAB_REF)
-	                	saveFile();
+	                if(En.getType() == task.SEND_FILE_TO_CLIENT)
+	                {
+	                	LabSettings ls = (LabSettings)En.getSingleObject();
+	                	saveFile(ls.getFileExt());
+	                }
 	                else if(En.getType() == task.UPLOAD_FILE_TO_LAB_RECORD)
 	                	sendFile(((LabSettings)En.getSingleObject()).getFilePath());
 	                	//sendFile("src//client//files//afasdf.jpg");
@@ -178,9 +177,9 @@ public class Controller {
 		 * Saving file in client storage
 		 * @throws IOException
 		 */
-		private static void saveFile() throws IOException {
+		private static void saveFile(String ext) throws IOException {
 			DataInputStream dis = new DataInputStream(socket.getInputStream());
-			FileOutputStream fos = new FileOutputStream("src//client//files//temp_file.jpg");
+			FileOutputStream fos = new FileOutputStream("src//images//lab_file."+ext);
 			byte[] buffer = new byte[16*1024]; // 16 kb buffer
 			
 			int filesize = 2097152; // Send file up to 2mb size in separate msg

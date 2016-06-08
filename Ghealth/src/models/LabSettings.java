@@ -21,26 +21,32 @@ public class LabSettings implements Serializable{
 	private String fileExt;
 	
 	
+	public LabSettings()
+	{
+		super();
+		
+	}
+	
 	public LabSettings(int labID,String labPtID, String createDate, String createTime, Status labStatus, String labDocID,
 			String labDoctorReq) {
 		super();
 		this.labID = labID;
-		this.labPtID = labPtID;
+		this.setLabPtID(labPtID);
 		CreateDate = createDate;
-		CreateTime = createTime;
-		this.labStatus = labStatus;
-		this.labDocID = labDocID;
+		setCreateTime(createTime);
+		this.setLabStatus(labStatus);
+		this.setLabDocID(labDocID);
 		this.setLabDoctorReq(labDoctorReq);
 	}
 	
 	public LabSettings(String labPtID, String createDate, String createTime, Status labStatus, String labDocID,
 			String labDoctorReq) {
 		super();
-		this.labPtID = labPtID;
+		this.setLabPtID(labPtID);
 		CreateDate = createDate;
-		CreateTime = createTime;
-		this.labStatus = labStatus;
-		this.labDocID = labDocID;
+		setCreateTime(createTime);
+		this.setLabStatus(labStatus);
+		this.setLabDocID(labDocID);
 		this.setLabDoctorReq(labDoctorReq);
 	}
 
@@ -95,5 +101,59 @@ public class LabSettings implements Serializable{
 	public void setFileExt(String fileExt) {
 		this.fileExt = fileExt;
 	}
+	
+	public String tostringShowLabs() {
+		return "Date= "+CreateDate+",Laborant "+labWorker.getuFirstName()+" "+labWorker.getuLastName()
+		+",Clinic="+labWorker.getuClinic().getcName()+"("+labWorker.getuClinic().getcLocation()+")";
+	}
+
+	public String getLabWorkerID() {
+		return labWorkerID;
+	}
+
+	public void setLabWorkerID(String labWorkerID) {
+		this.labWorkerID = labWorkerID;
+	}
+
+	public Status getLabStatus() {
+		return labStatus;
+	}
+
+	public void setLabStatus(Status labStatus) {
+		this.labStatus = labStatus;
+	}
+
+	public String getLabPtID() {
+		return labPtID;
+	}
+
+	public void setLabPtID(String labPtID) {
+		this.labPtID = labPtID;
+	}
+
+	public String getCreateTime() {
+		return CreateTime;
+	}
+
+	public void setCreateTime(String createTime) {
+		CreateTime = createTime;
+	}
+
+	public String getLabPhotoPath() {
+		return labPhotoPath;
+	}
+
+	public void setLabPhotoPath(String labPhotoPath) {
+		this.labPhotoPath = labPhotoPath;
+	}
+
+	public String getLabDocID() {
+		return labDocID;
+	}
+
+	public void setLabDocID(String labDocID) {
+		this.labDocID = labDocID;
+	}
+	
 	
 }

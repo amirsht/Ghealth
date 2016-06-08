@@ -44,6 +44,7 @@ public class SCdocAppointment {
 				as = new AppointmentSettings(result.getInt(1),result.getString(2),result.getString(3),result.getString(4),
 						result.getString(5),result.getString(6),st,result.getString("apsDocID"));
 				
+				as.setApsSummery(result.getString(15));
 				
 				Clinic clinic = new Clinic(result.getInt("cID"),result.getString("cName"),result.getString("cLocation"));
 				DoctorSpeciallity ds = DoctorSpeciallity.valueOf(result.getString("dSpeciality"));
@@ -125,7 +126,7 @@ public class SCdocAppointment {
 		int result;
 		
 		querystr="UPDATE appointmentsettings "
-				+ "SET apsStatus='ARRIVED', apsSummery ='"+summery+"'"
+				+ "SET apsStatus='ARRIVED', apsSummery ='"+summery+"' "
 				+ "WHERE apsID='"+apsID+"'";
 		
 		try 

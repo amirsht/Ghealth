@@ -31,7 +31,9 @@ public class AppointmentSettings  implements Serializable {
 	private String CreateTime;
 	private Status apsStatus;
 	private String apsDocID;
+	private String apsSummery;
 	private Doctor doctor;
+	
 	
 	
 	
@@ -148,6 +150,16 @@ public class AppointmentSettings  implements Serializable {
 	public String toStringCancelAppoint() {
 		return "("+doctor.getdSpeciality()+") Date=" + apsDate + ", Doctor "+
 				doctor.getuLastName()+",Clinic="+doctor.getuClinic().getcName()+" ("+doctor.getuClinic().getcLocation()+")";
+	}
+
+
+	public String getApsSummery() {
+		return apsSummery;
+	}
+
+
+	public void setApsSummery(String apsSummery) {
+		this.apsSummery = apsSummery;
 	}
 	
 }

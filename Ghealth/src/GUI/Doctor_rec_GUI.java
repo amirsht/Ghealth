@@ -93,7 +93,7 @@ public class Doctor_rec_GUI extends LoggingOut {
 		btnCancel.addActionListener(new CancelListener());
 		
 		textRecPane = new JTextPane();
-		textRecPane.setText("Ask the patient what's up?...");
+		textRecPane.setText("Please fill appointment record here...");
 		textRecPane.setBounds(202, 143, 273, 228);
 		contentPane.add(textRecPane);
 		
@@ -216,9 +216,11 @@ public void SetPatient(Patient pt) {
 	//	return InsertPatientId.getText();
 	//}
 
-public String getRecordField() {
-	return textRecPane.getText();
-}
+	public String getRecordField() 
+	{
+		return textRecPane.getText();
+	}
+
 
 	public class CancelListener implements ActionListener 
     {

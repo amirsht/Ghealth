@@ -234,11 +234,12 @@ public class LabController {
 				else
 				{
 					lb.setLabWorkerSummery(rec.getRecordField());
+					lb.setLabWorkerID(LoginControl.getUserId());
 					Controller.Control(lb,task.UPDATE_LAB_RECORD);
 					JOptionPane.showMessageDialog(null,"Lab record was updated!"
 							,"Done.", JOptionPane.INFORMATION_MESSAGE);
 
-					
+					UploadFile=false;
 					rec.dispose();
 				}
 			}
