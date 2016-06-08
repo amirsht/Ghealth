@@ -276,6 +276,7 @@ public class DoctorController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Tring to VIEW Appointment History!!");
+			doc_hist_GUI.getimagePan().setVisible(false);
 
 			int selectedIndex = doc_hist_GUI.getAppointmentHistoryBox().getSelectedIndex();
 			System.out.println("" + selectedIndex);
