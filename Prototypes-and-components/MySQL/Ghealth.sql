@@ -32,7 +32,8 @@ SET character_set_client = utf8;
  1 AS `apsCreateTime`,
  1 AS `apsStatus`,
  1 AS `apsDocID`,
- 1 AS `apsSummery`*/;
+ 1 AS `apsSummery`,
+ 1 AS `apsStartTime`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -52,12 +53,14 @@ CREATE TABLE `appointmentsettings` (
   `apsStatus` varchar(45) DEFAULT NULL,
   `apsDocID` varchar(45) DEFAULT NULL,
   `apsSummery` varchar(150) DEFAULT NULL,
+  `apsStartTime` time DEFAULT NULL,
   PRIMARY KEY (`apsID`),
+  UNIQUE KEY `apsStartTime_UNIQUE` (`apsStartTime`),
   KEY `apsPtID_idx` (`apsPtID`),
   KEY `apsDocID_idx` (`apsDocID`),
   CONSTRAINT `apsDocID` FOREIGN KEY (`apsDocID`) REFERENCES `user` (`uID`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `apsPtID` FOREIGN KEY (`apsPtID`) REFERENCES `patient` (`ptID`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -66,7 +69,7 @@ CREATE TABLE `appointmentsettings` (
 
 LOCK TABLES `appointmentsettings` WRITE;
 /*!40000 ALTER TABLE `appointmentsettings` DISABLE KEYS */;
-INSERT INTO `appointmentsettings` VALUES (1,'4444','2016-07-15','10:30:00','2016-06-15','14:01:43','ARRIVED','5001',NULL),(2,'4444','2016-08-15','11:00:00','2016-06-15','14:01:43','ARRIVED','5004',NULL),(3,'4444','2016-09-15','11:30:00','2016-06-15','14:01:43','ARRIVED','5005',NULL),(4,'4000','2016-07-15','12:00:00','2016-06-15','14:01:43','ARRIVED','5002',NULL),(5,'4000','2016-08-15','12:30:00','2016-06-15','14:01:43','ARRIVED','5003',NULL),(6,'4003','2016-07-15','13:00:00','2016-06-15','14:01:43','ARRIVED','5002',NULL),(7,'4003','2016-08-15','13:30:00','2016-06-15','14:01:43','ARRIVED','5003',NULL),(8,'4444','2016-08-15','08:00:00','2016-08-15','15:30:00','ARRIVED','5001',NULL),(9,'4444','2016-07-15','08:00:00','2016-07-15','08:00:00','ARRIVED','5002',NULL),(10,'4444','2016-06-15','13:00:00','2016-07-15','08:00:00','ARRIVED','5004',NULL),(11,'4444','2016-09-15','13:00:00','2016-07-15','08:00:00','CANCELED','5011',NULL),(12,'4444','2016-06-24','09:30:00','2016-06-03','00:18:56','CANCELED','5000',NULL),(13,'4444','2016-06-17','14:30:00','2016-06-03','00:27:19','CANCELED','5014',NULL),(14,'4444','2016-06-16','09:30:00','2016-06-04','15:13:31','CANCELED','5010',NULL),(15,'4444','2016-06-06','10:30:00','2016-06-04','15:56:46','CANCELED','5009',NULL),(16,'4444','2016-06-05','10:00:00','2016-06-04','15:57:49','CANCELED','5014',NULL),(17,'4444','2016-06-22','11:00:00','2016-06-06','14:59:25','SCHEDUELD','5000',NULL),(18,'4444','2016-06-30','16:00:00','2016-06-06','15:00:20','SCHEDUELD','5006',NULL);
+INSERT INTO `appointmentsettings` VALUES (1,'4444','2016-07-15','10:30:00','2016-06-15','14:01:43','ARRIVED','5001','123412',NULL),(2,'4444','2016-08-15','11:00:00','2016-06-15','14:01:43','ARRIVED','5004','dsfa',NULL),(3,'4444','2016-09-15','11:30:00','2016-06-15','14:01:43','ARRIVED','5005','adsf',NULL),(4,'4000','2016-07-15','12:00:00','2016-06-15','14:01:43','ARRIVED','5002','sdav',NULL),(5,'4000','2016-08-15','12:30:00','2016-06-15','14:01:43','ARRIVED','5003','wef',NULL),(6,'4003','2016-07-15','13:00:00','2016-06-15','14:01:43','ARRIVED','5002','dsavsd',NULL),(7,'4003','2016-08-15','13:30:00','2016-06-15','14:01:43','ARRIVED','5003','adsf',NULL),(8,'4444','2016-08-15','08:00:00','2016-08-15','15:30:00','ARRIVED','5001',NULL,NULL),(9,'4444','2016-07-15','08:00:00','2016-07-15','08:00:00','ARRIVED','5002',NULL,NULL),(10,'4444','2016-06-15','13:00:00','2016-07-15','08:00:00','ARRIVED','5004',NULL,NULL),(11,'4444','2016-09-15','13:00:00','2016-07-15','08:00:00','CANCELED','5011',NULL,NULL),(12,'4444','2016-06-24','09:30:00','2016-06-03','00:18:56','ARRIVED','5000','adslfalf\nadlfkadlskfdslakfjal\naldksfnladskfnlksdfnlka\nglandsgladsnglas',NULL),(13,'4444','2016-06-17','14:30:00','2016-06-03','00:27:19','CANCELED','5014',NULL,NULL),(14,'4444','2016-06-16','09:30:00','2016-06-04','15:13:31','CANCELED','5010',NULL,NULL),(15,'4444','2016-06-06','10:30:00','2016-06-04','15:56:46','ARRIVED','5009',NULL,'17:00:00'),(16,'4444','2016-06-05','10:00:00','2016-06-04','15:57:49','ARRIVED','5014',NULL,'16:00:00'),(17,'4444','2016-06-22','11:00:00','2016-06-06','14:59:25','CANCELED','5000',NULL,NULL),(18,'4444','2016-06-30','16:00:00','2016-06-06','15:00:20','SCHEDUELD','5006',NULL,NULL),(19,'4444','2016-06-25','10:00:00','2016-06-07','23:33:31','SCHEDUELD','5011',NULL,NULL);
 /*!40000 ALTER TABLE `appointmentsettings` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -124,7 +127,7 @@ CREATE TABLE `doctor` (
   `dID` varchar(45) NOT NULL,
   `dSpeciality` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`dID`),
-  CONSTRAINT `dcid` FOREIGN KEY (`dID`) REFERENCES `user` (`uID`) ON DELETE NO ACTION ON UPDATE CASCADE
+  CONSTRAINT `dID` FOREIGN KEY (`dID`) REFERENCES `user` (`uID`) ON DELETE NO ACTION ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -153,15 +156,15 @@ CREATE TABLE `labsettings` (
   `labStatus` varchar(45) DEFAULT NULL,
   `labDocID` varchar(45) DEFAULT NULL,
   `labworkerID` varchar(45) DEFAULT NULL,
-  `labDocReq` varchar(150) DEFAULT NULL,
-  `labWorkerSummery` varchar(150) DEFAULT NULL,
-  `labPhotoPath` varchar(150) DEFAULT NULL,
+  `labDocReq` varchar(500) DEFAULT NULL,
+  `labWorkerSummery` varchar(500) DEFAULT NULL,
+  `labPhotoPath` varchar(150) DEFAULT 'NO FILE',
   PRIMARY KEY (`labID`),
   KEY `labPtID_idx` (`labPtID`),
   KEY `labDocID` (`labDocID`),
   CONSTRAINT `labDocID` FOREIGN KEY (`labDocID`) REFERENCES `user` (`uID`) ON DELETE NO ACTION ON UPDATE CASCADE,
   CONSTRAINT `labPtID` FOREIGN KEY (`labPtID`) REFERENCES `patient` (`ptID`) ON DELETE NO ACTION ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -170,7 +173,7 @@ CREATE TABLE `labsettings` (
 
 LOCK TABLES `labsettings` WRITE;
 /*!40000 ALTER TABLE `labsettings` DISABLE KEYS */;
-INSERT INTO `labsettings` VALUES (1,'4444','2016-06-15','14:01:43','SCHEDUELD','5004','6000','Please kill this patient!','',NULL);
+INSERT INTO `labsettings` VALUES (1,'4444','2016-06-15','14:01:43','ARRIVED','5004','6000','1 Please kill this patient!','baelkfalsk','src//Server//files//1.jpg'),(2,'4444','2016-07-15','14:01:43','ARRIVED','5003','6000','2Please kill this patient!','Add your lab record here...asdgasdgadsgadsvadsvdsa\n\nsadf\ndsaf\n\ndgsa\na\nsdg\nadsg','src//Server//files//2.jpg'),(3,'4444','2016-06-20','14:01:43','ARRIVED','5005','6000','3 Please kill this patient!','Add your lasdfads\n\nfadsfadsfa asdfa\n\n\nsdfasdfasdfsad','src//Server//files//3.png'),(4,'4444','2016-05-30','14:01:43','ARRIVED','5002','6000','4 Please kill this patient!','Add your lasdfsad\nafsadsf\nasf','src//Server//files//4.jpg'),(5,'4444','2016-09-30','14:01:43','ARRIVED','5002','6000','5 Please kill this patient!','Blasdjgfaldskjfadlksjfadslkfj\n\nsadlfadkslf\n\n\nds\nagdsa','src//Server//files//5.jpg'),(6,'4444','2016-06-08','18:33:10','SCHEDUELD','5000',NULL,'adsfadsf\n\n\n\nadsf\n\nsf\nad\nsfad\n',NULL,'NO FILE'),(7,'4444','2016-06-08','18:36:20','ARRIVED','5000','6000','asdfsadfsdf\n\nasdf\n\nadsf\n\nsdf\n\ndsfa\na\ndsf\n\naf','asdfdsafads \n\n\nasdgk\nsadkg\nsgdka\nkag\nsd','src//Server//files//7.jpg');
 /*!40000 ALTER TABLE `labsettings` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -189,6 +192,8 @@ CREATE TABLE `patient` (
   `ptPhone` varchar(45) DEFAULT NULL,
   `ptPrivateClinic` varchar(45) DEFAULT NULL,
   `ptDoctorID` varchar(45) DEFAULT NULL,
+  `ptIsRegistered` binary(1) NOT NULL DEFAULT '1',
+  `ptLeaveDate` date DEFAULT NULL,
   PRIMARY KEY (`ptID`),
   KEY `PersonalDoctorID_idx` (`ptDoctorID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -200,7 +205,7 @@ CREATE TABLE `patient` (
 
 LOCK TABLES `patient` WRITE;
 /*!40000 ALTER TABLE `patient` DISABLE KEYS */;
-INSERT INTO `patient` VALUES ('4000','Adrienne','Bowers','fa','054-4665760','Klalit','1'),('4001','Irvin','Poole','as','054-1235760','Klalit','1'),('4002','Velma','Foster','adf','054-4664444','Klalit','1'),('4003','Cristina','Rodgers','sfASF','054-4665333','Klalit','1'),('4004','Elvira','Boone','temp@gmail.com','054-4665760','Maccabi','1'),('4005','Ori','Arel','temp@gmail.com','054-4611111','Klalit','1'),('4006','Amir','Sht','amamam@yahoo.com','054-3344123','Meuhedet','1'),('4007','Moshe','Sabag','asfa','055-5544336','Maccabi','1'),('4008','Grace','Mckinney','Test@braude.ac.il','052-4222456','Meuhedet','1'),('4444','Kety','Rina','Kety@gmail.com','050-333241','Maccabi','1');
+INSERT INTO `patient` VALUES ('4000','Adrienne','Bowers','fa','054-4665760','Klalit','1','1',NULL),('4001','Irvin','Poole','as','054-1235760','Klalit','1','1',NULL),('4002','Velma','Foster','adf','054-4664444','Klalit','1','1',NULL),('4003','Cristina','Rodgers','sfASF','054-4665333','Klalit','1','1',NULL),('4004','Elvira','Boone','temp@gmail.com','054-4665760','Maccabi','1','1',NULL),('4005','Ori','Arel','temp@gmail.com','054-4611111','Klalit','1','1',NULL),('4006','Amir','Sht','amamam@yahoo.com','054-3344123','Meuhedet','1','1',NULL),('4007','Moshe','Sabag','asfa','055-5544336','Maccabi','1','1',NULL),('4008','Grace','Mckinney','Test@braude.ac.il','052-4222456','Meuhedet','1','1',NULL),('4444','Kety','Rina','Kety@gmail.com','050-333241','Maccabi','1','1',NULL);
 /*!40000 ALTER TABLE `patient` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -297,7 +302,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `amir` AS select `a`.`apsID` AS `apsID`,`a`.`apsPtID` AS `apsPtID`,`a`.`apsDate` AS `apsDate`,`a`.`apsTime` AS `apsTime`,`a`.`apsCreateDate` AS `apsCreateDate`,`a`.`apsCreateTime` AS `apsCreateTime`,`a`.`apsStatus` AS `apsStatus`,`a`.`apsDocID` AS `apsDocID`,`a`.`apsSummery` AS `apsSummery` from `appointmentsettings` `a` where ((`a`.`apsPtID` = '4444') and (`a`.`apsStatus` = 'ARRIVED')) */;
+/*!50001 VIEW `amir` AS select `a`.`apsID` AS `apsID`,`a`.`apsPtID` AS `apsPtID`,`a`.`apsDate` AS `apsDate`,`a`.`apsTime` AS `apsTime`,`a`.`apsCreateDate` AS `apsCreateDate`,`a`.`apsCreateTime` AS `apsCreateTime`,`a`.`apsStatus` AS `apsStatus`,`a`.`apsDocID` AS `apsDocID`,`a`.`apsSummery` AS `apsSummery`,`a`.`apsStartTime` AS `apsStartTime` from `appointmentsettings` `a` where ((`a`.`apsPtID` = '4444') and (`a`.`apsStatus` = 'ARRIVED')) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -311,4 +316,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-06-06 17:18:19
+-- Dump completed on 2016-06-08 18:49:45
