@@ -189,7 +189,7 @@ public class DoctorController {
 
 			}
 			else{
-				JOptionPane.showMessageDialog(null, "The Patient '"+findpt.getpID()+"' Patient NOT Exists!" + "\n","Confirm",JOptionPane.OK_OPTION);	
+				JOptionPane.showMessageDialog(null, "The Patient '"+findpt.getpID()+"' Patient is NOT Registered!" + "\n","Confirm",JOptionPane.OK_OPTION);	
 			}
 			
 		}
@@ -245,22 +245,18 @@ public class DoctorController {
 			System.out.println("Tring to VIEW PATIENT HISTORY");
 			
 			List<String> objList = GET_ARRIVED_APPOINTMENTS(pt.getpID());
-			if(objList == null)
+			List<String> labList = GET_ARRIVED_LABS(pt.getpID());
+			
+			if(objList == null && labList == null)
 			{
 				System.out.println("There is no open appointment for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
-				JOptionPane.showMessageDialog(null,"There are no recorded appointments to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null,"There are no recorded Appointments and Labs to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
-			
-			List<String> labList = GET_ARRIVED_LABS(pt.getpID());
-			if(labList == null)
+						
+			if(labList != null && objList != null )
 			{
-				System.out.println("There is no open labs "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
-				JOptionPane.showMessageDialog(null,"There are no recorded appointments to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
-			}
-			
-			else
-			{
+
 				doc_hist_GUI = new Doctor_History_GUI();
 				doc_hist_GUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
 				doc_hist_GUI.SetPatient(pt);
@@ -268,7 +264,34 @@ public class DoctorController {
 				doc_hist_GUI.getLabResultBox().setModel(new DefaultComboBoxModel(labList.toArray()));
 				doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
 				//DoctorController doc_histControl = new DoctorController(doc_histGUI,pt,DoctorID);
-			}			
+				
+			}
+			if(objList != null && labList == null)
+			{
+				System.out.println("There is no open appointment for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				doc_hist_GUI = new Doctor_History_GUI();
+				doc_hist_GUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
+				doc_hist_GUI.SetPatient(pt);
+				doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());
+				//doc_hist_GUI.getLabResultBox().setModel(new DefaultComboBoxModel(labList.toArray()));
+				doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());
+				System.out.println("There is no open appointment for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				JOptionPane.showMessageDialog(null,"There are no recorded appointment to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Lab", JOptionPane.INFORMATION_MESSAGE);
+				
+			}
+			if(objList == null && labList != null)
+			{
+				System.out.println("There is no open Labs for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				doc_hist_GUI = new Doctor_History_GUI();
+				doc_hist_GUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
+				doc_hist_GUI.SetPatient(pt);
+				doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());
+				//doc_hist_GUI.getLabResultBox().setModel(new DefaultComboBoxModel(labList.toArray()));
+				doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());
+				System.out.println("There is no open Labs for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!");
+				JOptionPane.showMessageDialog(null,"There are no recorded Labs to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Labs", JOptionPane.INFORMATION_MESSAGE);
+				
+			}	
 		}
 		
 	}

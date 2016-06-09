@@ -9,5 +9,12 @@ public enum Status {
 	
 	
 	/* Appointment Status: */
-	SCHEDUELD, CANCELED, ARRIVED, NOSHOW
+	SCHEDUELD, CANCELED, ARRIVED, NOSHOW,
+	CANCEL_ALL,
+	
+	
+	/*Patient registration status*/
+	IS_REG,
+	NOT_REG,
+	
 }

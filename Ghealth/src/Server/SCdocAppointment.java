@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import models.*;
@@ -125,8 +126,11 @@ public class SCdocAppointment {
 		
 		int result;
 		
+		SimpleDateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
+		String createdHour = hourFormat.format(new Date());
+		
 		querystr="UPDATE appointmentsettings "
-				+ "SET apsStatus='ARRIVED', apsSummery ='"+summery+"' "
+				+ "SET apsStatus='ARRIVED', apsSummery ='"+summery+"', apsStartTime ='"+createdHour+"' "
 				+ "WHERE apsID='"+apsID+"'";
 		
 		try 

@@ -45,9 +45,9 @@ public class CS_GUI_Appoint extends LoggingOut {
 	private JButton btnCrtAppoint;
 	private JLabel lblwarningMessage = null;
 	private JPanel patientDetails;
-	JButton SearchPatient;
-	JButton LogOut;
-
+	private JButton SearchPatient;
+	private JButton LogOut;
+	private JButton btnUncreatePatient;
  
 	/**
 	 * Create the frame.
@@ -80,23 +80,31 @@ public class CS_GUI_Appoint extends LoggingOut {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnCrtAppoint.setBounds(138, 220, 245, 68);
+		btnCrtAppoint.setBounds(138, 214, 245, 68);
 		contentPane.add(btnCrtAppoint);
 		
 		btnCancelAppoint = new JButton("CANCEL APPOINTMENT");
-		btnCancelAppoint.setBounds(138, 310, 245, 68);
+		btnCancelAppoint.setBounds(138, 293, 245, 68);
 		contentPane.add(btnCancelAppoint);
 		
 
 		
 		SearchPatient = new JButton("SEARCH ANOTHER PATIENT");
-		SearchPatient.setBounds(138, 130, 245, 68);
+		SearchPatient.setBounds(138, 135, 245, 68);
 		contentPane.add(SearchPatient);
 		
 		LogOut = new JButton("Log Out");
-		LogOut.setBounds(138, 400, 245, 68);
+		LogOut.setBounds(138, 451, 245, 68);
 		LogOut.addActionListener(new LogOutListener());
 		contentPane.add(LogOut);
+		
+		btnUncreatePatient = new JButton("Uncreate Patient");
+		btnUncreatePatient.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnUncreatePatient.setBounds(138, 372, 245, 68);
+		contentPane.add(btnUncreatePatient);
 		
 		setLocationRelativeTo(null);
 		
@@ -138,6 +146,14 @@ public class CS_GUI_Appoint extends LoggingOut {
 	{
 		SearchPatient.addActionListener(e);
 	}
+	
+	public void UncreatePatientActionListener(ActionListener e)
+	{
+		btnUncreatePatient.addActionListener(e);
+	}
+	
+	
+	
 	
 	public void cancelAppointActionListener(ActionListener e)
 	{
@@ -219,10 +235,5 @@ public void SetPatient(Patient pt) {
 		patientDetails.setVisible(true);
 		
 	}
-	
-
-
-
-
 }
 

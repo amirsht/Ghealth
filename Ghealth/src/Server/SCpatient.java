@@ -8,7 +8,9 @@ package Server;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import enums.Status;
@@ -29,7 +31,8 @@ public class SCpatient {
 		Envelope en = new Envelope();
 		
 		/* Return patient row if exist */
-		querystr="SELECT * FROM patient WHERE ptID = '"+ptID+"';";
+		querystr="SELECT * FROM patient "
+				+ "WHERE ptID = '"+ptID+"';";
 		
 		try 
 		{
@@ -46,6 +49,27 @@ public class SCpatient {
 				en.setStatus(Status.NOT_EXIST);
 				//en.addobjList(pt);
 				System.out.println("Patient Not Exist in DB");
+				mysqlConnection.conn.close();
+			}
+			else if(result.getString(8).equals("NOT_REG"))
+			{
+				en.setStatus(Status.NOT_REG);
+				System.out.println("Patient Exist in DB BUT IS CANCELLED!");
+				/* Get & Create the patient from DB */
+				
+				pt.setpID(result.getString("ptID"));
+				pt.setpFirstName(result.getString("ptFirstName"));
+				pt.setpLastName(result.getString("ptLastName"));
+				pt.setPtEmail(result.getString("ptEmail"));
+				pt.setPtPhone(result.getString("ptPhone"));
+				pt.setPtPrivateClinic(result.getString("ptPrivateClinic"));
+				String ptdid = result.getString("ptDoctorID");
+				pt.setptpersonalDoctorID(ptdid);
+				
+				
+				en.addobjList(pt);
+				//en.setObj(pt);
+				System.out.println("ResultSet - ptID - "+result.getString("ptID") );
 				mysqlConnection.conn.close();
 			}
 			else
@@ -85,7 +109,8 @@ public class SCpatient {
 	{
 		Statement stmt;
 		String querystr;
-		querystr="INSERT INTO patient " + " VALUES ('"+pt.getpID()+"','"+pt.getpFirstName()+"','"+pt.getpLastName()+"', '"+pt.getPtEmail()+"', '"+pt.getPtPhone()+"', '"+pt.getPtPrivateClinic()+"', '"+pt.getPd()+"')";
+		querystr="INSERT INTO patient " 
+		+ " VALUES ('"+pt.getpID()+"','"+pt.getpFirstName()+"','"+pt.getpLastName()+"', '"+pt.getPtEmail()+"', '"+pt.getPtPhone()+"', '"+pt.getPtPrivateClinic()+"', '"+pt.getPd()+"', 'IS_REG',null)";
 		
 		try 
 		{
@@ -141,6 +166,114 @@ public class SCpatient {
         }
 		return en;
 		
+
+	}
+	
+	/**
+	 * methood chages the registration status of the patient and
+	 * canceles his SCHEDUALED Appointments
+	 * 
+	 * @param apsID
+	 * @return
+	 */
+	
+	public static Status UncreatePatient(Patient pt)
+	{
+		Statement stmt;
+		String querystr;
+		int result;
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String leftDate = formatter.format(new Date());
+
+		
+		querystr="UPDATE patient "
+				+ "SET ptIsRegistered='NOT_REG',ptLeaveDate='"+leftDate+"'"
+				+ "WHERE ptID='"+pt.getpID()+"'";
+		
+		try 
+		{
+			stmt = mysqlConnection.conn.createStatement();
+			System.out.println("Cancel appointment in DB: " + querystr);
+			result = stmt.executeUpdate(querystr);
+		
+			mysqlConnection.conn.close();
+		}
+		catch (SQLException ex) 
+   	    {/* handle any errors*/
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+          return Status.FAILED_EXCEPTION;
+        }
+		
+		return Status.NOT_REG;
+
+	}
+	
+	public static Status RecoverPatient(Patient pt)
+	{
+		Statement stmt;
+		String querystr;
+		int result;
+		
+		
+		querystr="UPDATE patient "
+				+ "SET ptIsRegistered='IS_REG' "
+				+ "WHERE ptID='"+pt.getpID()+"'";
+		
+		try 
+		{
+			stmt = mysqlConnection.conn.createStatement();
+			System.out.println("Cancel appointment in DB: " + querystr);
+			result = stmt.executeUpdate(querystr);
+		
+			mysqlConnection.conn.close();
+		}
+		catch (SQLException ex) 
+   	    {/* handle any errors*/
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+          return Status.FAILED_EXCEPTION;
+        }
+		
+		return Status.IS_REG;
+
+	}
+	
+	public static Status CANCEL_ALL_APPOINTMENTS(Patient pt)
+	{
+		Statement stmt;
+		String querystr,querystr_b;
+		int result;
+			
+		querystr="UPDATE appointmentsettings "
+				+ "SET apsStatus='CANCELED'"
+				+ "WHERE apsPtID='"+pt.getpID()+"' AND apsStatus='SCHEDUELD'";
+		
+		querystr_b="UPDATE labsettings "
+				+ "SET labStatus='CANCELED'"
+				+ "WHERE labPtID='"+pt.getpID()+"' AND labStatus='SCHEDUELD'";
+		
+		
+		try 
+		{
+			stmt = mysqlConnection.conn.createStatement();
+			System.out.println("Cancel appointment in DB: " + querystr);
+			result = stmt.executeUpdate(querystr);
+			result = stmt.executeUpdate(querystr_b);
+			mysqlConnection.conn.close();
+		}
+		catch (SQLException ex) 
+   	    {/* handle any errors*/
+          System.out.println("SQLException: " + ex.getMessage());
+          System.out.println("SQLState: " + ex.getSQLState());
+          System.out.println("VendorError: " + ex.getErrorCode());
+          return Status.FAILED_EXCEPTION;
+        }
+		
+		return Status.CANCEL_ALL;
 
 	}
 	

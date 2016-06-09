@@ -151,6 +151,33 @@ public class Server extends Thread
             	
             	
             /*---   Appointment Tasks: ---*/  
+            case CANCEL_PATIENT_REGISTRATION:
+            	
+            	System.out.println("case CANCEL_PATIENT_REGISTRATION");
+            	pt = (Patient)env.getSingleObject();
+            	status=SCpatient.UncreatePatient(pt);           	
+            	env.setStatus(status);
+            	break;
+            	
+            case CANCEL_ALL_PATIENT_APPOINTMENTS:
+            	
+            	System.out.println("case CANCEL_ALL_PATIENT_APPOINTMENTS:");
+            	pt = (Patient)env.getSingleObject();
+            	status=SCpatient.CANCEL_ALL_APPOINTMENTS(pt);           	
+            	env.setStatus(status);
+            	break;
+            	
+            case RECOVER_PATIENT_REGISTRATION:
+            	
+            	System.out.println("case RECOVER_PATIENT_REGISTRATION:");
+            	pt = (Patient)env.getSingleObject();
+            	status=SCpatient.RecoverPatient(pt);           	
+            	env.setStatus(status);
+            	break;
+            	
+            	
+            	
+            	
             case CREATE_NEW_APPOINTMENT:
             	System.out.println("CREATE_NEW_APPOINTMENT");
             	as = (AppointmentSettings) env.getSingleObject();
