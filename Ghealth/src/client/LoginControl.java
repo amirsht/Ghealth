@@ -134,6 +134,7 @@ public static User UserCon(User us,task ts){
 		        		   		   break;
 		        		   	   case CLINIC_MANAGER:
 			        		   		System.out.println("This user is CLINIC_MANAGER");
+			        		   		ClinicManagerController CM_ctrl = new ClinicManagerController(new CM_GUI(),us.getuID());
 		        		   		//TODO: open the next window (menu).
 		        		   		   break;
 		        		   	   case DOCTOR:
