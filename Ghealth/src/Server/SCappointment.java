@@ -24,7 +24,7 @@ public class SCappointment {
 	{
 		ResultSet result = null;
 		Statement stmt; 
-		String querystr_a,querystr_b,querystr_c;
+		String querystr_a,querystr_b,querystr_c,querystr_d;
 		User us = null;
 		Envelope en = new Envelope();
 		
@@ -40,14 +40,13 @@ public class SCappointment {
 		
 		querystr_b="SELECT COUNT(*) AS COUNT"
 				+ " FROM appointmentsettings a,doctor d"
-				+ " WHERE a.apsStatus='SCHEDUELD' AND d.dSpeciality='"+sp+"' AND d.dID=a.apsDocID;";
+				+ " WHERE a.apsPtID='"+pt+"' AND a.apsStatus='SCHEDUELD' AND d.dSpeciality='"+sp+"' AND d.dID=a.apsDocID;";
 		
 		querystr_c="SELECT DISTINCT uID,uFirstName,uLastName,cLocation,cName "
 				+ " FROM user,clinic,doctor LEFT JOIN AMIR on AMIR.apsDocID = doctor.dID "
 				+ " WHERE dSpeciality='"+sp+"' AND uID = dID AND cID = ucID"
 				+ " ORDER BY apsDate DESC; ";
-		
-		
+	
 		
 		System.out.println(querystr_a);
 		System.out.println(querystr_b);

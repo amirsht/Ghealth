@@ -363,16 +363,14 @@ public class AppointmentControl {
 						JOptionPane.showMessageDialog(null,"all Appointments are canceled!\n","Attention!", JOptionPane.INFORMATION_MESSAGE);
 						
 					}
-					if(objList != null)
+					
+					en = Controller.Control(pt,task.CANCEL_ALL_PATIENT_APPOINTMENTS);
+					if(en.getStatus() == Status.CANCEL_ALL)
 					{
-						en = Controller.Control(pt,task.CANCEL_ALL_PATIENT_APPOINTMENTS);
-						if(en.getStatus() == Status.CANCEL_ALL)
-						{
-							System.out.println("Patient's appointments are CANCELLED!!\n");							
-						}
-						
-						
+						System.out.println("Patient's appointments are CANCELLED!!\n");							
 					}
+					
+				
  		   		   	csGUI_findPt = new CS_GUI_findPatient();
  		   		   	ptCtrl = new PatientControl(csGUI_findPt);
 					csGUI_Appoint.dispose();

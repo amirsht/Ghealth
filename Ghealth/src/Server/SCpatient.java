@@ -245,19 +245,24 @@ public class SCpatient {
 	public static Status CANCEL_ALL_APPOINTMENTS(Patient pt)
 	{
 		Statement stmt;
-		String querystr;
+		String querystr,querystr_b;
 		int result;
 			
 		querystr="UPDATE appointmentsettings "
 				+ "SET apsStatus='CANCELED'"
 				+ "WHERE apsPtID='"+pt.getpID()+"' AND apsStatus='SCHEDUELD'";
 		
+		querystr_b="UPDATE labsettings "
+				+ "SET labStatus='CANCELED'"
+				+ "WHERE labPtID='"+pt.getpID()+"' AND labStatus='SCHEDUELD'";
+		
+		
 		try 
 		{
 			stmt = mysqlConnection.conn.createStatement();
 			System.out.println("Cancel appointment in DB: " + querystr);
 			result = stmt.executeUpdate(querystr);
-		
+			result = stmt.executeUpdate(querystr_b);
 			mysqlConnection.conn.close();
 		}
 		catch (SQLException ex) 
