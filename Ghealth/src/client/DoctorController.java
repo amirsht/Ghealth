@@ -259,14 +259,16 @@ public class DoctorController {
 				JOptionPane.showMessageDialog(null,"There are no recorded appointments to show for "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","No recorded Appointments", JOptionPane.INFORMATION_MESSAGE);
 			}
 			
-			doc_hist_GUI = new Doctor_History_GUI();
-			doc_hist_GUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
-			doc_hist_GUI.SetPatient(pt);
-			doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());
-			doc_hist_GUI.getLabResultBox().setModel(new DefaultComboBoxModel(labList.toArray()));
-			doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
-			//DoctorController doc_histControl = new DoctorController(doc_histGUI,pt,DoctorID);
-						
+			else
+			{
+				doc_hist_GUI = new Doctor_History_GUI();
+				doc_hist_GUI.getAppointmentHistoryBox().setModel(new DefaultComboBoxModel(objList.toArray()));
+				doc_hist_GUI.SetPatient(pt);
+				doc_hist_GUI.AppointmentHistoryBoxActionListener(new AppointmentHistoryBoxListener());
+				doc_hist_GUI.getLabResultBox().setModel(new DefaultComboBoxModel(labList.toArray()));
+				doc_hist_GUI.LabResultBoxActionListener(new LabResultBoxListener());	
+				//DoctorController doc_histControl = new DoctorController(doc_histGUI,pt,DoctorID);
+			}			
 		}
 		
 	}
