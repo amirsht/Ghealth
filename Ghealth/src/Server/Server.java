@@ -31,6 +31,7 @@ public class Server extends Thread
     public String filename;
     public static List<String> sessionList = new ArrayList<String>();
     public LabSettings ls = null;
+    public Clinic clinic = null;
     
     
     
@@ -272,6 +273,14 @@ public class Server extends Thread
             	ls = (LabSettings)env.getSingleObject();
             	SClab.UpdateLabRecord(ls.getLabID(),ls.getLabWorkerSummery(),ls.getLabWorkerID());
             	break;
+            	
+            	
+            case GET_CLINIC_WEEKLY_REPORT:
+            	System.out.println("GET_CLINIC_WEEKLY_REPORT");
+            	clinic = (Clinic)env.getSingleObject();
+            	env = WeeklyReports.getClinicWeeklyReport(clinic.getcID()); 
+            	break;
+            	
             	
             case LOG_OUT:
                 /* client is logging out */

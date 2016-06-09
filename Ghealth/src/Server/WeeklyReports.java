@@ -76,17 +76,15 @@ public class WeeklyReports {
 		String query_1 = ""
 				+ "SELECT A.apsDate, count(distinct A.apsPtID) as NumOfPatients, AVG(DATEDIFF(A.apsDate,A.apsCreateDate)) as AvgProcessTime, "
 				+ "AVG(timediff(A.apsStartTime, A.apsTime)/60) as AvgWaitingTime "
-				+ " "
-				+ "(SELECT count(*) FROM Patient Where ptLeaveDate =" ;
+				+ " " ;
 						
-		String query_2 =" ) AS LeaveClients, " + "(SELECT count(*) FROM appointmentsettings Where apsDate = ";
 		
-		String query_3 = " AND apsStatus = 'NOSHOW') AS NoShow"
+		String query_3 = " "
 				+ "FROM Ghealth.appointmentsettings A "
 				+ " "
-				+ "WHERE apsDate = ";
-		String query_4 =" AND A.apsDocID in (SELECT doc.uID FROM user doc WHERE doc.ucID =";
-		String query_5 = ")";
+				+ "WHERE apsStatus='ARRIVED' and apsDate = '";
+		String query_4 ="' ";//AND A.apsDocID in (SELECT doc.uID FROM user doc WHERE doc.ucID ='";
+		String query_5 = "')";
 		
 		
 
@@ -101,16 +99,17 @@ public class WeeklyReports {
 			stmt = ms.conn.createStatement();
 			
 			/*-- for each day of the past week -- */
-			for(int i=1; i<7;i++)
+			for(int i=0; i<7;i++)
 			{
 				/* --get from DB the 4 fields : apsDate, NumOfPatients, AvgProcessTime, AvgWaitingTime ---*/
-				today.add(Calendar.DATE, -i);
+				today.add(Calendar.DATE, -1);
 				String day_str = formatter.format(today.getTime());
-				String query = query_1 + day_str + query_2 + day_str+ query_3 + day_str + query_4 +  clinicID.toString() + query_5  ;
+				String query = query_1 + query_3 + day_str + query_4 ;//+  clinicID.toString() + query_5  ;
+				System.out.println("THE ONE WE NEED: " + query);
 				result = stmt.executeQuery(query);
 				result.next();
 				/*--Generate matrix with fields  --*/
-				this.sevenDaysData[i-1][0] = day_str;
+				this.sevenDaysData[i-1][0] = result.getString(1);
 				this.sevenDaysData[i-1][1] = result.getString(2);
 				this.sevenDaysData[i-1][2] = result.getString(3);
 				this.sevenDaysData[i-1][3] = result.getString(4);
