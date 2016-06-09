@@ -9,6 +9,7 @@ import enums.task;
 import models.Envelope;
 import models.Patient;
 import models.User;
+import models.Clinic;
 import GUI.*;
 import java.io.IOException;
 import java.sql.ResultSet;
@@ -23,6 +24,7 @@ public class LoginControl {
 	private User UserLogin;
 	private static String user_full_name;
 	private static String uId = null;
+	private static Clinic clinic;
 	//private User user;
 	//private User U;
 	
@@ -67,6 +69,11 @@ public static User UserCon(User us,task ts){
     	System.out.println("after get user id");
 		return uId;
 	}
+    
+    public static Clinic getUserClinic() {
+    	System.out.println("after get clinic id");
+		return clinic;
+	}
 
 	public static void setUser_full_name(String user_full_name) {
 		LoginControl.user_full_name = user_full_name;
@@ -108,6 +115,7 @@ public static User UserCon(User us,task ts){
         		   User us = (User)en.getSingleObject();
         		   
         		   uId = us.getuID();
+        		   clinic = us.getuClinic();
         		   System.out.println(en.getStatus().toString());
         		   
         		   //if(us.getuID() != null && !us.getuID().equals("0"))
