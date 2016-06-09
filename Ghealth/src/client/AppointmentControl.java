@@ -22,11 +22,13 @@ import models.*;
 public class AppointmentControl {
 
 
+	private CS_GUI_findPatient csGUI_findPt;
 	private CS_GUI_Appoint csGUI_Appoint;
 	private CS_GUI_newAppoint csGUI_CreateNewAppoint;
 	private CS_GUI_cancelAppoint csGUI_cancelAppoint;
 	private Patient pt;
 	private AppointmentSettings as;
+	private PatientControl ptCtrl;
 	private List<Object> objList_str;
 	
 	public AppointmentControl(CS_GUI_newAppoint cs,Patient pt)
@@ -61,7 +63,8 @@ public class AppointmentControl {
 		csGUI_Appoint.SetPatient(pt);
 		csGUI_Appoint.createAppointActionListener(new createNewAppointListener());
 		csGUI_Appoint.SearchPatientActionListener(new SearchPatientListener());
-		csGUI_Appoint.cancelAppointActionListener(new CancelAppointListener());	
+		csGUI_Appoint.cancelAppointActionListener(new CancelAppointListener());
+		csGUI_Appoint.UncreatePatientActionListener(new UncreatePatientListener());
 	}
 	
 	
@@ -321,6 +324,65 @@ public class AppointmentControl {
 						+ as,"Appointment Canceled!", JOptionPane.INFORMATION_MESSAGE);
 				csGUI_cancelAppoint.dispose();
 			}
+		}
+		
+	}//CancelAppintListener
+	
+	
+
+	/**
+	 * 
+	 * @author P34w
+	 *
+	 */
+	class UncreatePatientListener  implements ActionListener 
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			System.out.println("trying to UNCREATE PATIENT ");
+			
+			JOptionPane.showMessageDialog(null,"You about to cancel all appointments of "+pt.getpFirstName()+" "+pt.getpLastName()+"!!","Attention!", JOptionPane.INFORMATION_MESSAGE);
+			
+			int confirm = JOptionPane.showOptionDialog(
+		             null, "You are about to UnRegister "+pt.getpFirstName()+"\nAre you sure?", 
+		             "UnRegistration Confirmation", JOptionPane.YES_NO_OPTION, 
+		             JOptionPane.QUESTION_MESSAGE, null, null, null);
+		        if (confirm == 0) 
+		        {
+					List<String> objList = GET_OPEN_APPOINTMENTS(pt.getpID());
+
+					
+					
+					Envelope en = Controller.Control(pt,task.CANCEL_PATIENT_REGISTRATION);
+					
+					if(en.getStatus() == Status.NOT_REG)
+					{
+						System.out.println("Patient is UnCreated and all his appointments CANCELLED!!\n");
+						JOptionPane.showMessageDialog(null,"all Appointments are canceled!\n","Attention!", JOptionPane.INFORMATION_MESSAGE);
+						
+					}
+					if(objList != null)
+					{
+						en = Controller.Control(pt,task.CANCEL_ALL_PATIENT_APPOINTMENTS);
+						if(en.getStatus() == Status.CANCEL_ALL)
+						{
+							System.out.println("Patient's appointments are CANCELLED!!\n");							
+						}
+						
+						
+					}
+ 		   		   	csGUI_findPt = new CS_GUI_findPatient();
+ 		   		   	ptCtrl = new PatientControl(csGUI_findPt);
+					csGUI_Appoint.dispose();
+					
+		        	
+		        }
+			
+			
+
+		
 		}
 		
 	}//CancelAppintListener

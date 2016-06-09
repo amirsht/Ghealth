@@ -239,10 +239,8 @@ public class SCappointment {
 		return en;
 
 	}
-
 	
-	
-	
+		
 	public static Status CancelAppointment(int apsID)
 	{
 		Statement stmt;

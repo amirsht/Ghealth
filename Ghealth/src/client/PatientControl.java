@@ -127,6 +127,30 @@ public class PatientControl {
 				csGUI_findPatient.dispose();
 				CS_GUI_Appoint appoint = new CS_GUI_Appoint();
 				AppointmentControl pt_appoint = new AppointmentControl(appoint,findpt);
+			}else if(en.getStatus() == Status.NOT_REG){
+				
+				int response = JOptionPane.showConfirmDialog(null, "The Patient '"+findpt.getpID()+"' is canceled his account! "
+						+ "\nWould you like to restore?","Confirm",
+				        JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				    if (response == JOptionPane.NO_OPTION)   {
+				      System.out.println("No button clicked");
+				    } 
+				    else if (response == JOptionPane.YES_OPTION) {
+				      System.out.println("Yes button clicked");
+						
+						findpt = (Patient)en.getSingleObject();
+						System.out.println("patient restored!\n"+findpt);
+						csGUI_findPatient.dispose();
+						CS_GUI_Appoint appoint = new CS_GUI_Appoint();
+						AppointmentControl pt_appoint = new AppointmentControl(appoint,findpt);
+						
+						en = Controller.Control(findpt,task.RECOVER_PATIENT_REGISTRATION);
+						System.out.println("patient restored");
+				    } 
+				    else if (response == JOptionPane.CLOSED_OPTION) {
+				      System.out.println("JOptionPane closed");
+				    }
+				
 			}
 			else{
 				int response = JOptionPane.showConfirmDialog(null, "The Patient '"+findpt.getpID()+"' Patient NOT Exists! "
