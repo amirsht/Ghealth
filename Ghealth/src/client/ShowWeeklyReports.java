@@ -10,7 +10,7 @@ import javax.swing.JTable;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableCellRenderer;
 
-public class ReportsController extends JFrame {
+public class ShowWeeklyReports extends JFrame {
 
     private JScrollPane scrollPane;
     private JScrollPane scrollPane2;
@@ -18,7 +18,7 @@ public class ReportsController extends JFrame {
     private JTable table2;
     private String [][] str;
 
-    public ReportsController(String [][] str) {
+    public ShowWeeklyReports(String [][] str) {
     	this.str=str;
     	super.setTitle("Weekly Report");
     	initComponents2();

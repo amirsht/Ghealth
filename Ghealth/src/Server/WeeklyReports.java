@@ -70,15 +70,23 @@ public class WeeklyReports {
 		
 		ResultSet result = null;
 		Statement stmt;
-		String querystr1 = ""
+		
+		
+		
+		String query_1 = ""
 				+ "SELECT A.apsDate, count(distinct A.apsPtID) as NumOfPatients, AVG(DATEDIFF(A.apsDate,A.apsCreateDate)) as AvgProcessTime, "
 				+ "AVG(timediff(A.apsStartTime, A.apsTime)/60) as AvgWaitingTime "
 				+ " "
+				+ "(SELECT count(*) FROM Patient Where ptLeaveDate =" ;
+						
+		String query_2 =" ) AS LeaveClients, " + "(SELECT count(*) FROM appointmentsettings Where apsDate = ";
+		
+		String query_3 = " AND apsStatus = 'NOSHOW') AS NoShow"
 				+ "FROM Ghealth.appointmentsettings A "
 				+ " "
 				+ "WHERE apsDate = ";
-		String querystr2 =" AND A.apsDocID in (SELECT doc.uID FROM user doc WHERE doc.ucID =";
-		String querystr3 = ")";
+		String query_4 =" AND A.apsDocID in (SELECT doc.uID FROM user doc WHERE doc.ucID =";
+		String query_5 = ")";
 		
 		
 
@@ -98,7 +106,7 @@ public class WeeklyReports {
 				/* --get from DB the 4 fields : apsDate, NumOfPatients, AvgProcessTime, AvgWaitingTime ---*/
 				today.add(Calendar.DATE, -i);
 				String day_str = formatter.format(today.getTime());
-				String query = querystr1 + day_str + querystr2 + clinicID.toString() + querystr3 ;
+				String query = query_1 + day_str + query_2 + day_str+ query_3 + day_str + query_4 +  clinicID.toString() + query_5  ;
 				result = stmt.executeQuery(query);
 				result.next();
 				/*--Generate matrix with fields  --*/
