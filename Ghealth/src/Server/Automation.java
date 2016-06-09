@@ -53,7 +53,7 @@ public class Automation extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		timer.schedule(new PeriodicReport(),0);
+			timer.schedule(new PeriodicReport(), 0);
 	}
 	
 	//-------------------------------------------------------------------------------------
@@ -64,8 +64,10 @@ public class Automation extends Thread{
 		public void run(){
 			
 			/* TODO Creating weekly report */
+			WeeklyReports rep = new WeeklyReports();
+			rep.createAllWeeklyReports();
 			
-			timer.schedule(new PeriodicReport(), 7 * 24 * 60 * 60 * 1000); // every week
+			timer.schedule(new PeriodicReport(), 24 * 60 * 60 * 1000); // every day for the past week
 		}
 	}
 	
