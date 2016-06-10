@@ -1,5 +1,7 @@
 package client;
 
+import GUI.*;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -33,11 +35,11 @@ public class ShowWeeklyReports extends JFrame {
     	
     }
 
-  
+ 
     
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         table2 = new javax.swing.JTable() {
 
             @Override

@@ -341,7 +341,7 @@ public class Board extends JPanel implements Runnable, Commons {
 
           if (ingame)
           {
-            if (e.isAltDown()) {
+            if (e.isControlDown()) {
                 if (!shot.isVisible())
                     shot = new Shot(x, y);
             }
