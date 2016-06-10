@@ -7,6 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
+
+import java.util.concurrent.ThreadLocalRandom;
+
+import Games.Pacman.Pacman;
+import Games.Snake.Snake;
+import Games.SpaceInvaders.*;
+
 import javax.swing.JTextField;
 
 import java.awt.Window.Type;
@@ -103,6 +110,62 @@ public class LoginGUI extends LoggingOut {
 		btnCancel.setIcon(new ImageIcon(LoginGUI.class.getResource("/images/cancel.PNG")));
 		btnCancel.setBounds(350, 370, 97, 25);
 		contentPane.add(btnCancel);
+		
+		JButton btnSecret = new JButton("Ghealth Entertainment Generator");
+		btnSecret.setBounds(441, 437, 243, 23);
+		contentPane.add(btnSecret);
+		
+		btnSecret.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+
+				
+				int x = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+				
+				//x is now 1-3
+				
+				switch(x){
+				
+				case 1:
+					
+					   EventQueue.invokeLater(new Runnable() {
+				            @Override
+				            public void run() {                
+				                JFrame ex = new Snake();
+				                ex.setVisible(true);                
+				            }
+				        });
+					
+				
+					break;
+					
+				case 2:
+					  EventQueue.invokeLater(new Runnable() {
+
+				            @Override
+				            public void run() {
+				                Pacman ex = new Pacman();
+				                ex.setVisible(true);
+				            }
+				        });
+					
+					break;
+				
+				case 3:
+					
+					new SpaceInvaders();
+					break;
+					
+				default:
+					break;
+				
+				}
+				 
+			}
+		});
+		
 		btnCancel.addActionListener(new ActionListener() 
 		{
 			public void actionPerformed(ActionEvent e) 
@@ -168,6 +231,7 @@ public class LoginGUI extends LoggingOut {
 	public String getPasswordField() {
 		return passwordField.getText();
 	}
+	
 }
 
 
