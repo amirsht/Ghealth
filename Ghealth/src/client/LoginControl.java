@@ -153,6 +153,7 @@ public static User UserCon(User us,task ts){
 		        		   	   		break;
 		        		   	   case GENERAL_MANAGER:
 			        		   		System.out.println("This user is GENERAL_MANAGER");
+			        		   		GeneralManagerController GeneralCtrl = new GeneralManagerController(new GM_GUI(),us.getuID());
 		        		   		//TODO: open the next window (menu).
 		        		   		   break;
 		        		   		   
