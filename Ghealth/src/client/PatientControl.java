@@ -39,6 +39,7 @@ public class PatientControl {
 		csGUI_addPatient = cs;
 		csGUI_addPatient.addPatientActionListener(new AddPatientListener());
 		csGUI_addPatient.setPationID(pID);
+		csGUI_addPatient.addCancelActionListener(new cancelListener());
 	}
 	
 	/**
@@ -171,6 +172,21 @@ public class PatientControl {
 			
 			}
 			
+		}
+		
+	}
+	
+	
+	
+	class cancelListener  implements ActionListener 
+	{
+
+		@Override
+		public void actionPerformed(ActionEvent e) 
+		{
+			csGUI_addPatient.dispose();
+			CS_GUI_findPatient cs = new CS_GUI_findPatient();
+	   		PatientControl pt = new PatientControl(cs);
 		}
 		
 	}
