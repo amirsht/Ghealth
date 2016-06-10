@@ -57,33 +57,13 @@ public class ClinicManagerController {
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			String [][] str = new String[7][4];
-		
+			
 			Envelope en = Controller.Control(LoginControl.getUserClinic(),task.GET_CLINIC_WEEKLY_REPORT);
-			List<String> list ;
-			list =  (List<String>) en.getSingleObject();
-			int index =0;
+			List<Object> listObj =  en.getobjList();
+			//List<String[]> list = (ArrayList<String[]>)listObj;	
 			System.out.println("Got weekly report");
 			
-			for(int i=0; i<7 ;i++){
-				
-				for(int j=0;j<4;j++){
-					if(list.get(index)!=null && !list.get(index).equals("null")){
-					str[i][j] = list.get(index);
-					}
-					else{ str[i][j] = "empty"; }
-					
-					index+=1;
-				}
-			}
-			
-			for(int i=0;i<7;i++){
-				for(int j=0;j<4; j++){
-					System.out.println(str[i][j]);
-				}
-			}
-			
-			ShowWeeklyReports showRepo = new ShowWeeklyReports(str);
+			ShowWeeklyReports showRepo = new ShowWeeklyReports(listObj);
 		}
 		
 	}
