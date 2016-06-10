@@ -1,5 +1,9 @@
 package GUI;
 
+import Games.Pacman.*;
+import Games.Snake.*;
+import Games.SpaceInvaders.*;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -8,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTextField;
-
+import java.util.concurrent.ThreadLocalRandom;
 import java.awt.Window.Type;
 
 import javax.swing.JLabel;
@@ -108,6 +112,62 @@ public class LoginGUI extends LoggingOut {
 			public void actionPerformed(ActionEvent e) 
 			{
 				dispose();
+			}
+		});
+		
+		
+		JButton btnSecret = new JButton("Ghealth Entertainment Generator");
+		btnSecret.setBounds(441, 437, 243, 23);
+		contentPane.add(btnSecret);
+		
+		btnSecret.addActionListener(new ActionListener() 
+		{
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+
+				
+				int x = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+				
+				//x is now 1-3
+				
+				switch(x){
+				
+				case 1:
+					
+					   EventQueue.invokeLater(new Runnable() {
+				            @Override
+				            public void run() {                
+				                JFrame ex = new Snake();
+				                ex.setVisible(true);                
+				            }
+				        });
+					
+				
+					break;
+					
+				case 2:
+					  EventQueue.invokeLater(new Runnable() {
+
+				            @Override
+				            public void run() {
+				                Pacman ex = new Pacman();
+				                ex.setVisible(true);
+				            }
+				        });
+					
+					break;
+				
+				case 3:
+					
+					new SpaceInvaders();
+					break;
+					
+				default:
+					break;
+				
+				}
+				 
 			}
 		});
 		
