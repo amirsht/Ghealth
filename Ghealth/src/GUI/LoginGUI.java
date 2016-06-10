@@ -3,6 +3,7 @@ package GUI;
 import Games.Pacman.*;
 import Games.Snake.*;
 import Games.SpaceInvaders.*;
+import Games.Tetris.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -127,9 +128,9 @@ public class LoginGUI extends LoggingOut {
 				
 
 				
-				int x = ThreadLocalRandom.current().nextInt(1, 3 + 1);
+				int x = ThreadLocalRandom.current().nextInt(1, 4 + 1);
 				
-				//x is now 1-3
+				//x is now 1-4
 				
 				switch(x){
 				
@@ -161,6 +162,13 @@ public class LoginGUI extends LoggingOut {
 				case 3:
 					
 					new SpaceInvaders();
+					break;
+				case 4:
+					
+					Tetris game = new Tetris();
+			        game.setLocationRelativeTo(null);
+			        game.setVisible(true);
+			        
 					break;
 					
 				default:
