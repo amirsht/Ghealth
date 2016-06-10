@@ -278,7 +278,9 @@ public class Server extends Thread
             case GET_CLINIC_WEEKLY_REPORT:
             	System.out.println("GET_CLINIC_WEEKLY_REPORT");
             	clinic = (Clinic)env.getSingleObject();
-            	env = WeeklyReports.getClinicWeeklyReport(clinic.getcID()); 
+
+    			WeeklyReports rep = WeeklyReports.getInstance();
+            	env = rep.getClinicWeeklyReport(clinic.getcID()); 
             	break;
             	
             	
