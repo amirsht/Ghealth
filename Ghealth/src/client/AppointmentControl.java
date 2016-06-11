@@ -437,6 +437,7 @@ public class AppointmentControl {
 			String choosenDate = formatter.format(date);
 			
 			Date todayDate = new Date();
+			
 			if(todayDate.compareTo(date)>0)
 			{
 				System.out.println("The date '"+choosenDate+"' has passed, please select a proper date.");
@@ -452,10 +453,23 @@ public class AppointmentControl {
 			csGUI_CreateNewAppoint.getDoctorHoursBox().setVisible(true);
 			csGUI_CreateNewAppoint.getLblDoctorHours().setVisible(true);
 			
+
 			
-			
-			
-			
+		}
+		
+		public Date getZeroTimeDate(Date fecha) {
+		    Date res = fecha;
+		    Calendar calendar = Calendar.getInstance();
+
+		    calendar.setTime( fecha );
+		    calendar.set(Calendar.HOUR_OF_DAY, 0);
+		    calendar.set(Calendar.MINUTE, 0);
+		    calendar.set(Calendar.SECOND, 0);
+		    calendar.set(Calendar.MILLISECOND, 0);
+
+		    res = calendar.getTime();
+
+		    return res;
 		}
 		
 	}

@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.AddressException;
+
 
 
 
@@ -32,6 +35,7 @@ public class Server extends Thread
     public static List<String> sessionList = new ArrayList<String>();
     public LabSettings ls = null;
     public Clinic clinic = null;
+	private Notification nt;
     
     
     
@@ -284,6 +288,23 @@ public class Server extends Thread
             	break;
             	
             	
+            case SEND_PERSONAL_DOC_MAIL:
+                /* Sending the patient's personal doctor mail with app details. */
+            	nt = (Notification)env.getSingleObject();
+            	nt = SCdocAppointment.getPDocMail(nt); //scda = null;
+            	try {
+					Email.generateAndSendEmail(nt);
+				} catch (AddressException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+            	System.out.println("\n\n ===> The System has just sent an Email successfully. Check your email..");
+                	break;
+                	
+                	
             case LOG_OUT:
                 /* client is logging out */
             	us = (User)env.getSingleObject();

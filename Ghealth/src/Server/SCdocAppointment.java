@@ -117,7 +117,44 @@ public class SCdocAppointment {
 
 	}
 
+	public static Notification getPDocMail(Notification nt){
+		Statement stmt;
+		String querystr,querystr2;
+		ResultSet result;
 		
+		querystr= ""
+				+ "SELECT pd.PersonalDoctorEmail "
+				+ "FROM ghealth.personaldoctor pd, ghealth.patient p "
+				+ "WHERE p.ptID = '" + nt.patient.getpID() + "' AND p.ptDoctorID = pd.PersonalDoctorID";
+		querystr2= ""
+				+ "SELECT pd.PersonalDoctorName "
+				+ "FROM ghealth.personaldoctor pd, ghealth.patient p "
+				+ "WHERE p.ptID = '" + nt.patient.getpID() + "' AND p.ptDoctorID = pd.PersonalDoctorID";
+		
+		try {
+			stmt = mysqlConnection.conn.createStatement();
+			result = stmt.executeQuery(querystr);
+			result.next();
+			nt.mail = result.getString(1);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try {
+			stmt = mysqlConnection.conn.createStatement();
+			result = stmt.executeQuery(querystr2);
+			result.next();
+			nt.docName = result.getString(1);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return nt;
+	}
+	
+	
 	public static Status RecordAppointment(String apsID, String summery)
 	{
 		Statement stmt;

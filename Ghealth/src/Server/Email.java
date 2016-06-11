@@ -96,29 +96,64 @@ public class Email {
 		/**
 		 * Message itself
 		 */
-		generateMailMessage.setSubject("You have medical appointment scheduled for tomorrow");	
+		String strVar;
+		if(nt.appSummery.compareTo("none")==0){
+			
+			generateMailMessage.setSubject("You have medical appointment scheduled for tomorrow");	
+			
+			strVar="";
+			strVar += "<html>";
+			strVar += "<head>";
+			strVar += "<//head>";
+			strVar += "<body>";
+			strVar += "<h2><span style=\"font-size:20px;\">Dear ";
+			strVar += nt.ptName;
+			strVar += " ,<//span><//h2>";
+			strVar += "";
+			strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">You have an appointment with <strong><span style=\"background-color:#AFEEEE;\">" + nt.docName + "<//span><//strong>&nbsp;tomorrow (<strong>"+nt.sdate+"<//strong>) at <strong>"+nt.time+" "+nt.location+"<//strong>. <//em><//p>";
+			strVar += "";
+			strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">Please feel free to&nbsp;call us at &lt;04-9901911&gt; &nbsp;if you have any questions.<//em><//p>";
+			strVar += "";
+			strVar += "<p>&nbsp;<//p>";
+			strVar += "";
+			strVar += "<p><span style=\"font-size: 20px;\">Braude Hospital<span style=\"font-size:12px;\">&nbsp;- Always there fo you!<//span><//span><//p>";
+			strVar += "<p><span style=\"font-size: 20px;\"><span style=\"font-size:12px;\"><img alt=\"\" src=\"http://www.maloclinic.co.il/wp-content/uploads/2012/07/malo-clinc-team1.jpg\" style=\"width: 940px; height: 320px;\" //><//span><//span><//p>";
+			strVar += "";
+			strVar += "<//body>";
+			strVar += "<//html>";
+			strVar += "";
+		}
 		
-		String strVar="";
-		strVar += "<html>";
-		strVar += "<head>";
-		strVar += "<//head>";
-		strVar += "<body>";
-		strVar += "<h2><span style=\"font-size:20px;\">Dear ";
-		strVar += nt.ptName;
-		strVar += " ,<//span><//h2>";
-		strVar += "";
-		strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">You have an appointment with <strong><span style=\"background-color:#AFEEEE;\">" + nt.docName + "<//span><//strong>&nbsp;tomorrow (<strong>"+nt.sdate+"<//strong>) at <strong>"+nt.time+" "+nt.location+"<//strong>. <//em><//p>";
-		strVar += "";
-		strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">Please feel free to&nbsp;call us at &lt;04-9901911&gt; &nbsp;if you have any questions.<//em><//p>";
-		strVar += "";
-		strVar += "<p>&nbsp;<//p>";
-		strVar += "";
-		strVar += "<p><span style=\"font-size: 20px;\">Braude Hospital<span style=\"font-size:12px;\">&nbsp;- Always there fo you!<//span><//span><//p>";
-		strVar += "<p><span style=\"font-size: 20px;\"><span style=\"font-size:12px;\"><img alt=\"\" src=\"http://www.maloclinic.co.il/wp-content/uploads/2012/07/malo-clinc-team1.jpg\" style=\"width: 940px; height: 320px;\" //><//span><//span><//p>";
-		strVar += "";
-		strVar += "<//body>";
-		strVar += "<//html>";
-		strVar += "";
+		else{
+			generateMailMessage.setSubject("New Appointment summery of one of your patients");	
+			
+			strVar="";
+			strVar += "<html>";
+			strVar += "<head>";
+			strVar += "<//head>";
+			strVar += "<body>";
+			strVar += "<h2><span style=\"font-size:20px;\">Dear ";
+			strVar += nt.docName;
+			strVar += " ,<//span><//h2>";
+			strVar += "";
+			strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">Your patient (" + nt.patient.getpFirstName() + " " + nt.patient.getpLastName() + ") had an appointment today at our hospital.  <//em><//p>";
+			strVar += "";
+			strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">This is the appointment summery:<//em><//p>";
+			strVar += "";
+			strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">" + nt.appSummery + "<//em><//p>";
+			strVar += "";
+			strVar += "<p><em style=\"box-sizing: border-box; color: rgb(76, 76, 76); font-family: 'Open Sans', sans-serif; font-size: 16px; line-height: 23.2px; background-color: rgb(255, 255, 255);\">Please feel free to&nbsp;call us at &lt;04-9901911&gt; &nbsp;if you have any questions.<//em><//p>";
+			strVar += "";
+			strVar += "<p>&nbsp;<//p>";
+			strVar += "";
+			strVar += "<p><span style=\"font-size: 20px;\">Braude Hospital<span style=\"font-size:12px;\">&nbsp;- Always there fo you!<//span><//span><//p>";
+			strVar += "<p><span style=\"font-size: 20px;\"><span style=\"font-size:12px;\"><img alt=\"\" src=\"http://www.maloclinic.co.il/wp-content/uploads/2012/07/malo-clinc-team1.jpg\" style=\"width: 940px; height: 320px;\" //><//span><//span><//p>";
+			strVar += "";
+			strVar += "<//body>";
+			strVar += "<//html>";
+			strVar += "";
+		}
+			
 
 		String emailBody = strVar;
 		generateMailMessage.setContent(emailBody, "text/html");
@@ -142,7 +177,7 @@ public class Email {
 
 /**
  * Authenticator class
- * Made for Gmail ass-wipe Security system 
+ * Made for Gmail ass Security system 
  *
  * @author Pinto.com
  */

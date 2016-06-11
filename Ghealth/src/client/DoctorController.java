@@ -4,6 +4,7 @@ import models.*;
 import enums.*;
 import GUI.*;
 //import client.AppointmentControl.cancelAppointmentFromDB;
+import Server.Notification;
 
 import java.awt.Container;
 import java.awt.Image;
@@ -19,8 +20,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.SocketException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,10 +32,12 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 
 public class DoctorController {
@@ -49,6 +54,8 @@ public class DoctorController {
 	private List<Object> objList_stra;
 	private List<Object> objList_strb;
 
+
+	
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
@@ -108,7 +115,28 @@ public class DoctorController {
 	{
 		String [] AppID_AppSummery = {AppID,AppSummery};
 		Envelope en = Controller.Control( AppID_AppSummery, task.SET_APPOINTMENT_RECORD);
+		Notification nt = new Notification();
+		nt.appSummery = AppSummery;
+		nt.patient = pt;
 		
+		
+		Thread t = new Thread(new Runnable() {
+	        @Override
+		    public void run() {
+		    	URL url = null;
+				try {
+					url = new URL("http://findicons.com/files/icons/42/basic/64/tick.png");//http://www.archisevilla.org/wp-content/themes/archisevilla/images/loading.gif");
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				ImageIcon icon = new ImageIcon(url);
+		    	JOptionPane.showMessageDialog(null, "Record saved and mail sent!", "Please wait!", JOptionPane.INFORMATION_MESSAGE, icon);
+		    	Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
+		    }
+		});
+		t.start();
+		Controller.Control( nt, task.SEND_PERSONAL_DOC_MAIL);
 	}
 	
 	public List<String> GET_ARRIVED_APPOINTMENTS(String ptID)
@@ -228,7 +256,7 @@ public class DoctorController {
 			if(doc_recGUI.getRecordField().equals("Please fill appointment record here..."))
 			{
 				//TODO - pop up message
-				System.out.println("Pleae fill appointment!!!");
+				System.out.println("Please fill appointment!");
 				return;
 			}
 
