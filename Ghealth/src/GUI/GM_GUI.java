@@ -37,6 +37,9 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 import java.awt.Panel;
 import javax.swing.JComboBox;
+import javax.swing.JSeparator;
+import javax.swing.JList;
+import javax.swing.SwingConstants;
 
 
 public class GM_GUI extends LoggingOut {
@@ -64,6 +67,9 @@ public class GM_GUI extends LoggingOut {
 	private JLabel lblNewLabelTo;
 	private JLabel lblSelectDateFrom;
 	private JLabel lblSelectDateTo;
+	private JSeparator separator;
+	private JSeparator separator_1;
+	private JSeparator separator_2;
 	
 	
 	
@@ -99,13 +105,13 @@ public class GM_GUI extends LoggingOut {
 			}
 		});
 		
-		weeklyBtn.setBounds(237, 223, 271, 68);
+		weeklyBtn.setBounds(237, 352, 240, 35);
 		contentPane.add(weeklyBtn);
 		
 		
 		
 		JButton LogOut = new JButton("Log Out");
-		LogOut.setBounds(138, 400, 245, 68);
+		LogOut.setBounds(617, 493, 100, 30);
 		LogOut.addActionListener(new LogOutListener());
 		contentPane.add(LogOut);
 		
@@ -127,7 +133,7 @@ public class GM_GUI extends LoggingOut {
 		datePickerFrom.setVisible(true);
 		cal_from = new Panel();
 		cal_from.add(datePickerFrom);
-		cal_from.setBounds(33, 170, 278, 33);
+		cal_from.setBounds(33, 302, 278, 33);
 		cal_from.setVisible(true);
 		contentPane.add(cal_from,BorderLayout.WEST);		
 		btnChooseDateFrom = new JButton("OK");
@@ -137,31 +143,62 @@ public class GM_GUI extends LoggingOut {
 		datePickerTo.setVisible(true);
 		cal_to = new Panel();
 		cal_to.add(datePickerTo);
-		cal_to.setBounds(439, 170, 278, 33);
+		cal_to.setBounds(439, 302, 278, 33);
 		cal_to.setVisible(true);
 		contentPane.add(cal_to,BorderLayout.WEST);		
 		btnChooseDateTo = new JButton("OK");
 		cal_to.add(btnChooseDateTo);		
 		
 		lblSelectDateFrom = new JLabel("Select date From");
-		lblSelectDateFrom.setBounds(33, 131, 278, 33);
+		lblSelectDateFrom.setBounds(33, 262, 278, 33);
 		contentPane.add(lblSelectDateFrom);
 		
 		lblSelectDateTo = new JLabel("Select date To");
-		lblSelectDateTo.setBounds(439, 131, 278, 33);
+		lblSelectDateTo.setBounds(439, 262, 278, 33);
 		contentPane.add(lblSelectDateTo);
 		
 		JComboBox MonthBox = new JComboBox();
-		MonthBox.setBounds(33, 304, 55, 20);
+		MonthBox.addItem(1);MonthBox.addItem(2);MonthBox.addItem(3);
+		MonthBox.addItem(4);MonthBox.addItem(5);MonthBox.addItem(6);
+		MonthBox.addItem(7);MonthBox.addItem(8);MonthBox.addItem(9);
+		MonthBox.addItem(10);MonthBox.addItem(11);MonthBox.addItem(12);
+		MonthBox.setBounds(33, 447, 55, 20);
 		contentPane.add(MonthBox);
 		
 		JLabel lblLastMonthsAmount = new JLabel("Last months amount");
-		lblLastMonthsAmount.setBounds(33, 277, 130, 14);
+		lblLastMonthsAmount.setBounds(33, 407, 130, 14);
 		contentPane.add(lblLastMonthsAmount);
 		
-		JButton OKmonthBtn = new JButton("OK");
-		OKmonthBtn.setBounds(98, 303, 47, 23);
+		JButton OKmonthBtn = new JButton("Show reports with this number of months back");
+		OKmonthBtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		OKmonthBtn.setBounds(203, 440, 310, 35);
 		contentPane.add(OKmonthBtn);
+		
+		separator = new JSeparator();
+		separator.setBounds(0, 398, 795, 2);
+		contentPane.add(separator);
+		
+		JList<String> list = new JList<String>(new String[] { "Haifa", "Tel-Aviv", "Jerusalem", "Eilat", "Acko", "Karmiel", "Aza" }); //JList list = new JList();//
+		list.setToolTipText("Use 'CTRL' to select more than one item");
+
+		list.setBounds(237, 111, 240, 140);
+		contentPane.add(list);
+		
+		JLabel lblNewLabel = new JLabel("Please choose the clinics you want reports on");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(223, 86, 270, 14);
+		contentPane.add(lblNewLabel);
+		
+		separator_1 = new JSeparator();
+		separator_1.setBounds(0, 263, 795, 2);
+		contentPane.add(separator_1);
+		
+		separator_2 = new JSeparator();
+		separator_2.setBounds(0, 480, 795, 2);
+		contentPane.add(separator_2);
 		
 		setLocationRelativeTo(null);
 		
