@@ -139,7 +139,7 @@ public class CS_GUI_addPatient extends LoggingOut {
 		btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(392, 444, 109, 23);
 		contentPane.add(btnCancel);
-		btnCancel.addActionListener(new CancelListener());
+		//btnCancel.addActionListener(new CancelListener());
 		
 		Label at = new Label("@");
 		at.setBounds(464, 240, 15, 22);
@@ -269,8 +269,7 @@ public class CS_GUI_addPatient extends LoggingOut {
 	{
 		return eMailcomboBox;
 	}
-		
-	
+	/*
 	public class CancelListener implements ActionListener 
     {
     	@Override
@@ -279,4 +278,5 @@ public class CS_GUI_addPatient extends LoggingOut {
     		dispose();
     	}	
     }//CancelListener
+    */
 }

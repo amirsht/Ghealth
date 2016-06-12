@@ -172,8 +172,8 @@ public class mysqlConnection {
 	          
 	            /** Automated machine Start**/
 	        	auto = new Automation();
-	    		auto.start();
 	    		System.out.println("Automated machine has launched... *\\0/*");
+	    		auto.run();
 	    		/**                 **/
 	    		
 	          return true;

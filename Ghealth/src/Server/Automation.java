@@ -26,11 +26,13 @@ import models.Patient;
 /**
  *	Controls the automated tasks
  */
-public class Automation extends Thread{
+public class Automation extends TimerTask{
 	private Timer timer = new Timer();
+	private Timer timer2 = new Timer();
 	//public static Email mail= new Email();
 	public static List<Notification> notLst = new ArrayList<Notification>();
 	public static ResultSet result = null;
+	public static ResultSet result2 = null;
 	public Statement stmt; 
 	String querystr;
 	AppointmentSettings as;
@@ -45,26 +47,48 @@ public class Automation extends Thread{
 			 * here we can enter a starting date to schedule mailing at a certain hour
 			 * if there isn't a future date it will start immediately and repeat with the given value
 			 */
-			//Date startDate = dateFormatter.parse("2016-06-04 19:14:30");
-			//timer.schedule(new PeriodicNotification(),startDate, 60 * 1000);  //Every 24 hours at 8AM
-			Date startDate = dateFormatter.parse("2016-06-04 19:14:30");
+			Date startDate = dateFormatter.parse("2016-06-04 08:00:00");
 			timer.schedule(new PeriodicNotification(),startDate, 24 * 60 * 60 * 1000);  //Every 24 hours at 8AM
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			timer.schedule(new PeriodicReport(), 0);
+			timer2.schedule(new PeriodicReport(), 0);
 	}
 	
 	//-------------------------------------------------------------------------------------
 	/**
 	 * Execute automatic periodical reports
 	 */
-	public class PeriodicReport extends TimerTask{
+	public class PeriodicReport extends Automation{
 		public void run(){
 			
-			/* TODO Creating weekly report */
-			SCweeklyReports rep = SCweeklyReports.getInstance();
+			/* Setting all the patients that didn't show up to noshow status */
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar yesterday = Calendar.getInstance();
+			yesterday.add(Calendar.DATE, -1);
+			String yesterday_s = formatter.format(yesterday.getTime());
+			String querystr = ""
+					+ "SELECT apsID FROM ghealth.appointmentsettings "
+					+ "WHERE apsDate='"+yesterday_s+"' AND apsStatus='SCHEDUELD'";
+			result2=getSql(querystr);
+
+				try {
+					while (result2.next())
+					{
+						String updatestr = ""
+								+ "UPDATE appointmentsettings SET apsStatus='NOSHOW' "
+								+ "WHERE apsID='"+ result2.getString(1) +"'";
+						setSql(updatestr);
+						System.out.println("Appointment id="+result2.getString(1)+" has been updated to NOSHOW");
+					}
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			/*                                                                */
+			/* Getting weekly reports ready */	
+			WeeklyReports rep = WeeklyReports.getInstance();
 			rep.createAllClinicsWeeklyReports();
 			
 			timer.schedule(new PeriodicReport(), 24 * 60 * 60 * 1000); // every day for the past week
@@ -76,7 +100,7 @@ public class Automation extends Thread{
 	/**
 	 * Execute automatic periodical notifications
 	 */
-	public class PeriodicNotification extends TimerTask{
+	public class PeriodicNotification extends Automation{
 		public void run(){
 			/* TODO Checks for changed status appointment notifications */
 
@@ -95,7 +119,7 @@ public class Automation extends Thread{
 			
 			System.out.println(querystr);
 
-			getSql(querystr);
+			result=getSql(querystr);
 			
 			/*  -------------parsing---------------  */
 			try {
@@ -124,6 +148,7 @@ public class Automation extends Thread{
 					nt.docName="Dr. " + doctor.getuLastName() + " " + doctor.getuFirstName();
 					nt.location=clinic.getcLocation();
 					nt.mail=pt.getPtEmail();
+					nt.appSummery = "none";
 					System.out.println(nt.date + " "+ nt.docName+" "+nt.mail+ " "+nt.location+ " ");
 					/* Preparing notification object - end */
 					
@@ -175,24 +200,7 @@ public class Automation extends Thread{
 			}
 		}
 		
-		//-------------------------------------------------------------------------------------
-		
-		/**
-		 * Getting SQL query results back from DB
-		 * @param query
-		 */
-		public void getSql(String query){
-		//	Statement stmt;
-			try {
-				stmt = mysqlConnection.autoConn.createStatement();
-				result = stmt.executeQuery(querystr);
-			//	mysqlConnection.conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
+
 		//-------------------------------------------------------------------------------------
 		
 		/**
@@ -210,6 +218,36 @@ public class Automation extends Thread{
 	}
 	
 	
+	//-------------------------------------------------------------------------------------
 	
+	/**
+	 * Getting SQL query results back from DB
+	 * @param query
+	 */
+	public ResultSet getSql(String query){
+	//	Statement stmt;
+		try {
+			stmt = mysqlConnection.autoConn.createStatement();
+			result = stmt.executeQuery(query);
+		//	mysqlConnection.conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public void setSql(String query){
+		//	Statement stmt;
+			try {
+				stmt = mysqlConnection.conn.createStatement();
+				stmt.executeUpdate(query);
+			//	mysqlConnection.conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 	
 }
