@@ -67,7 +67,11 @@ public class GeneralManagerController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dateFrom = (Date)General_M_GUI.getDatePickerFrom().getModel().getValue();
+<<<<<<< HEAD
+			JOptionPane.showMessageDialog(null,"You chose date from: " + (int)(dateFrom.getMonth()+1),"", JOptionPane.INFORMATION_MESSAGE);
+=======
 			JOptionPane.showMessageDialog(null,"You chose date from: " + dateFrom.getDate(),"", JOptionPane.INFORMATION_MESSAGE);
+>>>>>>> 471820e58dddf539357695199a1ce6aebe323165
 			
 			System.out.println("--------" + dateFrom);
 		}
@@ -82,7 +86,11 @@ public class GeneralManagerController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dateTo = (Date)General_M_GUI.getDatePickerFrom().getModel().getValue();
+<<<<<<< HEAD
+			JOptionPane.showMessageDialog(null,"You chose date to: " + (int)(dateTo.getMonth()+1),"", JOptionPane.INFORMATION_MESSAGE);
+=======
 			JOptionPane.showMessageDialog(null,"You chose date to: " + dateTo.getDate(),"", JOptionPane.INFORMATION_MESSAGE);
+>>>>>>> 471820e58dddf539357695199a1ce6aebe323165
 			
 			System.out.println("--------" + dateTo);
 		}
@@ -100,8 +108,13 @@ public class GeneralManagerController {
 			choosenDateTo = formatter.format(dateTo);	
 		}
 	}
+<<<<<<< HEAD
 	
 	
+=======
+	
+	
+>>>>>>> 471820e58dddf539357695199a1ce6aebe323165
 	class showWeeklyListener implements ActionListener 
 	{
 		/* (non-Javadoc)
@@ -127,6 +140,53 @@ public class GeneralManagerController {
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			choosenDateFrom = formatter.format(dateFrom);
 			choosenDateTo = formatter.format(dateTo);	
+<<<<<<< HEAD
+			SendAndShow(clinicChosen,choosenDateFrom,choosenDateTo);
+			
+		}
+	}
+	
+	class showMonthlyListener  implements ActionListener 
+	{
+		public void actionPerformed(ActionEvent e) {
+			clinicChosen = General_M_GUI.getClinicSel();
+			if(clinicChosen==null){
+				JOptionPane.showMessageDialog(null,"Please select clinic before!","", JOptionPane.INFORMATION_MESSAGE);
+				return;
+			}
+			int monthBack = (int)General_M_GUI.getMonthBoxIndex()+1;
+			System.out.println("monthBack: "+monthBack);
+			dateTo = new Date();dateFrom = new Date();
+			dateFrom.setMonth(dateTo.getMonth()-monthBack);
+			System.out.println("dateTo:  "+dateTo+" \ndateFrom:  "+dateFrom);
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			choosenDateFrom = formatter.format(dateFrom);
+			choosenDateTo = formatter.format(dateTo);	
+			SendAndShow(clinicChosen,choosenDateFrom,choosenDateTo);
+		}
+	}
+	
+	public void SendAndShow(String clinic , String from, String to){
+
+		List<Object> strings_to_server = new ArrayList<Object>();
+		System.out.println("Trying to show monthly");
+		
+		strings_to_server.add(from);
+		strings_to_server.add(to);
+		strings_to_server.add(Character.toString(clinic.charAt(1))); //clinic id 
+		
+		/*-- call server --*/
+		Envelope en = Controller.Control(strings_to_server,task.GET_CLINIC_CLUSTER_MONTHLY_REPORT);
+
+		List<Object> listObj =  en.getobjList();
+	
+		System.out.println("Got cluster monthly report");
+		
+		@SuppressWarnings("unused")
+		showClusterReports showRepo = new showClusterReports(listObj);
+	}
+	
+=======
 			//----------------------------------------------------------------------------------------//
 			// 								V  mey's code  V										  //
 			//----------------------------------------------------------------------------------------//
@@ -159,5 +219,6 @@ public class GeneralManagerController {
 	}
 	
 	
+>>>>>>> 471820e58dddf539357695199a1ce6aebe323165
 } //PationControl
 
