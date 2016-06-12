@@ -89,6 +89,14 @@ public class Doctor_History_GUI extends LoggingOut {
 	
 	/** The imglabel. */
 	private JLabel imglabel;
+	
+	/** The btnLabHistory. */
+	private JButton btnLabHistory;
+	
+	/** The btnAppointmentHistory. */
+    private JButton btnAppointmentHistory;
+    
+    private JLabel LaborAppTitle;
 	/**
 	 * Create the frame.
 	 */
@@ -124,18 +132,20 @@ public class Doctor_History_GUI extends LoggingOut {
 		contentPane.add(btnCancel);
 		
 		AppointmentBox = new JComboBox<Object>();
-		AppointmentBox.setBounds(10, 139, 465, 20);
+		AppointmentBox.setBounds(10, 209, 465, 20);
 		contentPane.add(AppointmentBox);
 		
-		JLabel AppointmentLabel = new JLabel("Appointment History");
-		AppointmentLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
-		AppointmentLabel.setBounds(10, 114, 140, 14);
-		contentPane.add(AppointmentLabel);
-		
+		LaborAppTitle = new JLabel("Appointment History");
+		LaborAppTitle.setFont(new Font("Tahoma", Font.BOLD, 11));
+		LaborAppTitle.setBounds(10, 184, 140, 14);
+		contentPane.add(LaborAppTitle);
+
+		/*
 		JLabel lblLabResultHistory = new JLabel("Lab Result History");
 		lblLabResultHistory.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblLabResultHistory.setBounds(10, 184, 140, 14);
 		contentPane.add(lblLabResultHistory);
+		*/
 		
 		LabResBox = new JComboBox<Object>();
 		LabResBox.setBounds(10, 209, 465, 20);
@@ -155,6 +165,22 @@ public class Doctor_History_GUI extends LoggingOut {
     	contentPane.add(imagePan);
     	imglabel = new JLabel();
         imagePan.add(imglabel);
+        
+        
+        btnAppointmentHistory = new JButton("Appointment History");
+        btnAppointmentHistory.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        btnAppointmentHistory.setBounds(43, 119, 176, 54);
+        contentPane.add(btnAppointmentHistory);
+        
+        btnLabHistory = new JButton("Lab History");
+        btnLabHistory.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        btnLabHistory.setBounds(249, 119, 176, 54);
+        contentPane.add(btnLabHistory);
+        
+        JLabel Summerylabel = new JLabel("Summery:");
+        Summerylabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+        Summerylabel.setBounds(10, 251, 140, 14);
+        contentPane.add(Summerylabel);
     	
     	
 		btnCancel.addActionListener(new CancelListener());
@@ -355,6 +381,26 @@ public void SetPatient(Patient pt) {
 	}
 	
 	/**
+	 * Gets the Lab History Button.
+	 *
+	 * @return  Lab History Button
+	 */
+	public JButton getLabHistoryButton()
+	{
+        return btnLabHistory;
+	}
+	
+	/**
+	 * Gets the Appointment History Button.
+	 *
+	 * @return  Appointment History Button
+	 */
+	public JButton getAppHistoryButton()
+	{
+        return btnAppointmentHistory;
+	}
+	
+	/**
 	 * Sets the adds the to image pan.
 	 *
 	 * @param Path the new adds the to image pan
@@ -372,6 +418,16 @@ public void SetPatient(Patient pt) {
         
         imglabel.setIcon(new ImageIcon(image));
               
+	}
+	
+	/**
+	 * get the title of combobox.
+	 *
+	 * @return LaborAppTitle
+	 */
+	public JLabel getTitleLabel()
+	{
+		return LaborAppTitle;
 	}
 	
 	
