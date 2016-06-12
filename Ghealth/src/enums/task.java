@@ -76,12 +76,15 @@ public enum task {
 	/** The create lab ref. */
 	CREATE_LAB_REF,
 	
+	/** The get clinic list. */
+	GET_CLINIC_LIST,
 	
 	/** The get clinic weekly report. */
 	GET_CLINIC_WEEKLY_REPORT,
 	
 	/** The get clinic monthly report. */
 	GET_CLINIC_MONTHLY_REPORT,
+	
 	
 	/** The get clinic cluster months report. */
 	GET_CLINIC_CLUSTER_MONTHLY_REPORT,

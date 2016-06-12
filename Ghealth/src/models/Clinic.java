@@ -99,7 +99,12 @@ public class Clinic implements Serializable{
 	public void setcName(String cName) {
 		this.cName = cName;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "[" + cID + "] " + cName + ", Location=" + cLocation + "";
+	}
+	
+	
+	
 }

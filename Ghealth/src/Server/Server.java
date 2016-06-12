@@ -154,6 +154,11 @@ public class Server extends Thread
             	env = SCpatient.GetClinicList();
             	break;
             	
+            
+            case GET_CLINIC_LIST:
+            	env = SCclinic.GetOurClinicList();
+            	break;
+            
             	
             /*---   Appointment Tasks: ---*/  
             case CANCEL_PATIENT_REGISTRATION:
@@ -300,7 +305,7 @@ public class Server extends Thread
             	//clinic = (Clinic)env.getSingleObject();
 
     			SCmonthlyClusterReports reports = SCmonthlyClusterReports.getInstance();
-            	env = reports.getClinicMonthlyClusterReport(cID, from_month, to_month); //where do i get it from?? 
+            	//env = reports.getClinicMonthlyClusterReport(cID, from_month, to_month); //where do i get it from?? 
             	break;
             	
             case SEND_PERSONAL_DOC_MAIL:

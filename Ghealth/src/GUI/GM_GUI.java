@@ -1,5 +1,10 @@
 package GUI;
 import client.*;
+import enums.task;
+import models.Clinic;
+import models.Envelope;
+import models.PrivateClinic;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -12,7 +17,6 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import GUI.LoggingOut.LogOutListener;
-import client.LoginControl;
 
 import javax.swing.JTextField;
 
@@ -216,7 +220,21 @@ public class GM_GUI extends LoggingOut {
 		separator.setBounds(0, 398, 795, 2);
 		contentPane.add(separator);
 		
-		JList<String> list = new JList<String>(new String[] { "Haifa", "Tel-Aviv", "Jerusalem", "Eilat", "Acko", "Karmiel", "Aza" }); //JList list = new JList();//
+		
+		Envelope en = Controller.Control(null, task.GET_CLINIC_LIST);
+		String [] str = new String[en.getobjList().size()];
+		
+		System.out.println(en.getobjList().size());
+		int i=0;
+		for(Object obj : en.getobjList())
+		{
+			Clinic cl = new Clinic();
+			cl = (Clinic)obj;
+			str[i++] = cl.toString();
+		}
+		
+		
+		JList<String> list = new JList<String>(str); //JList list = new JList();//
 		list.setToolTipText("Use 'CTRL' to select more than one item");
 
 		list.setBounds(237, 111, 240, 140);
