@@ -44,6 +44,7 @@ import javax.swing.SwingConstants;
 
 
 /**
+ * @author G5 lab group
  * The Class of the general manager windows GUI.
  */
 public class GM_GUI extends LoggingOut {

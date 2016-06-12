@@ -32,6 +32,7 @@ import java.awt.Label;
 
 
 /**
+ * @author G5 lab group
  * The Class of the costumer service search patient.
  */
 public class CS_GUI_findPatient extends LoggingOut {

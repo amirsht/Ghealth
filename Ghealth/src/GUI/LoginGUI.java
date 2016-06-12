@@ -40,6 +40,7 @@ import javax.swing.SwingUtilities;
 
 
 /**
+ * @author G5 lab group
  * The Class LoginGUI.
  */
 public class LoginGUI extends LoggingOut {

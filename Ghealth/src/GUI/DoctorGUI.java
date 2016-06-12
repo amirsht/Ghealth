@@ -32,6 +32,7 @@ import java.awt.Label;
 
 
 /**
+ * @author G5 lab group
  * The Class DoctorGUI.
  */
 public class DoctorGUI extends LoggingOut {

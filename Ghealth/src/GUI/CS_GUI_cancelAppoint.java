@@ -26,6 +26,7 @@ import javax.swing.JButton;
 import java.awt.Font;
 
 /**
+ * @author G5 lab group
  * The Class  costumer service of cancel Appointment.
  */
 public class CS_GUI_cancelAppoint extends LoggingOut{

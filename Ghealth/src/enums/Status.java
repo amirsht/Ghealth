@@ -1,6 +1,7 @@
 package enums;
 
 /**
+ * @author G5 lab group
  * The Enum Query Status.
  */
 public enum Status {

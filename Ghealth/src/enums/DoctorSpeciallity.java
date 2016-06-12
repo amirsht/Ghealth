@@ -1,6 +1,7 @@
 package enums;
 
 /**
+ * @author G5 lab group
  * The Enums for Doctor Speciallity.
  */
 public enum DoctorSpeciallity {

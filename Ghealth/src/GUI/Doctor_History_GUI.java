@@ -48,6 +48,7 @@ import java.awt.RenderingHints;
 
 
 /**
+ * @author G5 lab group
  * The Class of doctor view history GUI.
  */
 public class Doctor_History_GUI extends LoggingOut {

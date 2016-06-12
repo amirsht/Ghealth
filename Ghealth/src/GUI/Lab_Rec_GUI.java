@@ -39,6 +39,7 @@ import javax.swing.SwingConstants;
 
 
 /**
+ * @author G5 lab group
  * The Class of the lab worker record GUI.
  */
 public class Lab_Rec_GUI extends LoggingOut {

@@ -41,6 +41,7 @@ import javax.swing.JComboBox;
 
 
 /**
+ * @author G5 lab group
  * The Class of the costumer service add new patient GUI.
  */
 public class CS_GUI_addPatient extends LoggingOut {

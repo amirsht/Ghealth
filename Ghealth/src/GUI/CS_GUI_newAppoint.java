@@ -42,6 +42,7 @@ import javax.swing.JTree;
 import java.awt.Panel;
 
 /**
+ * @author G5 lab group
  * The Class costumer service fill the form for new appointment.
  */
 public class CS_GUI_newAppoint extends LoggingOut {

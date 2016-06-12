@@ -14,6 +14,7 @@ import enums.task;
 import models.User;
 
 /**
+ * @author G5 lab group
  * The Class LoggingOut.
  */
 public class LoggingOut extends JFrame{

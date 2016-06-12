@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
+ * @author G5 lab group
  * The Class GhealthClientGUI to choose which server connect to.
  */
 public class GhealthClientGUI extends LoggingOut{

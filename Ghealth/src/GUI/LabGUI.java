@@ -34,6 +34,7 @@ import java.awt.Label;
 
 
 /**
+ * @author G5 lab group
  * The Class of the find patient of the lab worket GUI.
  */
 public class LabGUI extends LoggingOut {

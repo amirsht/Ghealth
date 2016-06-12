@@ -5,6 +5,7 @@ import java.io.Serializable;
 import enums.Status;
 
 /**
+ * @author G5 lab group
  * The Class model - LabSettings,
  * Here we will create lab ref and record the patient lab.
  */

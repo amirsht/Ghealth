@@ -45,6 +45,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
 /**
+ * @author G5 lab group
  * The Class MainWindowGUI.
  */
 public class MainWindowGUI extends LoggingOut {

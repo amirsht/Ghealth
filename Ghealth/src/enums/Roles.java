@@ -1,6 +1,7 @@
 package enums;
 
 /**
+ * @author G5 lab group
  * The Enum Roles of users.
  */
 public enum Roles {

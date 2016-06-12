@@ -32,6 +32,7 @@ import java.awt.Label;
 
 
 /**
+ *@author G5 lab group
  * The Class of the Clinic manager GUI.
  */
 public class CM_GUI extends LoggingOut {

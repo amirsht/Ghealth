@@ -4,6 +4,7 @@ import enums.*;
 
 
 /**
+ * @author G5 lab group
  * The Class for any User on our system.
  */
 public class User implements Serializable {

@@ -3,6 +3,7 @@ package models;
 import java.io.Serializable;
 
 /**
+ * @author G5 lab group
  * The Class Private Clinic.
  */
 public class PrivateClinic implements Serializable{
