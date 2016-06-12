@@ -1,7 +1,7 @@
 package enums;
 
 /**
- * The Enums for DoctorSpeciallity.
+ * The Enums for Doctor Speciallity.
  */
 public enum DoctorSpeciallity {
 

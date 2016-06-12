@@ -1,8 +1,7 @@
 package enums;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Enum Status.
+ * The Enum Query Status.
  */
 public enum Status {
 	
