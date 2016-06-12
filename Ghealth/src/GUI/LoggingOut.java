@@ -54,13 +54,14 @@ public class LoggingOut extends JFrame{
 	/**
 	 * Logging out listener.
 	 *
-	 * @see LogOutEvent
+	 * 
 	 */
 	class LogOutListener  implements ActionListener 
 	{
 	
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		/**
+		 * @param e the event
+		 *
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 

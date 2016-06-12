@@ -77,14 +77,12 @@ public class LoginGUI extends LoggingOut {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginGUI.class.getResource("/images/logo2.png")));
 		setTitle("Ghealth Login");
 		setResizable(false);
-		//setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);//JFrame.EXIT_ON_CLOSE);
+
 		setBounds(200, 200, 700, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		//JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-
 		
 		
 		JLabel label = new JLabel("");
@@ -108,7 +106,6 @@ public class LoginGUI extends LoggingOut {
 		userField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-				//JTextField();
 		passwordField.setColumns(10);
 		passwordField.setBounds(290, 330, 139, 22);
 		contentPane.add(passwordField);
@@ -262,7 +259,7 @@ public class LoginGUI extends LoggingOut {
 	/**
 	 * Adds the login action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addLoginActionListener(ActionListener e)
 	{
@@ -272,7 +269,7 @@ public class LoginGUI extends LoggingOut {
 	/**
 	 * Adds the cancel action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addCancelActionListener(ActionListener e)
 	{

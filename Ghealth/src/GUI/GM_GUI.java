@@ -285,7 +285,7 @@ public class GM_GUI extends LoggingOut {
 	/**
 	 * Monthly action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void monthlyActionListener(ActionListener e)
 	{
@@ -293,9 +293,9 @@ public class GM_GUI extends LoggingOut {
 	}
 	
 	/**
-	 * Gets the cal.
+	 * Gets the calendar.
 	 *
-	 * @return the cal
+	 * @return the calendar
 	 */
 	public Panel getCal() {
 		return cal_from;

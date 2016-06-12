@@ -250,7 +250,7 @@ public class CS_GUI_addPatient extends LoggingOut {
 	/**
 	 * Adds the patient action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addPatientActionListener(ActionListener e)
 	{
@@ -260,7 +260,7 @@ public class CS_GUI_addPatient extends LoggingOut {
 	/**
 	 * Adds the cancel action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addCancelActionListener(ActionListener e)
 	{
@@ -269,18 +269,18 @@ public class CS_GUI_addPatient extends LoggingOut {
 
 	
 	/**
-	 * Gets the f name.
+	 * Gets the first  name.
 	 *
-	 * @return the f name
+	 * @return the first name
 	 */
 	public String getfName() {
 		return fName.getText();
 	}
 
 	/**
-	 * Gets the l name.
+	 * Gets the last name.
 	 *
-	 * @return the l name
+	 * @return the last name
 	 */
 	public String getlName() {
 		return lName.getText();

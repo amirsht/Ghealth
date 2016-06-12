@@ -154,7 +154,7 @@ public class Doctor_rec_GUI extends LoggingOut {
 	/**
 	 * Record patient action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void RecordPatientActionListener(ActionListener e)
 	{
@@ -164,7 +164,7 @@ public class Doctor_rec_GUI extends LoggingOut {
 	/**
 	 * Adds the cancel action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addCancelActionListener(ActionListener e)
 	{
@@ -174,7 +174,7 @@ public class Doctor_rec_GUI extends LoggingOut {
 /**
  * Sets the patient.
  *
- * @param pt the pt
+ * @param pt the patient
  */
 public void SetPatient(Patient pt) {
 		
@@ -254,9 +254,6 @@ public void SetPatient(Patient pt) {
 	}
 
 	
-	//public String getPtID() {
-	//	return InsertPatientId.getText();
-	//}
 
 	/**
 	 * Gets the record field.

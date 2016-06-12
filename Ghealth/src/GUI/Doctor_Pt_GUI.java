@@ -161,7 +161,7 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	/**
 	 * Record appoint action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void RecordAppointActionListener(ActionListener e)
 	{
@@ -171,7 +171,7 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	/**
 	 * Log out action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void LogOutActionListener(ActionListener e)
 	{
@@ -181,7 +181,7 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	/**
 	 * Search patient action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void SearchPatientActionListener(ActionListener e)
 	{
@@ -191,7 +191,7 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	/**
 	 * View history action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void ViewHistoryActionListener(ActionListener e)
 	{
@@ -202,7 +202,7 @@ public class Doctor_Pt_GUI extends LoggingOut {
 	/**
 	 * Creates the lab action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void CreateLabActionListener(ActionListener e)
 	{
@@ -213,7 +213,7 @@ public class Doctor_Pt_GUI extends LoggingOut {
 /**
  * Sets the patient.
  *
- * @param pt the pt
+ * @param pt the patient
  */
 public void SetPatient(Patient pt) {
 		

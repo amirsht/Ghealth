@@ -150,7 +150,7 @@ public class CM_GUI extends LoggingOut {
 	/**
 	 * Monthly action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void monthlyActionListener(ActionListener e)
 	{

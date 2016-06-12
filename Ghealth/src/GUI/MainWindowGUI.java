@@ -114,7 +114,7 @@ public class MainWindowGUI extends LoggingOut {
 	/**
 	 * Addbtn home action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addbtnHomeActionListener(ActionListener e)
 	{
@@ -124,7 +124,7 @@ public class MainWindowGUI extends LoggingOut {
 	/**
 	 * Addbtn manage files action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addbtnManageFilesActionListener(ActionListener e)
 	{
@@ -134,7 +134,7 @@ public class MainWindowGUI extends LoggingOut {
 	/**
 	 * Addbtn manage groups action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addbtnManageGroupsActionListener(ActionListener e)
 	{

@@ -151,7 +151,7 @@ public class CS_GUI_findPatient extends LoggingOut {
 	/**
 	 * Find patient action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void findPatientActionListener(ActionListener e)
 	{
@@ -164,7 +164,7 @@ public class CS_GUI_findPatient extends LoggingOut {
 	/**
 	 * Gets the patient id.
 	 *
-	 * @return the pt id
+	 * @return the patient id
 	 */
 	public String getPtID() {
 		return InsertPatientId.getText();

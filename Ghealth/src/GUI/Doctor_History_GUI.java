@@ -198,7 +198,7 @@ public class Doctor_History_GUI extends LoggingOut {
 	/**
 	 * Adds the cancel action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void addCancelActionListener(ActionListener e)
 	{

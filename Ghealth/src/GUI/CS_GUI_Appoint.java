@@ -162,7 +162,7 @@ public class CS_GUI_Appoint extends LoggingOut {
 	/**
 	 * Creates the appoint action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void createAppointActionListener(ActionListener e)
 	{
@@ -172,7 +172,7 @@ public class CS_GUI_Appoint extends LoggingOut {
 	/**
 	 * Log out action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void LogOutActionListener(ActionListener e)
 	{
@@ -182,7 +182,7 @@ public class CS_GUI_Appoint extends LoggingOut {
 	/**
 	 * Search patient action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void SearchPatientActionListener(ActionListener e)
 	{
@@ -192,7 +192,7 @@ public class CS_GUI_Appoint extends LoggingOut {
 	/**
 	 * Uncreate patient action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void UncreatePatientActionListener(ActionListener e)
 	{
@@ -205,7 +205,7 @@ public class CS_GUI_Appoint extends LoggingOut {
 	/**
 	 * Cancel appoint action listener.
 	 *
-	 * @param e the e
+	 * @param e the event
 	 */
 	public void cancelAppointActionListener(ActionListener e)
 	{
@@ -216,7 +216,7 @@ public class CS_GUI_Appoint extends LoggingOut {
 /**
  * Sets the patient.
  *
- * @param pt the pt
+ * @param pt the patient
  */
 public void SetPatient(Patient pt) {
 		
