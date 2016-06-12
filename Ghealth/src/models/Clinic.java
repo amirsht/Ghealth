@@ -1,28 +1,40 @@
-/**
- * TODO This is the class description
- */
-
-
 package models;
 
 
 import java.io.Serializable;
 import java.util.*;
 
+/**
+ * The Class Clinic.
+ */
 public class Clinic implements Serializable{
 	
+	/** The clinic id. */
 	private int cID;
+	
+	/** The clinic name. */
 	private String cName;
+	
+	/** The clinic location. */
 	private String cLocation; 
 	
 	
-	Map<String,List<Doctor>> DoctorsBySpeciality;
 	  
+	/**
+	 * Instantiates a new clinic.
+	 */
 	public Clinic()
 	{
 		super();
 	}
 	
+	/**
+	 * Instantiates a new clinic.
+	 *
+	 * @param cID the clinic id
+	 * @param cName the clinic name
+	 * @param cLocation the clinic location
+	 */
 	public Clinic(int cID,String cName,String cLocation)
 	{
 		super();
@@ -30,37 +42,63 @@ public class Clinic implements Serializable{
 		this.setcName(cName);
 		this.cLocation = cLocation;
 		
-		//TODO : add list of doctors by speciality. each speciality has doctors list for DB
 		
 	}
 
+	/**
+	 * Gets the clinic id.
+	 *
+	 * @return the clinic id
+	 */
 	public int getcID() {
 		return cID;
 	}
 
+	/**
+	 * Sets the clinic id.
+	 *
+	 * @param cID the new clinic id
+	 */
 	public void setcID(int cID) {
 		this.cID = cID;
 	}
 
+	/**
+	 * Gets the clinic location.
+	 *
+	 * @return the clinic location
+	 */
 	public String getcLocation() {
 		return cLocation;
 	}
 
+	/**
+	 * Sets the clinic location.
+	 *
+	 * @param cLocation the new clinic location
+	 */
 	public void setcLocation(String cLocation) {
 		this.cLocation = cLocation;
 	}
 
+	/**
+	 * Gets the clinic name.
+	 *
+	 * @return the clinic name
+	 */
 	public String getcName() {
 		return cName;
 	}
 
+	/**
+	 * Sets the clinic name.
+	 *
+	 * @param cName the new clinic name
+	 */
 	public void setcName(String cName) {
 		this.cName = cName;
 	}
 	
-	
-	
-	//TODO add get list of doctors. but a doctor can't reach to this function 
 	
 
 }
