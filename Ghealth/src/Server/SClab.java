@@ -41,7 +41,7 @@ public class SClab {
 		try 
 		{
 			stmt = mysqlConnection.conn.createStatement();
-			System.out.println("Create new appointment in DB: " + querystr);
+			System.out.println("Get SCHEDUELD labs from DB: " + querystr);
 			result = stmt.executeQuery(querystr);
 			en.setStatus(Status.NOT_EXIST);
 			while (result.next())
@@ -98,7 +98,8 @@ public class SClab {
 		
 		querystr="SELECT * "
 				+ "FROM labsettings,user,clinic  "
-				+ "WHERE labDocID=uID AND labPtID='"+ptID+"' AND labStatus='ARRIVED' AND cID = ucID";
+				+ "WHERE labDocID=uID AND labPtID='"+ptID+"' AND labStatus='ARRIVED' AND cID = ucID"
+				+ " ORDER BY labCreateDate DESC";
 		
 		try 
 		{
