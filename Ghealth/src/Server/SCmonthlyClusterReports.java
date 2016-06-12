@@ -193,11 +193,11 @@ public class SCmonthlyClusterReports {
 				Calendar tempDay = Calendar.getInstance();
 				tempDay.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(result.getString(1)));
 				
-				int week =(Integer.parseInt(result.getString(1))%4)+1;
+				int week =(Integer.parseInt(result.getString(1))%4);
 				int month = (Integer.parseInt(result.getString(1))/4);
 				
 				
-				this.ReportToEnv.add(new String[]{clinicName,this.getMonthName(month+1), String.valueOf(week), result.getString(2), result.getString(3), result.getString(4), result.getString(6), result.getString(8) });	
+				this.ReportToEnv.add(new String[]{clinicName,this.getMonthName(month), String.valueOf(week), result.getString(2), result.getString(3), result.getString(4), result.getString(6), result.getString(8) });	
 				
 			}
 			

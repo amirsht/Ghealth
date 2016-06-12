@@ -68,6 +68,9 @@ public class GM_GUI extends LoggingOut {
 	/** The weekly btn. */
 	private JButton weeklyBtn;
 	
+	/** The monthly btn. */
+	private JButton OKmonthBtn;
+	
 	/** The date picker from. */
 	private JDatePickerImpl datePickerFrom;
 	
@@ -76,6 +79,9 @@ public class GM_GUI extends LoggingOut {
 	
 	/** The btn choose date from. */
 	private JButton btnChooseDateFrom;
+	
+	/** The MonthBox choose date from. */
+	private JComboBox MonthBox;
 	
 	/** The lbl new label from. */
 	private JLabel lblNewLabelFrom;
@@ -109,6 +115,8 @@ public class GM_GUI extends LoggingOut {
 	
 	/** The separator_2. */
 	private JSeparator separator_2;
+	
+	private JList<String> list;
 	
 	
 	
@@ -186,6 +194,10 @@ public class GM_GUI extends LoggingOut {
 		cal_to.setVisible(true);
 		contentPane.add(cal_to,BorderLayout.WEST);		
 		btnChooseDateTo = new JButton("OK");
+		btnChooseDateTo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		cal_to.add(btnChooseDateTo);		
 		
 		lblSelectDateFrom = new JLabel("Select date From");
@@ -196,19 +208,23 @@ public class GM_GUI extends LoggingOut {
 		lblSelectDateTo.setBounds(439, 262, 278, 33);
 		contentPane.add(lblSelectDateTo);
 		
-		JComboBox MonthBox = new JComboBox();
+		MonthBox = new JComboBox();
 		MonthBox.addItem(1);MonthBox.addItem(2);MonthBox.addItem(3);
 		MonthBox.addItem(4);MonthBox.addItem(5);MonthBox.addItem(6);
 		MonthBox.addItem(7);MonthBox.addItem(8);MonthBox.addItem(9);
 		MonthBox.addItem(10);MonthBox.addItem(11);MonthBox.addItem(12);
 		MonthBox.setBounds(33, 447, 55, 20);
+		MonthBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		contentPane.add(MonthBox);
 		
 		JLabel lblLastMonthsAmount = new JLabel("Last months amount");
 		lblLastMonthsAmount.setBounds(33, 407, 130, 14);
 		contentPane.add(lblLastMonthsAmount);
 		
-		JButton OKmonthBtn = new JButton("Show reports with this number of months back");
+		OKmonthBtn = new JButton("Show reports with this number of months back");
 		OKmonthBtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -234,8 +250,9 @@ public class GM_GUI extends LoggingOut {
 		}
 		
 		
-		JList<String> list = new JList<String>(str); //JList list = new JList();//
-		list.setToolTipText("Use 'CTRL' to select more than one item");
+		list = new JList<String>(str); //JList list = new JList();//
+		//list.setToolTipText("Use 'CTRL' to select more than one item");
+		//System.out.println(list.getSelectedValuesList());
 
 		list.setBounds(237, 111, 240, 140);
 		contentPane.add(list);
@@ -258,6 +275,18 @@ public class GM_GUI extends LoggingOut {
 		setVisible(true);
 		
 	
+	}
+	
+	
+	/**
+	 * Gets the clinic selection.
+	 *
+	 * @return the clinic selection
+	 */
+	public String getClinicSel(){
+		if(!list.getSelectedValuesList().isEmpty())
+			return list.getSelectedValuesList().get(0);
+		return null;
 	}
 	
 	/**
@@ -286,8 +315,7 @@ public class GM_GUI extends LoggingOut {
 	 * Undisplay warning message.
 	 */
 	public void undisplayWarningMessage() {
-		lblwarningMessage.setVisible(false);
-		
+		lblwarningMessage.setVisible(false);	
 	}
 	
 	
@@ -301,6 +329,11 @@ public class GM_GUI extends LoggingOut {
 		weeklyBtn.addActionListener(e);
 	}
 	
+	public int getMonthBoxIndex()
+	{
+		return MonthBox.getSelectedIndex();
+	}
+	
 	/**
 	 * Monthly action listener.
 	 *
@@ -308,7 +341,7 @@ public class GM_GUI extends LoggingOut {
 	 */
 	public void monthlyActionListener(ActionListener e)
 	{
-		btnMonthlyReport.addActionListener(e);
+		OKmonthBtn.addActionListener(e);
 	}
 	
 	/**
@@ -325,23 +358,29 @@ public class GM_GUI extends LoggingOut {
 	 *
 	 * @return the date picker
 	 */
-	public JDatePickerImpl getDatePicker() {
+	public JDatePickerImpl getDatePickerFrom() {
 		return datePickerFrom;
-	}	
+	}
+	
+	public JDatePickerImpl getDatePickerTo() {
+		return datePickerTo;
+	}
 	
 	/**
 	 * Gets the choosen date ok.
 	 *
 	 * @return the choosen date ok
 	 */
-	public JButton getChoosenDateOK() {
+	public JButton getChoosenDateFrom() {
 		return btnChooseDateFrom;
 	}
-	
-	
+	public JButton getChoosenDateTo() {
+		return btnChooseDateTo;
+	}
+
 
 	/**
-	* Cancell listener of the button.
+	* Cancel listener of the button.
 	*/
 	public class CancelListener implements ActionListener 
     {

@@ -169,7 +169,7 @@ public class SCmonthlyReports {
 			stmt.executeUpdate(query6);
 			stmt.executeUpdate(query7);
 			result = stmt.executeQuery(query8);
-			
+
 			
 			/*-- for each day of the past week -- */
 			while(result.next())
