@@ -41,8 +41,9 @@ import javax.swing.SwingUtilities;
 
 public class LoginGUI extends LoggingOut {
 
+	
 	/**
-	 * 
+	 * serialVersion
 	 */
 	private static final long serialVersionUID = -510417858888515993L;
 	
