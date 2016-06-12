@@ -41,7 +41,7 @@ import javax.swing.JComboBox;
 
 
 /**
- * The Class CS_GUI_addPatient.
+ * The Class of the costumer service add new patient GUI.
  */
 public class CS_GUI_addPatient extends LoggingOut {
 

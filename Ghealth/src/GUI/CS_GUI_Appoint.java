@@ -33,7 +33,7 @@ import java.awt.Label;
 
 
 /**
- * The Class CS_GUI_Appoint.
+ * The Class costumer service of adding new appointment.
  */
 public class CS_GUI_Appoint extends LoggingOut {
 

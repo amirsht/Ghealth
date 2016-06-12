@@ -32,7 +32,7 @@ import java.awt.Label;
 
 
 /**
- * The Class CS_GUI_findPatient.
+ * The Class of the costumer service search patient.
  */
 public class CS_GUI_findPatient extends LoggingOut {
 

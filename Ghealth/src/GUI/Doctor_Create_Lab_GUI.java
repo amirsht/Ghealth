@@ -261,21 +261,13 @@ public void SetPatient(Patient pt) {
 
 
 	/**
-	 * The listener interface for receiving cancel events.
-	 * The class that is interested in processing a cancel
-	 * event implements this interface, and the object created
-	 * with that class is registered with a component using the
-	 * component's <code>addCancelListener<code> method. When
-	 * the cancel event occurs, that object's appropriate
-	 * method is invoked.
-	 *
-	 * @see CancelEvent
-	 */
+	* Cancell listener of the button.
+	*/
 	public class CancelListener implements ActionListener 
     {
     	
-	    /* (non-Javadoc)
-	     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		/** 
+	     * closes the current frame of the class
 	     */
 	    @Override
     	public void actionPerformed(ActionEvent e)

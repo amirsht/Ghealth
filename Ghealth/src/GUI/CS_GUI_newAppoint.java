@@ -42,7 +42,7 @@ import javax.swing.JTree;
 import java.awt.Panel;
 
 /**
- * The Class CS_GUI_newAppoint.
+ * The Class costumer service fill the form for new appointment.
  */
 public class CS_GUI_newAppoint extends LoggingOut {
 
