@@ -52,132 +52,112 @@ public class SCmonthlyReports {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar today = Calendar.getInstance();
 		
-		today.add(Calendar.DATE, 20);
+		today.set(today.DAY_OF_MONTH, 1);
+		//today.add(Calendar.DATE, 20);
+		String from_date_str = formatter.format(today.getTime());
+		
+		
+		System.out.println(from_date_str);
+		
+		today.add(Calendar.DATE, 30);
 		String to_date_str = formatter.format(today.getTime());
 		
-		today.add(Calendar.DATE, -30);
-		String from_date_str = formatter.format(today.getTime());
+		System.out.println(to_date_str);
 
 		String query1 = ""
-				+ "Create or replace view Tablea as "
-				+ "(SELECT monthname(A.apsdate) AS MonthN, "
-				+ "		week(A.apsdate) AS weekNum, "
-				+ "		AVG(DATEDIFF(A.apsDate,A.apsCreateDate)) as AvgProcessTime, "
-				+ "		AVG(timediff(A.apsStartTime, A.apsTime)/60) as AvgWaitingTime, "
-				+ "       Count(DISTINCT A.apsptid) AS NumOfPatients "
-				+ "FROM   appointmentsettings A "
-				+ "WHERE  A.apsstatus = 'ARRIVED' AND "
-				+ "       A.apsdate >= '" + from_date_str
-				+ "' AND "
-				+ "       A.apsdate <= '" + to_date_str
-				+ "' AND "
-				+ "       A.apsDocID in (SELECT doc.uID FROM user doc where doc.ucID=" + clinicID
-				+ ") "
-				+ "GROUP BY weekNum);";
+				+ "Create or replace view TrypA as "
+				+ "(SELECT * "
+				+ "  from appointmentsettings A "
+				+ "  where A.apsstatus = 'ARRIVED');";
 
 
 				String query2 = ""
-				+ "Create or replace view Tableb as "
-				+ "(SELECT monthname(ptleavedate) AS Monthb, "
-				+ "	   week(ptleavedate)  AS weekNumb, "
-				+ "	   0 as AvgProcessTimeb, "
-				+ "	   0 as AvgWaitingTimeb, "
-				+ "	   0 as NumOfPatientsb , "
-				+ "       Count(p.ptleavedate) AS LeaveClients "
-				+ "FROM   patient P "
-				+ "WHERE  ptleavedate != 'null'  AND "
-				+ "       ptleavedate >= '" + from_date_str
-				+ "' AND "
-				+ "       ptleavedate <= '" + to_date_str 
-				+ "' "
-				+ "GROUP BY weekNumb);";
-
-
-				String query3 = ""
-				+ "Create or replace view Tablec as "
-				+ "( "
-				+ "SELECT monthname(A.apsdate) as monthc, "
-				+ "	    week(A.apsdate) AS weekNumc, "
-				+ "       Count(A.apsStatus) AS NoShow "
-				+ "FROM   appointmentsettings A "
-				+ "WHERE  A.apsstatus = 'NOSHOW'  AND "
+				+ "Create or replace view TrypB as "
+				+ "(SELECT idweeks AS weekNumar, "
+				+ "        Count(DISTINCT A.apsptid) AS NumOfPatients, "
+				+ "		AVG(DATEDIFF(A.apsDate,A.apsCreateDate)) as AvgProcessTime, "
+				+ "		AVG(timediff(A.apsStartTime, A.apsTime)/60) as AvgWaitingTime "
+				+ "FROM   TrypA A RIGHT OUTER JOIN Weeks ON WEEK(A.apsdate) = weeks.idweeks "
+				+ "WHERE  weeks.idweeks>= week('" + from_date_str
+				+ "') AND "
+				+ "       weeks.idweeks<=week('" + to_date_str
+				+ "') AND "
+				+ "	   A.apsstatus IS NULL OR (A.apsstatus = 'ARRIVED' AND "
 				+ "       A.apsdate >= '" + from_date_str
 				+ "' AND "
 				+ "       A.apsdate <= '" + to_date_str
-				+ "' AND "
+				+ "') and "
 				+ "       A.apsDocID in (SELECT doc.uID FROM user doc where doc.ucID=" + clinicID
 				+ ") "
-				+ "GROUP BY weekNumc "
-				+ ");";
+				+ "       GROUP BY idweeks "
+				+ "       order by idweeks);";
+
+
+				String query3 = ""
+				+ "Create or replace view TryLEAVEa as "
+				+ "(SELECT * "
+				+ "	FROM patient P "
+				+ "    where P.ptIsRegistered = 'NOT_REG' and P.ptLeaveDate IS NOT NULL);";
 
 
 				String query4 = ""
-				+ "create or replace view tabled as "
-				+ "select MonthN,weekNum,AvgProcessTime,AvgWaitingTime,NumOfPatients,NoShow from "
-				+ " "
-				+ "	SELECT * FROM tablea "
-				+ "		LEFT JOIN tablec ON tablea.weekNum = tablec.weeknumc "
-				+ "		GROUP by weeknum "
-				+ "	UNION "
-				+ "	SELECT * FROM tablea "
-				+ "		RIGHT JOIN tablec ON tablea.weekNum = tablec.weeknumc "
-				+ "		Group by weeknum  "
-				+ "	 "
-				+ ";";
+				+ "Create or replace view TryLEAVEb as "
+				+ "(SELECT idweeks AS weekNuml, "
+				+ "   Count(Pa.ptLeaveDate) AS LeaveClients "
+				+ "   FROM   TryLEAVEa Pa  RIGHT OUTER JOIN Weeks ON WEEK(Pa.ptLeaveDate) = weeks.idweeks "
+				+ "   WHERE  weeks.idweeks>= week('" + from_date_str
+				+ "') AND "
+				+ "       weeks.idweeks<=week('" + to_date_str
+				+ "') and Pa.ptLeaveDate is NULL "
+				+ "   OR (Pa.ptIsRegistered = 'NOT_REG' AND "
+				+ "      Pa.ptLeaveDate >= '" + from_date_str
+				+ "' AND "
+				+ "      Pa.ptLeaveDate <= '" + to_date_str
+				+ "') "
+				+ "      group by idweeks "
+				+ "      order by idweeks "
+				+ ");";
 
 
 				String query5 = ""
-				+ "create or replace view tablee as "
-				+ "SELECT MonthN,weekNum, "
-				+ "ifnull(AvgProcessTime,0) as AvgProcessTime, "
-				+ "ifnull(AvgWaitingTime,0) as AvgWaitingTime, "
-				+ "ifnull(NumOfPatients,0) as NumOfPatients, "
-				+ "ifnull(LeaveClients,0) as LeaveClients, "
-				+ "ifnull(NoShow,0) as NoShow "
-				+ "FROM "
-				+ " "
-				+ "	SELECT * FROM tabled "
-				+ "	LEFT JOIN tableb ON tabled.weekNum = tableb.weeknumb "
-				+ "	UNION "
-				+ "	SELECT * FROM tabled "
-				+ "	RIGHT JOIN tableb ON tabled.weekNum = tableb.weeknumb "
-				+ ";";
+				+ "Create or replace view TryNOSHOWa as "
+				+ "(SELECT * "
+				+ "from appointmentsettings A "
+				+ "where A.apsStatus ='NOSHOW' "
+				+ ");";
 
 
 				String query6 = ""
-				+ "select * from tablee GROUP BY weekNum "
-				+ "UNION "
-				+ "SELECT 'Min' as Op, "
-				+ "'' as MonthN, "
-				+ "MIN(AvgProcessTime) as AvgProcessTime, "
-				+ "MIN(AvgWaitingTime) as AvgWaitingTime, "
-				+ "Min(NumOfPatients) as NumOfPatients, "
-				+ "Min(LeaveClients) as LeaveClients, "
-				+ "Min(NoShow) as NoShow "
-				+ " FROM tablee "
-				+ "UNION "
-				+ "SELECT  'Max' as Op, "
-				+ "'' as MonthN, "
-				+ "Max(AvgProcessTime),Max(AvgWaitingTime),Max(NumOfPatients), "
-				+ "Max(LeaveClients) as LeaveClients, "
-				+ "Max(NoShow) as NoShow "
-				+ " FROM tablee "
-				+ " UNION "
-				+ " SELECT  'Avg' as Op, "
-				+ "'' as MonthN, "
-				+ " AVG(AvgProcessTime),AVG(AvgWaitingTime),AVG(NumOfPatients), "
-				+ " AVG(LeaveClients) as LeaveClients, "
-				+ " AVG(NoShow) as NoShow "
-				+ " FROM tablee "
-				+ " UNION "
-				+ " SELECT  'SD' as Op, "
-				+ "'' as MonthN, "
-				+ " STDDEV(AvgProcessTime),STDDEV(AvgWaitingTime),STDDEV(NumOfPatients), "
-				+ " STDDEV(LeaveClients) as LeaveClients, "
-				+ " STDDEV(NoShow) as NoShow "
-				+ " FROM tablee";
-	
-		
+				+ "Create or replace view TryNOSHOWb as "
+				+ "(SELECT idweeks AS weekNumns, "
+				+ "       Count(DISTINCT A.apsptid) AS NumOfNoshows "
+				+ "FROM   TryNOSHOWa A RIGHT OUTER JOIN Weeks ON WEEK(A.apsdate) = weeks.idweeks "
+				+ "WHERE  weeks.idweeks>= week('" + from_date_str
+				+ "') AND "
+				+ "       weeks.idweeks<=week('" + to_date_str
+				+ "') AND "
+				+ "	   A.apsstatus IS NULL OR "
+				+ "       (A.apsstatus = 'NOSHOW' AND "
+				+ "       A.apsdate >= '" + from_date_str
+				+ "' AND "
+				+ "       A.apsdate <= '" + to_date_str
+				+ "' and "
+				+ "       A.apsDocID in (SELECT doc.uID FROM user doc where doc.ucID=" + clinicID
+				+ ")) "
+				+ "GROUP BY idweeks);";
+
+
+				String query7 = ""
+				+ "Create or replace view NMonthlyView as "
+				+ "(SELECT * "
+				+ "FROM   TrypB AR,TryNOSHOWb NS, TryLEAVEb L "
+				+ "WHERE  NS.weekNumns = L.weekNuml AND L.weekNuml = AR.weekNumar AND NS.weekNumns = AR.weekNumar "
+				+ " "
+				+ ");";
+
+
+				String query8 = ""
+				+ "SELECT * FROM ghealth.NMonthlyView;";
 		
 		try {
 			mysqlConnection ms = new mysqlConnection();
@@ -188,7 +168,9 @@ public class SCmonthlyReports {
 			stmt.executeUpdate(query3);
 			stmt.executeUpdate(query4);
 			stmt.executeUpdate(query5);
-			result = stmt.executeQuery(query6);
+			stmt.executeUpdate(query6);
+			stmt.executeUpdate(query7);
+			result = stmt.executeQuery(query8);
 			
 			
 			/*-- for each day of the past week -- */
