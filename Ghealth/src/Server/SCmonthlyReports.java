@@ -18,9 +18,7 @@ public class SCmonthlyReports {
 	
 	private static SCmonthlyReports instance = null;
 	private List<Object> ReportToEnv;
-	List<String[]> clinicMonthlyReport;
 	
-
 	
 	
 	private SCmonthlyReports(){	
@@ -42,7 +40,7 @@ public class SCmonthlyReports {
 	
 	private void createReport(int clinicID){
 		
-		clinicMonthlyReport = new ArrayList<String[]>();
+		
 		this.ReportToEnv =  new ArrayList<Object>();
 		
 		ResultSet result = null;
@@ -52,14 +50,16 @@ public class SCmonthlyReports {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar today = Calendar.getInstance();
 		
+		String Month_name = this.getMonthName(today.MONTH);
+		
 		today.set(today.DAY_OF_MONTH, 1);
-		//today.add(Calendar.DATE, 20);
+		
 		String from_date_str = formatter.format(today.getTime());
 		
 		
 		System.out.println(from_date_str);
 		
-		today.add(Calendar.DATE, 30);
+		today.add(Calendar.DATE, 29);
 		String to_date_str = formatter.format(today.getTime());
 		
 		System.out.println(to_date_str);
@@ -181,8 +181,7 @@ public class SCmonthlyReports {
 				int weekNumOfMonth = tempDay.get(Calendar.WEEK_OF_MONTH);
 				
 				/* --get from DB the 4 fields : apsDate, NumOfPatients, AvgProcessTime, AvgWaitingTime ---*/
-				clinicMonthlyReport.add(new String[]{result.getString(1), String.valueOf(weekNumOfMonth), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7) });	
-				this.ReportToEnv.add(new String[]{result.getString(1), String.valueOf(weekNumOfMonth), result.getString(3), result.getString(4), result.getString(5), result.getString(6), result.getString(7) });	
+				this.ReportToEnv.add(new String[]{Month_name, String.valueOf(weekNumOfMonth), result.getString(2), result.getString(3), result.getString(4), result.getString(6), result.getString(8) });	
 				
 			}
 			
@@ -203,15 +202,11 @@ public class SCmonthlyReports {
 	public Envelope getClinicMonthlyReport(int cID){
 	    
 		Envelope en = new Envelope();    
-	//	List<Object> list = new ArrayList<Object>();
+	
 	           
         this.createReport(cID);
         
 		try {
-			
-			//this.ReportToEnv.add(this.clinicMonthlyReport);
-			//list =  (List<Object>) this.ReportToEnv.get(0);
-			
 			en.setobjList(this.ReportToEnv);
 			en.setStatus(Status.EXIST);		
 			en.setType(task.GET_CLINIC_MONTHLY_REPORT);
@@ -227,7 +222,42 @@ public class SCmonthlyReports {
              
 	}//end of getClinicMonthlyReport
 	
-	
+	private String getMonthName(int month_num){
+		
+		month_num += 1; 
+		switch(month_num){
+		
+		case 1:
+			return "January";
+		case 2:
+			return "February";
+		case 3:
+			return "March";
+		case 4:
+			return "April";
+		case 5:
+			return "May";
+		case 6: 
+			return "June";
+		case 7:
+			return "July";
+		case 8:
+			return "August";
+		case 9: 
+			return "September";
+		case 10:
+			return "October";
+		case 11:
+			return "November";
+		case 12:
+			return "December";
+		default: 
+			return "no_month";
+		
+		}
+		
+		
+	}
 	
 }
 
