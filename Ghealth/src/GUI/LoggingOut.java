@@ -13,6 +13,9 @@ import client.LoginControl;
 import enums.task;
 import models.User;
 
+/**
+ * The Class LoggingOut.
+ */
 public class LoggingOut extends JFrame{
 	
 	/**
@@ -22,13 +25,14 @@ public class LoggingOut extends JFrame{
 	private static final long serialVersionUID = 270872694035967708L;
 
 	/**
-	 * Setting X button to do nothing and adds the listener
+	 * Setting X button to do nothing and adds the listener.
 	 */
 	public LoggingOut(){
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(exitListener);
 	}
 	
+	/** The exit listener. */
 	WindowListener exitListener = new WindowAdapter() {
 		
 	    @Override
@@ -48,11 +52,16 @@ public class LoggingOut extends JFrame{
 	};
 	
 	/**
-	 * Logging out listener
+	 * Logging out listener.
+	 *
+	 * @see LogOutEvent
 	 */
 	class LogOutListener  implements ActionListener 
 	{
 	
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
