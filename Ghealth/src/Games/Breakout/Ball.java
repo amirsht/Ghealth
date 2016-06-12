@@ -2,6 +2,8 @@ package Games.Breakout;
 
 import javax.swing.ImageIcon;
 
+import Games.Snake.Snake;
+
 public class Ball extends Sprite implements Commons {
 
     private int xdir;
@@ -12,8 +14,9 @@ public class Ball extends Sprite implements Commons {
         xdir = 1;
         ydir = -1;
 
-        ImageIcon ii = new ImageIcon("ball.png");
+        ImageIcon ii = new ImageIcon(Ball.class.getResource("ball.png"));
         image = ii.getImage();
+        
 
         i_width = image.getWidth(null);
         i_heigth = image.getHeight(null);

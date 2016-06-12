@@ -1,5 +1,6 @@
 package GUI;
 
+import Games.Breakout.Breakout;
 import Games.Pacman.*;
 import Games.Snake.*;
 import Games.SpaceInvaders.*;
@@ -128,7 +129,7 @@ public class LoginGUI extends LoggingOut {
 				
 
 				
-				int x = ThreadLocalRandom.current().nextInt(1, 4 + 1);
+				int x = ThreadLocalRandom.current().nextInt(1, 5 + 1);
 				
 				//x is now 1-4
 				
@@ -169,6 +170,17 @@ public class LoginGUI extends LoggingOut {
 			        game.setLocationRelativeTo(null);
 			        game.setVisible(true);
 			        
+					break;
+				case 5:
+					
+					EventQueue.invokeLater(new Runnable() {
+			            @Override
+			            public void run() {                
+			                Breakout game = new Breakout();
+			                game.setVisible(true);                
+			            }
+			        });
+					
 					break;
 					
 				default:
