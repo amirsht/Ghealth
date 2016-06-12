@@ -21,6 +21,7 @@ import java.net.Socket;
 import java.net.SocketException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -67,7 +68,8 @@ public class GeneralManagerController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dateFrom = (Date)General_M_GUI.getDatePickerFrom().getModel().getValue();
-			JOptionPane.showMessageDialog(null,"You chose date from: " + (int)(dateFrom.getMonth()+1),"", JOptionPane.INFORMATION_MESSAGE);
+			//JOptionPane.showMessageDialog(null,"You chose date from: " + (int)(dateFrom.getMonth()+1),"", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,"You chose date from: " + (dateFrom),"", JOptionPane.INFORMATION_MESSAGE);
 			
 			System.out.println("--------" + dateFrom);
 		}
@@ -81,9 +83,9 @@ public class GeneralManagerController {
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			dateTo = (Date)General_M_GUI.getDatePickerFrom().getModel().getValue();
-			JOptionPane.showMessageDialog(null,"You chose date to: " + (int)(dateTo.getMonth()+1),"", JOptionPane.INFORMATION_MESSAGE);
-			
+			dateTo = (Date)General_M_GUI.getDatePickerTo().getModel().getValue();
+			//JOptionPane.showMessageDialog(null,"You chose date to: " + (int)(dateTo.getMonth()+1),"", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null,"You chose date to: " + (dateTo),"", JOptionPane.INFORMATION_MESSAGE);
 			System.out.println("--------" + dateTo);
 		}
 	}
@@ -135,6 +137,7 @@ public class GeneralManagerController {
 	class showMonthlyListener  implements ActionListener 
 	{
 		public void actionPerformed(ActionEvent e) {
+			
 			clinicChosen = General_M_GUI.getClinicSel();
 			if(clinicChosen==null){
 				JOptionPane.showMessageDialog(null,"Please select clinic before!","", JOptionPane.INFORMATION_MESSAGE);
@@ -142,12 +145,19 @@ public class GeneralManagerController {
 			}
 			int monthBack = (int)General_M_GUI.getMonthBoxIndex()+1;
 			System.out.println("monthBack: "+monthBack);
-			dateTo = new Date();dateFrom = new Date();
-			dateFrom.setMonth(dateTo.getMonth()-monthBack);
-			System.out.println("dateTo:  "+dateTo+" \ndateFrom:  "+dateFrom);
+			Calendar fromDay = Calendar.getInstance();
+			Calendar toDay = Calendar.getInstance();
+			fromDay.set(Calendar.MONTH,toDay.get(Calendar.MONTH)-monthBack);
+			/*
+			int mo = dateTo.getMonth()-monthBack;
+			dateFrom.setMonth(mo);
+			System.out.println("dateTo:  "+dateTo+" \ndateFrom:  "+dateFrom);*/
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+			dateTo = toDay.getTime();
+			dateFrom = fromDay.getTime();
 			choosenDateFrom = formatter.format(dateFrom);
 			choosenDateTo = formatter.format(dateTo);	
+			System.out.println("From "+choosenDateFrom+" To "+choosenDateTo);
 			SendAndShow(clinicChosen,choosenDateFrom,choosenDateTo);
 		}
 	}

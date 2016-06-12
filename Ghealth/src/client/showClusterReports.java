@@ -53,7 +53,7 @@ public class showClusterReports extends JFrame {
             }
         };
         table.setAutoCreateRowSorter(false);
-        table.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        table.setPreferredScrollableViewportSize(new Dimension(1000, 300));
         final JTableHeader header = table.getTableHeader();
         header.setDefaultRenderer(new HeaderRenderer(table));
         table.setToolTipText("<html>Process time - time since set date and schedule date <br>Waiting time - Time spent in waiting room</html>");

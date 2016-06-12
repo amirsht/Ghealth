@@ -154,9 +154,48 @@ public class SCmonthlyReports {
 				+ ");";
 
 
-				String query8 = ""
+				/*String query8 = ""
 				+ "SELECT * FROM ghealth.NMonthlyView;";
-		
+				*/
+				String query8 = ""
+						+ "SELECT weekNumar as weekNum,NumOfPatients,AvgProcessTime,AvgWaitingTime,NumOfNoshows,LeaveClients "
+						+ "	   FROM ghealth.nmonthlyview "
+						+ "       UNION "
+						+ "       SELECT "
+						+ "       'Min' as Op, "
+						+ "       Min(NumOfPatients) as NumOfPatients, "
+						+ "       MIN(AvgProcessTime) as AvgProcessTime, "
+						+ "       MIN(AvgWaitingTime) as AvgWaitingTime , "
+						+ "       MIN(NumOfNoshows) as NumOfNoshows, "
+						+ "       MIN(LeaveClients) as LeaveClients "
+						+ "	   FROM nmonthlyview "
+						+ "       UNION "
+						+ "       SELECT "
+						+ "       'Max' as Op, "
+						+ "       Max(NumOfPatients) , "
+						+ "       Max(AvgProcessTime), "
+						+ "       Max(AvgWaitingTime), "
+						+ "	   MAX(NumOfNoshows) as NumOfNoshows, "
+						+ "       MAX(LeaveClients) as LeaveClients "
+						+ "       FROM nmonthlyview "
+						+ "       UNION "
+						+ "       SELECT "
+						+ "       'Avg' as Op, "
+						+ "       AVG(NumOfPatients)  , "
+						+ "       AVG(AvgProcessTime), "
+						+ "       AVG(AvgWaitingTime), "
+						+ "	   AVG(NumOfNoshows) as NumOfNoshows, "
+						+ "       AVG(LeaveClients) as LeaveClients "
+						+ "       FROM nmonthlyview "
+						+ "       UNION "
+						+ "       SELECT "
+						+ "       'SD' as Op, "
+						+ "       STDDEV(NumOfPatients) , "
+						+ "       STDDEV(AvgProcessTime), "
+						+ "       STDDEV(AvgWaitingTime), "
+						+ "	   STDDEV(NumOfNoshows) as NumOfNoshows, "
+						+ "       STDDEV(LeaveClients) as LeaveClients "
+						+ "       FROM nmonthlyview";
 		try {
 			mysqlConnection ms = new mysqlConnection();
 			stmt = ms.conn.createStatement();
@@ -170,18 +209,26 @@ public class SCmonthlyReports {
 			stmt.executeUpdate(query7);
 			result = stmt.executeQuery(query8);
 
-			
+			String WN,MN;
 			/*-- for each day of the past week -- */
 			while(result.next())
 			{
 				Calendar tempDay = Calendar.getInstance();
-				tempDay.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(result.getString(1)));
+				WN = result.getString(1);
+				if(!WN.equals("Min") && !WN.equals("Max") && !WN.equals("Avg") && !WN.equals("SD"))
+				{	
+					tempDay.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(WN));
+					int week =(Integer.parseInt(result.getString(1))%4);
+					int month = ((1+Integer.parseInt(result.getString(1)))/4);
+					MN = getMonthName(month);
+					WN = String.valueOf(week);
+				}
+				else MN = " ";
 				
-				int week =(Integer.parseInt(result.getString(1))%4)+1;
-				int month = (Integer.parseInt(result.getString(1))/4);
 				
-				/* --get from DB the 4 fields : apsDate, NumOfPatients, AvgProcessTime, AvgWaitingTime ---*/
-				this.ReportToEnv.add(new String[]{this.getMonthName(month+1), String.valueOf(week), result.getString(2), result.getString(3), result.getString(4), result.getString(6), result.getString(8) });	
+				
+				
+				this.ReportToEnv.add(new String[]{MN,result.getString(1), result.getString(2), result.getString(3), result.getString(4), result.getString(5), result.getString(6) });	
 				
 			}
 			

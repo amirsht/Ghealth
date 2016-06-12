@@ -37,7 +37,7 @@ public class ShowWeeklyReports extends JFrame {
     
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         table2 = new javax.swing.JTable() {
 
             @Override
@@ -53,7 +53,7 @@ public class ShowWeeklyReports extends JFrame {
             }
         };
         table2.setAutoCreateRowSorter(false);
-        table2.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        table2.setPreferredScrollableViewportSize(new Dimension(1000, 300));
         final JTableHeader header = table2.getTableHeader();
         header.setDefaultRenderer(new HeaderRenderer(table2));
         table2.setToolTipText("<html>Process time - time since set date and schedule date <br>Waiting time - Time spent in waiting room</html>");
@@ -90,8 +90,6 @@ public class ShowWeeklyReports extends JFrame {
                 table, value, isSelected, hasFocus, row, col);
         }
     }
-    
-
     
 }
 

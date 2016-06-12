@@ -174,9 +174,22 @@ public class GM_GUI extends LoggingOut {
         p.put("text.month", "Month");
         p.put("text.year", "Year");
 		
-		JDatePanelImpl datePanel = new JDatePanelImpl(model,p);
+        
+        UtilDateModel model_b = new UtilDateModel();
+		Calendar calendar_b = Calendar.getInstance();
+		int day_b = calendar_b.get(Calendar.DAY_OF_MONTH);
+		int month_b = calendar_b.get(Calendar.MONTH); 
+		int year_b = calendar_b.get(Calendar.YEAR); 
+		model_b.setDate(year, month, day);
+		model_b.setSelected(true);
+		Properties p_b = new Properties();
+		p_b.put("text.today", "Today");
+		p_b.put("text.month", "Month");
+		p_b.put("text.year", "Year");
+		JDatePanelImpl datePanela = new JDatePanelImpl(model,p);
+		JDatePanelImpl datePanelb = new JDatePanelImpl(model_b,p_b);
 		
-		datePickerFrom = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePickerFrom = new JDatePickerImpl(datePanela, new DateLabelFormatter());
 		datePickerFrom.setVisible(true);
 		cal_from = new Panel();
 		cal_from.add(datePickerFrom);
@@ -186,7 +199,7 @@ public class GM_GUI extends LoggingOut {
 		btnChooseDateFrom = new JButton("OK");
 		cal_from.add(btnChooseDateFrom);		
 
-		datePickerTo = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePickerTo = new JDatePickerImpl(datePanelb, new DateLabelFormatter());
 		datePickerTo.setVisible(true);
 		cal_to = new Panel();
 		cal_to.add(datePickerTo);
@@ -225,10 +238,6 @@ public class GM_GUI extends LoggingOut {
 		contentPane.add(lblLastMonthsAmount);
 		
 		OKmonthBtn = new JButton("Show reports with this number of months back");
-		OKmonthBtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		OKmonthBtn.setBounds(203, 440, 310, 35);
 		contentPane.add(OKmonthBtn);
 		

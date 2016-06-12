@@ -41,26 +41,6 @@ public class LoginControl {
 		//loginG.addCancelActionListener(new CancelListener());	
 	}
 
-/*
-public static User UserCon(User us,task ts){
-    	
-    	Envelope En = new Envelope();
-      
-        En.addobjList(us);
-        En.setType(ts);
-        En =  Controller.communicate(En);
-        us = (User)(En.getSingleObject());
-        
-    	return us; 
-    }
-    
-    public static User GetExistUser(User us)
-    {
-		return UserCon(us,task.GET_USER);
-    }
-    	
-    */
-    
     public static String getUser_full_name() {
 		return user_full_name;
 	}
