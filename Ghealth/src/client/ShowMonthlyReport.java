@@ -1,3 +1,5 @@
+
+
 package client;
 
 import java.awt.BorderLayout;
@@ -14,18 +16,17 @@ import javax.swing.table.TableCellRenderer;
 
 import GUI.GM_GUI;
 
-public class ShowWeeklyReports extends JFrame {
+public class ShowMonthlyReport extends JFrame {
 
     private JScrollPane scrollPane;
-    private JScrollPane scrollPane2;
-    private JTable table2;
+    private JTable table;
     List<Object> list;
 
-   
+
     
-    public ShowWeeklyReports(List<Object> list) {
+    public ShowMonthlyReport(List<Object> list) {
     	this.list=list;
-    	super.setTitle("Weekly Report");
+    	super.setTitle("Monthly Report");
     	initComponents();
     	setVisible(true);
     	
@@ -36,7 +37,7 @@ public class ShowWeeklyReports extends JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        table2 = new javax.swing.JTable() {
+        table = new javax.swing.JTable() {
 
             @Override
             public Component prepareRenderer(
@@ -50,23 +51,23 @@ public class ShowWeeklyReports extends JFrame {
                 }
             }
         };
-        table2.setAutoCreateRowSorter(false);
-        table2.setPreferredScrollableViewportSize(new Dimension(600, 200));
-        final JTableHeader header = table2.getTableHeader();
-        header.setDefaultRenderer(new HeaderRenderer(table2));
-        table2.setToolTipText("<html>Process time - time since set date and schedule date <br>Waiting time - Time spent in waiting room</html>");
+        table.setAutoCreateRowSorter(false);
+        table.setPreferredScrollableViewportSize(new Dimension(600, 200));
+        final JTableHeader header = table.getTableHeader();
+        header.setDefaultRenderer(new HeaderRenderer(table));
+        table.setToolTipText("<html>Process time - time since set date and schedule date <br>Waiting time - Time spent in waiting room</html>");
      
-        
-      String []tryStr = new String[]{ "", "Process times", "Wait time since Ap date", "# of treated patients"};
+      
+      String []tryStr = new String[]{ "MonthN", "weekNum", "AvgProcessTime", "AvgWaitingTime", "NumOfPatients", "LeaveClients", "NoShow" };
       DefaultTableModel model = new DefaultTableModel(tryStr,0);
-      table2.setModel(model);
+      table.setModel(model);
       
       for( Object rowData: list ){
     	  model.addRow((String[])rowData);
       }
       
-        scrollPane2 = new JScrollPane(table2);
-        this.add(scrollPane2,BorderLayout.NORTH);
+        scrollPane = new JScrollPane(table);
+        this.add(scrollPane,BorderLayout.NORTH);
         pack();
     }
 

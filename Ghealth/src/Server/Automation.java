@@ -64,7 +64,7 @@ public class Automation extends Thread{
 		public void run(){
 			
 			/* TODO Creating weekly report */
-			WeeklyReports rep = WeeklyReports.getInstance();
+			SCweeklyReports rep = SCweeklyReports.getInstance();
 			rep.createAllClinicsWeeklyReports();
 			
 			timer.schedule(new PeriodicReport(), 24 * 60 * 60 * 1000); // every day for the past week

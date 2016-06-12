@@ -1,11 +1,5 @@
 package Server;
 
-import java.awt.Component;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,53 +7,29 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-
-import javax.swing.JTable;
-import javax.swing.table.TableCellRenderer;
-
-import client.ShowWeeklyReports;
-import enums.DoctorSpeciallity;
 import enums.Status;
 import enums.task;
-import models.AppointmentSettings;
-import models.Clinic;
-import models.Doctor;
 import models.Envelope;
 
 
-/*
- *  private static ClassicSingleton instance = null;
-   private ClassicSingleton() {
-      // Exists only to defeat instantiation.
-   }
-   public static ClassicSingleton getInstance() {
-      if(instance == null) {
-         instance = new ClassicSingleton();
-      }
-      return instance;
-   }*/
-
-
-
-
-public class WeeklyReports {
+public class SCweeklyReports {
 
 	
 	
-	private static WeeklyReports instance = null;
+	private static SCweeklyReports instance = null;
 	private List<Object> allReports;
 
 	
 	
-	private WeeklyReports(){	
+	private SCweeklyReports(){	
 		// Exists only to defeat instantiation.
 		System.out.println("in WeeklyReports constructor");
 	}
 	
 	
-	 public static WeeklyReports getInstance() {
+	 public static SCweeklyReports getInstance() {
 	      if(instance == null) {
-	         instance = new WeeklyReports();
+	         instance = new SCweeklyReports();
 	      }
 	      return instance;
 	   }
@@ -67,6 +37,7 @@ public class WeeklyReports {
 	 
 	 
 	//for automation 
+	@SuppressWarnings("static-access")
 	public void createAllClinicsWeeklyReports(){
 	
 		this.allReports = new ArrayList<Object>();
@@ -99,6 +70,7 @@ public class WeeklyReports {
 	} //end of createAllWeeklyReports
 	
 	
+	@SuppressWarnings("static-access")
 	private void createReport(int clinicID){
 		
 		List<String[]> weeklyData = new ArrayList<String[]>();
@@ -164,11 +136,9 @@ public class WeeklyReports {
 			
 			
 			allReports.add(weeklyData);
-	
-			
 			ms.conn.close();
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -177,6 +147,7 @@ public class WeeklyReports {
 	
 	
 	
+	@SuppressWarnings("unchecked")
 	public Envelope getClinicWeeklyReport(int cID){
 	    
 		Envelope en = new Envelope();    
@@ -199,28 +170,7 @@ public class WeeklyReports {
 	}//end of getClinicWeeklyReport
 	
 	
-	 
- 
-    
-    private static class HeaderRenderer implements TableCellRenderer {
 
-        TableCellRenderer renderer;
-
-        public HeaderRenderer(JTable table) {
-            renderer = table.getTableHeader().getDefaultRenderer();
-        }
-
-        @Override
-        public Component getTableCellRendererComponent(
-            JTable table, Object value, boolean isSelected,
-            boolean hasFocus, int row, int col) {
-            return renderer.getTableCellRendererComponent(
-                table, value, isSelected, hasFocus, row, col);
-        }
-    }
- 
-   
-    
 	
 }
 

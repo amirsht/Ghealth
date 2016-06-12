@@ -3,27 +3,15 @@ package client;
 import models.*;
 import enums.*;
 import GUI.*;
-import client.LoginControl.CancelListener;
-import client.LoginControl.LoginListener;
-
-import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 /* This class represents our client side 
  * of the system communication protocol.
  * the client will be personal for every component in the program
  * and will act as a "control unit"
  */
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
-import java.net.SocketException;
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 
 public class ClinicManagerController {
@@ -32,7 +20,7 @@ public class ClinicManagerController {
 	private String cm_ID;
 	
 	
-	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constructors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
 	/**
 	 * Constructor for the Adding patient screen GUI
@@ -49,7 +37,6 @@ public class ClinicManagerController {
 
 	
 	
-  
 
 	class showWeeklyListener  implements ActionListener 
 	{
@@ -60,9 +47,10 @@ public class ClinicManagerController {
 			
 			Envelope en = Controller.Control(LoginControl.getUserClinic(),task.GET_CLINIC_WEEKLY_REPORT);
 			List<Object> listObj =  en.getobjList();
-			//List<String[]> list = (ArrayList<String[]>)listObj;	
+		
 			System.out.println("Got weekly report");
 			
+			@SuppressWarnings("unused")
 			ShowWeeklyReports showRepo = new ShowWeeklyReports(listObj);
 		}
 		
@@ -74,7 +62,14 @@ public class ClinicManagerController {
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
-			System.out.println("Trying to show monthly");
+			/*-- call server --*/
+			Envelope en = Controller.Control(LoginControl.getUserClinic(),task.GET_CLINIC_MONTHLY_REPORT);
+			List<Object> listObj =  en.getobjList();
+		
+			System.out.println("Got monthly report");
+			
+			@SuppressWarnings("unused")
+			ShowMonthlyReport showRepo = new ShowMonthlyReport(listObj);
 			
 		
 		}
@@ -82,5 +77,5 @@ public class ClinicManagerController {
 	}
 	
 	
-} //PationControl
+} //ClinicManagerController
 

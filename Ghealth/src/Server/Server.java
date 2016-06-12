@@ -279,8 +279,16 @@ public class Server extends Thread
             	System.out.println("GET_CLINIC_WEEKLY_REPORT");
             	clinic = (Clinic)env.getSingleObject();
 
-    			WeeklyReports rep = WeeklyReports.getInstance();
+    			SCweeklyReports rep = SCweeklyReports.getInstance();
             	env = rep.getClinicWeeklyReport(clinic.getcID()); 
+            	break;
+            	
+            case GET_CLINIC_MONTHLY_REPORT:
+            	System.out.println("GET_CLINIC_MONTHLY_REPORT");
+            	clinic = (Clinic)env.getSingleObject();
+
+    			SCmonthlyReports report = SCmonthlyReports.getInstance();
+            	env = report.getClinicMonthlyReport(clinic.getcID()); 
             	break;
             	
             	
