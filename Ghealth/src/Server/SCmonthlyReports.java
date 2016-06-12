@@ -50,18 +50,16 @@ public class SCmonthlyReports {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar today = Calendar.getInstance();
 		
-		String Month_name = this.getMonthName(today.MONTH);
 		
-		today.set(today.DAY_OF_MONTH, 1);
+		
+		String to_date_str = formatter.format(today.getTime());
+		today.add(Calendar.DATE, -29);
 		
 		String from_date_str = formatter.format(today.getTime());
 		
 		
+
 		System.out.println(from_date_str);
-		
-		today.add(Calendar.DATE, 29);
-		String to_date_str = formatter.format(today.getTime());
-		
 		System.out.println(to_date_str);
 
 		String query1 = ""
@@ -177,11 +175,13 @@ public class SCmonthlyReports {
 			while(result.next())
 			{
 				Calendar tempDay = Calendar.getInstance();
-				tempDay.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(result.getString(2)));
-				int weekNumOfMonth = tempDay.get(Calendar.WEEK_OF_MONTH);
+				tempDay.set(Calendar.WEEK_OF_YEAR, Integer.parseInt(result.getString(1)));
+				
+				int week =(Integer.parseInt(result.getString(1))%4)+1;
+				int month = (Integer.parseInt(result.getString(1))/4);
 				
 				/* --get from DB the 4 fields : apsDate, NumOfPatients, AvgProcessTime, AvgWaitingTime ---*/
-				this.ReportToEnv.add(new String[]{Month_name, String.valueOf(weekNumOfMonth), result.getString(2), result.getString(3), result.getString(4), result.getString(6), result.getString(8) });	
+				this.ReportToEnv.add(new String[]{this.getMonthName(month+1), String.valueOf(week), result.getString(2), result.getString(3), result.getString(4), result.getString(6), result.getString(8) });	
 				
 			}
 			
@@ -222,9 +222,28 @@ public class SCmonthlyReports {
              
 	}//end of getClinicMonthlyReport
 	
+	
+	
+	private int getWeekNum(int weekOfYear){
+		int weekNum =0;
+		
+		switch(weekOfYear%4){
+			
+		case 0:
+			weekNum = 1;
+		case 1:
+			weekNum = 2;
+		case 2:
+			weekNum = 3;
+		case 3:
+			weekNum = 4; 
+		
+		}
+		return weekNum;
+		
+	}
 	private String getMonthName(int month_num){
 		
-		month_num += 1; 
 		switch(month_num){
 		
 		case 1:
