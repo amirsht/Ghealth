@@ -42,33 +42,67 @@ import javax.swing.JList;
 import javax.swing.SwingConstants;
 
 
+
+/**
+ * The Class of the general manager windows GUI.
+ */
 public class GM_GUI extends LoggingOut {
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1583234608338407492L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The lblwarning message. */
 	private JLabel lblwarningMessage = null;
+	
+	/** The btn monthly report. */
 	private JButton btnMonthlyReport;
+	
+	/** The weekly btn. */
 	private JButton weeklyBtn;
 	
+	/** The date picker from. */
 	private JDatePickerImpl datePickerFrom;
+	
+	/** The cal_from. */
 	private Panel cal_from;
+	
+	/** The btn choose date from. */
 	private JButton btnChooseDateFrom;
+	
+	/** The lbl new label from. */
 	private JLabel lblNewLabelFrom;
 	
+	/** The lbl date to. */
 	private JLabel lblDateTo;
 	
+	/** The date picker to. */
 	private JDatePickerImpl datePickerTo;
+	
+	/** The cal_to. */
 	private Panel cal_to;
+	
+	/** The btn choose date to. */
 	private JButton btnChooseDateTo;
+	
+	/** The lbl new label to. */
 	private JLabel lblNewLabelTo;
+	
+	/** The lbl select date from. */
 	private JLabel lblSelectDateFrom;
+	
+	/** The lbl select date to. */
 	private JLabel lblSelectDateTo;
+	
+	/** The separator. */
 	private JSeparator separator;
+	
+	/** The separator_1. */
 	private JSeparator separator_1;
+	
+	/** The separator_2. */
 	private JSeparator separator_2;
 	
 	
@@ -207,10 +241,18 @@ public class GM_GUI extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -221,39 +263,74 @@ public class GM_GUI extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Weekly action listener.
+	 *
+	 * @param e the e
+	 */
 	public void weeklyActionListener(ActionListener e)
 	{
 		weeklyBtn.addActionListener(e);
 	}
 	
+	/**
+	 * Monthly action listener.
+	 *
+	 * @param e the e
+	 */
 	public void monthlyActionListener(ActionListener e)
 	{
 		btnMonthlyReport.addActionListener(e);
 	}
 	
+	/**
+	 * Gets the cal.
+	 *
+	 * @return the cal
+	 */
 	public Panel getCal() {
 		return cal_from;
 	}	
 	
+	/**
+	 * Gets the date picker.
+	 *
+	 * @return the date picker
+	 */
 	public JDatePickerImpl getDatePicker() {
 		return datePickerFrom;
 	}	
 	
+	/**
+	 * Gets the choosen date ok.
+	 *
+	 * @return the choosen date ok
+	 */
 	public JButton getChoosenDateOK() {
 		return btnChooseDateFrom;
 	}
 	
 	
 
+	/**
+	* Cancell listener of the button.
+	*/
 	public class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    /** 
+	     * closes the current frame of the class
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		dispose();

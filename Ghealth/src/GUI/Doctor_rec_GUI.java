@@ -31,23 +31,39 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
+/**
+ * The Class Doctor record the patient's meeting GUI.
+ */
 public class Doctor_rec_GUI extends LoggingOut {
 
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5798215983453009657L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The text rec pane. */
 	private JTextPane textRecPane;
+	
+	/** The btn cancel. */
 	private JButton btnCancel;
+	
+	/** The save rec. */
 	private JButton saveRec;
+	
+	/** The lblwarning message. */
 	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
+	
+	/** The patient details. */
 	private JPanel patientDetails;
+	
+	/** The Search patient. */
 	JButton SearchPatient;
+	
+	/** The Log out. */
 	JButton LogOut;
 	
 	/**
@@ -104,10 +120,18 @@ public class Doctor_rec_GUI extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -118,22 +142,40 @@ public class Doctor_rec_GUI extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Record patient action listener.
+	 *
+	 * @param e the e
+	 */
 	public void RecordPatientActionListener(ActionListener e)
 	{
 		saveRec.addActionListener(e);
 	}
 	
+	/**
+	 * Adds the cancel action listener.
+	 *
+	 * @param e the e
+	 */
 	public void addCancelActionListener(ActionListener e)
 	{
 		btnCancel.addActionListener(e);
 	}
 	
+/**
+ * Sets the patient.
+ *
+ * @param pt the pt
+ */
 public void SetPatient(Patient pt) {
 		
 		
@@ -216,15 +258,27 @@ public void SetPatient(Patient pt) {
 	//	return InsertPatientId.getText();
 	//}
 
+	/**
+	 * Gets the record field.
+	 *
+	 * @return the record field
+	 */
 	public String getRecordField() 
 	{
 		return textRecPane.getText();
 	}
 
 
+	/**
+	* Cancell listener of the button.
+	*/
 	public class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    /** 
+	     * closes the current frame of the class
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		dispose();

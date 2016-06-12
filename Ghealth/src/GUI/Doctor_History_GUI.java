@@ -48,7 +48,7 @@ import java.awt.RenderingHints;
 
 
 /**
- * The Class Doctor_History_GUI.
+ * The Class of doctor view history GUI.
  */
 public class Doctor_History_GUI extends LoggingOut {
 
@@ -63,7 +63,6 @@ public class Doctor_History_GUI extends LoggingOut {
 	private JButton btnCancel;
 	
 	/** The lblwarning message. */
-	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
 	
 	/** The patient details. */

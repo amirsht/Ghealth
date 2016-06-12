@@ -44,36 +44,34 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.LineBorder;
 
+/**
+ * The Class MainWindowGUI.
+ */
 public class MainWindowGUI extends LoggingOut {
 
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 8911802687405241262L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The btn home. */
 	private JButton btnHome;
+	
+	/** The btn manage files. */
 	private JButton btnManageFiles;
+	
+	/** The btn manage groups. */
 	private JButton btnManageGroups;
+	
+	/** The panel. */
 	private JPanel panel;
-	/**
-	 * Launch the application.
-	 */
-/*	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MainWindowGUI frame = new MainWindowGUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}*/
 
 	/**
 	 * Create the frame. This is the Home window.
+	 * Launch the application.
+	 *
+	 * @param user the user
 	 */
 	public MainWindowGUI(User user) {
 
@@ -113,16 +111,31 @@ public class MainWindowGUI extends LoggingOut {
 	
 	// Action Listeners
 	
+	/**
+	 * Addbtn home action listener.
+	 *
+	 * @param e the e
+	 */
 	public void addbtnHomeActionListener(ActionListener e)
 	{
 		btnHome.addActionListener(e);
 	}
 	
+	/**
+	 * Addbtn manage files action listener.
+	 *
+	 * @param e the e
+	 */
 	public void addbtnManageFilesActionListener(ActionListener e)
 	{
 		btnManageFiles.addActionListener(e);
 	}
 	
+	/**
+	 * Addbtn manage groups action listener.
+	 *
+	 * @param e the e
+	 */
 	public void addbtnManageGroupsActionListener(ActionListener e)
 	{
 		btnManageGroups.addActionListener(e);

@@ -31,7 +31,7 @@ import java.awt.Label;
 
 
 /**
- * The Class Doctor_Pt_GUI.
+ * The Class when the doctor meets the patient menu GUI.
  */
 public class Doctor_Pt_GUI extends LoggingOut {
 

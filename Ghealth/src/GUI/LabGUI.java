@@ -33,21 +33,34 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
+/**
+ * The Class of the find patient of the lab worket GUI.
+ */
 public class LabGUI extends LoggingOut {
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -3233126342207430542L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The btn cancel. */
 	private JButton btnCancel;
+	
+	/** The find patient. */
 	private JButton findPatient;
-	//private JButton btnCrtPt;
+	
+	/** The lblwarning message. */
 	private JLabel lblwarningMessage = null;
+	
+	/** The Insert patient id. */
 	private JTextField InsertPatientId;
+	
+	/** The Lab_ history. */
 	private JComboBox<?> Lab_History;
+	
+	/** The btn choose lab. */
 	private JButton btnChooseLab;
 	
 	/**
@@ -144,10 +157,18 @@ public class LabGUI extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -158,33 +179,61 @@ public class LabGUI extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Find patient action listener.
+	 *
+	 * @param e the e
+	 */
 	public void findPatientActionListener(ActionListener e)
 	{
 		findPatient.addActionListener(e);
 	}
 	
+	/**
+	 * Adds the cancel action listener.
+	 *
+	 * @param e the e
+	 */
 	public void addCancelActionListener(ActionListener e)
 	{
 		btnCancel.addActionListener(e);
 	}
 	
+	/**
+	 * Gets the lab history combo box.
+	 *
+	 * @return the lab history combo box
+	 */
 	public JComboBox<?> getLabHistoryComboBox()
 	{
 		return Lab_History;
 	}
 
 	
+	/**
+	 * Gets the pt id.
+	 *
+	 * @return the pt id
+	 */
 	public String getPtID() {
 		return InsertPatientId.getText();
 	}
 
 	
+	/**
+	 * Gets the btn choose lab.
+	 *
+	 * @return the btn choose lab
+	 */
 	public JButton getbtnChooseLab()
 	{
 		return btnChooseLab;
@@ -192,9 +241,24 @@ public class LabGUI extends LoggingOut {
 	
 	
 	
+	/**
+	 * The listener interface for receiving cancel events.
+	 * The class that is interested in processing a cancel
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addCancelListener<code> method. When
+	 * the cancel event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see CancelEvent
+	 */
 	public class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    /* (non-Javadoc)
+	     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		dispose();

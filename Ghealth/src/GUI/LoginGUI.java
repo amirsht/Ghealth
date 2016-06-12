@@ -39,27 +39,39 @@ import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 
+/**
+ * The Class LoginGUI.
+ */
 public class LoginGUI extends LoggingOut {
 
 	
-	/**
-	 * serialVersion
-	 */
+	/** serialVersion. */
 	private static final long serialVersionUID = -510417858888515993L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The user field. */
 	private JTextField userField;
+	
+	/** The password field. */
 	private JPasswordField passwordField;
+	
+	/** The btn cancel. */
 	//private JTextField passwordField;
 	private JButton btnCancel;
+	
+	/** The btn login. */
 	private JButton btnLogin;
+	
+	/** The lblwarning message. */
 	private JLabel lblwarningMessage = null;
 
 
 
 
 	/**
-	 * Create the frame.
+	 * Create the frame of the user log in GUI.
 	 */
 	public LoginGUI() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginGUI.class.getResource("/images/logo2.png")));
@@ -201,6 +213,11 @@ public class LoginGUI extends LoggingOut {
 	// Action Listeners
 	
 	
+	/**
+	 * Gets the lblwarning message.
+	 *
+	 * @return the lblwarning message
+	 */
 	public JLabel getLblwarningMessage() {
 		if(lblwarningMessage == null){
 			lblwarningMessage = new JLabel("user name or password is wrong");
@@ -210,10 +227,19 @@ public class LoginGUI extends LoggingOut {
 		}
 		return lblwarningMessage;
 	}
+	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -224,17 +250,30 @@ public class LoginGUI extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Adds the login action listener.
+	 *
+	 * @param e the e
+	 */
 	public void addLoginActionListener(ActionListener e)
 	{
 		btnLogin.addActionListener(e);
 	}
 	
+	/**
+	 * Adds the cancel action listener.
+	 *
+	 * @param e the e
+	 */
 	public void addCancelActionListener(ActionListener e)
 	{
 		btnCancel.addActionListener(e);
@@ -242,10 +281,20 @@ public class LoginGUI extends LoggingOut {
 	
 	// Getters
 	
+	/**
+	 * Gets the user field.
+	 *
+	 * @return the user field
+	 */
 	public String getUserField() {
 		return userField.getText();
 	}
 
+	/**
+	 * Gets the password field.
+	 *
+	 * @return the password field
+	 */
 	public String getPasswordField() {
 		return passwordField.getText();
 	}
