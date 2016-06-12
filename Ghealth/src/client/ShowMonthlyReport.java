@@ -58,7 +58,7 @@ public class ShowMonthlyReport extends JFrame {
         table.setToolTipText("<html>Process time - time since set date and schedule date <br>Waiting time - Time spent in waiting room</html>");
      
       
-      String []tryStr = new String[]{ "MonthN", "weekNum", "AvgProcessTime", "AvgWaitingTime", "NumOfPatients", "LeaveClients", "NoShow" };
+      String []tryStr = new String[]{ "Month", "Week number in month", "Number of trited patients", "Avg. process time", "Avg. time in waiting room", " Number no-show patients ","Clients left company" };
       DefaultTableModel model = new DefaultTableModel(tryStr,0);
       table.setModel(model);
       
