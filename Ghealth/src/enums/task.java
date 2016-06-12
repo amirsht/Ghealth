@@ -83,6 +83,9 @@ public enum task {
 	/** The get clinic monthly report. */
 	GET_CLINIC_MONTHLY_REPORT,
 	
+	/** The get clinic cluster months report. */
+	GET_CLINIC_CLUSTER_MONTHLY_REPORT,
+	
 	/** The send personal doc mail. */
 	SEND_PERSONAL_DOC_MAIL
 }
