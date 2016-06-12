@@ -14,17 +14,26 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ClinicManagerController.
+ */
 public class ClinicManagerController {
       
+	/** The Clinic_ m_ gui. */
 	private CM_GUI Clinic_M_GUI;
+	
+	/** The cm_ id. */
 	private String cm_ID;
 	
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constructors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
 	/**
-	 * Constructor for the Adding patient screen GUI
-	 * @param 
+	 * Constructor for the Adding patient screen GUI.
+	 *
+	 * @param cm the cm
+	 * @param uID the u id
 	 */
 	public ClinicManagerController(CM_GUI cm,String uID)
 	{
@@ -38,9 +47,23 @@ public class ClinicManagerController {
 	
 	
 
+	/**
+	 * The listener interface for receiving showWeekly events.
+	 * The class that is interested in processing a showWeekly
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addshowWeeklyListener<code> method. When
+	 * the showWeekly event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see showWeeklyEvent
+	 */
 	class showWeeklyListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -56,9 +79,23 @@ public class ClinicManagerController {
 		
 	}
 	
+	/**
+	 * The listener interface for receiving showMonthly events.
+	 * The class that is interested in processing a showMonthly
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addshowMonthlyListener<code> method. When
+	 * the showMonthly event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see showMonthlyEvent
+	 */
 	class showMonthlyListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{

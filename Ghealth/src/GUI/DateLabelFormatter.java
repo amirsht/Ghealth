@@ -6,16 +6,29 @@ import java.util.Calendar;
 
 import javax.swing.JFormattedTextField.AbstractFormatter;
 
+/**
+ * The Class DateLabelFormatter.
+ */
 public class DateLabelFormatter extends AbstractFormatter {
 
+	/** The date pattern. */
 	private String datePattern = "dd/MM/yyyy";
+	
+	/** The date formatter. */
 	private SimpleDateFormat dateFormatter = new SimpleDateFormat(datePattern);
 	
+	/**
+	 * Parses text returning an arbitrary Object. Some formatters may return null.
+	 */
 	@Override
 	public Object stringToValue(String text) throws ParseException {
 		return dateFormatter.parseObject(text);
 	}
 
+	/** 
+	 * Returns the string value to display for value
+	 * @return Returns the string value to display for value
+	 */
 	@Override
 	public String valueToString(Object value) throws ParseException {
 		if (value != null) {

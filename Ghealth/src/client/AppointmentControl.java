@@ -19,18 +19,42 @@ import GUI.*;
 import enums.*;
 import models.*;
 
+/**
+ * The Class AppointmentControl.
+ */
 public class AppointmentControl {
 
 
+	/** The cs gu i_find pt. */
 	private CS_GUI_findPatient csGUI_findPt;
+	
+	/** The cs gu i_ appoint. */
 	private CS_GUI_Appoint csGUI_Appoint;
+	
+	/** The cs gu i_ create new appoint. */
 	private CS_GUI_newAppoint csGUI_CreateNewAppoint;
+	
+	/** The cs gu i_cancel appoint. */
 	private CS_GUI_cancelAppoint csGUI_cancelAppoint;
+	
+	/** The pt. */
 	private Patient pt;
+	
+	/** The as. */
 	private AppointmentSettings as;
+	
+	/** The pt ctrl. */
 	private PatientControl ptCtrl;
+	
+	/** The obj list_str. */
 	private List<Object> objList_str;
 	
+	/**
+	 * Instantiates a new appointment control.
+	 *
+	 * @param cs the cs
+	 * @param pt the pt
+	 */
 	public AppointmentControl(CS_GUI_newAppoint cs,Patient pt)
 	{
 		this.pt=pt;
@@ -49,11 +73,10 @@ public class AppointmentControl {
 	}
 	
 	/**
-	 * 
-	 * constractor for the find patient screen GUI
-	 * @param
-	 * @param
-	 * 
+	 * constractor for the find patient screen GUI.
+	 *
+	 * @param cs the cs
+	 * @param pt the pt
 	 */
 	public AppointmentControl(CS_GUI_Appoint cs,Patient pt)
 	{
@@ -70,6 +93,12 @@ public class AppointmentControl {
 	
 	
 
+	/**
+	 * Gets the open appointments.
+	 *
+	 * @param ptID the pt id
+	 * @return the list
+	 */
 	public List<String> GET_OPEN_APPOINTMENTS(String ptID)
 	{
 		
@@ -91,6 +120,13 @@ public class AppointmentControl {
 		return strList;
 	}
 	
+	/**
+	 * Gets the doctor clinic.
+	 *
+	 * @param ptID the pt id
+	 * @param ds the ds
+	 * @return the list
+	 */
 	public List<String> GET_DOCTOR_CLINIC(String ptID,DoctorSpeciallity ds)
 	{
 		/* GET_DOCTORS_IN_CLINIC_BY_TYPE */
@@ -119,6 +155,13 @@ public class AppointmentControl {
 		return strList;
 	}
 	
+	/**
+	 * Gets the doctor hours.
+	 *
+	 * @param ptID the pt id
+	 * @param date the date
+	 * @return the list
+	 */
 	public List<String> GET_DOCTOR_HOURS(String ptID,String date)
 	{
 		/* GET_AVAILIBLE_DOCTOR_HOURS */
@@ -139,9 +182,23 @@ public class AppointmentControl {
 	}
 	
 	
+	/**
+	 * The listener interface for receiving createNewAppoint events.
+	 * The class that is interested in processing a createNewAppoint
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addcreateNewAppointListener<code> method. When
+	 * the createNewAppoint event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see createNewAppointEvent
+	 */
 	class createNewAppointListener  implements ActionListener 
 	{
 
+		/**
+		 * 
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -156,9 +213,15 @@ public class AppointmentControl {
 		
 	}
 	
+	/**
+	 *
+	 */
 	class InsertNewAppointToDBListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -208,9 +271,23 @@ public class AppointmentControl {
 		
 	
 	
+	/**
+	 * The listener interface for receiving selectDoctorType events.
+	 * The class that is interested in processing a selectDoctorType
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addSelectDoctorTypeListener<code> method. When
+	 * the selectDoctorType event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see SelectDoctorTypeEvent
+	 */
 	class SelectDoctorTypeListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -254,9 +331,15 @@ public class AppointmentControl {
 		}
 	}//SelectDoctorTypeListener
 	
+	/**
+	 * The Class SelectClnicAndDoctor.
+	 */
 	class SelectClnicAndDoctor  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -280,9 +363,23 @@ public class AppointmentControl {
 	
 	
 	
+	/**
+	 * The listener interface for receiving cancelAppoint events.
+	 * The class that is interested in processing a cancelAppoint
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addCancelAppointListener<code> method. When
+	 * the cancelAppoint event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see CancelAppointEvent
+	 */
 	class CancelAppointListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -306,9 +403,15 @@ public class AppointmentControl {
 	}//CancelAppintListener
 	
 	
+	/**
+	 * The Class cancelAppointmentFromDB.
+	 */
 	class cancelAppointmentFromDB  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -331,13 +434,22 @@ public class AppointmentControl {
 	
 
 	/**
-	 * 
-	 * @author P34w
+	 * The listener interface for receiving uncreatePatient events.
+	 * The class that is interested in processing a uncreatePatient
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addUncreatePatientListener<code> method. When
+	 * the uncreatePatient event occurs, that object's appropriate
+	 * method is invoked.
 	 *
+	 * @author P34w
 	 */
 	class UncreatePatientListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -402,9 +514,23 @@ public class AppointmentControl {
 	}//LogOutListener
 	*/
 	
+	/**
+	 * The listener interface for receiving searchPatient events.
+	 * The class that is interested in processing a searchPatient
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addSearchPatientListener<code> method. When
+	 * the searchPatient event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see SearchPatientEvent
+	 */
 	class SearchPatientListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -417,9 +543,16 @@ public class AppointmentControl {
 	}//SearchPatientListener
 	
 	
+	/**
+	 * The Class SelectHour.
+	 */
 	class SelectHour implements ActionListener 
     {
-    	@Override
+    	
+	    /* (non-Javadoc)
+	     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		as.setApsTime(csGUI_CreateNewAppoint.getDoctorHoursBox().getSelectedItem().toString());
@@ -428,8 +561,23 @@ public class AppointmentControl {
     }//SelectHour
 	
 
+	/**
+	 * The listener interface for receiving selectDate events.
+	 * The class that is interested in processing a selectDate
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addSelectDateListener<code> method. When
+	 * the selectDate event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see SelectDateEvent
+	 */
 	class SelectDateListener  implements ActionListener 
 	{
+		
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			Date date = (Date)csGUI_CreateNewAppoint.getDatePicker().getModel().getValue();
@@ -457,6 +605,12 @@ public class AppointmentControl {
 			
 		}
 		
+		/**
+		 * Gets the zero time date.
+		 *
+		 * @param fecha the fecha
+		 * @return the zero time date
+		 */
 		public Date getZeroTimeDate(Date fecha) {
 		    Date res = fecha;
 		    Calendar calendar = Calendar.getInstance();
@@ -475,9 +629,24 @@ public class AppointmentControl {
 	}
 	
 	
+    /**
+     * The listener interface for receiving cancel events.
+     * The class that is interested in processing a cancel
+     * event implements this interface, and the object created
+     * with that class is registered with a component using the
+     * component's <code>addCancelListener<code> method. When
+     * the cancel event occurs, that object's appropriate
+     * method is invoked.
+     *
+     * @see CancelEvent
+     */
     class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    /* (non-Javadoc)
+	     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		csGUI_CreateNewAppoint.dispose();

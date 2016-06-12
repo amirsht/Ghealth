@@ -41,27 +41,55 @@ import javax.swing.JSpinner;
 import javax.swing.JTree;
 import java.awt.Panel;
 
+/**
+ * The Class CS_GUI_newAppoint.
+ */
 public class CS_GUI_newAppoint extends LoggingOut {
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1645191120165568000L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The btn cancel appoint. */
 	private JButton btnCancelAppoint;
+	
+	/** The btn crt appoint. */
 	private JButton btnCrtAppoint;
+	
+	/** The lblwarning message. */
 	private JLabel lblwarningMessage = null;
+	
+	/** The Doctor type box. */
 	private JComboBox<?> DoctorTypeBox;
+	
+	/** The Doctor_and_ clinic box. */
 	private JComboBox<?> Doctor_and_ClinicBox;
+	
+	/** The Doctor hours box. */
 	private JComboBox<?> DoctorHoursBox;
+	
+	/** The doctor hours. */
 	private JLabel lblDoctorHours;
+	
+	/** The  doctor_and_ clinic. */
 	private JLabel lblDoctor_and_Clinic;
+	
+	/** The doctor type. */
 	private JLabel lblDoctorType;
+	
+	/** The date picker. */
 	private JDatePickerImpl datePicker;
+	
+	/** The calendar. */
 	private Panel cal;
+	
+	/** The button choose date. */
 	private JButton btnChooseDate;
+	
+	/** The patient details. */
 	private JPanel patientDetails;
 	
 	/**
@@ -183,6 +211,11 @@ public class CS_GUI_newAppoint extends LoggingOut {
 	
 	
 	
+	/**
+	 * Sets the patient.
+	 *
+	 * @param pt the pt
+	 */
 	public void SetPatient(Patient pt) {
 		
 		
@@ -263,10 +296,18 @@ public class CS_GUI_newAppoint extends LoggingOut {
 
 
 
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -277,91 +318,165 @@ public class CS_GUI_newAppoint extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Creates the new appoint action listener.
+	 *
+	 * @param e the e
+	 */
 	public void createNewAppointActionListener(ActionListener e)
 	{
 		btnCrtAppoint.addActionListener(e);
 	}
 	
+	/**
+	 * Cancel new appoint action listener.
+	 *
+	 * @param e the e
+	 */
 	public void cancelNewAppointActionListener(ActionListener e)
 	{
 		btnCancelAppoint.addActionListener(e);
 	}
 	
+	/**
+	 * Select doc type action listener.
+	 *
+	 * @param e the e
+	 */
 	public void SelectDocTypeActionListener(ActionListener e){
 		
 		DoctorTypeBox.addActionListener(e);
 		
 	}
 	
+	/**
+	 * Doctor box action listener.
+	 *
+	 * @param e the e
+	 */
 	public void DoctorBoxActionListener(ActionListener e){
 		
 		Doctor_and_ClinicBox.addActionListener(e);
 	}
 	
+/**
+ * Doctor hours box action listener.
+ *
+ * @param e the e
+ */
 public void DoctorHoursBoxActionListener(ActionListener e){
 		
 		DoctorHoursBox.addActionListener(e);
 	}
 	
-/*
-	public void setfName(String ffName) {
 
-		
-		JLabel displayData = new JLabel(ffName);
-		displayData.setBounds(247, 120, 122, 14);
-		contentPane.add(displayData);	
-
-	}*/
-
-	public void setPtID(String ptIDstr) {
+	/**
+ * Sets the patient id.
+ *
+ * @param ptIDstr the new pt id
+ */
+public void setPtID(String ptIDstr) {
 		
 		JLabel ptID = new JLabel(ptIDstr);
 		ptID.setBounds(372, 120, 100, 14);
 		contentPane.add(ptID);
 	}
 
+	/**
+	 * Gets the doctor type box.
+	 *
+	 * @return the doctor type box
+	 */
 	public JComboBox<?> getDoctorTypeBox() {
 		return DoctorTypeBox;
 	}
 
+	/**
+	 * Gets the doctor_and_ clinic box.
+	 *
+	 * @return the doctor_and_ clinic box
+	 */
 	public JComboBox<?> getDoctor_and_ClinicBox() {
 		return Doctor_and_ClinicBox;
 	}
 	
+	/**
+	 * Gets the doctor hours box.
+	 *
+	 * @return the doctor hours box
+	 */
 	public JComboBox<?> getDoctorHoursBox() {
 		return DoctorHoursBox;
 	}
 
+	/**
+	 * Gets the lbl doctor hours.
+	 *
+	 * @return the lbl doctor hours
+	 */
 	public JLabel getLblDoctorHours() {
 		return lblDoctorHours;
 	}
 
+	/**
+	 * Gets the lbl doctor_and_ clinic.
+	 *
+	 * @return the lbl doctor_and_ clinic
+	 */
 	public JLabel getLblDoctor_and_Clinic() {
 		return lblDoctor_and_Clinic;
 	}
 
+	/**
+	 * Gets the lbl doctor type.
+	 *
+	 * @return the lbl doctor type
+	 */
 	public JLabel getLblDoctorType() {
 		return lblDoctorType;
 	}
 
+	/**
+	 * Gets the cal.
+	 *
+	 * @return the cal
+	 */
 	public Panel getCal() {
 		return cal;
 	}	
 	
+	/**
+	 * Gets the date picker.
+	 *
+	 * @return the date picker
+	 */
 	public JDatePickerImpl getDatePicker() {
 		return datePicker;
 	}	
 	
+	/**
+	 * Gets the choosen date ok.
+	 *
+	 * @return the choosen date ok
+	 */
 	public JButton getChoosenDateOK() {
 		return btnChooseDate;
 	}
 	
+	/**
+	 * Gets the btn crt appoint.
+	 *
+	 * @return the btn crt appoint
+	 */
 	public JButton getbtnCrtAppoint() {
 		return btnCrtAppoint;
 	}

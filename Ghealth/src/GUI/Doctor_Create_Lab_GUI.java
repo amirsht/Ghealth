@@ -32,26 +32,40 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
+/**
+ * The Class Doctor_Create_Lab_GUI.
+ */
 public class Doctor_Create_Lab_GUI extends LoggingOut {
 
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2258527420854925774L;
-	/**
-	 * 
-	 */
+	
+	/** The content pane. */
 	
 	private JPanel contentPane;
+	
+	/** The text rec pane. */
 	private JTextPane textRecPane;
+	
+	/** The btn cancel. */
 	private JButton btnCancel;
+	
+	/** The Create lab ref. */
 	private JButton CreateLabRef;
+	
+	/** The lblwarning message. */
 	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
+	
+	/** The patient details. */
 	private JPanel patientDetails;
+	
+	/** The Search patient. */
 	JButton SearchPatient;
+	
+	/** The Log out. */
 	JButton LogOut;
 	
 	/**
@@ -100,10 +114,18 @@ public class Doctor_Create_Lab_GUI extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -114,22 +136,40 @@ public class Doctor_Create_Lab_GUI extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Creates the new lab ref action listener.
+	 *
+	 * @param e the e
+	 */
 	public void CreateNewLabRefActionListener(ActionListener e)
 	{
 		CreateLabRef.addActionListener(e);
 	}
 	
+	/**
+	 * Adds the cancel action listener.
+	 *
+	 * @param e the e
+	 */
 	public void addCancelActionListener(ActionListener e)
 	{
 		btnCancel.addActionListener(e);
 	}
 	
+/**
+ * Sets the patient.
+ *
+ * @param pt the pt
+ */
 public void SetPatient(Patient pt) {
 		
 		
@@ -209,15 +249,35 @@ public void SetPatient(Patient pt) {
 
 	
 
+	/**
+	 * Gets the record field.
+	 *
+	 * @return the record field
+	 */
 	public String getRecordField() 
 	{
 		return textRecPane.getText();
 	}
 
 
+	/**
+	 * The listener interface for receiving cancel events.
+	 * The class that is interested in processing a cancel
+	 * event implements this interface, and the object created
+	 * with that class is registered with a component using the
+	 * component's <code>addCancelListener<code> method. When
+	 * the cancel event occurs, that object's appropriate
+	 * method is invoked.
+	 *
+	 * @see CancelEvent
+	 */
 	public class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    /* (non-Javadoc)
+	     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		dispose();

@@ -25,17 +25,32 @@ import javax.swing.JLayeredPane;
 import javax.swing.JButton;
 import java.awt.Font;
 
+/**
+ * The Class CS_GUI_cancelAppoint.
+ */
 public class CS_GUI_cancelAppoint extends LoggingOut{
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1645191120165568000L;
+	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The patient details. */
 	private JPanel patientDetails;
+	
+	/** The combo box. */
 	private JComboBox comboBox;
+	
+	/** The btn cancel appointment. */
 	private JButton btnCancelAppointment;
+	
+	/** The btn cancel appoint. */
 	private JButton btnCancelAppoint;
 	
+	/**
+	 * Instantiates a new c s_ gu i_cancel appoint.
+	 */
 	public CS_GUI_cancelAppoint() {
 		setResizable(false);
 		setTitle("G-Health");
@@ -88,6 +103,11 @@ public class CS_GUI_cancelAppoint extends LoggingOut{
 	
 	
 	
+/**
+ * Sets the patient.
+ *
+ * @param pt the pt
+ */
 public void SetPatient(Patient pt) {
 		
 		
@@ -166,11 +186,21 @@ public void SetPatient(Patient pt) {
 	}
 
 
+	/**
+	 * Gets the btn cancel appointment.
+	 *
+	 * @return the btn cancel appointment
+	 */
 	public JButton getbtnCancelAppointment()
 	{
 		return btnCancelAppointment;
 	}
 
+	/**
+	 * Gets the combo box.
+	 *
+	 * @return the combo box
+	 */
 	public JComboBox getcomboBox()
 	{
 		return comboBox;

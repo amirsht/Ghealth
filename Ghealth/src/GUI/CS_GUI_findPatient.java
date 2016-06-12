@@ -31,19 +31,27 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
+/**
+ * The Class CS_GUI_findPatient.
+ */
 public class CS_GUI_findPatient extends LoggingOut {
 
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -5798215983453009657L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The find patient. */
 	private JButton findPatient;
+	
+	/** The lblwarning message. */
 	//private JButton btnCrtPt;
 	private JLabel lblwarningMessage = null;
+	
+	/** The Insert patient id. */
 	private JTextField InsertPatientId;
 	
 	/**
@@ -109,10 +117,18 @@ public class CS_GUI_findPatient extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -123,12 +139,20 @@ public class CS_GUI_findPatient extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Find patient action listener.
+	 *
+	 * @param e the e
+	 */
 	public void findPatientActionListener(ActionListener e)
 	{
 		findPatient.addActionListener(e);
@@ -137,13 +161,25 @@ public class CS_GUI_findPatient extends LoggingOut {
 	
 
 	
+	/**
+	 * Gets the patient id.
+	 *
+	 * @return the pt id
+	 */
 	public String getPtID() {
 		return InsertPatientId.getText();
 	}
 
+	/**
+	* Cancel listener of the button.
+	*/
 	public class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    /** 
+	     * closes the current frame of the class
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		dispose();
