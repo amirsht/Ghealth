@@ -39,14 +39,16 @@ public class SCmonthlyClusterReports {
 
 	
 	
-	private void createReport(int clinicID ,String from_month, String to_month){
+	private void createReport(String cID ,String from_date_str, String to_date_str){
 		
 		
 		this.ReportToEnv =  new ArrayList<Object>();
 		
 		ResultSet resultClinicName = null;
 		Statement stmt1;
-		String querystr = "SELECT C.cName FROM clinic C" + "WHERE C.cID =" + clinicID; // clinic name
+		
+		int clinicID = Integer.parseInt(cID);
+		String querystr = "SELECT C.cName FROM clinic C " + " WHERE C.cID = " + clinicID ; // clinic name
 		String clinicName = null;
 		
 		try {
@@ -59,12 +61,10 @@ public class SCmonthlyClusterReports {
 			resultClinicName.next();
 			
 			clinicName = resultClinicName.getString(1);
-				
-				
+					
 			
 			ms.conn.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -74,21 +74,6 @@ public class SCmonthlyClusterReports {
 		
 		ResultSet result = null;
 		Statement stmt;
-		
-
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar today = Calendar.getInstance();
-		
-
-		today.set(Calendar.MONTH, getMonthNumber(from_month) );
-		today.set(Calendar.DAY_OF_MONTH,1);
-		
-		String from_date_str = formatter.format(today.getTime());
-		
-		today.set(Calendar.MONTH, getMonthNumber(to_month) );
-		today.set(Calendar.DAY_OF_MONTH,1);
-		String to_date_str = formatter.format(today.getTime());
-	
 		
 
 		System.out.println(from_date_str);
@@ -228,13 +213,15 @@ public class SCmonthlyClusterReports {
 	
 	
 	
-	public Envelope getClinicMonthlyClusterReport(int cID, String from_month, String to_month){
-	    
+	public Envelope getClinicMonthlyClusterReport(List<Object> objList){
+		
+		
+		String from_date = (String)objList.get(0);
+		 String to_date =  (String)objList.get(1);
+		String cID =  (String)objList.get(2);
+        this.createReport(cID , from_date,  to_date);
+    	
 		Envelope en = new Envelope();    
-	
-	           
-        this.createReport(cID , from_month,  to_month);
-        
 		try {
 			en.setobjList(this.ReportToEnv);
 			en.setStatus(Status.EXIST);		
