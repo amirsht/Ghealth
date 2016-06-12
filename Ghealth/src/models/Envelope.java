@@ -7,6 +7,7 @@ import java.util.List;
 
 
 /**
+ * @author G5 lab group
  * this class is Envelope Model which saves the 
  * Object ,task and message fields to send to server.
  */

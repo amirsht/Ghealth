@@ -32,21 +32,38 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
+/**
+ * @author G5 lab group
+ * The Class costumer service of adding new appointment.
+ */
 public class CS_GUI_Appoint extends LoggingOut {
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 1645191120165568000L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The btn cancel appoint. */
 	private JButton btnCancelAppoint;
+	
+	/** The btn crt appoint. */
 	private JButton btnCrtAppoint;
+	
+	/** The lblwarning message. */
 	private JLabel lblwarningMessage = null;
+	
+	/** The patient details. */
 	private JPanel patientDetails;
+	
+	/** The Search patient. */
 	private JButton SearchPatient;
+	
+	/** The Log out. */
 	private JButton LogOut;
+	
+	/** The btn uncreate patient. */
 	private JButton btnUncreatePatient;
  
 	/**
@@ -112,10 +129,18 @@ public class CS_GUI_Appoint extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -126,27 +151,50 @@ public class CS_GUI_Appoint extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Creates the appoint action listener.
+	 *
+	 * @param e the event
+	 */
 	public void createAppointActionListener(ActionListener e)
 	{
 		btnCrtAppoint.addActionListener(e);
 	}
 	
+	/**
+	 * Log out action listener.
+	 *
+	 * @param e the event
+	 */
 	public void LogOutActionListener(ActionListener e)
 	{
 		LogOut.addActionListener(e);
 	}
 	
+	/**
+	 * Search patient action listener.
+	 *
+	 * @param e the event
+	 */
 	public void SearchPatientActionListener(ActionListener e)
 	{
 		SearchPatient.addActionListener(e);
 	}
 	
+	/**
+	 * Uncreate patient action listener.
+	 *
+	 * @param e the event
+	 */
 	public void UncreatePatientActionListener(ActionListener e)
 	{
 		btnUncreatePatient.addActionListener(e);
@@ -155,12 +203,22 @@ public class CS_GUI_Appoint extends LoggingOut {
 	
 	
 	
+	/**
+	 * Cancel appoint action listener.
+	 *
+	 * @param e the event
+	 */
 	public void cancelAppointActionListener(ActionListener e)
 	{
 		btnCancelAppoint.addActionListener(e);
 	}
 	
 	
+/**
+ * Sets the patient.
+ *
+ * @param pt the patient
+ */
 public void SetPatient(Patient pt) {
 		
 		

@@ -40,25 +40,50 @@ import javax.swing.JSpinner;
 import javax.swing.JComboBox;
 
 
+/**
+ * @author G5 lab group
+ * The Class of the costumer service add new patient GUI.
+ */
 public class CS_GUI_addPatient extends LoggingOut {
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -4516583930581651307L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The btn cancel. */
 	private JButton btnCancel;
+	
+	/** The btn add patient. */
 	private JButton btnAddPatient;
+	
+	/** The lblwarning message. */
 	private JLabel lblwarningMessage = null;
+	
+	/** The name. */
 	private JTextField fName;
+	
+	/** The l name. */
 	private JTextField lName;
+	
+	/** The e mail. */
 	private JTextField eMail;
+	
+	/** The phone. */
 	private JTextField phone;
+	
+	/** The Pation id. */
 	private JTextField PationID;
+	
+	/** The doctor id. */
 	private JTextField doctorID;
+	
+	/** The Clinic box. */
 	private JComboBox ClinicBox;
+	
+	/** The e mailcombo box. */
 	private JComboBox eMailcomboBox;
 	
 
@@ -77,15 +102,7 @@ public class CS_GUI_addPatient extends LoggingOut {
 		contentPane.setLayout(null);
 		contentPane.setLayout(null);
 		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-		/*--------------------------------------------------------------------------
-		frame.addWindowListener(new WindowAdapter()
-		{
-		    public void windowClosing(WindowEvent e)
-		    {
-		    	System.out.println("------------window closed-------------");
-		    }
-		});
-		*/ //-------------------------------------------------------------------------
+
 		JLabel label = new JLabel("New label");
 		label.setBounds(0, 0, 0, 0);
 		contentPane.add(label);
@@ -139,7 +156,6 @@ public class CS_GUI_addPatient extends LoggingOut {
 		btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(392, 444, 109, 23);
 		contentPane.add(btnCancel);
-		//btnCancel.addActionListener(new CancelListener());
 		
 		Label at = new Label("@");
 		at.setBounds(464, 240, 15, 22);
@@ -201,10 +217,18 @@ public class CS_GUI_addPatient extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -215,68 +239,117 @@ public class CS_GUI_addPatient extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Adds the patient action listener.
+	 *
+	 * @param e the event
+	 */
 	public void addPatientActionListener(ActionListener e)
 	{
 		btnAddPatient.addActionListener(e);
 	}
 	
+	/**
+	 * Adds the cancel action listener.
+	 *
+	 * @param e the event
+	 */
 	public void addCancelActionListener(ActionListener e)
 	{
 		btnCancel.addActionListener(e);
 	}
 
 	
+	/**
+	 * Gets the first  name.
+	 *
+	 * @return the first name
+	 */
 	public String getfName() {
 		return fName.getText();
 	}
 
+	/**
+	 * Gets the last name.
+	 *
+	 * @return the last name
+	 */
 	public String getlName() {
 		return lName.getText();
 	}
 
+	/**
+	 * Gets the e mail.
+	 *
+	 * @return the e mail
+	 */
 	public String geteMail() {
 		return eMail.getText();
 	}
 
+	/**
+	 * Gets the phone.
+	 *
+	 * @return the phone
+	 */
 	public String getPhone() {
 		return phone.getText();
 	}
 
 
+	/**
+	 * Sets the pation id.
+	 *
+	 * @param id the new pation id
+	 */
 	public void setPationID(String id){
 		PationID.setText(id);
 	}
+	
+	/**
+	 * Gets the pation id.
+	 *
+	 * @return the pation id
+	 */
 	public String getPationID() {
 		return PationID.getText();
 	}
 
+	/**
+	 * Gets the doctor id.
+	 *
+	 * @return the doctor id
+	 */
 	public String getDoctorID() {
 		return doctorID.getText();
 	}
 	
+	/**
+	 * Gets the clinic box.
+	 *
+	 * @return the clinic box
+	 */
 	public JComboBox getClinicBox()
 	{
 		return ClinicBox;
 	}
 	
+	/**
+	 * Gets the e mail box.
+	 *
+	 * @return the e mail box
+	 */
 	public JComboBox geteMailBox()
 	{
 		return eMailcomboBox;
 	}
-	/*
-	public class CancelListener implements ActionListener 
-    {
-    	@Override
-    	public void actionPerformed(ActionEvent e)
-    	{
-    		dispose();
-    	}	
-    }//CancelListener
-    */
 }

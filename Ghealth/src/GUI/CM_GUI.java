@@ -31,17 +31,26 @@ import javax.swing.JTextPane;
 import java.awt.Label;
 
 
+/**
+ *@author G5 lab group
+ * The Class of the Clinic manager GUI.
+ */
 public class CM_GUI extends LoggingOut {
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -8152476922277860117L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The lblwarning message. */
 	private JLabel lblwarningMessage = null;
+	
+	/** The btn monthly report. */
 	private JButton btnMonthlyReport;
+	
+	/** The weekly btn. */
 	private JButton weeklyBtn;
 	
 	/**
@@ -98,10 +107,18 @@ public class CM_GUI extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -112,17 +129,30 @@ public class CM_GUI extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
 	
+	/**
+	 * Weekly action listener.
+	 *
+	 * @param e the event
+	 */
 	public void weeklyActionListener(ActionListener e)
 	{
 		weeklyBtn.addActionListener(e);
 	}
 	
+	/**
+	 * Monthly action listener.
+	 *
+	 * @param e the event
+	 */
 	public void monthlyActionListener(ActionListener e)
 	{
 		btnMonthlyReport.addActionListener(e);
@@ -130,9 +160,16 @@ public class CM_GUI extends LoggingOut {
 	
 	
 
+	/**
+	* Cancell listener of the button.
+	*/
 	public class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    /** 
+	     * closes the current frame of the class
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		dispose();

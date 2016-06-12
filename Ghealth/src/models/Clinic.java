@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
+ * @author G5 lab group
  * The Class Clinic.
  */
 public class Clinic implements Serializable{

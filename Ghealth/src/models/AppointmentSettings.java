@@ -15,6 +15,7 @@ import enums.Status;
 
 
 /**
+ * @author G5 lab group
  * The Class AppointmentSettings.
  */
 public class AppointmentSettings  implements Serializable {

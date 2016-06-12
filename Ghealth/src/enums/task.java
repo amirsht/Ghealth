@@ -1,6 +1,7 @@
 package enums;
 
 /**
+ * @author G5 lab group
  * The Enum tasks for client server communicate.
  */
 public enum task {

@@ -47,26 +47,47 @@ import java.awt.Panel;
 import java.awt.RenderingHints;
 
 
+/**
+ * @author G5 lab group
+ * The Class of doctor view history GUI.
+ */
 public class Doctor_History_GUI extends LoggingOut {
 
 	
-	/**
-	 * 
-	 */
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 4721311421959450478L;
 	
+	/** The content pane. */
 	private JPanel contentPane;
+	
+	/** The btn cancel. */
 	private JButton btnCancel;
-	//private JButton btnCrtPt;
+	
+	/** The lblwarning message. */
 	private JLabel lblwarningMessage = null;
+	
+	/** The patient details. */
 	private JPanel patientDetails;
+	
+	/** The Appointment box. */
 	private JComboBox<?> AppointmentBox;
+	
+	/** The Lab res box. */
 	private JComboBox<?> LabResBox;
 	
+	/** The Search patient. */
 	private JButton SearchPatient;
+	
+	/** The Log out. */
 	private JButton LogOut;
+	
+	/** The editor pane. */
 	private JEditorPane editorPane;
+	
+	/** The image pan. */
 	private JPanel imagePan;
+	
+	/** The imglabel. */
 	private JLabel imglabel;
 	/**
 	 * Create the frame.
@@ -124,8 +145,7 @@ public class Doctor_History_GUI extends LoggingOut {
 		editorPane.setBounds(10, 274, 164, 286);
 		editorPane.setContentType("text/html");
 		editorPane.setEditable(false);
-		//editorPane.setLineWrap(true); //Makes the text wrap to the next line
-		//editorPane.setWrapStyleWord(true); //Makes the text wrap full words, not just letters
+
 		contentPane.add(editorPane);
 		
 		imagePan = new JPanel();
@@ -146,10 +166,18 @@ public class Doctor_History_GUI extends LoggingOut {
 	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -160,16 +188,29 @@ public class Doctor_History_GUI extends LoggingOut {
 	
 	
 	
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		
 	}
 	
+	/**
+	 * Adds the cancel action listener.
+	 *
+	 * @param e the event
+	 */
 	public void addCancelActionListener(ActionListener e)
 	{
 		btnCancel.addActionListener(e);
 	}
 	
+/**
+ * Sets the patient on the frame.
+ *
+ * @param pt the patient object
+ */
 public void SetPatient(Patient pt) {
 		
 		
@@ -246,43 +287,82 @@ public void SetPatient(Patient pt) {
 		
 	}
 
+	/**
+	 * Sets the summery.
+	 *
+	 * @param summery the summery
+	 */
 	public void SetSummery(String summery) {
 		editorPane.setText(summery);
 	}
 
+	/**
+	 * Gets the appointment history box.
+	 *
+	 * @return the appointment history box
+	 */
 	public JComboBox<?> getAppointmentHistoryBox() {
 		return AppointmentBox;
 	}
 	
+	/**
+	 * Gets the lab result box.
+	 *
+	 * @return the lab result box
+	 */
 	public JComboBox<?> getLabResultBox() {
 		return LabResBox;
 	}
 	
+	/**
+	 * Appointment history box action listener.
+	 *
+	 * @param e the event
+	 */
 	public void AppointmentHistoryBoxActionListener(ActionListener e){
 		
 		AppointmentBox.addActionListener(e);
 	}
 	
+	/**
+	 * Lab result box action listener.
+	 *
+	 * @param e the event
+	 */
 	public void LabResultBoxActionListener(ActionListener e){
 		
 		LabResBox.addActionListener(e);
 	}
 	
+	/**
+	 * Gets the editor pane.
+	 *
+	 * @return the editor pane
+	 */
 	public  JEditorPane geteditorPane()
 	{
 			return editorPane;
 	}
 
+	/**
+	 * Gets the image pan.
+	 *
+	 * @return the image pan
+	 */
 	public JPanel getimagePan()
 	{
 		return imagePan;
 	}
 	
+	/**
+	 * Sets the adds the to image pan.
+	 *
+	 * @param Path the new adds the to image pan
+	 */
 	public void setAddToImagePan(String Path)
 	{
 		Image image = null;
         try {
-        	//File sourceimage = new File("src\\images\\aaa.jpg");
         	File sourceimage = new File(Path);
         	image = ImageIO.read(sourceimage);
         	image = getScaledImage(image,300,300);
@@ -290,15 +370,19 @@ public void SetPatient(Patient pt) {
         	e.printStackTrace();
         }
         
-        
-        
-        //imglabel = new JLabel(new ImageIcon(image));
         imglabel.setIcon(new ImageIcon(image));
-        //imagePan.add(imglabel);
               
 	}
 	
 	
+	/**
+	 * Gets the scaled image.
+	 *
+	 * @param srcImg the src img
+	 * @param w the width
+	 * @param h the hight
+	 * @return the scaled image
+	 */
 	private static Image getScaledImage(Image srcImg, int w, int h){
         BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = resizedImg.createGraphics();
@@ -310,9 +394,16 @@ public void SetPatient(Patient pt) {
         return resizedImg;
     }
 	
+	/**
+	* Cancell listener of the button.
+	*/
 	public class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    /** 
+	     * closes the current frame of the class
+	     */
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		dispose();

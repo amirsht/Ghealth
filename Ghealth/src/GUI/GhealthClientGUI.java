@@ -8,18 +8,37 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
+/**
+ * @author G5 lab group
+ * The Class GhealthClientGUI to choose which server connect to.
+ */
 public class GhealthClientGUI extends LoggingOut{
 
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = -2806545028733372660L;
 	
 	
+	/** The Label port. */
 	private JLabel LabelPort = null;
+	
+	/** The Label host. */
 	private JLabel LabelHost = null;
+	
+	/** The Text host. */
 	private JTextField TextHost = null;
+	
+	/** The Text port. */
 	private JTextField TextPort = null;
+	
+	/** The Button ok. */
 	private JButton ButtonOk = null;
+	
+	/** The Button cancel. */
 	private JButton ButtonCancel = null;
 
+	/**
+	 * Instantiates a new ghealth client gui.
+	 */
 	public GhealthClientGUI() {
 		getContentPane().setLayout(null);
 		
@@ -55,6 +74,11 @@ public class GhealthClientGUI extends LoggingOut{
 		this.setResizable(false);
 	}
 	
+	/**
+	 * Gets the text host.
+	 *
+	 * @return the text host
+	 */
 	private JTextField getTextHost(){
 		if(TextHost == null){
 			TextHost = new JTextField();
@@ -65,6 +89,11 @@ public class GhealthClientGUI extends LoggingOut{
 		return TextHost;
 	}
 
+	/**
+	 * Gets the text port.
+	 *
+	 * @return the text port
+	 */
 	private JTextField getTextPort(){
 		if(TextPort == null){
 			TextPort = new JTextField();
@@ -75,29 +104,57 @@ public class GhealthClientGUI extends LoggingOut{
 		return TextPort;
 	}
 	
+	/**
+	 * Clear fields.
+	 */
 	public void clearFields(){
 		TextHost.setText("");
 		TextPort.setText("");
 	}
 	
+	/**
+	 * Gets the host.
+	 *
+	 * @return the host
+	 */
 	public String getHost(){
 		return TextHost.getText();
 	}
 	
+	/**
+	 * Gets the port.
+	 *
+	 * @return the port
+	 */
 	public int getPort(){
 		if(TextPort.getText().equals(""))
 			return 0;
 		return Integer.parseInt(TextPort.getText());
 	}
 
+	/**
+	 * Adds the ok action listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void addOKActionListener(ActionListener listener){
 		ButtonOk.addActionListener(listener);
 	}
 
+	/**
+	 * Adds the cancel action listener.
+	 *
+	 * @param listener the listener
+	 */
 	public void addCancelActionListener(ActionListener listener){
 		ButtonCancel.addActionListener(listener);
 	}
 	
+	/**
+	 * Display warnning message.
+	 *
+	 * @param msg the msg
+	 */
 	public void displayWarnningMessage(String msg)
 	{
 		JOptionPane.showMessageDialog(this, msg);

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import enums.*;
 
 /**
+ * @author G5 lab group
  * The Class Doctor.
  */
 public class Doctor extends User implements Serializable{
