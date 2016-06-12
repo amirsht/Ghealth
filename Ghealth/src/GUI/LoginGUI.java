@@ -132,7 +132,7 @@ public class LoginGUI extends LoggingOut {
 				
 				int x = ThreadLocalRandom.current().nextInt(1, 5 + 1);
 				
-				//x is now 1-4
+				//x is now 1-5
 				
 				switch(x){
 				
