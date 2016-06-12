@@ -81,15 +81,73 @@ public class SCweeklyReports {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar today = Calendar.getInstance();
 		
+
+		today.add(Calendar.DATE, -1);
 		String to_date_str = formatter.format(today.getTime());
 		today.add(Calendar.DATE, -7);
 		String from_date_str = formatter.format(today.getTime());
+		
+		String query1 = ""
+				+ "Create or replace view TrypA as "
+				+ "(SELECT * "
+				+ "  from appointmentsettings A "
+				+ "  where A.apsstatus = 'ARRIVED');";
+		
+		String query2 = ""
+				+ "DROP TABLE IF EXISTS calendar; ";
+		String query3 = ""
+				+ "CREATE TABLE IF NOT EXISTS calendar(calendar_date DATE NOT NULL PRIMARY KEY); ";
+		String query4 = ""
+				+ "CALL filldates('"+from_date_str+"','"+to_date_str+"');";
+		
+		String query5 = ""
+				+ "Create or replace view Vweeklyrep as "
+				+ "(SELECT calendar_date AS apsDate, "
+				+ "		AVG(DATEDIFF(A.apsDate,A.apsCreateDate)) as AvgProcessTime, "
+				+ "		AVG(ltrim(timediff(A.apsStartTime, A.apsTime))) as AvgWaitingTime, "
+				+ "        Count(DISTINCT A.apsptid) AS NumOfPatients "
+				+ "FROM   TrypA A RIGHT OUTER JOIN calendar ON A.apsdate = calendar.calendar_date "
+				+ "WHERE  A.apsstatus IS NULL OR (A.apsstatus = 'ARRIVED' AND "
+				+ "       A.apsdate >= '"+from_date_str+"' AND "
+				+ "       A.apsdate <= '"+to_date_str+"' and "
+				+ "       A.apsDocID in (SELECT doc.uID FROM user doc where doc.ucID='" + clinicID
+				+ "')) "
+				+ "       group by (calendar.calendar_date));";
+		
 
-
+		String query6 = ""
+					+ "SELECT * FROM vweeklyrep "
+					+ "       UNION "
+					+ "       SELECT 'Min' as Op, "
+					+ "       MIN(AvgProcessTime) as AvgProcessTime, "
+					+ "       MIN(AvgWaitingTime) as AvgWaitingTime, "
+					+ "       Min(NumOfPatients) as NumOfPatients "
+					+ "	   FROM vweeklyrep "
+					+ "       UNION "
+					+ "       SELECT  'Max' as Op, "
+					+ "       Max(AvgProcessTime), "
+					+ "       Max(AvgWaitingTime), "
+					+ "       Max(NumOfPatients) "
+					+ "       FROM vweeklyrep "
+					+ "       UNION "
+					+ "       SELECT  'Avg' as Op, "
+					+ "       AVG(AvgProcessTime), "
+					+ "       AVG(AvgWaitingTime), "
+					+ "       AVG(NumOfPatients) "
+					+ "       FROM vweeklyrep "
+					+ "       UNION "
+					+ "       SELECT  'SD' as Op, "
+					+ "       STDDEV(AvgProcessTime), "
+					+ "       STDDEV(AvgWaitingTime), "
+					+ "       STDDEV(NumOfPatients) "
+					+ "       FROM vweeklyrep";
+		
+		
+		/*
 		String query = "CREATE OR REPLACE VIEW TABLEWEEK AS "
 				+ "SELECT  A.apsDate, "
-				+ "		AVG(DATEDIFF(A.apsDate,A.apsCreateDate)) as AvgProcessTime, "
-				+ "		AVG(timediff(A.apsStartTime, A.apsTime)/60) as AvgWaitingTime, "
+					+ "		AVG(DATEDIFF(A.apsDate,A.apsCreateDate)) as AvgProcessTime, "
+					+ "		AVG(timediff(A.apsStartTime, A.apsTime)/60) as AvgWaitingTime, "
 				+ "        Count(DISTINCT A.apsptid) AS NumOfPatients "
 				+ "FROM   appointmentsettings A "
 				+ "WHERE   A.apsstatus = 'ARRIVED' "
@@ -118,13 +176,17 @@ public class SCweeklyReports {
 				+ " SELECT  'SD' as Op, "
 				+ " STDDEV(AvgProcessTime),STDDEV(AvgWaitingTime),STDDEV(NumOfPatients) "
 				+ " FROM TABLEWEEK";
-		
+		*/
 		try {
 			mysqlConnection ms = new mysqlConnection();
 			stmt = ms.conn.createStatement();
 			
-			stmt.executeUpdate(query);
-			result = stmt.executeQuery(query2);
+			stmt.executeUpdate(query1);
+			stmt.executeUpdate(query2);
+			stmt.executeUpdate(query3);
+			stmt.executeUpdate(query4);
+			stmt.executeUpdate(query5);
+			result = stmt.executeQuery(query6);
 			
 			
 			/*-- for each day of the past week -- */
