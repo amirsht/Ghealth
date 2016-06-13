@@ -19,8 +19,9 @@ import java.util.concurrent.Executors;
 
 
 /**
- * @author G5 lab group
+ * 
  * The Class LoginControl.
+ * @author G5 lab group
  */
 public class LoginControl {
 	

@@ -30,8 +30,9 @@ import javax.swing.JOptionPane;
 
 
 /**
- * @author G5 lab group
+ *
  * The Class GeneralManagerController.
+ * @author G5 lab group
  */
 public class GeneralManagerController {
       

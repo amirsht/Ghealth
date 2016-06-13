@@ -24,8 +24,9 @@ import javax.swing.JOptionPane;
 
 
 /**
- * @author G5 lab group
+ * 
  * The Class PatientControl.
+ * @author G5 lab group
  */
 public class PatientControl {
       

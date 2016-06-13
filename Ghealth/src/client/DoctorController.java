@@ -41,8 +41,9 @@ import javax.swing.SwingUtilities;
 
 
 /**
- * @author G5 lab group
+ * 
  * The Class DoctorController.
+ * @author G5 lab group
  */
 public class DoctorController {
       

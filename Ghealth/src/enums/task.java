@@ -1,8 +1,9 @@
 package enums;
 
 /**
- * @author G5 lab group
+ * 
  * The Enum tasks for client server communicate.
+ * @author G5 lab group
  */
 public enum task {
 	/** The add patient. */

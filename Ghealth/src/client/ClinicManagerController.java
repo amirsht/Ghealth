@@ -15,8 +15,9 @@ import java.util.List;
 
 
 /**
- * @author G5 lab group
+ * 
  * The Class ClinicManagerController.
+ * @author G5 lab group
  */
 public class ClinicManagerController {
       

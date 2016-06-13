@@ -17,8 +17,9 @@ import javax.swing.table.TableCellRenderer;
 import GUI.GM_GUI;
 
 /**
- * @author G5 lab group
+ * 
  * The Class ShowMonthlyReport.
+ * @author G5 lab group
  */
 public class ShowMonthlyReport extends JFrame {
 

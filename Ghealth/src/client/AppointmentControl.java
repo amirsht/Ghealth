@@ -20,8 +20,9 @@ import enums.*;
 import models.*;
 
 /**
- * @author G5 lab group
+ * 
  * The Class AppointmentControl.
+ * @author G5 lab group
  */
 public class AppointmentControl {
 

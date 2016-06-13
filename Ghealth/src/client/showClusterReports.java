@@ -1,6 +1,3 @@
-
-
-
 package client;
 
 import java.awt.BorderLayout;
@@ -18,8 +15,9 @@ import javax.swing.table.TableCellRenderer;
 import GUI.GM_GUI;
 
 /**
- * @author G5 lab group
+ * 
  * The Class showClusterReports.
+ * @author G5 lab group
  */
 public class showClusterReports extends JFrame {
 
