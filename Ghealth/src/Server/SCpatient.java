@@ -1,8 +1,3 @@
-/**
- * TODO This is the class description
- */
-
-
 package Server;
 
 import java.sql.ResultSet;
