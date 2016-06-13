@@ -12,37 +12,55 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * The Class ServerGui.
+ *
  * @author G5 lab group
  * this class is Graphic user interface of Server which extends AbstractGuiServer
  * this class is the GUI we need to fill scheme, user name and password to workbench 
- *
  */
 public class ServerGui extends AbstractGuiServer {
-	/**
-	 * 
-	 */
+	
+	/** The Constant serialVersionUID. */
 	private static final long serialVersionUID = 5003284014897183840L;
 
 	//private JPanel contentPane;
-	/**all the buttons, labels and text fields */
+	/** all the buttons, labels and text fields. */
 	private JButton loginBut = null;
 	
+	/** The lbl user name. */
 	private JLabel lblUserName = null;
+    
+    /** The lblwarning message. */
     private JLabel lblwarningMessage = null;
+	
+	/** The lbl password. */
 	private JLabel lblPassword = null;
+	
+	/** The lbl port. */
 	private JLabel lblPort = null;
+	
+	/** The lbl scheam. */
 	private JLabel lblScheam = null;
 	
+	/** The text field user. */
 	private JTextField textFieldUser;
+	
+	/** The text field pass. */
 	private JTextField textFieldPass;
+	
+	/** The text field port. */
 	private JTextField textFieldPort;
+	
+	/** The text field scheam. */
 	private JTextField textFieldScheam;
 	
 	
+	/** The my font. */
 	private Font myFont;
+	
 	/**
 	 * constructor 
-	 * this constructor add all the Label, Button,TextField to the Frame
+	 * this constructor add all the Label, Button,TextField to the Frame.
 	 */
 	public ServerGui() {
 		myFont = new Font("Serif",Font.BOLD,17);
@@ -66,6 +84,11 @@ public class ServerGui extends AbstractGuiServer {
 	
 	}
 	
+/**
+ * Gets the lblwarning message.
+ *
+ * @return the lblwarning message
+ */
 //Getters and setter, etc.
 	public JLabel getLblwarningMessage() {
 		if(lblwarningMessage == null){
@@ -76,10 +99,19 @@ public class ServerGui extends AbstractGuiServer {
 		}
 		return lblwarningMessage;
 	}
+	
+	/**
+	 * Sets the warning message visible true.
+	 */
 	public void setWarningMessageVisibleTrue() {
 		lblwarningMessage.setVisible(true);	
 	}
 	
+	/**
+	 * Sets the warning message visible true.
+	 *
+	 * @param st the new warning message visible true
+	 */
 	public void setWarningMessageVisibleTrue(String st) {
 		lblwarningMessage.setText(st);
 		lblwarningMessage.setForeground(Color.RED);
@@ -88,6 +120,11 @@ public class ServerGui extends AbstractGuiServer {
 		
 	}
 
+	/**
+	 * Gets the login.
+	 *
+	 * @return the login
+	 */
 	public JButton getLogin() {
 		
 		if(loginBut == null ) {
@@ -98,6 +135,11 @@ public class ServerGui extends AbstractGuiServer {
 	}
 
 	
+	/**
+	 * Gets the lbl user name.
+	 *
+	 * @return the lbl user name
+	 */
 	public JLabel getLblUserName() {
 		if(lblUserName == null) {
 			lblUserName = new JLabel("user name:");
@@ -107,6 +149,11 @@ public class ServerGui extends AbstractGuiServer {
 		return lblUserName;
 	}
 	
+	/**
+	 * Gets the lbl port.
+	 *
+	 * @return the lbl port
+	 */
 	public JLabel getLblPort() {
 		if(lblPort == null) {
 			lblPort = new JLabel("port: ");
@@ -116,6 +163,11 @@ public class ServerGui extends AbstractGuiServer {
 		return lblPort;
 	}
 
+	/**
+	 * Gets the lbl password.
+	 *
+	 * @return the lbl password
+	 */
 	public JLabel getLblPassword() {
 		if(lblPassword == null){
 			lblPassword = new JLabel("password :");
@@ -125,6 +177,11 @@ public class ServerGui extends AbstractGuiServer {
 		return lblPassword;
 	}
 	
+	/**
+	 * Gets the lbl scheam.
+	 *
+	 * @return the lbl scheam
+	 */
 	public JLabel getLblScheam() {
 		if(lblScheam == null){
 			lblScheam = new JLabel("Scheam:");
@@ -134,6 +191,11 @@ public class ServerGui extends AbstractGuiServer {
 		return lblScheam;
 	}
 
+	/**
+	 * Gets the text field user.
+	 *
+	 * @return the text field user
+	 */
 	public JTextField getTextFieldUser() {
 		if(textFieldUser == null) {
 			textFieldUser = new JTextField();
@@ -143,6 +205,11 @@ public class ServerGui extends AbstractGuiServer {
 		return textFieldUser;
 	}
 
+	/**
+	 * Gets the text field pass.
+	 *
+	 * @return the text field pass
+	 */
 	public JTextField getTextFieldPass() {
 		if(textFieldPass == null) {
 			textFieldPass = new JTextField();
@@ -152,6 +219,11 @@ public class ServerGui extends AbstractGuiServer {
 		return textFieldPass;
 	}
 	
+	/**
+	 * Gets the text fieldport.
+	 *
+	 * @return the text fieldport
+	 */
 	public JTextField getTextFieldport() {
 		if(textFieldPort == null) {
 			textFieldPort = new JTextField();
@@ -161,6 +233,11 @@ public class ServerGui extends AbstractGuiServer {
 		return textFieldPort;
 	}
 	
+	/**
+	 * Gets the text field scheam.
+	 *
+	 * @return the text field scheam
+	 */
 	public JTextField getTextFieldScheam() {
 		if(textFieldScheam == null) {
 			textFieldScheam = new JTextField();
@@ -170,24 +247,47 @@ public class ServerGui extends AbstractGuiServer {
 		return textFieldScheam;
 	}
 	
+	/**
+	 * Sets the text field pass.
+	 *
+	 * @param str the new text field pass
+	 */
 	public void setTextFieldPass(String str) {
 		textFieldPass.setText(str);
 	}
 	
+	/**
+	 * Sets the text field user.
+	 *
+	 * @param str the new text field user
+	 */
 	public void setTextFieldUser(String str) {
 		textFieldUser.setText(str);
 	}
 	
+	/**
+	 * Sets the text field port.
+	 *
+	 * @param str the new text field port
+	 */
 	public void setTextFieldPort(String str) {
 		textFieldPort.setText(str);
 	}
 	
+	/**
+	 * Sets the text fieldscheam.
+	 *
+	 * @param str the new text fieldscheam
+	 */
 	public void setTextFieldscheam(String str) {
 		textFieldScheam.setText(str);
 	}
 	
 	
 	
+	/**
+	 * Clear text.
+	 */
 	public void ClearText(){
 		textFieldUser.setText("");
 		textFieldPass.setText("");
@@ -195,31 +295,57 @@ public class ServerGui extends AbstractGuiServer {
 		textFieldScheam.setText("");
 	}
 
+	/**
+	 * Gets the text user name.
+	 *
+	 * @return the text user name
+	 */
 	public String getTextUserName() {
 		return textFieldUser.getText();
 	}
 	
+	/**
+	 * Gets the text password.
+	 *
+	 * @return the text password
+	 */
 	public String getTextPassword() {
 		
 		return textFieldPass.getText();
 	}
 	
+	/**
+	 * Gets the text port.
+	 *
+	 * @return the text port
+	 */
 	public String getTextPort() {
 		
 		return textFieldPort.getText();
 	}
+	
+	/**
+	 * Gets the text scheam.
+	 *
+	 * @return the text scheam
+	 */
 	public String getTextScheam() {
 		
 		return textFieldScheam.getText();
 	}
+	
 	/**
-	 * add to login button ActionListener
-	 * @param listener
+	 * add to login button ActionListener.
+	 *
+	 * @param listener the listener
 	 */
 	public void addLoginActionListener(ActionListener listener){
 		loginBut.addActionListener(listener);
 	}
 
+	/**
+	 * Undisplay warning message.
+	 */
 	public void undisplayWarningMessage() {
 		lblwarningMessage.setVisible(false);
 		

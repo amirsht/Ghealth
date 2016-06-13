@@ -16,11 +16,20 @@ import java.util.List;
 import enums.Status;
 import models.*;
 
-
+/**
+ * @author G5 lab group
+ * The Class SCpatient.
+ */
 public class SCpatient {
 
 
 
+	/**
+	 * Gets the exist patient.
+	 *
+	 * @param ptID the pt id
+	 * @return the envelope
+	 */
 	public static Envelope GetExistPatient(String ptID)
 	{
 		int rowCount=0;
@@ -105,6 +114,12 @@ public class SCpatient {
 		return en;
 	}
 	
+	/**
+	 * Creates the patient.
+	 *
+	 * @param pt the pt
+	 * @return the status
+	 */
 	public static Status CreatePatient(Patient pt)
 	{
 		Statement stmt;
@@ -132,6 +147,11 @@ public class SCpatient {
 	}
 	
 	
+	/**
+	 * Gets the clinic list.
+	 *
+	 * @return the envelope
+	 */
 	public static Envelope GetClinicList()
 	{
 		Envelope en = new Envelope();
@@ -171,10 +191,10 @@ public class SCpatient {
 	
 	/**
 	 * methood chages the registration status of the patient and
-	 * canceles his SCHEDUALED Appointments
-	 * 
-	 * @param apsID
-	 * @return
+	 * canceles his SCHEDUALED Appointments.
+	 *
+	 * @param pt the pt
+	 * @return the status
 	 */
 	
 	public static Status UncreatePatient(Patient pt)
@@ -211,6 +231,12 @@ public class SCpatient {
 
 	}
 	
+	/**
+	 * Recover patient.
+	 *
+	 * @param pt the pt
+	 * @return the status
+	 */
 	public static Status RecoverPatient(Patient pt)
 	{
 		Statement stmt;
@@ -242,6 +268,12 @@ public class SCpatient {
 
 	}
 	
+	/**
+	 * Cancel all appointments.
+	 *
+	 * @param pt the pt
+	 * @return the status
+	 */
 	public static Status CANCEL_ALL_APPOINTMENTS(Patient pt)
 	{
 		Statement stmt;
