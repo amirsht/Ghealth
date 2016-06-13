@@ -12,6 +12,7 @@ import enums.*;
 import models.*;
 
 /**
+ * @author G5 lab group
  * The Main Class That starts Ghealth Application.
  * Initializes login screen
  */

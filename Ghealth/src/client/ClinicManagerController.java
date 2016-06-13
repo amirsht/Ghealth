@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 
-// TODO: Auto-generated Javadoc
 /**
+ * @author G5 lab group
  * The Class ClinicManagerController.
  */
 public class ClinicManagerController {

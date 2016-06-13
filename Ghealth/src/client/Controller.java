@@ -17,6 +17,7 @@ import enums.task;
 import models.*;
 
 /**
+ * @author G5 lab group
  * Taking care of all connection and transportation in client side
  * including file management
  */

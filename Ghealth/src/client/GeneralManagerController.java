@@ -29,22 +29,41 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
+/**
+ * @author G5 lab group
+ * The Class GeneralManagerController.
+ */
 public class GeneralManagerController {
       
+	/** The General_ m_ gui. */
 	private GM_GUI General_M_GUI;
+	
+	/** The gm_ id. */
 	private String gm_ID;
+	
+	/** The choosen date from. */
 	public String choosenDateFrom = null;
+	
+	/** The choosen date to. */
 	public String choosenDateTo = null;
+	
+	/** The date from. */
 	public Date dateFrom = null;
+	
+	/** The date to. */
 	public Date dateTo = null;
+	
+	/** The clinic chosen. */
 	public String clinicChosen = null;
 	
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
 	/**
-	 * Contractor for the Adding patient screen GUI
-	 * @param 
+	 * Contractor for the general manager screen GUI controller.
+	 *
+	 * @param gm the gm GUI instance
+	 * @param uID the u id
 	 */
 	public GeneralManagerController(GM_GUI gm,String uID)
 	{
@@ -59,6 +78,9 @@ public class GeneralManagerController {
 
 	
 	
+	/**
+	 * The Class SelectDateListenerFrom.
+	 */
 	class SelectDateListenerFrom implements ActionListener 
 	{
 		
@@ -68,28 +90,29 @@ public class GeneralManagerController {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dateFrom = (Date)General_M_GUI.getDatePickerFrom().getModel().getValue();
-			//JOptionPane.showMessageDialog(null,"You chose date from: " + (int)(dateFrom.getMonth()+1),"", JOptionPane.INFORMATION_MESSAGE);
 			JOptionPane.showMessageDialog(null,"You chose date from: " + (dateFrom),"", JOptionPane.INFORMATION_MESSAGE);
 			
 			System.out.println("--------" + dateFrom);
 		}
 	}
 	
+	/**
+	 * The Class SelectDateListenerTo.
+	 */
 	class SelectDateListenerTo implements ActionListener 
 	{
 		
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			dateTo = (Date)General_M_GUI.getDatePickerTo().getModel().getValue();
-			//JOptionPane.showMessageDialog(null,"You chose date to: " + (int)(dateTo.getMonth()+1),"", JOptionPane.INFORMATION_MESSAGE);
 			JOptionPane.showMessageDialog(null,"You chose date to: " + (dateTo),"", JOptionPane.INFORMATION_MESSAGE);
 			System.out.println("--------" + dateTo);
 		}
 	}
 	
+	/**
+	 * The Class SendDateRange.
+	 */
 	class SendDateRange implements ActionListener 
 	{
 		/* (non-Javadoc)
@@ -104,11 +127,14 @@ public class GeneralManagerController {
 	}
 	
 	
+	/**
+	 * The listener interface for receiving tables by events.
+	 * selecting all the right filds
+	 * befor sending request to db
+	 * 
+	 */
 	class showWeeklyListener implements ActionListener 
 	{
-		/* (non-Javadoc)
-		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -134,8 +160,13 @@ public class GeneralManagerController {
 		}
 	}
 	
+	/**
+	 * The listener interface for the general manager.
+	 * for choosing and filtering the table he want's to see
+	 */
 	class showMonthlyListener  implements ActionListener 
 	{
+		
 		public void actionPerformed(ActionEvent e) {
 			
 			clinicChosen = General_M_GUI.getClinicSel();
@@ -148,10 +179,7 @@ public class GeneralManagerController {
 			Calendar fromDay = Calendar.getInstance();
 			Calendar toDay = Calendar.getInstance();
 			fromDay.set(Calendar.MONTH,toDay.get(Calendar.MONTH)-monthBack);
-			/*
-			int mo = dateTo.getMonth()-monthBack;
-			dateFrom.setMonth(mo);
-			System.out.println("dateTo:  "+dateTo+" \ndateFrom:  "+dateFrom);*/
+
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			dateTo = toDay.getTime();
 			dateFrom = fromDay.getTime();
@@ -162,6 +190,13 @@ public class GeneralManagerController {
 		}
 	}
 	
+	/**
+	 * Send and show.
+	 *
+	 * @param clinic the clinic
+	 * @param from the from
+	 * @param to the to
+	 */
 	public void SendAndShow(String clinic , String from, String to){
 
 		List<Object> strings_to_server = new ArrayList<Object>();

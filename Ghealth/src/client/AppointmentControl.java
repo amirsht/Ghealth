@@ -20,40 +20,26 @@ import enums.*;
 import models.*;
 
 /**
+ * @author G5 lab group
  * The Class AppointmentControl.
  */
 public class AppointmentControl {
 
-
-	/** The cs gu i_find pt. */
-	private CS_GUI_findPatient csGUI_findPt;
-	
-	/** The cs gu i_ appoint. */
-	private CS_GUI_Appoint csGUI_Appoint;
-	
-	/** The cs gu i_ create new appoint. */
-	private CS_GUI_newAppoint csGUI_CreateNewAppoint;
-	
-	/** The cs gu i_cancel appoint. */
-	private CS_GUI_cancelAppoint csGUI_cancelAppoint;
-	
-	/** The pt. */
-	private Patient pt;
-	
-	/** The as. */
-	private AppointmentSettings as;
-	
-	/** The pt ctrl. */
+	private CS_GUI_findPatient csGUI_findPt;	
+	private CS_GUI_Appoint csGUI_Appoint;	
+	private CS_GUI_newAppoint csGUI_CreateNewAppoint;	
+	private CS_GUI_cancelAppoint csGUI_cancelAppoint;	
+	private Patient pt;	
+	private AppointmentSettings as;	
 	private PatientControl ptCtrl;
 	
-	/** The obj list_str. */
 	private List<Object> objList_str;
 	
 	/**
 	 * Instantiates a new appointment control.
 	 *
-	 * @param cs the cs
-	 * @param pt the pt
+	 * @param cs the costumer service GUI windows
+	 * @param pt the patients referance.
 	 */
 	public AppointmentControl(CS_GUI_newAppoint cs,Patient pt)
 	{
@@ -75,8 +61,8 @@ public class AppointmentControl {
 	/**
 	 * constractor for the find patient screen GUI.
 	 *
-	 * @param cs the cs
-	 * @param pt the pt
+	 * @param cs the costumer service GUI windows
+	 * @param pt the patients referance.
 	 */
 	public AppointmentControl(CS_GUI_Appoint cs,Patient pt)
 	{
@@ -96,7 +82,7 @@ public class AppointmentControl {
 	/**
 	 * Gets the open appointments.
 	 *
-	 * @param ptID the pt id
+	 * @param ptID the patient id
 	 * @return the list
 	 */
 	public List<String> GET_OPEN_APPOINTMENTS(String ptID)
@@ -123,8 +109,8 @@ public class AppointmentControl {
 	/**
 	 * Gets the doctor clinic.
 	 *
-	 * @param ptID the pt id
-	 * @param ds the ds
+	 * @param ptID the patient id
+	 * @param ds the patient
 	 * @return the list
 	 */
 	public List<String> GET_DOCTOR_CLINIC(String ptID,DoctorSpeciallity ds)
@@ -497,22 +483,6 @@ public class AppointmentControl {
 		
 	}//CancelAppintListener
 	
-	/*
-	class LogOutListener  implements ActionListener 
-	{
-
-		@Override
-		public void actionPerformed(ActionEvent e) 
-		{
-			
-			Controller.Control(new User(LoginControl.getUserId()),task.LOG_OUT);
-			csGUI_Appoint.dispose();
-			LoginControl userctrl = new LoginControl(new LoginGUI());
-
-		}
-		
-	}//LogOutListener
-	*/
 	
 	/**
 	 * The listener interface for receiving searchPatient events.
@@ -631,26 +601,16 @@ public class AppointmentControl {
 	
     /**
      * The listener interface for receiving cancel events.
-     * The class that is interested in processing a cancel
-     * event implements this interface, and the object created
-     * with that class is registered with a component using the
-     * component's <code>addCancelListener<code> method. When
-     * the cancel event occurs, that object's appropriate
-     * method is invoked.
-     *
-     * @see CancelEvent
+     * closing the current window
+     * 
      */
     class CancelListener implements ActionListener 
     {
     	
-	    /* (non-Javadoc)
-	     * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	     */
 	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     		csGUI_CreateNewAppoint.dispose();
-    		//csGUI_Appoint.dispose();	//Closes the login window
     	}	
     }//action
 

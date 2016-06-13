@@ -16,15 +16,31 @@ import javax.swing.table.TableCellRenderer;
 
 import GUI.GM_GUI;
 
+/**
+ * @author G5 lab group
+ * The Class ShowWeeklyReports.
+ */
 public class ShowWeeklyReports extends JFrame {
 
+    /** The scroll pane. */
     private JScrollPane scrollPane;
+    
+    /** The scroll pane2. */
     private JScrollPane scrollPane2;
+    
+    /** The table2. */
     private JTable table2;
+    
+    /** The list. */
     List<Object> list;
 
    
     
+    /**
+     * Instantiates a new show weekly reports.
+     *
+     * @param list the list
+     */
     public ShowWeeklyReports(List<Object> list) {
     	this.list=list;
     	super.setTitle("Weekly Report");
@@ -35,6 +51,9 @@ public class ShowWeeklyReports extends JFrame {
 
  
     
+    /**
+     * Inits the components.
+     */
     @SuppressWarnings("unchecked")
     private void initComponents() {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -74,10 +93,19 @@ public class ShowWeeklyReports extends JFrame {
 
    
     
+    /**
+     * The Class HeaderRenderer.
+     */
     private static class HeaderRenderer implements TableCellRenderer {
 
+        /** The renderer. */
         TableCellRenderer renderer;
 
+        /**
+         * Instantiates a new header renderer.
+         *
+         * @param table the table
+         */
         public HeaderRenderer(JTable table) {
             renderer = table.getTableHeader().getDefaultRenderer();
         }

@@ -23,16 +23,25 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 
+/**
+ * @author G5 lab group
+ * The Class PatientControl.
+ */
 public class PatientControl {
       
+	/** The cs gu i_add patient. */
 	private CS_GUI_addPatient csGUI_addPatient;
+	
+	/** The cs gu i_find patient. */
 	private CS_GUI_findPatient csGUI_findPatient;
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
 
 	/**
-	 * constractor for the Adding patient screen GUI
-	 * @param 
+	 * constractor for the Adding patient screen GUI.
+	 *
+	 * @param cs the cs
+	 * @param pID the id
 	 */
 	public PatientControl(CS_GUI_addPatient cs,String pID)
 	{
@@ -43,8 +52,9 @@ public class PatientControl {
 	}
 	
 	/**
-	 * 
-	 * constractor for the find patient screen GUI
+	 * constractor for the find patient screen GUI.
+	 *
+	 * @param cs the cs
 	 */
 	public PatientControl(CS_GUI_findPatient cs)
 	{
@@ -55,6 +65,10 @@ public class PatientControl {
 	
   
 
+	/**
+	 * The listener interface for receiving addPatient events.
+	 * filling the form when cs want to add patient.
+	 */
 	class AddPatientListener  implements ActionListener 
 	{
 
@@ -62,7 +76,7 @@ public class PatientControl {
 		public void actionPerformed(ActionEvent e) 
 		{
 			
-			System.out.println("Add Patient Lis");
+			System.out.println("Add Patient List");
 			System.out.println(csGUI_addPatient.getClinicBox().getSelectedItem());
 			if(csGUI_addPatient.getPationID().equals("") ||
 				csGUI_addPatient.getfName().equals("") ||
@@ -101,9 +115,16 @@ public class PatientControl {
 		
 	}
 	
+	/**
+	 * The listener interface for receiving findPatient events.
+	 * when trying to find the patient in the database
+	 */
 	class findPatientListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -178,6 +199,10 @@ public class PatientControl {
 	
 	
 	
+	/**
+	 * The listener interface for receiving cancel events.
+	 * closing the current windows.
+	 */
 	class cancelListener  implements ActionListener 
 	{
 

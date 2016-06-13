@@ -40,20 +40,46 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 
+/**
+ * @author G5 lab group
+ * The Class DoctorController.
+ */
 public class DoctorController {
       
+	/** The doc gui. */
 	private DoctorGUI docGUI;
+	
+	/** The doc pt gui. */
 	private Doctor_Pt_GUI docPtGUI;
+	
+	/** The doc lab gui. */
 	private Doctor_Create_Lab_GUI docLabGUI;
+	
+	/** The pt. */
 	private Patient pt;
+	
+	/** The doc_rec gui. */
 	private Doctor_rec_GUI doc_recGUI;
+	
+	/** The doc_hist_ gui. */
 	private Doctor_History_GUI doc_hist_GUI;
+	
+	/** The Doctor id. */
 	private String DoctorID;
 	
+	/** The as. */
 	private AppointmentSettings as;
+	
+	/** The obj list_stra. */
 	private List<Object> objList_stra;
+	
+	/** The obj list_strb. */
 	private List<Object> objList_strb;
+	
+	/** The appointment list. */
 	private List<String> appointmentList;
+	
+	/** The lab list. */
 	private List<String> labList;
 
 	
@@ -63,8 +89,10 @@ public class DoctorController {
 	
 	
 	/**
-	 * 
-	 * constractor for the find patient screen GUI
+	 * constractor for the find patient screen GUI.
+	 *
+	 * @param doc the doc
+	 * @param docID the doc id
 	 */
 	public DoctorController(DoctorGUI doc,String docID)
 	{
@@ -74,6 +102,13 @@ public class DoctorController {
 
 	}
 	
+	/**
+	 * Instantiates a new doctor controller.
+	 *
+	 * @param doc_pt the doc_pt
+	 * @param pt the pt
+	 * @param docID the doc id
+	 */
 	public DoctorController(Doctor_Pt_GUI doc_pt,Patient pt,String docID)
 	{
 		this.pt = pt;
@@ -86,6 +121,13 @@ public class DoctorController {
 		docPtGUI.SearchPatientActionListener(new SearchAnotherPatientListener());
 	}
 	
+	/**
+	 * Instantiates a new doctor controller.
+	 *
+	 * @param docRec the doc rec
+	 * @param pt the pt
+	 * @param docID the doc id
+	 */
 	public DoctorController(Doctor_rec_GUI docRec,Patient pt,String docID)
 	{
 		this.pt = pt;
@@ -94,7 +136,15 @@ public class DoctorController {
 		doc_recGUI.SetPatient(pt);
 		doc_recGUI.RecordPatientActionListener(new RecPatientListener());	
 	}
+	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
 	
+	/**
+	 * Gets the current appointment.
+	 *
+	 * @param ptID the pt id
+	 * @param docID the doc id
+	 * @return the int
+	 */
 	public int GET_CURRENT_APPOINTMENT(String ptID, String docID)
 	{
 		String [] patientID_doctorID = {ptID,docID};
@@ -112,6 +162,12 @@ public class DoctorController {
 		}
 	}
 	
+	/**
+	 * Sets the appointment record.
+	 *
+	 * @param AppID the app id
+	 * @param AppSummery the app summery
+	 */
 	public void SET_APPOINTMENT_RECORD(String AppID, String AppSummery)
 	{
 		String [] AppID_AppSummery = {AppID,AppSummery};
@@ -140,6 +196,12 @@ public class DoctorController {
 		Controller.Control( nt, task.SEND_PERSONAL_DOC_MAIL);
 	}
 	
+	/**
+	 * Gets the arrived appointments.
+	 *
+	 * @param ptID the pt id
+	 * @return the list
+	 */
 	public List<String> GET_ARRIVED_APPOINTMENTS(String ptID)
 	{
 		
@@ -161,6 +223,12 @@ public class DoctorController {
 		return strList;
 	}
 	
+	/**
+	 * Gets the arrived labs.
+	 *
+	 * @param ptID the pt id
+	 * @return the list
+	 */
 	public List<String> GET_ARRIVED_LABS(String ptID)
 	{
 		
@@ -182,12 +250,14 @@ public class DoctorController {
 		return strList;
 	}
 	
-	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   Controller Function ~~~~~~~~~~~~~~~~~~~~~~~~  */
 	
     
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   ActionListener Functions ~~~~~~~~~~~~~~~~~~~~~~~~  */
   
 
+	/**
+	 * The listener interface for receiving find Patient events.
+	 */
 	class findPatientListener  implements ActionListener 
 	{
 
@@ -225,8 +295,12 @@ public class DoctorController {
 		
 	}
 	
+	/**
+	 * The listener interface for receiving record Appointment events.
+	 */
 	class RecAppointListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -246,8 +320,12 @@ public class DoctorController {
 	}
 	
 	
+	/**
+	 * The listener interface for receiving record Patient events.
+	 */
 	class RecPatientListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 						
@@ -267,8 +345,12 @@ public class DoctorController {
 		
 	}
 	
+	/**
+	 * The listener interface for receiving view History events.
+	 */
 	class ViewHistoryListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Tring to VIEW PATIENT HISTORY");
@@ -311,8 +393,12 @@ public class DoctorController {
 		
 	}
 	
+	/**
+	 * The listener interface for receiving appointment History Box events.
+	 */
 	class AppointmentHistoryBoxListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Tring to VIEW Appointment History!!");
@@ -322,7 +408,6 @@ public class DoctorController {
 			System.out.println("" + selectedIndex);
 			AppointmentSettings aaa = (AppointmentSettings)objList_stra.get(selectedIndex);
 			System.out.println(aaa);
-			//Envelope en = Controller.Control(as,task.CANCEL_APPOINTMENT_FROM_DB);
 			System.out.println("Tring to VIEW Appointment Summery INDEX:" + selectedIndex);	
 			doc_hist_GUI.SetSummery(aaa.getApsSummery());
 
@@ -330,8 +415,12 @@ public class DoctorController {
 		
 	}
 	
+	/**
+	 * The listener interface for receiving lab Result Box events.
+	 */
 	class LabResultBoxListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -346,7 +435,6 @@ public class DoctorController {
 			System.out.println(ls.getFilePath());
 			if(!ls.getFilePath().equals("NO FILE"))
 			{
-				//Controller.Control(ls,task.SEND_FILE_TO_CLIENT);
 				System.out.println(ls.getFileExt());
 				doc_hist_GUI.setAddToImagePan("src\\images\\lab_file."+ls.getFileExt());
 				doc_hist_GUI.getimagePan().setVisible(true);
@@ -360,8 +448,12 @@ public class DoctorController {
 	}
 	
 	
+	/**
+	 * The listener interface for receiving create Lab events.
+	 */
 	class CreateLabListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.println("Trying to create Lab");
@@ -373,8 +465,12 @@ public class DoctorController {
 	
 	
 	
+	/**
+	 * The listener interface for receiving create Lab in DB events.
+	 */
 	class CreateLabinDBListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
@@ -398,8 +494,12 @@ public class DoctorController {
 	}
 	
 	
+	/**
+	 * The listener interface for receiving search Another Patient events.
+	 */
 	class SearchAnotherPatientListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			docPtGUI.dispose();
@@ -410,8 +510,13 @@ public class DoctorController {
 	}
 	
 	
+	/**
+	 * The listener interface for receiving Lab History events.
+
+	 */
 	class ShowLabHistoryListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(labList != null)
@@ -430,8 +535,12 @@ public class DoctorController {
 	}
 	
 	
+	/**
+	 * The listener interface for receiving the patient appointment events.
+	 */
 	class ShowAppointmentHistoryListener  implements ActionListener 
 	{
+		
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(appointmentList != null)

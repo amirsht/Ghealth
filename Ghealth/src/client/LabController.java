@@ -36,15 +36,31 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
+/**
+ * The Class LabController.
+ * @author G5 lab group
+ */
 public class LabController {
       
+	/** The lab gui. */
 	private LabGUI labGUI;
+	
+	/** The pt. */
 	private Patient pt;
+	
+	/** The Lab worker id. */
 	private String LabWorkerID;
+	
+	/** The obj list_str. */
 	private List<Object> objList_str;
+	
+	/** The lb. */
 	private LabSettings lb;
+	
+	/** The rec. */
 	private Lab_Rec_GUI rec;
+	
+	/** The Upload file. */
 	private boolean UploadFile=false;
 	
 	/*  ~~~~~~~~~~~~~~~~~~~~~~~~   GUI Constractors ~~~~~~~~~~~~~~~~~~~~~~~~  */
@@ -52,8 +68,10 @@ public class LabController {
 	
 	
 	/**
-	 * 
-	 * constractor for the find patient screen GUI
+	 * constractor for the find patient screen GUI.
+	 *
+	 * @param lab the lab
+	 * @param labworker the labworker
 	 */
 	
 	public LabController(LabGUI lab,String labworker)
@@ -68,9 +86,16 @@ public class LabController {
 	
 
 
+	/**
+	 * The listener interface for receiving findPatient events.
+	 * find the patient in the database.
+	 */
 	class findPatientListener  implements ActionListener 
 	{
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) 
 		{
@@ -115,6 +140,11 @@ public class LabController {
 	}
 
 		
+	/**
+	 * The listener interface for receiving browseFile events.
+	 * find the file to upload to server side and add it's path to db
+	 *
+	 */
 	class BrowseFileListener  implements ActionListener 
 	{
 
@@ -180,6 +210,10 @@ public class LabController {
 		}
 	}
 	
+		/**
+		 * The listener interface for receiving chooseLab events.
+		 * choose the lab foe the patient
+		 */
 		class ChooseLabListener  implements ActionListener 
 		{
 
@@ -204,6 +238,9 @@ public class LabController {
 		}
 		
 		
+		/**
+		 * The Class jpgFilter.
+		 */
 		class jpgFilter  implements FileFilter 
 		{
 
@@ -216,9 +253,15 @@ public class LabController {
 			
 		}
 		
+		/**
+		 * The Class RecordLab.
+		 */
 		class RecordLab  implements ActionListener 
 		{
 
+			/* (non-Javadoc)
+			 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+			 */
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
@@ -246,6 +289,12 @@ public class LabController {
 			
 		}
 		
+		/**
+		 * Gets the lab history.
+		 *
+		 * @param ptID the patient id
+		 * @return the list
+		 */
 		private List<String> GET_LAB_HISTORY(String ptID) 
 		{
 			

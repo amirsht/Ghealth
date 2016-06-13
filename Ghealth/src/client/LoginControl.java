@@ -18,20 +18,34 @@ import java.util.Observable;
 import java.util.concurrent.Executors;
 
 
+/**
+ * @author G5 lab group
+ * The Class LoginControl.
+ */
 public class LoginControl {
 	
+	/** The login g. */
 	private LoginGUI loginG;
+	
+	/** The User login. */
 	private User UserLogin;
+	
+	/** The user_full_name. */
 	private static String user_full_name;
+	
+	/** The u id. */
 	private static String uId = null;
+	
+	/** The clinic. */
 	private static Clinic clinic;
 	//private User user;
 	//private User U;
 	
 	
 	/**
-	 * 
-	 * constractor
+	 * constractor.
+	 *
+	 * @param lC the l c
 	 */
 	public LoginControl (LoginGUI lC )
 	{
@@ -41,27 +55,52 @@ public class LoginControl {
 		//loginG.addCancelActionListener(new CancelListener());	
 	}
 
+    /**
+     * Gets the user_full_name.
+     *
+     * @return the user_full_name
+     */
     public static String getUser_full_name() {
 		return user_full_name;
 	}
 
+    /**
+     * Gets the user id.
+     *
+     * @return the user id
+     */
     public static String getUserId() {
     	System.out.println("after get user id");
 		return uId;
 	}
     
+    /**
+     * Gets the user clinic.
+     *
+     * @return the user clinic
+     */
     public static Clinic getUserClinic() {
     	System.out.println("after get clinic id");
 		return clinic;
 	}
 
+	/**
+	 * Sets the user_full_name.
+	 *
+	 * @param user_full_name the new user_full_name
+	 */
 	public static void setUser_full_name(String user_full_name) {
 		LoginControl.user_full_name = user_full_name;
 	}
 
+	/**
+	 * The listener interface for receiving cancel events.
+	 * closing the windows
+	 */
 	class CancelListener implements ActionListener 
     {
-    	@Override
+    	
+	    @Override
     	public void actionPerformed(ActionEvent e)
     	{
     	loginG.dispose();	//Closes the login window
@@ -70,8 +109,17 @@ public class LoginControl {
 
 
 
+    /**
+     * The listener interface for receiving login events.
+     * trying to login with the username and password strings
+     * 
+     */
     class LoginListener implements ActionListener
     {
+         
+         /* (non-Javadoc)
+          * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+          */
          public void actionPerformed(ActionEvent ev)
          {      		
         	 String pass = loginG.getPasswordField();	//Gets the password the user entered
