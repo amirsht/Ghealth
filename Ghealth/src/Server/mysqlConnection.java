@@ -21,27 +21,53 @@ import models.Patient;
 
 
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class mysqlConnection.
+ *
  * @author G5 lab group
  * MySQL Connection Class
  */
 public class mysqlConnection {
 	
+	/** The auto Connection. */
 	public static Connection conn,autoConn; //TODO - will be changed (maby) to private	
+	
+	/** The temporary mysqlConnection. */
 	public mysqlConnection temp;
+	
+	/** The Server view. */
 	private ServerGui ServerView;
+	
+	/** The server log view. */
 	private serverLogGui serverLogView;
+	
+	/** The user log. */
 	private  ArrayList<String> userLog;
+	
+	/** The user name db. */
 	private static String userNameDB = "root";
+	
+	/** The password db. */
 	private static String passwordDB = "1234";
+	
+	/** The Defport. */
 	private static String Defport = "5555";
+	
+	/** The port. */
 	private static int port = 0;
+	
+	/** The Scheama. */
 	private String Scheam = "jdbc:mysql://localhost/ghealth";
+	
+	/** The Server. */
 	public Server sv;
+	
+	/** The Automation. */
 	public Automation auto = null;
 	
 	/**
-	 * Default constructor
+	 * Default constructor, sets conn DB connector.
 	 */
 	public mysqlConnection() 
 	{
@@ -67,9 +93,11 @@ public class mysqlConnection {
             System.out.println("VendorError: " + ex.getErrorCode());
             }
    	}
+	
 	/**
-	 * constructor
-	 * @param SerGui is the start gui that open first when we open 
+	 * constructor.
+	 *
+	 * @param SerGui is the start gui that open first when we open
 	 * the server - need to field port user name and password of workbench
 	 * @param servLog show when client connect or disconnect to server
 	 */
@@ -92,11 +120,15 @@ public class mysqlConnection {
    	}
 	
 	  /**
-	   * Inner class that handles when Button Logout Pressed, implements ActiontListener
-	   *
-	   */
+  	 * Inner class that handles when Button Logout Pressed, implements ActiontListener.
+  	 *
+  	 * @see DisconnectedEvent
+  	 */
 	class DisconnectedListener implements ActionListener {
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
@@ -106,12 +138,17 @@ public class mysqlConnection {
 		}
 	
 	}
+	
 	/**
-	 *  Inner class that handles when Button Login Pressed, implements ActiontListener
+	 *  Inner class that handles when Button Login Pressed, implements ActiontListener.
 	 *
+	 * @see LoginEvent
 	 */
 	class LoginListener implements ActionListener {
 
+		/* (non-Javadoc)
+		 * @see java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+		 */
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
@@ -150,7 +187,8 @@ public class mysqlConnection {
 	
 	
 	/**
-	 * openConnectionDB is method that check if the open Connection to DB
+	 * openConnectionDB is method that check if the open Connection to DB.
+	 *
 	 * @return boolean
 	 */
 	  public boolean openConnectionDB(){
@@ -168,6 +206,7 @@ public class mysqlConnection {
 	           this.conn = DriverManager.getConnection(Scheam,userNameDB,passwordDB);
 	          //Connection conn = DriverManager.getConnection("jdbc:mysql://192.168.3.68/test","root","Root");
 	          System.out.println("SQL connection succeed");
+	          /** Automated machine connector**/
 	          this.autoConn = DriverManager.getConnection(Scheam,userNameDB,passwordDB);
 	          System.out.println("SQL connection for Auto succeed");
 	          
@@ -188,10 +227,12 @@ public class mysqlConnection {
 	          }
 		  
 	}
+		
 		/**
-		 * set the new log of Employee that connect or disconnect to server
-		 * @param e1
-		 * @param Task
+		 * set the new log of Employee that connect or disconnect to server.
+		 *
+		 * @param e1 the e1
+		 * @param Task the task
 		 */
 	  public void SetLog(String e1, String Task){
 			ZonedDateTime zonedDateTime = ZonedDateTime.now();
@@ -225,26 +266,56 @@ public class mysqlConnection {
 		}
 	
 	
-	/************************************************Getters and setters***************************************/
+	/**
+	 * **********************************************Getters and setters**************************************.
+	 *
+	 * @return the server view
+	 */
 	public ServerGui getServerView() {
 		return ServerView;
 	}
 
+	/**
+	 * Sets the server view.
+	 *
+	 * @param serverView the new server view
+	 */
 	public void setServerView(ServerGui serverView) {
 		ServerView = serverView;
 	}
 
+	/**
+	 * Gets the server log view.
+	 *
+	 * @return the server log view
+	 */
 	public serverLogGui getServerLogView() {
 		return serverLogView;
 	}
 
+	/**
+	 * Sets the server log view.
+	 *
+	 * @param serverLogView the new server log view
+	 */
 	public void setServerLogView(serverLogGui serverLogView) {
 		this.serverLogView = serverLogView;
 	}
 	
-	 public void setPasswordDB(String password1) {
+	 /**
+ 	 * Sets the password db.
+ 	 *
+ 	 * @param password1 the new password db
+ 	 */
+ 	public void setPasswordDB(String password1) {
 			this.passwordDB = password1;
 		}
+	
+	/**
+	 * Sets the user name db.
+	 *
+	 * @param userName the new user name db
+	 */
 	public void setUserNameDB(String userName) {
 		this.userNameDB = userName;
 	}
