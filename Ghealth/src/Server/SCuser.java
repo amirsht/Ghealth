@@ -12,8 +12,18 @@ import enums.Status;
 import models.*;
 import enums.*;
 
+/**
+ * @author G5 lab group
+ * The Class SCuser.
+ */
 public class SCuser {
 
+	/**
+	 * Gets the exist user.
+	 *
+	 * @param uID the u id
+	 * @return the envelope
+	 */
 	public static Envelope GetExistUser(String uID)
 	{
 		int rowCount=0;
@@ -62,7 +72,6 @@ public class SCuser {
 				
 				System.out.println("ResultSet - uID - "+result.getString("uID") );
 				mysqlConnection.conn.close();
-				//en.setObj(pt);
 			}else{
 				
 				en.setStatus(Status.NOT_EXIST);

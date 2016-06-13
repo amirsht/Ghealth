@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * @author G5 lab group
  * this class is Graphic user interface of Server which extends AbstractGuiServer
  * this class is the GUI we need to fill scheme, user name and password to workbench 
  *

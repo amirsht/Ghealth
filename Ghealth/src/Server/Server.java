@@ -16,33 +16,54 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
 
-
-
 /**
+ * @author G5 lab group
  * Main server class.
  * includes mainly the server socket connections and the tasks switch case
  */
 public class Server extends Thread
 {
 
+    /** The server socket. */
     private ServerSocket serverSocket = null;
+    
+    /** The conn. */
     public Connection conn;
+    
+    /** The status. */
     public Status status;
+    
+    /** The pt. */
     public Patient pt = null;
+    
+    /** The us. */
     public User us = null;
+    
+    /** The as. */
     public AppointmentSettings as = null;
+    
+    /** The filename. */
     public String filename;
+    
+    /** The session list. */
     public static List<String> sessionList = new ArrayList<String>();
+    
+    /** The ls. */
     public LabSettings ls = null;
+    
+    /** The clinic. */
     public Clinic clinic = null;
+	
+	/** The nt. */
 	private Notification nt;
     
     
     
     
     /**
-     * Starting server socket with given port
-     * @param port
+     * Starting server socket with given port.
+     *
+     * @param port the port
      */
     public Server(int port) 
     {
@@ -60,7 +81,7 @@ public class Server extends Thread
     
     
     /**
-     * Waiting for connections
+     * Waiting for connections.
      */
     public void run()
     {
@@ -79,8 +100,9 @@ public class Server extends Thread
 
     
     /**
-     * Taking care of network transportations and tasks switch case
-     * @param cs
+     * Taking care of network transportations and tasks switch case.
+     *
+     * @param cs the cs
      */
     public void communicate(Socket cs) {
     	
@@ -370,8 +392,9 @@ public class Server extends Thread
     
     
     /**
-     * Removing user session from the active sessions list
-     * @param getuID
+     * Removing user session from the active sessions list.
+     *
+     * @param getuID the getu id
      */
     public void removeSession(String getuID) {
     	System.out.println("before remove");
@@ -381,9 +404,10 @@ public class Server extends Thread
 
 
 	/**
-	 * Searching user session in active sessions list
-	 * @param uid
-	 * @return
+	 * Searching user session in active sessions list.
+	 *
+	 * @param uid the uid
+	 * @return true, if successful
 	 */
 	public boolean searchUserSession(String uid){
     	for(String str: sessionList) {
@@ -394,10 +418,11 @@ public class Server extends Thread
     }
     
     /**
-     * Sending file
-     * @param filename
-     * @param s
-     * @throws IOException
+     * Sending file.
+     *
+     * @param filename the filename
+     * @param s the s
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     public void sendFile(String filename,Socket s) throws IOException {
 		DataOutputStream dos = new DataOutputStream(s.getOutputStream());
@@ -421,10 +446,11 @@ public class Server extends Thread
     
     
     /**
-     * Saving file in server storage
-     * @param filename
-     * @param clientSock
-     * @throws IOException
+     * Saving file in server storage.
+     *
+     * @param filename the filename
+     * @param clientSock the client sock
+     * @throws IOException Signals that an I/O exception has occurred.
      */
     private void saveFile(String filename,Socket clientSock) throws IOException {
 		DataInputStream dis = new DataInputStream(clientSock.getInputStream());
@@ -446,13 +472,5 @@ public class Server extends Thread
 		dis.close();
 	}
     
-    
-  /*
-    public static void main(String[] args) {
-    	
-        Server server;     
-        server = new Server(5555);
-        server.start();
-     
-    }*/
+   
 }

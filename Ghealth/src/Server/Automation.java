@@ -24,22 +24,48 @@ import models.Doctor;
 import models.Patient;
 
 /**
- *	Controls the automated tasks
+ * @author G5 lab group
+ * 	Controls the automated tasks.
  */
 public class Automation extends TimerTask{
+	
+	/** The timer. */
 	private Timer timer = new Timer();
+	
+	/** The timer2. */
 	private Timer timer2 = new Timer();
+	
+	/** The not lst. */
 	//public static Email mail= new Email();
 	public static List<Notification> notLst = new ArrayList<Notification>();
+	
+	/** The result. */
 	public static ResultSet result = null;
+	
+	/** The result2. */
 	public static ResultSet result2 = null;
+	
+	/** The stmt. */
 	public Statement stmt; 
+	
+	/** The querystr. */
 	String querystr;
+	
+	/** The as. */
 	AppointmentSettings as;
+	
+	/** The doctor. */
 	Doctor doctor;
+	
+	/** The c. */
 	Calendar c = new GregorianCalendar();
+	
+	/** The cal. */
 	Calendar cal = new GregorianCalendar();
 	
+	/* (non-Javadoc)
+	 * @see java.util.TimerTask#run()
+	 */
 	public void run(){
 		SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
@@ -58,9 +84,13 @@ public class Automation extends TimerTask{
 	
 	//-------------------------------------------------------------------------------------
 	/**
-	 * Execute automatic periodical reports
+	 * Execute automatic periodical reports.
 	 */
 	public class PeriodicReport extends Automation{
+		
+		/* (non-Javadoc)
+		 * @see Server.Automation#run()
+		 */
 		public void run(){
 			
 			/* Setting all the patients that didn't show up to noshow status */
@@ -98,9 +128,13 @@ public class Automation extends TimerTask{
 	//-------------------------------------------------------------------------------------
 	
 	/**
-	 * Execute automatic periodical notifications
+	 * Execute automatic periodical notifications.
 	 */
 	public class PeriodicNotification extends Automation{
+		
+		/* (non-Javadoc)
+		 * @see Server.Automation#run()
+		 */
 		public void run(){
 			/* TODO Checks for changed status appointment notifications */
 
@@ -185,9 +219,12 @@ public class Automation extends TimerTask{
 			*/
 			//-------------------------------------------------------------------------------------
 		}
-		/** 
-		 * Sending mail function 
-		 * @param nt
+		
+		/**
+		 *  
+		 * Sending mail function .
+		 *
+		 * @param nt the nt
 		 */
 		private void sendMail(Notification nt) {
 			// TODO Auto-generated method stub
@@ -204,9 +241,10 @@ public class Automation extends TimerTask{
 		//-------------------------------------------------------------------------------------
 		
 		/**
-		 * Searching if user in session
-		 * @param mail
-		 * @return
+		 * Searching if user in session.
+		 *
+		 * @param mail the mail
+		 * @return true, if successful
 		 */
 		public boolean searchUserSession(String mail){
 	    	for(Notification notf: notLst) {
@@ -221,8 +259,10 @@ public class Automation extends TimerTask{
 	//-------------------------------------------------------------------------------------
 	
 	/**
-	 * Getting SQL query results back from DB
-	 * @param query
+	 * Getting SQL query results back from DB.
+	 *
+	 * @param query the query
+	 * @return the sql
 	 */
 	public ResultSet getSql(String query){
 	//	Statement stmt;
@@ -237,6 +277,11 @@ public class Automation extends TimerTask{
 		return result;
 	}
 	
+	/**
+	 * Sets the sql.
+	 *
+	 * @param query the new sql
+	 */
 	public void setSql(String query){
 		//	Statement stmt;
 			try {

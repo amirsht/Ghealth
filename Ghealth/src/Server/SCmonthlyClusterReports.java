@@ -13,22 +13,37 @@ import enums.task;
 import models.Envelope;
 
 
+/**
+ * @author G5 lab group
+ * The Class SCmonthlyClusterReports.
+ */
 public class SCmonthlyClusterReports {
 
 	
 	
+	/** The instance. */
 	private static SCmonthlyClusterReports instance = null;
+	
+	/** The Report to env. */
 	private List<Object> ReportToEnv;
 	
 	
 	
+	/**
+	 * Instantiates a new s cmonthly cluster reports.
+	 */
 	private SCmonthlyClusterReports(){	
 		// Exists only to defeat instantiation.
 		System.out.println("in MonthlyReports constructor");
 	}
 	
 	
-	 public static SCmonthlyClusterReports getInstance() {
+	 /**
+ 	 * Gets the single instance of SCmonthlyClusterReports.
+ 	 *
+ 	 * @return single instance of SCmonthlyClusterReports
+ 	 */
+ 	public static SCmonthlyClusterReports getInstance() {
 	      if(instance == null) {
 	         instance = new SCmonthlyClusterReports();
 	      }
@@ -39,6 +54,13 @@ public class SCmonthlyClusterReports {
 
 	
 	
+	/**
+	 * Creates the report.
+	 *
+	 * @param cID the c id
+	 * @param from_date_str the from_date_str
+	 * @param to_date_str the to_date_str
+	 */
 	private void createReport(String cID ,String from_date_str, String to_date_str){
 		
 		
@@ -261,6 +283,12 @@ public class SCmonthlyClusterReports {
 	
 	
 	
+	/**
+	 * Gets the clinic monthly cluster report.
+	 *
+	 * @param objList the obj list
+	 * @return the clinic monthly cluster report
+	 */
 	public Envelope getClinicMonthlyClusterReport(List<Object> objList){
 		
 		
@@ -288,6 +316,12 @@ public class SCmonthlyClusterReports {
 	
 	
 	
+	/**
+	 * Gets the week num.
+	 *
+	 * @param weekOfYear the week of year
+	 * @return the week num
+	 */
 	private int getWeekNum(int weekOfYear){
 		int weekNum =0;
 		
@@ -306,6 +340,13 @@ public class SCmonthlyClusterReports {
 		return weekNum;
 		
 	}
+	
+	/**
+	 * Gets the month name.
+	 *
+	 * @param month_num the month_num
+	 * @return the month name
+	 */
 	private String getMonthName(int month_num){
 		
 		switch(month_num){
@@ -342,6 +383,12 @@ public class SCmonthlyClusterReports {
 		
 	}
 	
+	/**
+	 * Gets the month number.
+	 *
+	 * @param month the month
+	 * @return the month number
+	 */
 	private int getMonthNumber(String month){
 		
 		

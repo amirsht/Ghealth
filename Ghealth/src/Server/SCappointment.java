@@ -18,8 +18,19 @@ import java.util.List;
 import models.*;
 import enums.*;
 
+/**
+ * @author G5 lab group
+ * The Class SCappointment.
+ */
 public class SCappointment {
 
+	/**
+	 * Gets the clinic doctor list.
+	 *
+	 * @param pt the pt
+	 * @param sp the sp
+	 * @return the envelope
+	 */
 	public static Envelope GetClinicDoctorList(String pt,String sp)
 	{
 		ResultSet result = null;
@@ -101,6 +112,13 @@ public class SCappointment {
 	}
 	
 	
+	/**
+	 * Gets the availible doctor hours.
+	 *
+	 * @param date the date
+	 * @param uID the u id
+	 * @return the envelope
+	 */
 	public static Envelope GetAvailibleDoctorHours(String date,String uID)
 	{
 		ResultSet result = null;
@@ -159,6 +177,12 @@ public class SCappointment {
 	}
 	
 	
+	/**
+	 * Creates the appointment.
+	 *
+	 * @param as the as
+	 * @return the status
+	 */
 	public static Status CreateAppointment(AppointmentSettings as)
 	{
 		Statement stmt;
@@ -188,6 +212,12 @@ public class SCappointment {
 	}
 	
 	
+	/**
+	 * Gets the schedueld appointments.
+	 *
+	 * @param ptID the pt id
+	 * @return the envelope
+	 */
 	public static Envelope GetSCHEDUELDAppointments(String ptID)
 	{
 		Statement stmt;
@@ -240,6 +270,12 @@ public class SCappointment {
 	}
 	
 		
+	/**
+	 * Cancel appointment.
+	 *
+	 * @param apsID the aps id
+	 * @return the status
+	 */
 	public static Status CancelAppointment(int apsID)
 	{
 		Statement stmt;

@@ -19,10 +19,20 @@ import java.util.List;
 import models.*;
 import enums.*;
 
+/**
+ * @author G5 lab group
+ * The Class SClab.
+ */
 public class SClab {
 
 	
 	
+	/**
+	 * Get_ scheduel d_labs.
+	 *
+	 * @param ptID the pt id
+	 * @return the envelope
+	 */
 	public static Envelope Get_SCHEDUELD_labs(String ptID)
 	{
 		Statement stmt;
@@ -86,6 +96,12 @@ public class SClab {
 	}
 
 	
+	/**
+	 * Get_ arrive d_labs.
+	 *
+	 * @param ptID the pt id
+	 * @return the envelope
+	 */
 	public static Envelope Get_ARRIVED_labs(String ptID)
 	{
 		Statement stmt;
@@ -163,6 +179,13 @@ public class SClab {
 	
 	
 	
+	/**
+	 * Update lab record.
+	 *
+	 * @param labID the lab id
+	 * @param record the record
+	 * @param labworkerID the labworker id
+	 */
 	public static void UpdateLabRecord(int labID,String record,String labworkerID)
 	{
 		Statement stmt;
@@ -195,6 +218,12 @@ public class SClab {
 
 
 
+	/**
+	 * Update lab file path.
+	 *
+	 * @param filename the filename
+	 * @param labID the lab id
+	 */
 	public static void UpdateLabFilePath(String filename,int labID) {
 		Statement stmt;
 		String querystr;
@@ -223,6 +252,12 @@ public class SClab {
 	}
 	
 	
+	/**
+	 * Gets the lab file path.
+	 *
+	 * @param labID the lab id
+	 * @return the string
+	 */
 	public static String GetLabFilePath(int labID) {
 		Statement stmt;
 		String querystr;
@@ -253,6 +288,12 @@ public class SClab {
 		return filePath;
 	}
 
+	/**
+	 * Creaet lab ref.
+	 *
+	 * @param lb the lb
+	 * @return the status
+	 */
 	public static Status CreaetLabRef(LabSettings lb) {
 		Statement stmt;
 		String querystr;

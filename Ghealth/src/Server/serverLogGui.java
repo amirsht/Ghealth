@@ -26,6 +26,7 @@ import java.sql.*;
 import models.Envelope;
 import models.User;
 /**
+ * @author G5 lab group
  * this class is Graphic user interface of Server log.
  *
  */

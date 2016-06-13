@@ -13,10 +13,19 @@ import enums.Status;
 import models.*;
 
 
+/**
+ * @author G5 lab group
+ * The Class SCclinic.
+ */
 public class SCclinic {
 
 
 
+	/**
+	 * Gets the our clinic list.
+	 *
+	 * @return the envelope
+	 */
 	public static Envelope GetOurClinicList()
 	{
 		Envelope en = new Envelope();

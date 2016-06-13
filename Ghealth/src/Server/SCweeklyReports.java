@@ -12,22 +12,37 @@ import enums.task;
 import models.Envelope;
 
 
+/**
+ * @author G5 lab group
+ * The Class SCweeklyReports.
+ */
 public class SCweeklyReports {
 
 	
 	
+	/** The instance. */
 	private static SCweeklyReports instance = null;
+	
+	/** The all reports. */
 	private List<Object> allReports;
 
 	
 	
+	/**
+	 * Instantiates a new s cweekly reports.
+	 */
 	private SCweeklyReports(){	
 		// Exists only to defeat instantiation.
 		System.out.println("in WeeklyReports constructor");
 	}
 	
 	
-	 public static SCweeklyReports getInstance() {
+	 /**
+ 	 * Gets the single instance of SCweeklyReports.
+ 	 *
+ 	 * @return single instance of SCweeklyReports
+ 	 */
+ 	public static SCweeklyReports getInstance() {
 	      if(instance == null) {
 	         instance = new SCweeklyReports();
 	      }
@@ -36,6 +51,9 @@ public class SCweeklyReports {
 	
 	 
 	 
+	/**
+	 * Creates the all clinics weekly reports.
+	 */
 	//for automation 
 	@SuppressWarnings("static-access")
 	public void createAllClinicsWeeklyReports(){
@@ -70,6 +88,11 @@ public class SCweeklyReports {
 	} //end of createAllWeeklyReports
 	
 	
+	/**
+	 * Creates the report.
+	 *
+	 * @param clinicID the clinic id
+	 */
 	@SuppressWarnings("static-access")
 	private void createReport(int clinicID){
 		
@@ -209,6 +232,12 @@ public class SCweeklyReports {
 	
 	
 	
+	/**
+	 * Gets the clinic weekly report.
+	 *
+	 * @param cID the c id
+	 * @return the clinic weekly report
+	 */
 	@SuppressWarnings("unchecked")
 	public Envelope getClinicWeeklyReport(int cID){
 	    

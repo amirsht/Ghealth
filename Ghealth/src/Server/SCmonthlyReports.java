@@ -12,22 +12,37 @@ import enums.task;
 import models.Envelope;
 
 
+/**
+ * @author G5 lab group
+ * The Class SCmonthlyReports.
+ */
 public class SCmonthlyReports {
 
 	
 	
+	/** The instance. */
 	private static SCmonthlyReports instance = null;
+	
+	/** The Report to env. */
 	private List<Object> ReportToEnv;
 	
 	
 	
+	/**
+	 * Instantiates a new s cmonthly reports.
+	 */
 	private SCmonthlyReports(){	
 		// Exists only to defeat instantiation.
 		System.out.println("in MonthlyReports constructor");
 	}
 	
 	
-	 public static SCmonthlyReports getInstance() {
+	 /**
+ 	 * Gets the single instance of SCmonthlyReports.
+ 	 *
+ 	 * @return single instance of SCmonthlyReports
+ 	 */
+ 	public static SCmonthlyReports getInstance() {
 	      if(instance == null) {
 	         instance = new SCmonthlyReports();
 	      }
@@ -38,6 +53,11 @@ public class SCmonthlyReports {
 
 	
 	
+	/**
+	 * Creates the report.
+	 *
+	 * @param clinicID the clinic id
+	 */
 	private void createReport(int clinicID){
 		
 		
@@ -246,6 +266,12 @@ public class SCmonthlyReports {
 	
 	
 	
+	/**
+	 * Gets the clinic monthly report.
+	 *
+	 * @param cID the c id
+	 * @return the clinic monthly report
+	 */
 	public Envelope getClinicMonthlyReport(int cID){
 	    
 		Envelope en = new Envelope();    
@@ -271,6 +297,12 @@ public class SCmonthlyReports {
 	
 	
 	
+	/**
+	 * Gets the week num.
+	 *
+	 * @param weekOfYear the week of year
+	 * @return the week num
+	 */
 	private int getWeekNum(int weekOfYear){
 		int weekNum =0;
 		
@@ -289,6 +321,13 @@ public class SCmonthlyReports {
 		return weekNum;
 		
 	}
+	
+	/**
+	 * Gets the month name.
+	 *
+	 * @param month_num the month_num
+	 * @return the month name
+	 */
 	private String getMonthName(int month_num){
 		
 		switch(month_num){

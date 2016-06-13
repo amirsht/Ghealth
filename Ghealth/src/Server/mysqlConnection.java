@@ -22,6 +22,7 @@ import models.Patient;
 
 
 /**
+ * @author G5 lab group
  * MySQL Connection Class
  */
 public class mysqlConnection {

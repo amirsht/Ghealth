@@ -14,8 +14,18 @@ import java.util.List;
 import models.*;
 import enums.*;
 
+/**
+ * @author G5 lab group
+ * The Class SCdocAppointment.
+ */
 public class SCdocAppointment {
 	
+	/**
+	 * Gets the recorded appointments.
+	 *
+	 * @param ptID the pt id
+	 * @return the envelope
+	 */
 	public static Envelope GetRecordedAppointments(String ptID)
 	{
 		Statement stmt;
@@ -72,6 +82,13 @@ public class SCdocAppointment {
 
 	}
 		
+	/**
+	 * Gets the current appointment.
+	 *
+	 * @param ptID the pt id
+	 * @param apsDocID the aps doc id
+	 * @return the envelope
+	 */
 	public static Envelope GetCurrentAppointment(String ptID, String apsDocID)
 	{
 		Statement stmt;
@@ -117,6 +134,12 @@ public class SCdocAppointment {
 
 	}
 
+	/**
+	 * Gets the p doc mail.
+	 *
+	 * @param nt the nt
+	 * @return the p doc mail
+	 */
 	public static Notification getPDocMail(Notification nt){
 		Statement stmt;
 		String querystr,querystr2;
@@ -155,6 +178,13 @@ public class SCdocAppointment {
 	}
 	
 	
+	/**
+	 * Record appointment.
+	 *
+	 * @param apsID the aps id
+	 * @param summery the summery
+	 * @return the status
+	 */
 	public static Status RecordAppointment(String apsID, String summery)
 	{
 		Statement stmt;

@@ -14,6 +14,7 @@ import javax.mail.internet.MimeMessage;
  
 
 /**
+ * @author G5 lab group
  * Sends the notification mail to the patient
  */
 public class Email {
