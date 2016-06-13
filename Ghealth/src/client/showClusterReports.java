@@ -37,7 +37,7 @@ public class showClusterReports extends JFrame {
     
     @SuppressWarnings("unchecked")
     private void initComponents() {
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         table = new javax.swing.JTable() {
 
             @Override
