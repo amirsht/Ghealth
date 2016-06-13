@@ -71,29 +71,29 @@ public class Automation extends TimerTask{
 		try {
 			/** 
 			 * here we can enter a starting date to schedule mailing at a certain hour
-			 * if there isn't a future date it will start immediately and repeat with the given value
+			 * if there is no future date it will start immediately and repeat with the given value
 			 */
 			Date startDate = dateFormatter.parse("2016-06-04 08:00:00");
+			/**Execute automatic periodical notifications*/
 			timer.schedule(new PeriodicNotification(),startDate, 24 * 60 * 60 * 1000);  //Every 24 hours at 8AM
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		/**
+		 * Execute automatic periodical reports
+		 */
 			timer2.schedule(new PeriodicReport(), 0);
 	}
 	
 	//-------------------------------------------------------------------------------------
 	/**
-	 * Execute automatic periodical reports.
+	 * Automatic periodical reports
 	 */
 	public class PeriodicReport extends Automation{
-		
-		/* (non-Javadoc)
-		 * @see Server.Automation#run()
-		 */
 		public void run(){
 			
-			/* Setting all the patients that didn't show up to noshow status */
+			/** Setting all the patients that didn't show up to noshow status */
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar yesterday = Calendar.getInstance();
 			yesterday.add(Calendar.DATE, -1);
@@ -117,7 +117,7 @@ public class Automation extends TimerTask{
 					e.printStackTrace();
 				}
 			/*                                                                */
-			/* Getting weekly reports ready */	
+			/** Getting weekly reports ready */	
 			SCweeklyReports rep = SCweeklyReports.getInstance();
 			rep.createAllClinicsWeeklyReports();
 			
@@ -128,13 +128,9 @@ public class Automation extends TimerTask{
 	//-------------------------------------------------------------------------------------
 	
 	/**
-	 * Execute automatic periodical notifications.
+	 * Automatic periodical notifications
 	 */
 	public class PeriodicNotification extends Automation{
-		
-		/* (non-Javadoc)
-		 * @see Server.Automation#run()
-		 */
 		public void run(){
 			/* TODO Checks for changed status appointment notifications */
 
@@ -219,12 +215,9 @@ public class Automation extends TimerTask{
 			*/
 			//-------------------------------------------------------------------------------------
 		}
-		
-		/**
-		 *  
-		 * Sending mail function .
-		 *
-		 * @param nt the nt
+		/** 
+		 * Sending mail function 
+		 * @param nt
 		 */
 		private void sendMail(Notification nt) {
 			// TODO Auto-generated method stub
@@ -241,10 +234,9 @@ public class Automation extends TimerTask{
 		//-------------------------------------------------------------------------------------
 		
 		/**
-		 * Searching if user in session.
-		 *
-		 * @param mail the mail
-		 * @return true, if successful
+		 * Searching if user in session
+		 * @param mail
+		 * @return
 		 */
 		public boolean searchUserSession(String mail){
 	    	for(Notification notf: notLst) {
@@ -259,10 +251,8 @@ public class Automation extends TimerTask{
 	//-------------------------------------------------------------------------------------
 	
 	/**
-	 * Getting SQL query results back from DB.
-	 *
-	 * @param query the query
-	 * @return the sql
+	 * Getting SQL query results back from DB
+	 * @param query
 	 */
 	public ResultSet getSql(String query){
 	//	Statement stmt;
@@ -278,9 +268,9 @@ public class Automation extends TimerTask{
 	}
 	
 	/**
-	 * Sets the sql.
+	 * Sending SQL query.
 	 *
-	 * @param query the new sql
+	 * @param query the new SQL query
 	 */
 	public void setSql(String query){
 		//	Statement stmt;
