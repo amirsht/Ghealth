@@ -27,8 +27,8 @@ public class SCappointment {
 	/**
 	 * Gets the clinic doctor list.
 	 *
-	 * @param pt the pt
-	 * @param sp the sp
+	 * @param pt the patient
+	 * @param sp the Specialty
 	 * @return the envelope
 	 */
 	public static Envelope GetClinicDoctorList(String pt,String sp)
@@ -116,7 +116,7 @@ public class SCappointment {
 	 * Gets the availible doctor hours.
 	 *
 	 * @param date the date
-	 * @param uID the u id
+	 * @param uID the user id
 	 * @return the envelope
 	 */
 	public static Envelope GetAvailibleDoctorHours(String date,String uID)
@@ -180,7 +180,7 @@ public class SCappointment {
 	/**
 	 * Creates the appointment.
 	 *
-	 * @param as the as
+	 * @param as the Appointment Settings
 	 * @return the status
 	 */
 	public static Status CreateAppointment(AppointmentSettings as)
@@ -213,9 +213,9 @@ public class SCappointment {
 	
 	
 	/**
-	 * Gets the schedueld appointments.
+	 * Gets the scheduled appointments.
 	 *
-	 * @param ptID the pt id
+	 * @param ptID the patient id
 	 * @return the envelope
 	 */
 	public static Envelope GetSCHEDUELDAppointments(String ptID)
@@ -273,7 +273,7 @@ public class SCappointment {
 	/**
 	 * Cancel appointment.
 	 *
-	 * @param apsID the aps id
+	 * @param apsID the Appointment id
 	 * @return the status
 	 */
 	public static Status CancelAppointment(int apsID)

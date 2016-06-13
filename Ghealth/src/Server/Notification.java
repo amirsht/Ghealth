@@ -14,13 +14,13 @@ public class Notification implements Serializable {
 	/** The date. */
 	public Date date = null;
 	
-	/** The sdate. */
+	/** The String date. */
 	public String sdate = null;
 	
 	/** The time. */
 	public String time = null;
 	
-	/** The mail. */
+	/** The mail address. */
 	public String mail = null;
 	
 	/** The location. */
@@ -29,10 +29,10 @@ public class Notification implements Serializable {
 	/** The doc name. */
 	public String docName = null;	
 	
-	/** The pt name. */
+	/** The patient name. */
 	public String ptName = null;
 	
-	/** The app summery. */
+	/** The appointment summary. */
 	public String appSummery = null;
 	
 	/** The patient. */
